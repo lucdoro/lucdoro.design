@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeria AI — 171 grafik Midjourney · LucDoroDesign</title>
+<meta name="description" content="Galeria fotorealistycznych grafik AI (171 sztuk) — portrety Marilyn Monroe, moda streetwear, tekstury, koncepcje. Efekt malarski przechodzi w ostrą wersję po najechaniu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d10;--panel:#161619;--line:#2b2b32;--txt:#f2efe8;--mut:#a09a91;--acc:#b58cff;--acc2:#7b4dff;--ok:#1DB954;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{overflow-x:hidden;}
+body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;min-height:100vh;line-height:1.5;}
+a{color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+
+/* HEADER — spójny z lucdoro.design */
+.header{position:sticky;top:0;z-index:100;background:color-mix(in srgb, var(--bg) 62%, transparent);backdrop-filter:blur(32px) saturate(160%);-webkit-backdrop-filter:blur(32px) saturate(160%);border-bottom:1px solid rgba(255,255,255,.08);}
+.header-bg-title{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding-left:clamp(180px,22vw,360px);font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(3rem,8vw,7.5rem);letter-spacing:-.04em;line-height:1.05;color:transparent;-webkit-text-stroke:1px var(--acc);pointer-events:none;user-select:none;z-index:0;opacity:.3;white-space:nowrap;overflow:hidden}
+.header-bg-title em{font-style:italic;font-weight:600;-webkit-text-stroke:1px var(--acc2);}
+.nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 24px;min-height:160px;max-width:1600px;margin:0 auto;}
+.brand-wrap{display:inline-flex;align-items:center;gap:16px;text-decoration:none;color:var(--txt);flex-shrink:0;}
+.brand-logo{height:76px;width:auto;display:block;object-fit:contain;flex-shrink:0;}
+@media(max-width:768px){.brand-logo{height:64px;}}
+@media(max-width:480px){.brand-logo{height:56px;}}
+.nav-links{display:flex;flex-direction:column;gap:6px;align-items:center;font-size:13px;}
+.nav-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.nav-links a{position:relative;color:var(--txt);text-decoration:none;padding:8px 14px;border-radius:999px;overflow:hidden;transition:color .3s;isolation:isolate;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);}
+.nav-links a::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--acc2),var(--acc));transform:translateY(101%);transition:transform .35s cubic-bezier(.7,0,.3,1);z-index:-1;border-radius:999px;}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::before{transform:translateY(0);}
+.nav-back{color:var(--txt);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:999px;text-decoration:none;font-size:12px;font-weight:600;transition:border-color .2s,color .2s;}
+.nav-back:hover{border-color:var(--acc);color:var(--acc);}
+@media(max-width:840px){
+  .nav{flex-wrap:wrap;min-height:auto;padding:12px 16px;gap:12px;}
+  .nav-links{flex-direction:row;flex-wrap:wrap;order:3;width:100%;}
+  .nav-row{width:100%;}
+  .header-bg-title{font-size:clamp(3rem,15vw,6rem);opacity:.1;}
+}
+
+/* HERO */
+.hero{padding:56px 32px 24px;text-align:center;max-width:960px;margin:0 auto;position:relative;}
+.hero .kicker{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:16px;}
+.hero h1{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(32px,5vw,58px);line-height:1.1;letter-spacing:-.02em;margin-bottom:14px;background:linear-gradient(135deg,#f2efe8,#b58cff);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{color:var(--mut);font-size:15px;max-width:640px;margin:0 auto 16px;line-height:1.65;}
+.hero .count{display:inline-block;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#fff;padding:6px 14px;border-radius:99px;font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:2px;font-weight:700;}
+
+/* FILTERS — facet chips */
+.filters-wrap{padding:8px 24px 24px;max-width:1600px;margin:0 auto;}
+.filter-group{margin-bottom:14px;}
+.filter-group-label{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mut);margin-bottom:8px;padding-left:2px;}
+.filters{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{position:relative;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--mut);font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;overflow:hidden;transition:color .3s,border-color .3s;isolation:isolate;cursor:pointer;font-weight:600;}
+.chip::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--acc2),var(--acc));transform:translateY(101%);transition:transform .35s cubic-bezier(.7,0,.3,1);z-index:-1;}
+.chip:hover{color:#fff;border-color:transparent;}
+.chip:hover::before{transform:translateY(0);}
+.chip.is-active{color:#fff;border-color:transparent;box-shadow:0 0 0 2px var(--acc),0 0 20px -4px rgba(181,140,255,.5);}
+.chip.is-active::before{transform:translateY(0);}
+.chip .cnt{opacity:.7;margin-left:4px;font-weight:400;}
+
+/* Gallery grid */
+.gallery{padding:20px 24px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;max-width:1600px;margin:0 auto;}
+@media(max-width:800px){.gallery{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;padding:20px 14px 60px;}}
+.gallery-item{margin:0;position:relative;border-radius:14px;overflow:hidden;cursor:zoom-in;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease,opacity .3s ease;background:#14141a;aspect-ratio:9/16;}
+.gallery-item.is-hidden{display:none;}
+.gallery-item:hover{transform:translateY(-3px) scale(1.005);box-shadow:0 20px 40px -20px rgba(0,0,0,.6),0 0 0 2px var(--acc),0 0 24px -4px rgba(181,140,255,.4);}
+/* Dual img: painterly base + sharp overlay (opacity 0→1 on hover) */
+.gallery-item .img-base,.gallery-item .img-sharp{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1);}
+.gallery-item .img-base{opacity:1;}
+.gallery-item .img-sharp{opacity:0;}
+.gallery-item:hover .img-base{opacity:0;}
+.gallery-item:hover .img-sharp{opacity:1;transform:scale(1.04);}
+.gallery-item::after{content:"⌕";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.6);width:44px;height:44px;background:linear-gradient(135deg,var(--acc2),var(--acc));border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;opacity:0;transition:opacity .3s ease,transform .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;box-shadow:0 6px 18px -4px rgba(123,77,255,.6);z-index:3;}
+.gallery-item:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1);}
+/* LOGO top-left — fotokomórka auto-invert */
+.gallery-item .tile-logo{position:absolute;top:10px;left:10px;width:38px;height:38px;object-fit:contain;z-index:3;pointer-events:none;transition:filter .4s ease,opacity .3s ease;opacity:.92;filter:brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0,0,0,.5));}
+.gallery-item .tile-logo.dark{filter:brightness(0) invert(0) drop-shadow(0 1px 3px rgba(255,255,255,.4));}
+@media(max-width:500px){.gallery-item .tile-logo{width:30px;height:30px;top:8px;left:8px;}}
+/* BRAND TAG bottom-right — Fraunces outline "Galeria AI" jak w headerze */
+.gallery-item .tile-brand-tag{position:absolute;bottom:10px;right:12px;font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:15px;letter-spacing:-.02em;line-height:1;color:transparent;-webkit-text-stroke:.6px var(--acc);z-index:2;pointer-events:none;user-select:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7));white-space:nowrap;}
+.gallery-item .tile-brand-tag em{font-style:italic;font-weight:600;-webkit-text-stroke:.6px var(--acc2);}
+@media(max-width:500px){.gallery-item .tile-brand-tag{font-size:12px;bottom:8px;right:10px;}}
+/* Badge 18+ / VIDEO — dolny lewy */
+.gallery-item .badge-18{position:absolute;bottom:10px;left:10px;padding:3px 8px;border-radius:6px;background:rgba(200,40,40,.9);color:#fff;font-family:'Roboto Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.5px;z-index:2;}
+.gallery-item .badge-video{position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:6px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);color:#fff;font-family:'Roboto Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.8px;z-index:2;}
+
+/* Lightbox — obraz w kontenerze z overlayami (logo, brand, opis flush) */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);backdrop-filter:blur(20px);z-index:200;padding:40px;align-items:center;justify-content:center;cursor:zoom-out;}
+.lightbox.is-open{display:flex;animation:lbFade .3s ease;}
+@keyframes lbFade{from{opacity:0;}to{opacity:1;}}
+/* Wrapper obrazu — position:relative, sized do rzeczywistych wymiarów obrazu przez JS */
+.lb-panel{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:calc(100vw - 120px);max-height:calc(100vh - 100px);cursor:default;}
+.lb-image-wrap{position:relative;display:block;max-width:100%;max-height:calc(100vh - 260px);border-radius:8px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.6),0 0 0 1px rgba(181,140,255,.2);}
+.lb-media{display:block;max-width:calc(100vw - 120px);max-height:calc(100vh - 260px);object-fit:contain;border-radius:8px;}
+/* LOGO top-left overlay w obrazie */
+.lb-logo-overlay{position:absolute;top:14px;left:14px;width:52px;height:52px;object-fit:contain;z-index:5;pointer-events:none;transition:filter .4s ease;filter:brightness(0) invert(1) drop-shadow(0 1px 4px rgba(0,0,0,.6));opacity:.95;}
+.lb-logo-overlay.dark{filter:brightness(0) invert(0) drop-shadow(0 1px 4px rgba(255,255,255,.5));}
+@media(max-width:640px){.lb-logo-overlay{width:40px;height:40px;top:10px;left:10px;}}
+/* BRAND TAG "Galeria AI" — bottom-right overlay w obrazie */
+.lb-brand-overlay{position:absolute;bottom:14px;right:16px;font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:22px;letter-spacing:-.02em;line-height:1;color:transparent;-webkit-text-stroke:.8px var(--acc);z-index:5;pointer-events:none;user-select:none;filter:drop-shadow(0 1px 4px rgba(0,0,0,.8));white-space:nowrap;}
+.lb-brand-overlay em{font-style:italic;font-weight:600;-webkit-text-stroke:.8px var(--acc2);}
+@media(max-width:640px){.lb-brand-overlay{font-size:16px;bottom:10px;right:12px;}}
+/* OPIS STRIP — POD obrazem (nie overlay) */
+.lb-desc-strip{width:100%;max-width:min(720px,100%);padding:0 8px;text-align:left;}
+.lb-desc-strip .lb-title{display:block;font-family:'Manrope',sans-serif;font-size:15px;line-height:1.35;color:#f2efe8;font-weight:700;letter-spacing:.1px;margin-bottom:4px;}
+.lb-desc-strip .lb-desc{display:block;font-family:'Manrope',sans-serif;font-size:12px;line-height:1.5;color:#a09a91;font-weight:400;letter-spacing:.1px;margin-bottom:8px;}
+.lb-desc-strip .lb-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.lb-tag-mini{font-family:'Roboto Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;background:rgba(181,140,255,.18);border:1px solid rgba(181,140,255,.4);border-radius:99px;color:var(--acc);cursor:pointer;transition:all .2s;font-weight:600;}
+.lb-tag-mini:hover{background:linear-gradient(135deg,var(--acc2),var(--acc));border-color:transparent;color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px -2px rgba(123,77,255,.5);}
+@media(max-width:640px){
+  .lb-desc-strip{padding:0 6px;}
+  .lb-desc-strip .lb-title{font-size:13px;}
+  .lb-desc-strip .lb-desc{font-size:11px;}
+  .lb-tag-mini{font-size:8px;padding:3px 7px;}
+}
+/* Nawigacja / zamknięcie */
+.lb-close,.lb-nav{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:50%;cursor:pointer;transition:all .25s;line-height:1;}
+.lb-close{position:absolute;top:20px;right:20px;width:44px;height:44px;font-size:20px;z-index:220;}
+.lb-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg);border-color:var(--acc);}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;font-size:22px;z-index:220;}
+.lb-nav:hover{background:linear-gradient(135deg,var(--acc2),var(--acc));border-color:transparent;box-shadow:0 8px 24px -6px rgba(123,77,255,.6);}
+.lb-prev{left:20px;} .lb-next{right:20px;}
+.lb-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#fff;font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:2px;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.15);z-index:220;}
+@media(max-width:640px){
+  .lightbox{padding:16px;}
+  .lb-nav{width:40px;height:40px;font-size:18px;}
+  .lb-prev{left:8px;}.lb-next{right:8px;}
+  .lb-panel{max-width:calc(100vw - 24px);max-height:calc(100vh - 32px);gap:10px;}
+  .lb-image-wrap{max-width:100%;max-height:calc(100vh - 220px);}
+  .lb-media{max-width:calc(100vw - 24px);max-height:calc(100vh - 220px);}
+}
+
+footer{padding:40px 24px;text-align:center;color:var(--mut);font-size:12px;border-top:1px solid rgba(255,255,255,.06);}
+footer a{color:var(--acc);text-decoration:none;}
+
+/* Loading state */
+.loading{padding:60px;text-align:center;color:var(--mut);font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:2px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-bg-title" aria-hidden="true">Galeria <em>AI</em></div>
+  <div class="nav">
+    <a class="brand-wrap" href="https://lucdoro.design" aria-label="LucDoroDesign — powrót">
+      <img class="brand-logo" src="https://lucdoro.design/assets/logo.png" alt="LucDoroDesign">
+    </a>
+    <nav class="nav-links" aria-label="Główna nawigacja">
+      <div class="nav-row">
+        <a href="https://lucdoro.design/#projekty">Projekty</a>
+        <a href="https://lucdoro.design/#o-mnie">O studiu</a>
+        <a href="https://lucdoro.design/#uslugi">Usługi</a>
+        <a href="https://lucdoro.design/#proces">Proces</a>
+        <a href="https://lucdoro.design/#kontakt">Kontakt</a>
+      </div>
+      <div class="nav-row">
+        <a href="https://lucdoro.design/cv/">CV</a>
+        <a href="https://lucdoro.design/stopki-mailowe/">Stopki</a>
+        <a href="https://lucdoro.design/kreator/">Kreator</a>
+        <a href="https://lucdoro.design/kalkulator/">Kalkulator</a>
+        <a href="https://lucdoro.design/#blog">Blog</a>
+      </div>
+    </nav>
+    <a class="nav-back" href="https://lucdoro.design">← powrót</a>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="kicker">Fotorealistyczne grafiki · Midjourney · 2026</div>
+  <h1>Galeria AI — cinematic collection</h1>
+  <p>Fotorealistyczne obrazy AI z tagami po stylu, epoce i realizmie. <b>Domyślnie wyświetlany jest efekt malarski</b> (Photoshop "Maźnięcia farbą") — <b>najedź kursorem</b> żeby zobaczyć ostrą wersję.</p>
+  <div class="count" id="count-total">Ładowanie…</div>
+</header>
+
+<div class="filters-wrap" id="filters-wrap"></div>
+
+<main class="gallery" id="gallery">
+  <div class="loading">Ładuję galerię…</div>
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Podgląd zdjęcia">
+  <button class="lb-close" id="lb-close" aria-label="Zamknij">×</button>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Poprzednie">‹</button>
+  <div class="lb-panel" id="lb-panel">
+    <div class="lb-image-wrap" id="lb-image-wrap">
+      <img class="lb-media" id="lb-img" alt="" style="display:none;" crossorigin="anonymous">
+      <video class="lb-media" id="lb-video" controls autoplay loop muted playsinline style="display:none;"></video>
+      <img class="lb-logo-overlay" id="lb-logo" src="https://lucdoro.design/assets/logo.png" alt="LucDoroDesign">
+      <span class="lb-brand-overlay">Galeria <em>AI</em></span>
+    </div>
+    <div class="lb-desc-strip">
+      <span class="lb-title" id="lb-title">—</span>
+      <span class="lb-desc" id="lb-desc">—</span>
+      <div class="lb-tags" id="lb-tags"></div>
+    </div>
+  </div>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Następne">›</button>
+  <div class="lb-counter" id="lb-counter">1 / 1</div>
+</div>
+
+<footer>
+  Wszystkie obrazy © LucDoroDesign · <a href="https://lucdoro.design">lucdoro.design</a> · Wygenerowane w Midjourney · <span id="total-count">171</span> grafik AI · Efekt malarski = Photoshop "Maźnięcia farbą" (ImageMagick <code>-paint 4</code>)
+</footer>
+
+<script>
+const BASE = 'https://lucdoro.design/assets/gallery';
+
+// State
+let MANIFEST = null;
+let ACTIVE_FILTERS = { kategoria: 'all', postac: 'all', 'era-styl': 'all', realizm: 'all', is18: 'all' };
+let currentIdx = 0;
+let visibleFiles = [];
+
+// Labels PL
+const FACET_LABELS = {
+  kategoria: 'Kategoria',
+  postac: 'Postać',
+  'era-styl': 'Era / Styl',
+  realizm: 'Realizm',
+  is18: 'Zawartość'
+};
+
+const VALUE_LABELS = {
+  // kategoria
+  'portret-kobiecy': 'Portret kobiecy',
+  'moda-odziez': 'Moda / odzież',
+  'logo-branding': 'Logo / branding',
+  'tekstura-tlo': 'Tekstura',
+  'produkt-render': 'Produkt render',
+  'lifestyle-scena': 'Lifestyle',
+  'koncept-abstrakt': 'Koncept',
+  'bizuteria-detal': 'Biżuteria',
+  'video-animacja': 'Video',
+  'symbolika': 'Symbolika',
+  // postac
+  'marilyn-monroe-blonde': 'Marilyn Monroe',
+  'brunette-glamour': 'Brunetka',
+  'latina-beauty': 'Latina',
+  'streetwear-model': 'Model streetwear',
+  'abstract-figure': 'Abstract',
+  'no-person': 'Brak osoby',
+  'family-group': 'Rodzina',
+  'animal-snake': 'Wąż',
+  'animal-dog': 'Pies',
+  // era-styl
+  'vintage-1950s': 'Vintage 1950s',
+  'retro-editorial': 'Retro editorial',
+  'modern-minimal': 'Modern minimal',
+  'timeless': 'Timeless',
+  'y2k-nostalgic': 'Y2K',
+  'industrial-brutalist': 'Industrial',
+  'illustration-flat': 'Illustration',
+  // realizm
+  'hyperreal': 'Hyperreal',
+  'cinematic': 'Cinematic',
+  'editorial-photo': 'Editorial photo',
+  'concept-art': 'Concept art',
+  'stylized-illustration': 'Stylized illust.',
+  'abstract-render': 'Abstract render',
+};
+
+function labelize(v){ return VALUE_LABELS[v] || v; }
+
+async function loadManifest() {
+  try {
+    const res = await fetch(BASE + '/manifest.json?v=' + Date.now());
+    MANIFEST = await res.json();
+    buildFilters();
+    renderGallery();
+    document.getElementById('count-total').textContent = MANIFEST.total_files + ' grafik AI';
+  } catch(e) {
+    document.getElementById('gallery').innerHTML = '<div class="loading" style="color:#c73">Błąd ładowania manifestu: ' + e.message + '</div>';
+  }
+}
+
+function countValues(facet) {
+  const counts = {};
+  for (const f of MANIFEST.files) {
+    const v = facet === 'is18' ? (f['18plus'] ? 'y' : 'n') : f[facet];
+    counts[v] = (counts[v] || 0) + 1;
+  }
+  return counts;
+}
+
+function buildFilters() {
+  const wrap = document.getElementById('filters-wrap');
+  const facets = ['kategoria', 'postac', 'era-styl', 'realizm', 'is18'];
+  wrap.innerHTML = '';
+  for (const facet of facets) {
+    const counts = countValues(facet);
+    const values = Object.keys(counts).sort((a,b) => counts[b] - counts[a]);
+    const group = document.createElement('div');
+    group.className = 'filter-group';
+    group.innerHTML = `<div class="filter-group-label">${FACET_LABELS[facet]}</div><div class="filters" data-facet="${facet}"></div>`;
+    const chipsWrap = group.querySelector('.filters');
+
+    const allChip = document.createElement('button');
+    allChip.className = 'chip is-active';
+    allChip.dataset.value = 'all';
+    allChip.innerHTML = `Wszystkie <span class="cnt">${MANIFEST.total_files}</span>`;
+    chipsWrap.appendChild(allChip);
+
+    for (const v of values) {
+      const chip = document.createElement('button');
+      chip.className = 'chip';
+      chip.dataset.value = v;
+      let display = v;
+      if (facet === 'is18') display = v === 'y' ? '🔞 18+' : '✓ SFW';
+      else display = labelize(v);
+      chip.innerHTML = `${display} <span class="cnt">${counts[v]}</span>`;
+      chipsWrap.appendChild(chip);
+    }
+    wrap.appendChild(group);
+  }
+
+  wrap.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    const facet = chip.parentElement.dataset.facet;
+    chip.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('is-active'));
+    chip.classList.add('is-active');
+    ACTIVE_FILTERS[facet] = chip.dataset.value;
+    renderGallery();
+  });
+}
+
+function passesFilters(f) {
+  for (const [facet, val] of Object.entries(ACTIVE_FILTERS)) {
+    if (val === 'all') continue;
+    if (facet === 'is18') {
+      const is18 = f['18plus'] ? 'y' : 'n';
+      if (is18 !== val) return false;
+    } else {
+      if (f[facet] !== val) return false;
+    }
+  }
+  return true;
+}
+
+function renderGallery() {
+  const g = document.getElementById('gallery');
+  visibleFiles = MANIFEST.files.filter(passesFilters);
+  if (!visibleFiles.length) {
+    g.innerHTML = '<div class="loading" style="grid-column:1/-1">Brak grafik dla wybranych filtrów.</div>';
+    return;
+  }
+  g.innerHTML = visibleFiles.map((f, i) => {
+    const isVideo = f.format === 'mp4';
+    const badge18 = f['18plus'] ? '<span class="badge-18">18+</span>' : '';
+    const badgeVid = isVideo ? '<span class="badge-video">▶ VIDEO</span>' : '';
+    return `<div class="gallery-item" data-idx="${i}">
+      <img class="img-base" src="${BASE}/painterly/${f.id}.webp" alt="${f.alt_pl}" loading="lazy" />
+      <img class="img-sharp" src="${BASE}/thumbs/${f.id}.webp" alt="${f.alt_pl}" loading="lazy" crossorigin="anonymous" />
+      <img class="tile-logo" src="https://lucdoro.design/assets/logo.png" alt="LucDoroDesign" loading="lazy" />
+      ${badge18}
+      ${badgeVid}
+      <span class="tile-brand-tag">Galeria <em>AI</em></span>
+    </div>`;
+  }).join('');
+  // Uruchom fotokomórkę na wszystkich sharp obrazkach (analiza brightness pod logiem)
+  requestAnimationFrame(runPhotocellOnTiles);
+}
+
+// Fotokomórka: analizuje pixele w obszarze logo top-left (48x48px), ustawia .dark jeśli tło jasne
+function runPhotocellOnTiles() {
+  const tiles = document.querySelectorAll('.gallery-item');
+  tiles.forEach(tile => {
+    const sharp = tile.querySelector('.img-sharp');
+    const logo = tile.querySelector('.tile-logo');
+    if (!sharp || !logo || tile.dataset.pcelDone === '1') return;
+
+    const analyze = () => {
+      try {
+        const cv = document.createElement('canvas');
+        // sample 48x48 z top-left
+        const sample = 48;
+        cv.width = sample; cv.height = sample;
+        const ctx = cv.getContext('2d');
+        // narysuj tylko top-left część obrazu, skalowaną 1:1
+        // sharp img ma naturalWidth/Height
+        const nw = sharp.naturalWidth, nh = sharp.naturalHeight;
+        if (!nw || !nh) return;
+        // wycinamy prostokąt z lewej-górnej części odpowiadający pozycji loga
+        // logo jest w pozycji 10-58px na kafelku, kafelek ~240px, obraz cover
+        // uproszczenie: bierzemy top-left 15% x 15% obrazu
+        const srcW = Math.floor(nw * 0.20), srcH = Math.floor(nh * 0.12);
+        ctx.drawImage(sharp, 0, 0, srcW, srcH, 0, 0, sample, sample);
+        const data = ctx.getImageData(0, 0, sample, sample).data;
+        let sum = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          // luminance: 0.299R + 0.587G + 0.114B
+          sum += 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
+        }
+        const brightness = sum / (data.length / 4);
+        // brightness < 128 → tło ciemne → logo białe (default)
+        // brightness >= 128 → tło jasne → logo czarne (.dark)
+        if (brightness >= 128) logo.classList.add('dark');
+        else logo.classList.remove('dark');
+        tile.dataset.pcelDone = '1';
+      } catch(e) {
+        // CORS albo inny błąd — zostaw default (białe)
+        tile.dataset.pcelDone = '1';
+      }
+    };
+
+    if (sharp.complete && sharp.naturalWidth) {
+      analyze();
+    } else {
+      sharp.addEventListener('load', analyze, { once: true });
+    }
+  });
+}
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbVid = document.getElementById('lb-video');
+const lbTitle = document.getElementById('lb-title');
+const lbDesc = document.getElementById('lb-desc');
+const lbTags = document.getElementById('lb-tags');
+const lbCounter = document.getElementById('lb-counter');
+
+function openLightbox(idx) {
+  currentIdx = idx;
+  updateLb();
+  lb.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function updateLb() {
+  const f = visibleFiles[currentIdx];
+  if (!f) return;
+  const isVideo = f.format === 'mp4';
+  const lbLogo = document.getElementById('lb-logo');
+  if (isVideo) {
+    lbImg.style.display = 'none';
+    lbVid.style.display = 'block';
+    lbVid.src = BASE + '/video/' + f.id + '.mp4';
+    lbVid.play().catch(()=>{});
+  } else {
+    lbVid.pause();
+    lbVid.style.display = 'none';
+    lbImg.style.display = 'block';
+    lbImg.src = BASE + '/full/' + f.id + '.webp';
+    lbImg.alt = f.alt_pl;
+    lbImg.addEventListener('load', () => runPhotocellOnLightbox(lbImg, lbLogo), { once: true });
+  }
+  lbTitle.textContent = f.title_pl;
+  lbDesc.textContent = f.alt_pl;
+  lbCounter.textContent = (currentIdx + 1) + ' / ' + visibleFiles.length;
+  // tags clickable — kategoria, postać, era-styl, realizm, mood + motywy top 3
+  const facetTags = [
+    ['kategoria', f.kategoria],
+    ['postac', f.postac],
+    ['era-styl', f['era-styl']],
+    ['realizm', f.realizm],
+    ['mood', f.mood],
+  ].filter(([_, v]) => v && v !== 'no-person');
+  lbTags.innerHTML = facetTags.map(([facet, v]) =>
+    `<span class="lb-tag-mini" data-facet="${facet}" data-value="${v}">${labelize(v)}</span>`
+  ).join('');
+}
+
+// Fotokomórka dla lightbox — analiza brightness top-left
+function runPhotocellOnLightbox(img, logo) {
+  if (!img || !logo || !img.naturalWidth) return;
+  try {
+    const cv = document.createElement('canvas');
+    const sample = 60;
+    cv.width = sample; cv.height = sample;
+    const ctx = cv.getContext('2d');
+    const nw = img.naturalWidth, nh = img.naturalHeight;
+    const srcW = Math.floor(nw * 0.15), srcH = Math.floor(nh * 0.10);
+    ctx.drawImage(img, 0, 0, srcW, srcH, 0, 0, sample, sample);
+    const data = ctx.getImageData(0, 0, sample, sample).data;
+    let sum = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      sum += 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
+    }
+    const b = sum / (data.length / 4);
+    if (b >= 128) logo.classList.add('dark');
+    else logo.classList.remove('dark');
+  } catch(e) {
+    logo.classList.remove('dark');
+  }
+}
+function closeLightbox() {
+  lb.classList.remove('is-open');
+  lbVid.pause();
+  document.body.style.overflow = '';
+}
+function nav(delta) {
+  if (!visibleFiles.length) return;
+  currentIdx = (currentIdx + delta + visibleFiles.length) % visibleFiles.length;
+  updateLb();
+}
+
+document.getElementById('gallery').addEventListener('click', e => {
+  const item = e.target.closest('.gallery-item');
+  if (item) openLightbox(+item.dataset.idx);
+});
+// Click na tag w lightbox → aktywuj filtr + zamknij + scroll do galerii
+document.getElementById('lb-tags').addEventListener('click', e => {
+  const tag = e.target.closest('.lb-tag-mini');
+  if (!tag) return;
+  const facet = tag.dataset.facet;
+  const value = tag.dataset.value;
+  if (!facet || !value) return;
+  // Ustaw filtr
+  ACTIVE_FILTERS[facet] = value;
+  // Odzwierciedl aktywny chip w UI filterów
+  const wrap = document.getElementById('filters-wrap');
+  const groupChips = wrap.querySelector(`.filters[data-facet="${facet}"]`);
+  if (groupChips) {
+    groupChips.querySelectorAll('.chip').forEach(c => c.classList.remove('is-active'));
+    const activeChip = groupChips.querySelector(`.chip[data-value="${value}"]`);
+    if (activeChip) activeChip.classList.add('is-active');
+  }
+  closeLightbox();
+  renderGallery();
+  // Scroll do galerii
+  document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); nav(-1); });
+document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); nav(1); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('is-open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') nav(-1);
+  if (e.key === 'ArrowRight') nav(1);
+});
+
+loadManifest();
+</script>
+</body>
+</html>

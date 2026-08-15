@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator wyceny — LucDoroDesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d10;--acc:#b58cff;--acc2:#7b4dff;--txt:#f2efe8;--mut:#a09a91;--line:#2b2b32;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;overflow:hidden;min-height:100vh;}
+
+/* TOP NAV — wzorzec z /developer/ */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;min-height:65px;background:color-mix(in srgb, var(--bg) 92%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.top-nav-back{display:inline-flex;align-items:center;gap:8px;color:var(--txt);text-decoration:none;font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);transition:all .2s ease;white-space:nowrap;}
+.top-nav-back:hover{border-color:var(--acc);color:var(--acc);transform:translateX(-2px);}
+.top-nav-brand{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--txt);letter-spacing:.02em;}
+.top-nav-links{display:flex;gap:14px;align-items:center;font-size:13px;}
+.top-nav-links a{color:var(--mut);text-decoration:none;transition:color .2s;}
+.top-nav-links a:hover{color:var(--acc);}
+.tn-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--txt);width:36px;height:36px;border-radius:999px;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;flex:none;}
+.tn-btn:hover{border-color:var(--acc);color:var(--acc);}
+.tn-lang-btn{width:auto;padding:0 10px;font-family:'Roboto Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;}
+.tn-palette-wrap{position:relative;display:inline-block;}
+.tn-palette-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:var(--card,#1a1a1e);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);z-index:200;}
+.tn-palette-menu.is-open{display:flex;}
+.tn-palette-menu button{background:transparent;border:0;color:var(--txt);padding:9px 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;text-align:left;display:flex;align-items:center;gap:10px;transition:background .18s;}
+.tn-palette-menu button:hover{background:rgba(255,255,255,.06);}
+.tn-palette-menu button.is-active{background:color-mix(in srgb, var(--acc) 12%, transparent);color:var(--acc);}
+.tn-swatches{display:inline-flex;gap:3px;}
+.tn-swatches span{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.15);}
+
+/* SPLIT VIEW */
+.split{position:fixed;top:65px;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;}
+/* UJEDNOLICONE RAMKI — obie kolumny jako panele (desktop) */
+@media(min-width:901px){
+  .split{gap:16px;padding:16px;}
+  .split-left,.split-right{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);}
+  
+  
+}
+.split-left{position:relative;display:flex;flex-direction:column;}
+.split-right{position:relative;overflow:hidden;background:radial-gradient(ellipse at top right,color-mix(in srgb, var(--acc) 12%, var(--bg)) 0%,var(--bg) 60%);}
+
+/* Theme toggle bar — nad iframe (nie overlap) */
+.calc-frame{border:0;width:100%;flex:1;background:#f8f6f0;transition:background .3s;display:block;}
+.calc-frame.dark{background:#0f1115;}
+
+/* RIGHT SHOWCASE */
+.showcase{position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden;padding:0;}
+.showcase-top{flex:1 1 50%;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.showcase-bottom{flex:1 1 50%;min-height:0;overflow-y:auto;border-top:1px solid var(--line);padding:36px 40px;}
+.showcase-bottom .showcase-card{max-width:none;}
+.showcase-empty--bottom{opacity:.55;max-width:340px;}
+.showcase-empty--bottom p{color:var(--mut);font-size:13px;line-height:1.6;}
+@media(max-width:900px){
+  .showcase-top{flex:none;padding:70px 16px 16px;}
+  .showcase-bottom{flex:none;padding:24px 16px;}
+}
+/* Blob decoracje */
+
+/* Empty state */
+.showcase-empty{position:relative;z-index:1;text-align:center;max-width:400px;opacity:.6;}
+.showcase-empty-icon{font-size:48px;margin-bottom:20px;}
+.showcase-empty h2{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:24px;color:var(--txt);margin-bottom:10px;}
+.showcase-empty p{color:var(--mut);font-size:14px;line-height:1.6;}
+
+/* Selected service card */
+.showcase-card{position:relative;z-index:1;max-width:520px;width:100%;}
+.showcase-eyebrow{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:20px;}
+.showcase-name{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(32px,4vw,56px);line-height:1.1;margin:0 0 24px;background:linear-gradient(135deg,var(--txt) 0%,var(--acc) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em;}
+.showcase-price-row{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:24px;}
+.showcase-price{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(48px,6vw,80px);background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;}
+.showcase-price-unit{color:var(--mut);font-size:14px;font-family:'Roboto Mono',monospace;letter-spacing:.5px;}
+.showcase-market{color:var(--mut);font-size:13px;margin-bottom:24px;padding:12px 16px;background:rgba(255,255,255,.03);border-left:2px solid var(--acc);border-radius:0 8px 8px 0;}
+.showcase-market b{color:var(--txt);}
+.showcase-desc{color:var(--mut);line-height:1.75;font-size:14px;margin-bottom:28px;}
+.showcase-features{list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:10px;}
+.showcase-features li{padding-left:24px;position:relative;font-size:13.5px;color:var(--txt);}
+.showcase-features li::before{content:"✦";position:absolute;left:0;color:var(--acc);font-size:12px;top:2px;}
+.showcase-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--wa-bg);color:var(--wa-fg);text-decoration:none;border-radius:12px;font-weight:700;font-size:13px;letter-spacing:.3px;box-shadow:0 12px 32px rgba(123,77,255,.4);transition:transform .2s;}
+.showcase-cta:hover{transform:translateY(-2px);}
+
+/* KOLEKCJE — floating panel top-right of right column */
+.collections-btn{position:absolute;top:14px;right:14px;z-index:20;background:var(--wa-bg);backdrop-filter:blur(12px);border:1px solid transparent;color:var(--wa-fg);padding:10px 16px;border-radius:12px;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.5px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 8px 26px rgba(var(--wa-shadow),.45);}
+.collections-btn:hover{transform:translateY(-1px) scale(1.03);box-shadow:0 10px 30px rgba(var(--wa-shadow),.6);}
+.collections-btn .cnt{background:linear-gradient(135deg,var(--acc2),var(--acc));color:#fff;font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 7px;border-radius:99px;font-weight:800;}
+.collections-panel{position:absolute;top:56px;right:14px;width:340px;max-width:calc(100vw - 28px);max-height:calc(100vh - 140px);background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:16px;padding:16px;z-index:21;display:none;flex-direction:column;gap:14px;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.collections-panel.is-open{display:flex;animation:panelIn .3s cubic-bezier(.22,1,.36,1);}
+@keyframes panelIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+.cp-section-title{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:2px;}
+.cp-preset,.cp-saved{background:color-mix(in srgb, var(--txt) 6%, transparent);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;transition:all .18s;}
+.cp-preset:hover,.cp-saved:hover{border-color:color-mix(in srgb, var(--acc) 50%, transparent);background:color-mix(in srgb, var(--txt) 6%, transparent);}
+.cp-name{font-weight:700;color:var(--txt);font-size:13.5px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.cp-name .cp-price{font-family:'Syne',sans-serif;font-weight:800;color:var(--wa-bg);font-size:14px;}
+.cp-items{color:var(--mut);font-size:11.5px;line-height:1.5;}
+.cp-actions{display:flex;gap:6px;margin-top:6px;}
+.cp-btn{flex:1;background:transparent;border:1px solid var(--line);color:var(--txt);padding:6px 10px;border-radius:8px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;transition:all .18s;}
+.cp-btn:hover{border-color:var(--acc);color:var(--acc);}
+.cp-btn.primary{background:var(--wa-bg);border-color:transparent;color:var(--wa-fg);}
+.cp-btn.primary:hover{transform:translateY(-1px);color:#fff;}
+.cp-btn.danger:hover{border-color:#e07a5f;color:#e07a5f;}
+.cp-save-row{display:flex;gap:6px;margin-top:6px;}
+.cp-save-row input{flex:1;background:color-mix(in srgb, var(--txt) 6%, transparent);border:1px solid var(--line);color:var(--txt);padding:8px 12px;border-radius:8px;font-family:inherit;font-size:12px;outline:none;}
+.cp-save-row input:focus{border-color:var(--acc);}
+.cp-empty{color:var(--mut);font-size:11.5px;font-style:italic;text-align:center;padding:12px 0;}
+
+/* Mobile floating "podgląd" button — pokazuje się gdy user kliknął pozycję */
+.showcase-fab{display:none;position:fixed;bottom:20px;right:20px;z-index:50;background:var(--wa-bg);color:#fff;border:0;padding:14px 22px;border-radius:12px;font-family:inherit;font-weight:800;font-size:13px;letter-spacing:.3px;cursor:pointer;box-shadow:0 12px 32px rgba(123,77,255,.5);transition:transform .2s;}
+.showcase-fab:hover,.showcase-fab:active{transform:translateY(-2px);}
+.showcase-fab.is-visible{display:inline-flex;align-items:center;gap:8px;animation:fabPop .35s cubic-bezier(.34,1.56,.64,1);}
+@keyframes fabPop{from{transform:translateY(20px) scale(.85);opacity:0;}to{transform:none;opacity:1;}}
+
+@media(max-width:900px){
+  .split{grid-template-columns:1fr;grid-template-rows:1fr;}
+  .split-left{border-right:0;border-bottom:none;height:calc(100vh - 58px);}
+  .split-right{position:fixed;top:58px;left:0;right:0;bottom:0;transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);z-index:40;background:radial-gradient(ellipse at top right,color-mix(in srgb, var(--acc) 12%, var(--bg)) 0%,var(--bg) 60%);}
+  .split-right.is-open{transform:translateY(0);}
+  .collections-panel{position:fixed;top:auto;right:0;left:0;bottom:0;width:100%;max-width:none;max-height:75vh;border-radius:20px 20px 0 0;padding:20px 16px 24px;}
+  .collections-btn{top:auto;bottom:80px;right:14px;font-size:11px;padding:8px 14px;}
+  /* Close button na mobile inside showcase */
+  .showcase-close{display:flex!important;position:absolute;top:16px;right:16px;z-index:5;background:rgba(23,26,33,.85);border:1px solid rgba(255,255,255,.2);color:var(--txt);width:38px;height:38px;border-radius:50%;font-size:20px;line-height:1;padding:0;cursor:pointer;align-items:center;justify-content:center;}
+  .top-nav{padding:10px 14px;min-height:58px;}
+  .top-nav-brand{display:none;}
+  .top-nav-links{gap:10px;font-size:12px;}
+  .top-nav-links a{display:none;}
+  
+  
+  
+  
+  .showcase-price{font-size:44px!important;}
+  .showcase-name{font-size:28px!important;}
+}
+.showcase-close{display:none;}
+@media(max-width:640px){
+  .top-nav-back{padding:5px 10px;font-size:11px;}
+  
+  .top-nav{min-height:58px;}
+  .split-left{height:calc(100vh - 58px);}
+  .split-right{top:58px;}
+  .showcase-fab{bottom:14px;right:14px;padding:12px 18px;font-size:12px;}
+}
+
+  /* PAKIET — karty uslug obok siebie, siatka dopasowuje sie do liczby pozycji */
+  .pkg-head{margin-bottom:22px;}
+  .pkg-eyebrow{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:12px;}
+  .pkg-title{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(26px,3vw,40px);line-height:1.1;margin:0 0 14px;color:var(--txt);}
+  .pkg-total{display:flex;align-items:baseline;gap:10px;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(30px,4vw,48px);color:var(--wa-bg);}
+  .pkg-total small{font-family:'Roboto Mono',monospace;font-size:12px;font-weight:500;color:var(--mut);letter-spacing:1px;}
+  .pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:26px;}
+  .pkg-card{background:color-mix(in srgb, var(--txt) 6%, transparent);border:1px solid var(--line);border-radius:12px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;}
+  .pkg-card-cat{font-family:'Roboto Mono',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);}
+  .pkg-card-name{font-family:'Fraunces',serif;font-style:italic;font-size:17px;line-height:1.2;color:var(--txt);}
+  .pkg-card-desc{font-size:12px;line-height:1.55;color:var(--mut);flex:1;}
+  .pkg-card-foot{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding-top:10px;margin-top:2px;}
+  .pkg-card-qty{font-family:'Roboto Mono',monospace;font-size:10.5px;letter-spacing:1px;color:var(--mut);}
+  .pkg-card-sum{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--txt);}
+  .cp-count{font-family:'Roboto Mono',monospace;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);font-weight:600;white-space:nowrap;padding:3px 8px;border-radius:99px;background:color-mix(in srgb, var(--txt) 6%, transparent);}
+  .cp-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:0;border-top:1px dashed var(--line);}
+  .cp-list li{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:5px 0;font-size:11.5px;line-height:1.4;color:var(--mut);border-bottom:1px dashed var(--line);}
+  .cp-list li:last-child{border-bottom:0;}
+  .cp-list li span{flex:1;}
+  .cp-list li b{font-family:'Roboto Mono',monospace;font-size:10.5px;color:var(--txt);font-weight:700;white-space:nowrap;}
+  .cp-desc{color:var(--mut);font-size:11.5px;line-height:1.5;font-style:italic;}
+  /* PARAGON — zywa lista zamawianych uslug, rozwija sie w dol */
+  .receipt-wrap{position:relative;width:100%;height:100%;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;justify-content:center;overflow:auto;padding:22px 26px;box-sizing:border-box;}
+  .receipt-wrap .receipt{flex:1 1 260px;max-width:320px;}
+  @media(max-width:900px){.receipt-wrap{flex-direction:column;padding:0;} .receipt-wrap .receipt{max-width:100%;width:100%;}}
+  .receipt{position:relative;width:100%;background:var(--card);border:1px solid var(--line);border-bottom:0;
+    border-radius:12px 12px 0 0;padding:20px 18px 30px;font-family:'Roboto Mono',monospace;color:var(--txt);
+    transform-origin:top center;
+    -webkit-mask:conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/15px 100% repeat-x;
+    mask:conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/15px 100% repeat-x;}
+  .receipt.is-new{animation:unroll .5s cubic-bezier(.22,1,.36,1);}
+  @keyframes unroll{from{clip-path:inset(0 0 100% 0);}to{clip-path:inset(0 0 0 0);}}
+  /* zabkowana krawedz na dole — jak oderwany paragon */
+
+  .r-head{text-align:center;border-bottom:1px dashed var(--line);padding-bottom:12px;margin-bottom:12px;}
+  .r-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;}
+  .r-sub{font-size:9.5px;letter-spacing:1.5px;color:var(--mut);margin-top:5px;text-transform:uppercase;}
+  .r-pkg{margin-top:9px;display:inline-block;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--wa-fg);background:var(--wa-bg);padding:4px 10px;border-radius:8px;font-weight:700;}
+  .r-item{margin-bottom:9px;}
+  .r-row{display:flex;align-items:baseline;gap:6px;font-size:11.5px;}
+  .r-row .r-name{flex:0 1 auto;}
+  .r-row .r-fill{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-3px);min-width:8px;}
+  .r-row .r-val{white-space:nowrap;font-weight:700;}
+  .r-qty{font-size:9.5px;color:var(--mut);letter-spacing:.5px;margin-top:2px;}
+  .r-extra .r-name{color:var(--mut);}
+  .r-sep{border-top:1px dashed var(--line);margin:12px 0 10px;}
+  .r-tot{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--mut);margin-bottom:4px;}
+  .r-tot.net{font-size:15px;color:var(--txt);font-weight:700;margin:8px 0 6px;}
+  .r-tot.net b{color:var(--wa-bg);}
+  .r-cta{display:block;text-align:center;margin-top:16px;padding:12px 14px;background:var(--wa-bg);color:var(--wa-fg);
+    text-decoration:none;border-radius:12px;font-family:'Manrope',sans-serif;font-weight:700;font-size:12.5px;}
+  .r-foot{text-align:center;font-size:9px;letter-spacing:1.2px;color:var(--mut);margin-top:14px;text-transform:uppercase;}
+/* KOLOR AKCJI — identyczny z guzikiem WhatsApp na stronie glownej */
+:root{--wa-bg:#25d366;--wa-shadow:37,211,102;--wa-fg:#fff}
+:root[data-theme="light"]:not([data-palette]){--wa-bg:#1DB954;--wa-shadow:29,185,84;--wa-fg:#fff}
+:root[data-palette="combo01"][data-theme="light"]{--wa-bg:#E5555C;--wa-fg:#fff}
+:root[data-palette="combo01"][data-theme="dark"]{--wa-bg:#FF7B85;--wa-fg:#0f1a2e}
+:root[data-palette="combo02"][data-theme="light"]{--wa-bg:#00A0A0;--wa-fg:#fff}
+:root[data-palette="combo02"][data-theme="dark"]{--wa-bg:#00E5A0;--wa-fg:#082018}
+:root[data-palette="combo03"][data-theme="light"]{--wa-bg:#E67E22;--wa-fg:#fff}
+:root[data-palette="combo03"][data-theme="dark"]{--wa-bg:#FFB74D;--wa-fg:#1a0f00}
+:root[data-palette="combo04"][data-theme="light"]{--wa-bg:#3D7A4A;--wa-fg:#fff}
+:root[data-palette="combo04"][data-theme="dark"]{--wa-bg:#5DAA6F;--wa-fg:#0A1F10}
+:root[data-palette="combo05"][data-theme="light"]{--wa-bg:#D9186B;--wa-fg:#fff}
+:root[data-palette="combo05"][data-theme="dark"]{--wa-bg:#FF3A9E;--wa-fg:#1a0018}
+/* PALETY — spojne z /developer/ */
+:root{--card:#161619;}
+:root[data-palette="combo01"][data-theme="light"]{--bg:#CAE8E8;--card:#DEF0F0;--line:#A0C4C4;--txt:#28469E;--mut:#4864B0;--acc:#28469E;--acc2:#E5555C;}
+:root[data-palette="combo01"][data-theme="dark"]{--bg:#28469E;--card:#334FA8;--line:#4260B4;--txt:#CAE8E8;--mut:#A0C4C4;--acc:#CAE8E8;--acc2:#FF7B85;}
+:root[data-palette="combo02"][data-theme="light"]{--bg:#FDE1B8;--card:#FFEDD5;--line:#E8CCA0;--txt:#3A241C;--mut:#7A5A48;--acc:#C24A2E;--acc2:#7A1E5C;}
+:root[data-palette="combo02"][data-theme="dark"]{--bg:#3E0856;--card:#4E1866;--line:#6E3886;--txt:#FAAE62;--mut:#E09E52;--acc:#FAAE62;--acc2:#00E5A0;}
+:root[data-palette="combo03"][data-theme="light"]{--bg:#B0EDF9;--card:#C4F0F9;--line:#88C4D8;--txt:#04344C;--mut:#24546C;--acc:#04344C;--acc2:#E67E22;}
+:root[data-palette="combo03"][data-theme="dark"]{--bg:#04344C;--card:#14546C;--line:#2A5A72;--txt:#B0EDF9;--mut:#88CDE0;--acc:#B0EDF9;--acc2:#FFB74D;}
+:root[data-palette="combo04"][data-theme="light"]{--bg:#F5EDEF;--card:#FAF3F5;--line:#E5D0D6;--txt:#3A0F1D;--mut:#7A5060;--acc:#7A1E5C;--acc2:#3D7A4A;}
+:root[data-palette="combo04"][data-theme="dark"]{--bg:#2A0F1A;--card:#3A1826;--line:#4A2536;--txt:#F5EDEF;--mut:#B89AA8;--acc:#D07DAD;--acc2:#5DAA6F;}
+:root[data-palette="combo05"][data-theme="light"]{--bg:#FFFE15;--card:#FFFF3C;--line:#D0CE10;--txt:#0C1E29;--mut:#243E49;--acc:#0C1E29;--acc2:#D9186B;}
+:root[data-palette="combo05"][data-theme="dark"]{--bg:#0C1E29;--card:#182E39;--line:#3E5E69;--txt:#FFFE15;--mut:#E0DE35;--acc:#FFFE15;--acc2:#FF3A9E;}
+:root[data-theme="light"]:not([data-palette]){--bg:#f5f2ea;--card:#ffffff;--line:#e4dfd0;--txt:#1a1a1e;--mut:#5a554d;--acc:#7b4dff;--acc2:#1DB954;}
+</style>
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Nawigacja" data-i18n-en="Navigation" data-i18n-attr="aria-label">
+  <a class="top-nav-back" href="https://lucdoro.design" aria-label="Powrót do strony głównej">← lucdoro.design</a>
+  <div class="top-nav-brand" data-i18n-en="Offering · Pricing calculator">Oferta · Kalkulator wyceny</div>
+  <div class="top-nav-links">
+    <a href="https://lucdoro.design/stopki-mailowe/" data-i18n-en="Signatures">Stopki</a>
+    <a href="https://lucdoro.design/kreator/" data-i18n-en="Creator">Kreator</a>
+    <a href="https://lucdoro.design/developer/">Developer</a>
+    <a href="https://lucdoro.design/#kontakt" data-i18n-en="Contact">Kontakt</a>
+    <button class="tn-btn" id="tn-theme-btn" aria-label="Motyw jasny/ciemny" title="Motyw">☾</button>
+    <button class="tn-btn tn-lang-btn" id="tn-lang-btn" aria-label="Change language / Zmień język" title="PL / EN">EN</button>
+    <div class="tn-palette-wrap">
+      <button class="tn-btn" id="tn-palette-btn" aria-label="Paleta kolorów" title="Palety" aria-haspopup="menu" aria-expanded="false">◐</button>
+      <div class="tn-palette-menu" id="tn-palette-menu" role="menu">
+        <button type="button" data-palette="default" class="is-active"><span class="tn-swatches"><span style="background:#f5f2ea"></span><span style="background:#7b4dff"></span></span>Default</button>
+        <button type="button" data-palette="combo01"><span class="tn-swatches"><span style="background:#CAE8E8"></span><span style="background:#28469E"></span></span>Ocean</button>
+        <button type="button" data-palette="combo02"><span class="tn-swatches"><span style="background:#FAAE62"></span><span style="background:#3E0856"></span></span>Sunset</button>
+        <button type="button" data-palette="combo03"><span class="tn-swatches"><span style="background:#B0EDF9"></span><span style="background:#04344C"></span></span>Sky</button>
+        <button type="button" data-palette="combo04"><span class="tn-swatches"><span style="background:#F5EDEF"></span><span style="background:#7A1E5C"></span></span>Milano</button>
+        <button type="button" data-palette="combo05"><span class="tn-swatches"><span style="background:#FFFE15"></span><span style="background:#0C1E29"></span></span>Neon</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="split">
+  <div class="split-left">
+    
+    <iframe class="calc-frame dark" id="calc-frame" src="calc.html?theme=dark" title="Kalkulator wyceny"></iframe>
+  </div>
+  <div class="split-right" id="split-right">
+    <button class="showcase-close" id="showcase-close" aria-label="Zamknij podgląd">×</button>
+    <button class="collections-btn" id="collections-btn" title="Kolekcje pozycji">
+      📦 Kolekcje <span class="cnt" id="collections-count">0</span>
+    </button>
+    <div class="collections-panel" id="collections-panel" role="dialog" aria-label="Kolekcje">
+      <div>
+        <div data-i18n-en="Ready-made packages" class="cp-section-title">Gotowe pakiety</div>
+        <div id="cp-presets"></div>
+      </div>
+      <div>
+        <div data-i18n-en="Your collections" class="cp-section-title">Twoje kolekcje</div>
+        <div id="cp-saved"></div>
+      </div>
+      <div>
+        <div class="cp-section-title">Zapisz obecny wybór</div>
+        <div class="cp-save-row">
+          <input type="text" id="cp-name-input" placeholder="Nazwa kolekcji (np. Rebranding X)">
+          <button class="cp-btn primary" id="cp-save-btn">💾 Zapisz</button>
+        </div>
+      </div>
+    </div>
+    <div class="showcase" id="showcase">
+      <div class="showcase-top" id="showcase-top">
+        <div class="showcase-empty">
+          <div class="showcase-empty-icon">👈</div>
+          <h2 data-i18n-en="Pick an item from the price list">Kliknij pozycję w cenniku</h2>
+          <p>Wybierz usługę po lewej — po prawej pojawi się wstępny paragon z ceną.</p>
+        </div>
+      </div>
+      <div class="showcase-bottom" id="showcase-bottom">
+        <div class="showcase-empty showcase-empty--bottom">
+          <p data-i18n-en="Details of the selected item — description and what's included — will appear here.">Szczegóły wybranej pozycji — opis i co wchodzi w skład — pojawią się tutaj.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="showcase-fab" id="showcase-fab" aria-label="Otwórz podgląd wybranej pozycji">
+  👁 <span id="fab-name">Podgląd</span>
+</button>
+
+<script>
+// THEME + PALETTE + LANG — wzorzec z /developer/
+(function(){
+  var html = document.documentElement;
+  var themeBtn = document.getElementById('tn-theme-btn');
+  var palBtn = document.getElementById('tn-palette-btn');
+  var palMenu = document.getElementById('tn-palette-menu');
+  var frame = document.getElementById('calc-frame');
+  if (!themeBtn || !palBtn || !palMenu) return;
+  var palChips = palMenu.querySelectorAll('button');
+
+  function applyTheme(t){
+    html.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? '☾' : '☀';
+    if (frame) frame.classList.toggle('dark', t === 'dark');
+    syncFrame();
+    try { localStorage.setItem('theme', t); } catch(e){}
+  }
+  function applyPal(p){
+    if (p && p !== 'default') html.setAttribute('data-palette', p);
+    else { html.removeAttribute('data-palette'); p = 'default'; }
+    palChips.forEach(function(c){ c.classList.toggle('is-active', c.dataset.palette === p); });
+    try { localStorage.setItem('lucdoro-palette', p); } catch(e){}
+    syncFrame();
+  }
+  var frameReady = false;
+  function syncFrame(){
+    if (!frame || !frameReady) return;
+    var t = html.getAttribute('data-theme') || 'dark';
+    var p = html.getAttribute('data-palette') || 'default';
+    var want = 'calc.html?theme=' + t + '&palette=' + p;
+    if (frame.getAttribute('src') !== want) frame.setAttribute('src', want);
+  }
+  var savedTheme = 'dark', savedPal = 'default';
+  try { savedTheme = localStorage.getItem('theme') || 'dark'; } catch(e){}
+  try { savedPal = localStorage.getItem('lucdoro-palette') || 'default'; } catch(e){}
+  applyTheme(savedTheme); applyPal(savedPal);
+  frameReady = true; syncFrame();
+
+  themeBtn.addEventListener('click', function(){
+    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  palBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = palMenu.classList.toggle('is-open');
+    palBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(e){
+    if (!palMenu.contains(e.target) && e.target !== palBtn){
+      palMenu.classList.remove('is-open');
+      palBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  palChips.forEach(function(c){
+    c.addEventListener('click', function(){
+      applyPal(c.dataset.palette);
+      palMenu.classList.remove('is-open');
+      palBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
+// EN/PL toggle
+(function(){
+  var btn = document.getElementById('tn-lang-btn');
+  if (!btn) return;
+  var html = document.documentElement;
+  var nodes = document.querySelectorAll('[data-i18n-en]');
+  nodes.forEach(function(el){
+    if (el.getAttribute('data-i18n-pl') !== null) return;
+    var attr = el.getAttribute('data-i18n-attr');
+    el.setAttribute('data-i18n-pl', attr ? (el.getAttribute(attr) || '') : el.innerHTML);
+  });
+  var frame = document.getElementById('calc-frame');
+  function syncFrame(lang){
+    if (frame && frame.contentWindow) frame.contentWindow.postMessage({type:'set-lang', lang:lang}, '*');
+  }
+  function apply(lang){
+    html.setAttribute('lang', lang);
+    btn.textContent = lang === 'en' ? 'PL' : 'EN';
+    nodes.forEach(function(el){
+      var val = lang === 'en' ? el.getAttribute('data-i18n-en') : el.getAttribute('data-i18n-pl');
+      if (val === null) return;
+      var attr = el.getAttribute('data-i18n-attr');
+      if (attr) el.setAttribute(attr, val); else el.innerHTML = val;
+    });
+    try { localStorage.setItem('lucdoro-lang', lang); } catch(e){}
+    syncFrame(lang);
+  }
+  var saved = 'pl';
+  try { saved = localStorage.getItem('lucdoro-lang') || 'pl'; } catch(e){}
+  apply(saved);
+  if (frame) frame.addEventListener('load', function(){ syncFrame(html.getAttribute('lang') === 'en' ? 'en' : 'pl'); });
+  btn.addEventListener('click', function(){
+    apply(html.getAttribute('lang') === 'en' ? 'pl' : 'en');
+  });
+})();
+
+const SERVICE_DETAILS = {
+  "Logo — nowy projekt": {
+    cat: "Branding",
+    desc: "Znak od zera: 3 wstępne koncepty w różnych kierunkach, wybór jednego + 2 rundy dopracowania. Dostajesz pliki wektorowe (SVG, PDF, EPS) + rastrowe (PNG w wersjach ciemnej i jasnej).",
+    features: ["3 wstępne koncepty (różne kierunki)","2 rundy poprawek w cenie","Pliki wektorowe + rastrowe","Wersja ciemna + jasna","Mini-guide użycia (1 strona)"]
+  },
+  "Logo — redesign / odświeżenie": {
+    cat: "Branding",
+    desc: "Modernizacja istniejącego znaku bez utraty rozpoznawalności — nowa typografia, dopasowana paleta, lepsze proporcje. Idealne dla firm z 3+ lat historii.",
+    features: ["Analiza obecnego znaku","2 propozycje odświeżenia","Zachowanie DNA marki","Nowe pliki produkcyjne"]
+  },
+  "Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)": {
+    cat: "Branding",
+    desc: "Kompletny system wizualny: logo w kilku wariantach, paleta kolorów z kodami, typografia (fonty + hierarchia), zestaw materiałów (wizytówka, papier firmowy, stopka mailowa, template social media).",
+    features: ["Logo (główne + warianty)","Paleta kolorów + zastosowania","System typograficzny","Wizytówka + papier firmowy","Stopka mailowa","3 templaty social media"]
+  },
+  "Mini księga znaku / brandbook": {
+    cat: "Branding",
+    desc: "Dokument PDF (12-20 stron) z zasadami użycia logo, paletą, typografią i przykładami. Do wysłania każdej agencji/drukarni.",
+    features: ["12-20 stron PDF","Zasady użycia logo","Paleta CMYK/RGB/HEX","Typografia + hierarchia","Przykłady zastosowań"]
+  },
+  "Nazwa firmy / naming": {
+    cat: "Branding",
+    desc: "10-15 propozycji nazw z analizą dostępności domeny .pl/.com i konta Instagram. Warsztat + brief.",
+    features: ["Brief + warsztat online","10-15 propozycji nazw","Sprawdzenie domen .pl/.com","Weryfikacja social media","Uzasadnienie każdej nazwy"]
+  },
+  "Wizytówka — projekt": {
+    cat: "DTP",
+    desc: "Projekt wizytówki 90×50 mm, dwustronny, przygotowany pod druk (CMYK, spady 3mm, kontury czcionek). Pliki PDF do drukarni + JPG do e-mail.",
+    features: ["2 warianty do wyboru","CMYK, spady 3mm","Kontury czcionek","PDF do druku + JPG podglądowe"]
+  },
+  "Baner / billboard — projekt": {
+    cat: "DTP",
+    desc: "Projekt banera / billboardu w dowolnym formacie (1×2m, 3×6m, itd). Skalowalny wektor, gotowy do druku wielkoformatowego.",
+    features: ["Dowolny format i proporcje","Wektor + spady","Optymalizacja czytelności z daleka","PDF/AI do drukarni"]
+  },
+  "Ulotka — projekt (do A5, 2 strony)": {
+    cat: "DTP",
+    desc: "Klasyczna ulotka A5 dwustronna — z propozycją layoutu, tekstem (na podstawie briefu) i grafikami. Idealne na wydarzenie lub promocję sezonową.",
+    features: ["A5 dwustronna","Layout + hierarchia treści","Grafiki wektorowe","Gotowe do druku (PDF, CMYK)"]
+  },
+  "Plakat — projekt": {
+    cat: "DTP",
+    desc: "Plakat A3-A1 z mocną kompozycją — na koncert, wystawę, promocję. Fokus na czytelność z 3 metrów.",
+    features: ["A3/A2/A1 do wyboru","Mocna typografia + hierarchia","Print-ready (PDF, CMYK)"]
+  },
+  "Rollup — projekt": {
+    cat: "DTP",
+    desc: "Projekt rollupa 85×200 cm — na targi, konferencje, wydarzenia. Kompozycja pionowa z kluczową informacją w górnej strefie (widoczna z daleka).",
+    features: ["85×200 lub 100×200 cm","Layout zoptymalizowany pionowo","Kluczowa info top-3rd","PDF do produkcji"]
+  },
+  "Menu / karta — projekt": {
+    cat: "DTP",
+    desc: "Karta menu (restauracja, kawiarnia, salon) — z hierarchią, zdjęciami produktów, cenami. Wersja A4 / A5 / niestandardowa.",
+    features: ["Dowolny format","Hierarchia kategorii","Miejsce na zdjęcia","Wersja do druku i online (PDF)"]
+  },
+  "Okleina / magnesy na auto — projekt": {
+    cat: "DTP",
+    desc: "Projekt okleiny na auto (osobowe, dostawcze) lub magnesów — logo, dane kontaktowe, hasło. Uwzględnia proporcje pojazdu i kierunek jazdy.",
+    features: ["Pełna okleina lub tylko boki","Wektor + wymiary rzeczywiste","Preview 3D na aucie","PDF do drukarni ploterowej"]
+  },
+  "Naklejki / etykiety — projekt": {
+    cat: "DTP",
+    desc: "Projekt etykiet na produkty (żywność, kosmetyki, alkohole) lub naklejek reklamowych — z zachowaniem wymogów prawnych (skład, waga, kod EAN).",
+    features: ["Dowolny kształt/format","Wymogi prawne (dla żywności)","Miejsce na kod kreskowy","PDF wektorowy"]
+  },
+  "Koszulka / odzież — projekt nadruku": {
+    cat: "DTP",
+    desc: "Projekt nadruku na koszulkę, bluzę, torbę — dostosowany pod technikę (sitodruk, DTG, haft). Kolory Pantone dla dokładności.",
+    features: ["Techniki: sitodruk/DTG/haft","Kolory Pantone","Preview na produkcie","PSD + wektor"]
+  },
+  "Grafika social media — 1 kreacja": {
+    cat: "Social",
+    desc: "Jedna grafika na Instagram/Facebook/LinkedIn — post, story lub reel cover. Zgodna z Twoim brand style guide.",
+    features: ["Format IG/FB/LinkedIn","Wersja square + story","Zgodna z brand style","PNG + edytowalny plik"]
+  },
+  "Wersja językowa / adaptacja projektu": {
+    cat: "DTP",
+    desc: "Adaptacja istniejącego projektu na inny język (EN, DE, itp.) — z zachowaniem proporcji i hierarchii, korekta pod długość tekstu.",
+    features: ["Dowolny język","Zachowanie proporcji","Korekta hierarchii","Bez konieczności odtwarzania od zera"]
+  },
+  "Poprawa / przygotowanie plików do druku": {
+    cat: "Prepress",
+    desc: "Rozwiązanie problemów z plikami klienta — dodanie spadów, konwersja RGB→CMYK, konturyzacja fontów, sprawdzenie rozdzielczości.",
+    features: ["Spady 3mm","RGB → CMYK","Kontury czcionek","Weryfikacja 300dpi","PDF/X-1a lub X-4"]
+  },
+  "Wizytówki — druk 500 szt.": {
+    cat: "Druk",
+    desc: "Druk 500 wizytówek 90×50mm, papier kredowy 350g, foliowanie matowe lub błysk. Dostawa do 5 dni roboczych.",
+    features: ["500 sztuk","Papier 350g kreda","Folia mat/błysk","5 dni robocze","Dostawa w cenie"]
+  },
+  "Ulotki — druk 1000 szt. A6": {
+    cat: "Druk",
+    desc: "1000 ulotek A6 (105×148mm) na papierze kredowym 170g, druk dwustronny full color.",
+    features: ["1000 sztuk A6","Papier 170g","Druk 4/4 (dwustronny)","Kraków/Warszawa 3 dni"]
+  },
+  "Baner z oczkami — 1 m²": {
+    cat: "Druk",
+    desc: "Baner reklamowy PVC 510g z oczkami co 50cm i podwójnym szwem. Cena za 1m² — dowolny format.",
+    features: ["PVC 510g","Oczka co 50cm","Podwójny szew","Odporność na deszcz"]
+  },
+  "Rollup z konstrukcją — produkcja": {
+    cat: "Druk",
+    desc: "Kompletny rollup 85×200 z konstrukcją aluminiową, torbą transportową i wydrukiem. Gotowy do rozstawienia w 30 sekund.",
+    features: ["85×200 cm","Konstrukcja aluminiowa","Torba transportowa","Wymienny wydruk"]
+  },
+  "Plakat — druk (do 50×100)": {
+    cat: "Druk",
+    desc: "Druk plakatu do formatu 50×100 cm na papierze kredowym 170g lub blueback 115g (na słupy reklamowe).",
+    features: ["Do 50×100 cm","Kreda 170g lub blueback","Optional lakier UV","Dowolna liczba sztuk"]
+  },
+  "Landing page / one-page": {
+    cat: "Web",
+    desc: "Strona jednosekcjowa (one-page) — hero + oferta + galeria + kontakt. Responsywna, szybka (Core Web Vitals), SEO ready. WordPress lub statyczna.",
+    features: ["1 sekcja x 6-8 modułów","Responsywna (mobile-first)","Core Web Vitals 90+","Formularz kontaktowy","Analityka + SEO"]
+  },
+  "Strona firmowa (WordPress / statyczna)": {
+    cat: "Web",
+    desc: "Pełna strona firmowa: 5-10 podstron (o firmie, oferta, portfolio, blog, kontakt). WordPress z customowym motywem lub statyczna (szybsza).",
+    features: ["5-10 podstron","CMS WordPress lub statyk","Blog + kategorie","Wielojęzyczność (opcja)","Certyfikat SSL + hosting rekomendacja"]
+  },
+  "Sklep internetowy": {
+    cat: "Web",
+    desc: "Sklep na WooCommerce (WordPress) lub PrestaShop — z kategoriami produktów, koszykiem, płatnościami online (PayU/Przelewy24/Stripe), integracją kurierską.",
+    features: ["Nielimitowana ilość produktów","Płatności online","Integracja kurierska","Panel zamówień","Faktury automatyczne"]
+  },
+  "Opieka nad stroną — miesiąc": {
+    cat: "Web",
+    desc: "Miesięczna opieka techniczna: aktualizacje WP + wtyczek, backup codzienny, monitoring uptime, 2h zmian treści w cenie.",
+    features: ["Aktualizacje WP + wtyczek","Backup codzienny","Monitoring uptime 24/7","2h zmian treści/mc","Wsparcie e-mail"]
+  }
+};
+
+// ── KOLEKCJE ────────────────────────────────────────────────
+const PRESETS = [
+  {
+    id:"starter",
+    name:"🚀 Starter",
+    desc:"Logo · Wizytówka · Ulotka A5",
+    items:[
+      {name:"Logo — nowy projekt", qty:1},
+      {name:"Wizytówka — projekt", qty:1},
+      {name:"Ulotka — projekt (do A5, 2 strony)", qty:1}
+    ]
+  },
+  {
+    id:"rebranding",
+    name:"✨ Rebranding kompletny",
+    desc:"Identyfikacja + baner + 3× social",
+    items:[
+      {name:"Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)", qty:1},
+      {name:"Baner / billboard — projekt", qty:1},
+      {name:"Grafika social media — 1 kreacja", qty:3}
+    ]
+  },
+  {
+    id:"firma-online",
+    name:"🌐 Firma online",
+    desc:"Logo + strona firmowa + 5× social",
+    items:[
+      {name:"Logo — nowy projekt", qty:1},
+      {name:"Strona firmowa (WordPress / statyczna)", qty:1},
+      {name:"Grafika social media — 1 kreacja", qty:5}
+    ]
+  },
+  {
+    id:"ecommerce",
+    name:"🛒 E-commerce start",
+    desc:"Sklep + landing + 5× social + mini-brand",
+    items:[
+      {name:"Sklep internetowy", qty:1},
+      {name:"Landing page / one-page", qty:1},
+      {name:"Grafika social media — 1 kreacja", qty:5},
+      {name:"Mini księga znaku / brandbook", qty:1}
+    ]
+  },
+  {
+    id:"eventowy",
+    name:"🎪 Pakiet eventowy",
+    desc:"Rollup + plakat + ulotka + baner",
+    items:[
+      {name:"Rollup — projekt", qty:1},
+      {name:"Plakat — projekt", qty:2},
+      {name:"Ulotka — projekt (do A5, 2 strony)", qty:1},
+      {name:"Baner / billboard — projekt", qty:1}
+    ]
+  }
+];
+
+const CP_KEY = 'ldd_kalk_collections_v1';
+function getSaved(){ try { return JSON.parse(localStorage.getItem(CP_KEY) || '[]'); } catch(e){ return []; } }
+function saveSaved(list){ try { localStorage.setItem(CP_KEY, JSON.stringify(list)); } catch(e){} }
+
+// Bieżący stan calc (aktualizowany przez postMessage)
+let calcCurrentState = [];
+
+function estimatePrice(items){
+  // Groszowe szacowanie — będzie dokładne po applyCollection w calc
+  return null;
+}
+
+function renderCollections(){
+  const presetsEl = document.getElementById('cp-presets');
+  const composition = (items) => `<ul class="cp-list">${items.map(i =>
+    `<li><span>${i.name}</span><b>× ${i.qty}</b></li>`).join('')}</ul>`;
+
+  presetsEl.innerHTML = PRESETS.map(p => `
+    <div class="cp-preset">
+      <div class="cp-name">${p.name}<span class="cp-count">${p.items.length} poz.</span></div>
+      <div class="cp-desc">${p.desc}</div>
+      ${composition(p.items)}
+      <div class="cp-actions">
+        <button class="cp-btn primary" data-apply="preset:${p.id}">Zastosuj</button>
+      </div>
+    </div>
+  `).join('');
+
+  const saved = getSaved();
+  const savedEl = document.getElementById('cp-saved');
+  if (!saved.length){
+    savedEl.innerHTML = '<div class="cp-empty">Brak zapisanych — wybierz pozycje w kalkulatorze i zapisz jako kolekcję.</div>';
+  } else {
+    savedEl.innerHTML = saved.map(c => `
+      <div class="cp-saved">
+        <div class="cp-name">💾 ${c.name}<span class="cp-count">${c.items.length} poz.</span></div>
+        ${composition(c.items)}
+        <div class="cp-actions">
+          <button class="cp-btn primary" data-apply="saved:${c.id}">Zastosuj</button>
+          <button class="cp-btn danger" data-delete="${c.id}">🗑</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('collections-count').textContent = PRESETS.length + saved.length;
+
+  // Bind actions
+  document.querySelectorAll('[data-apply]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const [type, id] = btn.dataset.apply.split(':');
+      const source = type === 'preset' ? PRESETS : getSaved();
+      const collection = source.find(c => c.id === id);
+      if (collection) applyCollection(collection);
+    });
+  });
+  document.querySelectorAll('[data-delete]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.delete;
+      const saved = getSaved().filter(c => c.id !== id);
+      saveSaved(saved);
+      renderCollections();
+    });
+  });
+}
+
+function applyCollection(collection){
+  const iframe = document.getElementById('calc-frame');
+  if (!iframe || !iframe.contentWindow) return;
+  iframe.contentWindow.postMessage({type:'apply-collection', items:collection.items, name:collection.name}, '*');
+  // Zamknij panel
+  document.getElementById('collections-panel').classList.remove('is-open');
+  // Toast/feedback
+  const btn = document.getElementById('collections-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '✓ Zastosowano ' + collection.name;
+  btn.style.background = 'rgba(125,201,143,.2)';
+  setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; }, 2000);
+}
+
+function saveCurrentAsCollection(name){
+  if (!name || !name.trim()) return alert('Podaj nazwę kolekcji');
+  const iframe = document.getElementById('calc-frame');
+  if (!iframe || !iframe.contentWindow){ alert('Kalkulator się jeszcze ładuje'); return; }
+  // Poproś calc o obecny stan
+  iframe.contentWindow.postMessage({type:'get-state', saveAs:name.trim()}, '*');
+}
+
+// Toggle panel
+document.getElementById('collections-btn').addEventListener('click', () => {
+  document.getElementById('collections-panel').classList.toggle('is-open');
+});
+document.addEventListener('click', (e) => {
+  const panel = document.getElementById('collections-panel');
+  const btn = document.getElementById('collections-btn');
+  if (!panel.contains(e.target) && !btn.contains(e.target)) panel.classList.remove('is-open');
+});
+document.getElementById('cp-save-btn').addEventListener('click', () => {
+  const input = document.getElementById('cp-name-input');
+  saveCurrentAsCollection(input.value);
+});
+
+// Odbiór postMessage z iframe (calc.html wysyła po kliknięciu wiersza + na get-state)
+window.addEventListener('message', (e) => {
+  if (!e.data) return;
+  if (e.data.type === 'service-select') renderShowcase(e.data);
+  if (e.data.type === 'selection') renderReceipt(e.data);
+  if (e.data.type === 'state'){
+    calcCurrentState = e.data.items || [];
+    if (e.data.saveAs){
+      // Zapisz jako nowa kolekcja
+      const filtered = calcCurrentState.filter(i => i.qty > 0);
+      if (!filtered.length){ alert('Wybierz jakieś pozycje w kalkulatorze (ilość > 0)'); return; }
+      const saved = getSaved();
+      saved.push({id:'c'+Date.now(), name:e.data.saveAs, items:filtered});
+      saveSaved(saved);
+      document.getElementById('cp-name-input').value = '';
+      renderCollections();
+      const btn = document.getElementById('collections-btn');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓ Zapisano';
+      setTimeout(() => btn.innerHTML = orig, 1500);
+    }
+  }
+});
+
+// Init
+renderCollections();
+
+// ── MOBILE SHOWCASE DRAWER ──
+const IS_MOBILE = () => window.matchMedia('(max-width: 900px)').matches;
+const splitRight = document.getElementById('split-right');
+const showcaseClose = document.getElementById('showcase-close');
+const showcaseFab = document.getElementById('showcase-fab');
+const fabName = document.getElementById('fab-name');
+let lastSelectedName = '';
+
+function openShowcase(){
+  splitRight.classList.add('is-open');
+  showcaseFab.classList.remove('is-visible');
+  document.body.style.overflow = 'hidden';
+}
+function closeShowcase(){
+  splitRight.classList.remove('is-open');
+  document.body.style.overflow = '';
+  if (IS_MOBILE() && lastSelectedName){
+    showcaseFab.classList.add('is-visible');
+  }
+}
+showcaseClose.addEventListener('click', closeShowcase);
+showcaseFab.addEventListener('click', openShowcase);
+// Close on Esc
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && splitRight.classList.contains('is-open')) closeShowcase();
+});
+
+// Hook renderShowcase to auto-open on mobile + update FAB
+const _origRenderShowcase = renderShowcase;
+renderShowcase = function(data){
+  _origRenderShowcase(data);
+  lastSelectedName = data.name;
+  if (IS_MOBILE()){
+    // Skróć nazwę do FAB
+    const short = data.name.length > 22 ? data.name.slice(0,20)+'…' : data.name;
+    fabName.textContent = short + ' · ' + data.price + ' zł';
+    openShowcase();
+  }
+};
+// On resize — jeśli przechodzi z mobile → desktop, zamknij drawer
+window.addEventListener('resize', () => {
+  if (!IS_MOBILE()){
+    splitRight.classList.remove('is-open');
+    document.body.style.overflow = '';
+    showcaseFab.classList.remove('is-visible');
+  } else if (lastSelectedName){
+    showcaseFab.classList.add('is-visible');
+  }
+});
+
+
+
+// ── PARAGON: zywa lista zamawianych uslug ────────────────────────────────────
+let lastReceiptKey = '';
+
+// Pakiet "powstaje" sam, gdy wybor zawiera komplet jego pozycji
+function matchPreset(items){
+  const have = {};
+  items.forEach(i => { have[i.name] = i.qty; });
+  let best = null;
+  PRESETS.forEach(p => {
+    const full = p.items.every(pi => (have[pi.name] || 0) >= pi.qty);
+    if (full && (!best || p.items.length > best.items.length)) best = p;
+  });
+  return best;
+}
+
+function renderReceipt(data){
+  const items = (data.items || []).filter(i => i.qty > 0);
+  const top = document.getElementById('showcase-top');
+  if (!items.length){ lastReceiptKey = ''; top.innerHTML = EMPTY_TOP; return false; }
+
+  const pkg = matchPreset(items);
+  const inPkg = pkg ? pkg.items.map(i => i.name) : [];
+  const pkgItems = pkg ? items.filter(i => inPkg.indexOf(i.name) !== -1) : [];
+  const extraItems = items.filter(i => inPkg.indexOf(i.name) === -1);
+  const finalItems = pkg ? extraItems : items;
+
+  const line = (i) => `
+    <div class="r-item">
+      <div class="r-row"><span class="r-name">${i.name}</span><span class="r-fill"></span><span class="r-val">${i.sum} zł</span></div>
+      <div class="r-qty">${i.qty} × ${i.price} zł</div>
+    </div>`;
+
+  const e = data.extras || {};
+  const addon = (label, val) => val > 0 ? `<div class="r-tot"><span>${label}</span><span>${Math.round(val)} zł</span></div>` : '';
+
+  const orderLines = items.map(i => `• ${i.name} × ${i.qty} — ${i.sum} zł`).join('\n');
+  const wa = 'https://wa.me/48795758555?text=' + encodeURIComponent(
+    (pkg ? 'Cześć! Interesuje mnie pakiet ' + pkg.name + (extraItems.length ? ' + pozycje dodatkowe:\n' : ':\n') : 'Cześć! Interesuje mnie wycena:\n')
+    + orderLines + '\nRazem netto: ' + Math.round(data.net) + ' zł');
+
+  const key = items.map(i => i.name + ':' + i.qty).join('|') + '#' + Math.round(data.net);
+  const isNew = lastReceiptKey.split('#')[0] !== key.split('#')[0];
+  lastReceiptKey = key;
+
+  const pkgSum = pkgItems.reduce((s, i) => s + i.sum, 0);
+
+  const pkgReceiptHTML = pkg ? `
+    <div class="receipt ${isNew ? 'is-new' : ''}">
+      <div class="r-head">
+        <div class="r-brand">LucDoroDesign</div>
+        <div class="r-sub">Pakiet · ${pkgItems.length} ${pkgItems.length === 1 ? 'pozycja' : 'pozycji'}</div>
+        <div class="r-pkg">${pkg.name}</div>
+      </div>
+      ${pkgItems.map(line).join('')}
+      <div class="r-sep"></div>
+      <div class="r-tot net"><span>SUMA PAKIETU</span><b>${Math.round(pkgSum)} zł</b></div>
+      <div class="r-foot">Skład pakietu — szczegóły niżej ↓</div>
+    </div>` : '';
+
+  const finalTitle = pkg ? (finalItems.length ? 'Dodatkowo wybrane' : 'Podsumowanie zamówienia') : 'Wstępna wycena';
+  const finalReceiptHTML = `
+    <div class="receipt ${isNew ? 'is-new' : ''}">
+      <div class="r-head">
+        <div class="r-brand">LucDoroDesign</div>
+        <div class="r-sub">${finalTitle}${finalItems.length ? ' · ' + finalItems.length + ' ' + (finalItems.length === 1 ? 'pozycja' : 'pozycji') : ''}</div>
+      </div>
+      ${finalItems.map(line).join('')}
+      ${finalItems.length ? '<div class="r-sep"></div>' : ''}
+      ${addon('Tryb przyspieszony', e.rush)}
+      ${addon('Dodatkowe rundy poprawek', e.rev)}
+      ${addon('Dodatkowe konsultacje', e.call)}
+      ${addon('Dostawa', e.del)}
+      ${e.disc > 0 ? `<div class="r-tot"><span>Rabat</span><span>−${Math.round(e.disc)} zł</span></div>` : ''}
+      <div class="r-tot net"><span>NETTO RAZEM</span><b>${Math.round(data.net)} zł</b></div>
+      ${data.vatOn ? `<div class="r-tot"><span>VAT 23%</span><span>${Math.round(data.vat)} zł</span></div>
+      <div class="r-tot"><span>BRUTTO</span><span>${Math.round(data.gross)} zł</span></div>` : ''}
+      <a class="r-cta" href="${wa}" target="_blank" rel="noopener">Zamów → WhatsApp</a>
+      <div class="r-foot">Wycena orientacyjna · ceny netto</div>
+    </div>`;
+
+  top.innerHTML = `<div class="receipt-wrap">${pkgReceiptHTML}${finalReceiptHTML}</div>`;
+  lastSelectedName = pkg ? pkg.name : (items[0] && items[0].name) || '';
+  return true;
+}
+
+const EMPTY_TOP = document.getElementById('showcase-top').innerHTML;
+const EMPTY_BOTTOM = document.getElementById('showcase-bottom').innerHTML;
+
+function renderPackage(data){
+  const items = (data.items || []).filter(i => i.qty > 0);
+  if (!items.length) return;
+  const cards = items.map(i => {
+    const d = SERVICE_DETAILS[i.name] || {};
+    const desc = (d.desc || '').split('. ')[0].replace(/\.\s*$/, '');
+    return `
+      <div class="pkg-card">
+        <div class="pkg-card-cat">${d.cat || i.group || 'Usługa'}</div>
+        <div class="pkg-card-name">${i.name}</div>
+        ${desc ? `<div class="pkg-card-desc">${desc}.</div>` : ''}
+        <div class="pkg-card-foot">
+          <span class="pkg-card-qty">${i.qty} × ${i.price} zł</span>
+          <span class="pkg-card-sum">${i.sum} zł</span>
+        </div>
+      </div>`;
+  }).join('');
+  const lines = items.map(i => `• ${i.name} × ${i.qty} — ${i.sum} zł`).join('\n');
+  document.getElementById('showcase').innerHTML = `
+    <div class="showcase-card">
+      <div class="pkg-head">
+        <div class="pkg-eyebrow">Pakiet · ${items.length} ${items.length === 1 ? 'usługa' : 'usługi'}</div>
+        <h1 class="pkg-title">${data.name}</h1>
+        <div class="pkg-total">${data.total} zł <small>NETTO</small></div>
+      </div>
+      <div class="pkg-grid">${cards}</div>
+      <a class="showcase-cta" href="https://wa.me/48795758555?text=${encodeURIComponent('Cześć! Interesuje mnie pakiet ' + data.name + ':\n' + lines + '\nRazem: ' + data.total + ' zł netto')}" target="_blank" rel="noopener">
+        Zamów ten pakiet → WhatsApp
+      </a>
+    </div>
+  `;
+  lastSelectedName = data.name;
+}
+
+function renderShowcase(data){
+  const {name, price, market} = data;
+  const details = SERVICE_DETAILS[name] || {
+    cat: "Usługa",
+    desc: "Wybrana pozycja z cennika. Skontaktuj się by omówić szczegóły.",
+    features: []
+  };
+  const featHTML = details.features.map(f => `<li>${f}</li>`).join('');
+  const marketHTML = market ? `<div class="showcase-market">Średnia rynkowa: <b>${market} zł</b> · u mnie <b style="color:#7dc98f;">${price} zł</b> = oszczędzasz <b>${Math.round((market-price)/market*100)}%</b></div>` : '';
+  document.getElementById('showcase-bottom').innerHTML = `
+    <div class="showcase-card">
+      <div class="showcase-eyebrow">${details.cat} · z cennika</div>
+      <h1 class="showcase-name">${name}</h1>
+      <div class="showcase-price-row">
+        <div class="showcase-price">${price} zł</div>
+        <div class="showcase-price-unit">netto</div>
+      </div>
+      ${marketHTML}
+      <p class="showcase-desc">${details.desc}</p>
+      ${featHTML?`<ul class="showcase-features">${featHTML}</ul>`:''}
+      <a class="showcase-cta" href="https://wa.me/48795758555?text=${encodeURIComponent('Cześć! Interesuje mnie: ' + name + ' za ' + price + ' zł netto')}" target="_blank" rel="noopener">
+        Zamów tę pozycję → WhatsApp
+      </a>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>

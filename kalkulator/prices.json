@@ -1,0 +1,36 @@
+{
+  "_meta": {
+    "version": 1,
+    "updated": "2026-07-30T00:00:00Z",
+    "note": "Ceny netto w PLN. Edytuj wartości i re-uploaduj plik na serwer — kalkulatory u klientów zsynchronizują się przy najbliższym fetch (auto co 5 minut).",
+    "currency": "PLN"
+  },
+  "prices": {
+    "Logo — nowy projekt": 900,
+    "Logo — redesign / odświeżenie": 600,
+    "Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)": 3500,
+    "Mini księga znaku / brandbook": 800,
+    "Nazwa firmy / naming": 500,
+    "Wizytówka — projekt": 150,
+    "Baner / billboard — projekt": 300,
+    "Ulotka — projekt (do A5, 2 strony)": 250,
+    "Plakat — projekt": 250,
+    "Rollup — projekt": 300,
+    "Menu / karta — projekt": 400,
+    "Okleina / magnesy na auto — projekt": 500,
+    "Naklejki / etykiety — projekt": 200,
+    "Koszulka / odzież — projekt nadruku": 200,
+    "Grafika social media — 1 kreacja": 120,
+    "Wersja językowa / adaptacja projektu": 250,
+    "Poprawa / przygotowanie plików do druku": 50,
+    "Wizytówki — druk 500 szt.": 150,
+    "Ulotki — druk 1000 szt. A6": 250,
+    "Baner z oczkami — 1 m²": 120,
+    "Rollup z konstrukcją — produkcja": 400,
+    "Plakat — druk (do 50×100)": 90,
+    "Landing page / one-page": 1500,
+    "Strona firmowa (WordPress / statyczna)": 2900,
+    "Sklep internetowy": 4500,
+    "Opieka nad stroną — miesiąc": 200
+  }
+}

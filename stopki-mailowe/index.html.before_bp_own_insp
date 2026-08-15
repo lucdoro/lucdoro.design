@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stopki mailowe pod Twoją markę — LucDoroDesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&family=Playfair+Display:wght@600;700&family=Roboto+Mono:wght@500;700&family=Fraunces:ital,opsz,wght@1,9..144,400..700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{--acc:#b58cff;--bg:#0d0d10;--card:#161619;--line:#2b2b32;--txt:#f2efe8;--mut:#a09a91;}
+  html{overflow-x:hidden;max-width:100vw;}
+  body{background:var(--bg);color:var(--txt);font-family:'Manrope',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;max-width:100vw;}
+  *{max-width:100%;box-sizing:border-box;}
+  @media(max-width:640px){
+    .wrap{padding:0 14px !important;}
+    .ex,.sig,.gmail-preamble{max-width:100%;overflow-x:hidden;}
+    .ex table,.sig table{width:100%!important;max-width:100%!important;table-layout:fixed;}
+    .ex img,.sig img{max-width:100%;height:auto;}
+    .ex td,.sig td{word-break:break-word;overflow-wrap:break-word;}
+    .row{flex-wrap:wrap;}
+    .ct{word-break:break-word;}
+    .showcase-section{margin-left:-14px !important;margin-right:-14px !important;border-radius:16px !important;padding:32px 16px 40px !important;}
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* HERO */
+  .hero{padding:80px 0 56px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:680px;height:420px;background:radial-gradient(closest-side,rgba(181,140,255,.22),transparent);filter:blur(10px);z-index:0;}
+  .hero>*{position:relative;z-index:1;}
+  /* Outline text "Stopki" jako drugi plan — fill=bg (cutout), stroke=txt semi-transparent */
+  .bg-outline{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces','Playfair Display',serif;font-style:italic;font-weight:400;font-size:clamp(8rem,22vw,20rem);color:var(--bg);-webkit-text-stroke:1.5px var(--txt);letter-spacing:-.04em;line-height:.85;z-index:1;pointer-events:none;user-select:none;white-space:nowrap;opacity:.35;}
+  [data-theme="light"] .bg-outline{opacity:.45;}
+  @media(max-width:640px){.bg-outline{font-size:clamp(4rem,28vw,8rem);-webkit-text-stroke-width:1px;opacity:.28;}}
+  .hero>*:not(.bg-outline){position:relative;z-index:2;}
+  .kicker{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:20px;}
+  h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,58px);line-height:1.05;letter-spacing:-.5px;}
+  h1 em{font-style:italic;color:var(--acc);font-family:'Playfair Display',serif;font-weight:700;}
+  .lead{max-width:640px;margin:22px auto 0;color:var(--mut);font-size:17px;}
+  .cta-row{margin-top:34px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:center;}
+  .btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.3px;padding:14px 24px;border-radius:14px;transition:transform .15s ease,box-shadow .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-wa{background:#25d366;color:#04220f;box-shadow:0 8px 30px rgba(37,211,102,.35);}
+  .btn-olx{background:transparent;color:var(--txt);border:1px solid var(--line);}
+  .btn-olx:hover{border-color:var(--acc);}
+  .price-pill{display:inline-flex;align-items:center;gap:8px;font-family:'Roboto Mono',monospace;font-size:13px;font-weight:700;color:var(--acc);border:1px solid rgba(181,140,255,.4);border-radius:999px;padding:10px 16px;background:rgba(181,140,255,.08);}
+
+  /* SECTION */
+  .sec-head{text-align:center;margin:72px 0 8px;}
+  .sec-head h2{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,3.5vw,36px);}
+  .sec-head p{color:var(--mut);margin-top:10px;}
+
+  /* GRID of examples */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:40px;}
+  @media(max-width:820px){.grid{grid-template-columns:1fr;}}
+  /* MOBILE — fix overflow (bez rotacji kart) */
+  @media(max-width:720px){
+    .ex-stage{padding:16px 14px 18px;overflow:hidden;}
+    .row{flex-wrap:wrap;gap:12px;}
+    .mono{width:44px;height:44px;font-size:16px;border-radius:10px;}
+    .nm{font-size:14px;}
+    .po{font-size:9.5px;letter-spacing:1px;}
+    .ct{font-size:11.5px;line-height:1.6;}
+    .gmail-preamble .gm-lbl,.gmail-preamble .gm-val,.gmail-preamble .gm-body{font-size:12.5px;}
+    .gmail-preamble .gm-row{min-height:32px;padding:6px 0;}
+    .soc a{width:22px;height:22px;font-size:10px;}
+    .avatar{width:48px;height:48px;}
+  }
+  .ex{cursor:pointer;}
+
+  /* GMAIL MODAL — click stopki otwiera preview jak w Gmailu */
+  .gmail-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+  .gmail-modal.is-open{display:block;animation:gmFade .3s ease;}
+  @keyframes gmFade{from{opacity:0}to{opacity:1}}
+  .gm-close{position:fixed;top:24px;right:24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;width:44px;height:44px;border-radius:50%;font-size:24px;cursor:pointer;z-index:10000;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;transition:all .2s;}
+  .gm-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg);}
+  .gm-frame{position:absolute;top:40px;left:40px;right:40px;bottom:40px;background:#202124;border-radius:16px;color:#e8eaed;font-family:'Google Sans','Roboto',Arial,sans-serif;display:grid;grid-template:auto 1fr / 260px 1fr;overflow:hidden;border:1px solid #3c4043;box-shadow:0 40px 120px rgba(0,0,0,.7);}
+  .gm-top{grid-column:1/-1;padding:10px 16px;background:#202124;border-bottom:1px solid #3c4043;display:flex;align-items:center;gap:16px;}
+  .gm-logo{width:40px;height:40px;background:linear-gradient(135deg,#c5221f 0%,#e94235 100%);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Arial;font-weight:900;font-size:22px;}
+  .gm-title{font-size:22px;font-weight:400;color:#e8eaed;letter-spacing:.3px;}
+  .gm-search{flex:1;max-width:720px;background:#303134;padding:11px 20px;border-radius:8px;color:#9aa0a6;font-size:14px;display:flex;align-items:center;gap:12px;}
+  .gm-search::before{content:"⌕";font-size:18px;opacity:.6;}
+  .gm-side{background:#202124;padding:14px 6px;border-right:1px solid #3c4043;overflow-y:auto;display:flex;flex-direction:column;gap:2px;}
+  .gm-compose{background:#c2e7ff;color:#001d35;border:0;padding:12px 24px;border-radius:16px;font-weight:600;font-size:14px;cursor:default;margin:0 6px 14px;text-align:left;width:fit-content;box-shadow:0 4px 12px rgba(0,0,0,.3);display:flex;align-items:center;gap:12px;font-family:inherit;}
+  .gm-nav-item{color:#e8eaed;padding:8px 22px;border-radius:0 20px 20px 0;font-size:14px;display:flex;align-items:center;gap:20px;cursor:default;text-decoration:none;transition:background .2s;}
+  .gm-nav-item:hover{background:#3c4043;}
+  .gm-nav-item.active{background:#d3e3fd;color:#001d35;font-weight:700;}
+  .gm-nav-item .gm-count{margin-left:auto;font-size:12px;opacity:.7;}
+  /* MAIN: split na 2 połowy — jasna (default Gmail) + ciemna (dark mode) */
+  .gm-main{padding:0;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative;}
+  .gm-main::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:#3c4043;z-index:5;}
+  .gm-half{padding:20px 26px;overflow-y:auto;position:relative;}
+  .gm-half-badge{position:sticky;top:-20px;margin:-20px -26px 12px;padding:6px 16px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;z-index:6;}
+  /* JASNA połowa — jasne tło, ciemny tekst */
+  .gm-half-light{background:#ffffff;color:#202124;}
+  .gm-half-light .gm-half-badge{background:#f1f3f4;color:#5f6368;border-bottom:1px solid #e8eaed;}
+  .gm-half-light .gm-subject{color:#202124;}
+  .gm-half-light .gm-label{background:#e8eaed;color:#5f6368;}
+  .gm-half-light .gm-meta-body strong{color:#202124;}
+  .gm-half-light .gm-meta-body em{color:#5f6368;}
+  .gm-half-light .gm-meta-body .gm-to,.gm-half-light .gm-time{color:#5f6368;}
+  .gm-half-light .gm-body{color:#202124;}
+  .gm-half-light .gm-actions button{border-color:#dadce0;color:#1a73e8;}
+  .gm-half-light .gm-actions button:hover{background:#f1f3f4;}
+  .gm-half-light .gm-avatar{background:#1a73e8;color:#fff;}
+  /* CIEMNA połowa — ciemne tło, jasny tekst */
+  .gm-half-dark{background:#202124;color:#e8eaed;}
+  .gm-half-dark .gm-half-badge{background:#303134;color:#9aa0a6;border-bottom:1px solid #3c4043;}
+  .gm-half-dark .gm-subject{color:#e8eaed;}
+  .gm-half-dark .gm-label{background:#3c4043;color:#e8eaed;}
+  .gm-half-dark .gm-meta-body strong{color:#e8eaed;}
+  .gm-half-dark .gm-meta-body em{color:#9aa0a6;}
+  .gm-half-dark .gm-meta-body .gm-to,.gm-half-dark .gm-time{color:#9aa0a6;}
+  .gm-half-dark .gm-body{color:#e8eaed;}
+  .gm-half-dark .gm-actions button{border-color:#5f6368;color:#e8eaed;}
+  .gm-half-dark .gm-actions button:hover{background:#3c4043;}
+  .gm-half-dark .gm-avatar{background:#8ab4f8;color:#202124;}
+  /* wspólne */
+  .gm-subject{font-size:20px;font-weight:400;margin:0 0 16px;letter-spacing:.1px;line-height:1.35;}
+  .gm-label{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin-left:8px;letter-spacing:.3px;}
+  .gm-meta{display:flex;align-items:center;gap:12px;padding:10px 0;margin-bottom:14px;}
+  .gm-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;flex-shrink:0;}
+  .gm-meta-body{flex:1;font-size:13px;line-height:1.4;min-width:0;}
+  .gm-meta-body strong{font-weight:600;}
+  .gm-meta-body em{font-style:normal;font-weight:400;font-size:12px;}
+  .gm-meta-body .gm-to{font-size:11px;margin-top:2px;}
+  .gm-time{font-size:11px;white-space:nowrap;}
+  .gm-body{font-size:13.5px;line-height:1.55;font-family:Arial,sans-serif;padding-left:50px;}
+  .gm-body p{margin:10px 0;}
+  .gm-sig-slot{margin-top:22px;padding-top:12px;}
+  .gm-actions{margin:22px 0 8px;padding-left:50px;display:flex;gap:10px;flex-wrap:wrap;}
+  .gm-actions button{background:transparent;border:1px solid;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;cursor:default;font-family:inherit;display:inline-flex;align-items:center;gap:6px;}
+  @media(max-width:820px){
+    .gm-frame{top:10px;left:10px;right:10px;bottom:10px;grid-template:auto 1fr;}
+    .gm-side,.gm-search,.gm-title{display:none;}
+    .gm-top{padding:10px 12px;}
+    .gm-main{grid-template-columns:1fr;grid-template-rows:1fr 1fr;}
+    .gm-main::before{left:0;right:0;top:50%;width:auto;height:1px;}
+    .gm-half{padding:14px 18px;}
+    .gm-half-badge{margin:-14px -18px 10px;}
+    .gm-body,.gm-actions{padding-left:0;}
+    .gm-close{top:14px;right:14px;}
+  }
+
+  /* GMAIL COMPOSE WINDOW — pre-fill do wysłania maila do LucDoroDesign */
+  .gm-compose-window{position:absolute;bottom:0;right:24px;width:540px;max-width:calc(100vw - 48px);height:540px;max-height:calc(100vh - 120px);background:#202124;border-radius:10px 10px 0 0;box-shadow:0 24px 60px rgba(0,0,0,.65);display:none;flex-direction:column;z-index:100;color:#e8eaed;font-family:'Google Sans','Roboto',Arial,sans-serif;border:1px solid #3c4043;border-bottom:none;overflow:hidden;}
+  .gm-compose-window.is-open{display:flex;animation:cwSlide .35s cubic-bezier(.4,0,.2,1);}
+  @keyframes cwSlide{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+  .gm-cw-header{background:#404040;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500;color:#e8eaed;}
+  .gm-cw-actions{display:flex;gap:8px;}
+  .gm-cw-actions button{background:transparent;border:0;color:#e8eaed;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;line-height:1;}
+  .gm-cw-actions button:hover{background:rgba(255,255,255,.1);}
+  .gm-cw-fields{padding:8px 16px 0;flex-shrink:0;}
+  .gm-cw-field{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #3c4043;font-size:13px;}
+  .gm-cw-field label{color:#9aa0a6;font-weight:400;flex-shrink:0;min-width:38px;}
+  .gm-cw-field input{background:transparent;border:0;color:#e8eaed;font-size:14px;font-family:inherit;flex:1;padding:2px 0;outline:none;}
+  .gm-cw-field input:read-only{color:#8ab4f8;}
+  .gm-cw-body{flex:1;padding:14px 16px;background:transparent;border:0;color:#e8eaed;font-family:Arial,sans-serif;font-size:13.5px;line-height:1.55;resize:none;outline:none;overflow-y:auto;min-height:0;}
+  .gm-cw-footer{padding:12px 16px;border-top:1px solid #3c4043;display:flex;gap:8px;align-items:center;flex-shrink:0;}
+  .gm-cw-send{background:#8ab4f8;color:#202124;border:0;padding:9px 22px;border-radius:20px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;transition:background .2s;}
+  .gm-cw-send:hover{background:#aecbfa;}
+  .gm-cw-wa{background:#25d366;color:#04220f;border:0;padding:9px 18px;border-radius:20px;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;transition:background .2s;}
+  .gm-cw-wa:hover{background:#3ce07a;}
+  .gm-cw-hint{margin-left:auto;color:#9aa0a6;font-size:11px;}
+  @media(max-width:640px){
+    .gm-compose-window{right:0;left:0;bottom:0;width:100%;max-width:none;height:85vh;border-radius:10px 10px 0 0;}
+  }
+  .gm-cw-body-wrap{flex:1;padding:14px 16px;overflow-y:auto;min-height:0;}
+  .gm-cw-intro{font-size:13.5px;color:#e8eaed;margin:0 0 10px;font-family:Arial,sans-serif;}
+  .gm-cw-picks{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+  .gm-pick{background:#2d2e30;border:1px solid #3c4043;color:#e8eaed;padding:10px 14px;border-radius:10px;text-align:left;font-family:'Google Sans','Roboto',Arial,sans-serif;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .18s;}
+  .gm-pick:hover{background:#3c4043;border-color:#8ab4f8;}
+  .gm-pick.is-picked{background:rgba(138,180,248,.15);border-color:#8ab4f8;}
+  .gm-pick-icon{width:18px;height:18px;border-radius:50%;border:1.5px solid #5f6368;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;background:transparent;transition:all .18s;}
+  .gm-pick.is-picked .gm-pick-icon{background:#8ab4f8;border-color:#8ab4f8;color:#202124;}
+  .gm-pick-label{flex:1;}
+  .gm-pick-price{color:#8ab4f8;font-weight:700;font-size:12px;background:rgba(138,180,248,.12);padding:2px 8px;border-radius:99px;}
+  .gm-cw-section{font-size:11px;color:#9aa0a6;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;margin:12px 0 6px;}
+  .gm-cw-textarea{width:100%;background:transparent;border:1px solid #3c4043;border-radius:8px;padding:10px 12px;color:#e8eaed;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;resize:vertical;outline:none;min-height:80px;transition:border-color .2s;}
+  .gm-cw-textarea:focus{border-color:#8ab4f8;}
+  .gm-cw-textarea::placeholder{color:#5f6368;}
+  .gm-cw-inputs{display:flex;gap:6px;margin-bottom:8px;}
+  .gm-cw-inputs input{flex:1;background:transparent;border:1px solid #3c4043;border-radius:8px;padding:8px 12px;color:#e8eaed;font-family:'Google Sans','Roboto',Arial,sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+  .gm-cw-inputs input:focus{border-color:#8ab4f8;}
+  .ex{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease,border-color .18s ease;}
+  .ex:hover{transform:translateY(-3px);border-color:rgba(181,140,255,.5);}
+  .ex-top{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);}
+  .ex-tag{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);}
+  .ex-no{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--acc);font-weight:700;}
+  .ex-stage{padding:22px 24px 24px;flex:1;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;}
+  .gmail-preamble{text-align:left;font-family:Arial,sans-serif;margin-bottom:18px;}
+  .gmail-preamble .gm-head{margin-bottom:16px;font-family:Arial,sans-serif;}
+  .gmail-preamble .gm-row{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid rgba(128,128,128,.18);gap:14px;min-height:38px;}
+  .gmail-preamble .gm-row:first-child{border-top:1px solid rgba(128,128,128,.18);}
+  .gmail-preamble .gm-lbl{font-size:14px;opacity:.55;min-width:52px;font-weight:400;letter-spacing:.1px;}
+  .gmail-preamble .gm-val{font-size:14px;opacity:.82;font-weight:400;letter-spacing:.1px;}
+  .gmail-preamble .gm-body{font-size:14px;line-height:1.55;opacity:.78;font-family:Arial,sans-serif;padding:2px 0;}
+  .gmail-preamble .gm-body p{margin:6px 0;}
+  .gmail-preamble .gm-body p.gm-mock{opacity:.72;}
+  .ex-wrap{display:flex;flex-direction:column;gap:10px;position:relative;}
+  .ex-note{padding:0 12px;font-size:13px;text-align:center;line-height:1.55;font-style:italic;color:#5a554d;margin:0;}
+  .showcase-section .ex-note{color:#5a554d;}
+  /* PRO tier — premium visual (multi-shadow + subtle gradient bg + animated badge + hover glow) */
+  .ex-wrap--pro{padding-top:14px;}
+  .ex-wrap--pro .ex{
+    border:1px solid rgba(181,140,255,.35);
+    background:linear-gradient(180deg,#161619 0%,#1a1a20 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.06),
+      0 0 0 1px rgba(181,140,255,.12),
+      0 8px 24px -8px rgba(123,77,255,.25),
+      0 32px 64px -20px rgba(123,77,255,.35),
+      0 4px 12px -4px rgba(0,0,0,.4);
+    position:relative;overflow:visible;
+    transition:transform .35s cubic-bezier(.34,1.35,.6,1),box-shadow .35s ease,border-color .35s ease;
+  }
+  .ex-wrap--pro .ex .ex-top{border-top-left-radius:17px;border-top-right-radius:17px;overflow:hidden;background:rgba(123,77,255,.08);}
+  .ex-wrap--pro .ex .ex-tag{color:#b58cff;font-weight:700;}
+  .ex-wrap--pro .ex .ex-no{color:#fff;background:linear-gradient(135deg,#7b4dff,#b58cff);padding:2px 8px;border-radius:99px;font-size:9px;}
+  /* Premium PRO badge — pulsuje */
+  .ex-wrap--pro .ex::before{
+    content:"✦ PRO · 249 zł";
+    position:absolute;top:-12px;right:16px;
+    background:linear-gradient(135deg,#7b4dff 0%,#b58cff 50%,#7b4dff 100%);
+    background-size:200% 100%;
+    color:#fff;
+    font-family:'Roboto Mono',monospace;font-size:10px;font-weight:800;letter-spacing:1.5px;
+    padding:6px 13px;border-radius:999px;z-index:5;
+    box-shadow:
+      0 8px 20px rgba(123,77,255,.55),
+      0 0 0 3px #0d0d10,
+      0 0 0 4px rgba(181,140,255,.3),
+      inset 0 1px 0 rgba(255,255,255,.25);
+    text-transform:uppercase;
+    animation:proShine 3s ease-in-out infinite;
+  }
+  @keyframes proShine{
+    0%,100%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+  }
+  /* Hover — lift + glow */
+  .ex-wrap--pro .ex:hover{
+    border-color:rgba(181,140,255,.7);
+    transform:translateY(-4px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.1),
+      0 0 0 1px rgba(181,140,255,.4),
+      0 12px 32px -8px rgba(123,77,255,.45),
+      0 44px 80px -20px rgba(123,77,255,.55),
+      0 8px 24px -4px rgba(0,0,0,.5);
+  }
+  .ex-wrap--pro .ex:hover::before{
+    box-shadow:
+      0 12px 28px rgba(123,77,255,.7),
+      0 0 0 3px #0d0d10,
+      0 0 0 5px rgba(181,140,255,.5),
+      inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  /* Ex-note dla PRO — subtelny akcent */
+  .ex-wrap--pro > .ex-note{color:#b58cff!important;font-weight:500;}
+  /* Sec-head PRO badge */
+  .sec-head-badge{display:inline-block;background:linear-gradient(135deg,#7b4dff,#b58cff);color:#fff;font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:800;padding:6px 14px;border-radius:999px;margin-bottom:12px;box-shadow:0 8px 24px rgba(123,77,255,.3);}
+
+  /* generic signature helpers */
+  .sig{width:100%;}
+  .mono{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;flex-shrink:0;}
+  .row{display:flex;align-items:center;gap:16px;}
+  .nm{font-weight:700;font-size:16px;}
+  .po{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;}
+  .ct{font-size:12.5px;line-height:1.7;}
+  .ct a{text-decoration:none;}
+
+  /* HOW / PRICING */
+  /* extended examples */
+  .soc{display:flex;gap:8px;margin-top:10px;}
+  .soc a{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;text-decoration:none;}
+  .clause{font-size:9.5px;line-height:1.55;margin-top:12px;padding-top:9px;}
+  .avatar{width:58px;height:58px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;}
+  .wide{grid-column:1 / -1;}
+
+  .pricing{margin:80px 0 0;background:linear-gradient(180deg,#161619,#111114);border:1px solid var(--line);border-radius:24px;padding:44px;text-align:center;}
+  .pricing h2{font-family:'Syne',sans-serif;font-size:30px;font-weight:700;}
+  .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:32px 0 30px;text-align:left;}
+  @media(max-width:720px){.feat{grid-template-columns:1fr;}}
+  .feat div{background:#0f0f12;border:1px solid var(--line);border-radius:14px;padding:18px;}
+  .feat h3{font-size:15px;margin-bottom:6px;}
+  .feat p{color:var(--mut);font-size:13px;}
+  .bigprice{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:var(--acc);}
+  .bigprice small{font-size:16px;color:var(--mut);font-weight:600;}
+
+  footer{text-align:center;padding:56px 0 70px;color:var(--mut);font-size:13px;}
+  footer .fcta{margin:14px 0 26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .disclaim{max-width:640px;margin:22px auto 0;font-size:12px;color:#6b665f;}
+
+  /* SHOWCASE SECTION — jasne tło wokół gridu przykładów */
+  .showcase-section{background:linear-gradient(180deg,#f5f2ea 0%,#ffffff 30%,#f8f5ed 100%);color:#1a1a1e;padding:60px 32px 70px;border-radius:28px;margin:36px 0;box-shadow:0 40px 80px -40px rgba(181,140,255,.15),inset 0 1px 0 rgba(255,255,255,.6);position:relative;overflow:hidden;}
+  .showcase-section::before{content:"";position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(181,140,255,.18),transparent 70%);pointer-events:none;}
+  .showcase-section::after{content:"";position:absolute;bottom:-80px;left:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(37,211,102,.12),transparent 70%);pointer-events:none;}
+  .showcase-section .sec-head{margin:0 0 8px;position:relative;z-index:1;}
+  .showcase-section .sec-head h2{color:#1a1a1e;}
+  .showcase-section .sec-head p{color:#5a554d;}
+  .showcase-section .grid{position:relative;z-index:1;margin-bottom:56px;}
+  .showcase-section .grid:last-child{margin-bottom:0;}
+  .showcase-section .sec-head:not(:first-child){margin-top:16px;padding-top:32px;border-top:1px dashed rgba(181,140,255,.3);}
+  @media(max-width:720px){.showcase-section{padding:40px 20px 50px;border-radius:20px;}}
+
+  /* TOP NAV — powrót do bazowej strony (zawsze ciemna z jasnym tekstem — czytelna na każdej palecie) */
+  .top-nav{position:sticky;top:0;z-index:100;background:rgba(13,13,16,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:#f2efe8;}
+  .top-nav *{color:#f2efe8;}
+  .top-nav .top-nav-back{border-color:rgba(255,255,255,.2);color:#f2efe8;}
+  .top-nav .top-nav-back:hover{border-color:#b58cff;color:#b58cff;}
+  .top-nav .top-nav-links a{color:#a09a91;}
+  .top-nav .top-nav-links a:hover{color:#b58cff;}
+  .top-nav .tn-btn{border-color:rgba(255,255,255,.2);color:#f2efe8;}
+  .top-nav .tn-btn:hover{border-color:#b58cff;color:#b58cff;}
+  .top-nav .tn-palette-menu{background:#1a1a1e;border-color:rgba(255,255,255,.12);color:#f2efe8;}
+  .top-nav .tn-palette-menu button{color:#f2efe8;}
+  .top-nav .tn-palette-menu button:hover{background:rgba(255,255,255,.06);}
+  .top-nav .tn-palette-menu button.is-active{background:rgba(181,140,255,.15);color:#b58cff;}
+  .top-nav-back{display:inline-flex;align-items:center;gap:8px;color:#f2efe8;text-decoration:none;font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);transition:all .2s ease;}
+  .top-nav-back:hover{border-color:#b58cff;color:#b58cff;transform:translateX(-2px);}
+  .top-nav-brand{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#f2efe8;letter-spacing:.02em;}
+  .top-nav-links{display:flex;gap:14px;align-items:center;font-size:13px;}
+  .top-nav-links a{color:#a09a91;text-decoration:none;transition:color .2s;}
+  .top-nav-links a:hover{color:#b58cff;}
+  @media(max-width:640px){.top-nav{padding:10px 16px;}.top-nav-brand{display:none;}.top-nav-links{gap:10px;font-size:12px;}}
+
+  /* PALETTE + THEME TOGGLE w top-nav */
+  .tn-btn{background:transparent;border:1px solid var(--line);color:var(--txt);width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;font-size:14px;padding:0;}
+  .tn-btn:hover{border-color:var(--acc);color:var(--acc);}
+  .tn-palette-wrap{position:relative;display:inline-block;}
+  .tn-palette-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);z-index:200;}
+  .tn-palette-menu.is-open{display:flex;}
+  .tn-palette-menu button{background:transparent;border:0;color:var(--txt);padding:9px 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;text-align:left;display:flex;align-items:center;gap:10px;transition:background .18s;}
+  .tn-palette-menu button:hover{background:rgba(255,255,255,.05);}
+  .tn-palette-menu button.is-active{background:rgba(181,140,255,.1);color:var(--acc);}
+  .tn-swatches{display:inline-flex;position:relative;}
+  .tn-swatches span{width:16px;height:16px;border-radius:50%;display:block;border:1.5px solid var(--card);}
+  .tn-swatches span:last-child{margin-left:-8px;}
+  @media(max-width:640px){.tn-palette-menu{position:fixed;top:auto;bottom:14px;left:14px;right:14px;min-width:0;max-width:none;}}
+
+  /* PALETY dla subpage — zmieniają --bg, --card, --line, --txt, --mut, --acc */
+  :root[data-palette="combo01"][data-theme="light"]{--bg:#CAE8E8;--card:#DEF0F0;--line:#A0C4C4;--txt:#28469E;--mut:#4864B0;--acc:#28469E;}
+  :root[data-palette="combo01"][data-theme="dark"]{--bg:#28469E;--card:#334FA8;--line:#4260B4;--txt:#CAE8E8;--mut:#A0C4C4;--acc:#CAE8E8;}
+  :root[data-palette="combo02"][data-theme="light"]{--bg:#FAAE62;--card:#FBBE7C;--line:#D08E42;--txt:#3E0856;--mut:#5E2876;--acc:#3E0856;}
+  :root[data-palette="combo02"][data-theme="dark"]{--bg:#3E0856;--card:#4E1866;--line:#6E3886;--txt:#FAAE62;--mut:#E09E52;--acc:#FAAE62;}
+  :root[data-palette="combo03"][data-theme="light"]{--bg:#B0EDF9;--card:#C4F0F9;--line:#88C4D8;--txt:#04344C;--mut:#24546C;--acc:#04344C;}
+  :root[data-palette="combo03"][data-theme="dark"]{--bg:#04344C;--card:#14546C;--line:#2A5A72;--txt:#B0EDF9;--mut:#88CDE0;--acc:#B0EDF9;}
+  :root[data-palette="combo04"][data-theme="light"]{--bg:#FFFBD4;--card:#FDF7C8;--line:#D8C8A0;--txt:#A90E02;--mut:#C93E32;--acc:#A90E02;}
+  :root[data-palette="combo04"][data-theme="dark"]{--bg:#A90E02;--card:#B92818;--line:#C93828;--txt:#FFFBD4;--mut:#F5F1C4;--acc:#FFFBD4;}
+  :root[data-palette="combo05"][data-theme="light"]{--bg:#FFFE15;--card:#FFFF3C;--line:#D0CE10;--txt:#0C1E29;--mut:#243E49;--acc:#0C1E29;}
+  :root[data-palette="combo05"][data-theme="dark"]{--bg:#0C1E29;--card:#182E39;--line:#3E5E69;--txt:#FFFE15;--mut:#E0DE35;--acc:#FFFE15;}
+  /* Default light variant */
+  :root[data-theme="light"]:not([data-palette]){--bg:#f5f2ea;--card:#ffffff;--line:#e4dfd0;--txt:#1a1a1e;--mut:#5a554d;--acc:#7b4dff;}
+
+  /* ============================================================
+     DARK NEUMORPHIC — showcase-section przybiera wygląd premium
+     panelu z chłodnym niebieskim akcentem + ciepłym złotem.
+     Karty stopek zostają jasne (czytelność podglądów mailowych),
+     ale osadzone są w głębokiej, neumorficznej ramce.
+     ============================================================ */
+  .showcase-section{
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(96,165,250,.08), transparent 55%),
+      radial-gradient(ellipse at 80% 100%, rgba(212,167,91,.06), transparent 55%),
+      linear-gradient(180deg, #0f1620 0%, #131a24 50%, #0f1620 100%) !important;
+    color:#d8dee9 !important;
+    border:1px solid rgba(255,255,255,.06);
+    padding:72px 44px 80px !important;
+    border-radius:32px !important;
+    margin:56px 0 !important;
+    box-shadow:
+      0 60px 140px -50px rgba(0,0,0,.85),
+      0 30px 80px -30px rgba(0,0,0,.55),
+      inset 0 1px 0 rgba(255,255,255,.05),
+      inset 0 -2px 0 rgba(0,0,0,.55),
+      0 0 0 1px rgba(212,167,91,.05) !important;
+    position:relative;
+    overflow:hidden;
+  }
+  /* Ambient glow: niebieski top-right + złoty bottom-left (jak w ref) */
+  .showcase-section::before{
+    content:"";position:absolute;top:-120px;right:-100px;width:460px;height:460px;
+    background:radial-gradient(circle, rgba(96,165,250,.22), transparent 65%) !important;
+    pointer-events:none;filter:blur(24px);z-index:0;
+  }
+  .showcase-section::after{
+    content:"";position:absolute;bottom:-140px;left:-100px;width:520px;height:520px;
+    background:radial-gradient(circle, rgba(212,167,91,.14), transparent 65%) !important;
+    pointer-events:none;filter:blur(28px);z-index:0;
+  }
+  /* Wewnętrzna aura — subtelna złota obwódka */
+  .showcase-section > *{position:relative;z-index:1;}
+  /* Sec-head — light on dark */
+  .showcase-section .sec-head h2{color:#e8ecf3 !important;}
+  .showcase-section .sec-head p{color:#8a94a3 !important;}
+  .showcase-section .sec-head:not(:first-child){
+    border-top:1px dashed rgba(96,165,250,.22) !important;
+    margin-top:28px !important;padding-top:44px !important;
+  }
+  /* Badge — golden pill (jak "Loading" w ref, chłodne tło z ciepłym tekstem) */
+  .showcase-section .sec-head-badge{
+    background:linear-gradient(180deg,#3d4a5e,#2b3648) !important;
+    color:#d4a75b !important;
+    border:1px solid rgba(212,167,91,.35) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.08),
+      inset 0 -1px 0 rgba(0,0,0,.35),
+      0 6px 16px -6px rgba(0,0,0,.5),
+      0 0 20px -6px rgba(212,167,91,.35) !important;
+    text-shadow:0 1px 0 rgba(0,0,0,.35);
+  }
+  /* Karty .ex — neumorphic elevated tiles (podniesione zza dark panel) */
+  .showcase-section .ex-wrap:not(.ex-wrap--pro) .ex{
+    border:1px solid rgba(0,0,0,.15) !important;
+    border-radius:18px !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.6),
+      inset 0 -1px 0 rgba(0,0,0,.06),
+      0 24px 48px -22px rgba(0,0,0,.7),
+      0 8px 16px -4px rgba(0,0,0,.35),
+      0 2px 4px -1px rgba(0,0,0,.2) !important;
+    transition:transform .4s cubic-bezier(.34,1.35,.6,1), box-shadow .4s ease !important;
+  }
+  .showcase-section .ex-wrap:not(.ex-wrap--pro) .ex:hover{
+    transform:translateY(-5px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.7),
+      0 32px 64px -20px rgba(0,0,0,.8),
+      0 0 0 2px rgba(96,165,250,.55),
+      0 0 48px -8px rgba(96,165,250,.5),
+      0 0 24px -4px rgba(96,165,250,.35) !important;
+  }
+  /* Ex-tag → chłodne szare caps */
+  .showcase-section .ex-tag{color:#6b7688;letter-spacing:2px;font-weight:600;}
+  /* Ex-no → złoty akcent numeracji (jak "Selected" w ref) */
+  .showcase-section .ex-wrap:not(.ex-wrap--pro) .ex-no{
+    color:#d4a75b !important;
+    text-shadow:0 0 10px rgba(212,167,91,.35);
+    font-weight:800;
+  }
+  /* Note pod kartą — chłodne szare, jak "helper text" */
+  .showcase-section .ex-note{color:#8a94a3 !important;font-family:'Fraunces',serif;font-style:italic;}
+  /* Dodatkowy focus ring dla klikanych kart — na focus keyboard */
+  .showcase-section .ex:focus-visible{
+    outline:none;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.6),
+      0 32px 64px -20px rgba(0,0,0,.8),
+      0 0 0 3px rgba(212,167,91,.7),
+      0 0 48px -6px rgba(212,167,91,.5) !important;
+  }
+  /* Responsive padding */
+  @media(max-width:720px){
+    .showcase-section{padding:44px 22px 52px !important;border-radius:24px !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Nawigacja">
+  <a class="top-nav-back" href="https://lucdoro.design" aria-label="Powrót do strony głównej">← lucdoro.design</a>
+  <div class="top-nav-brand">Oferta · Stopki mailowe</div>
+  <div class="top-nav-links">
+    <a href="https://lucdoro.design/kreator/" style="color:#b58cff;font-weight:700;">✦ Kreator</a>
+    <a href="https://lucdoro.design/#uslugi">Usługi</a>
+    <a href="https://lucdoro.design/#kontakt">Kontakt</a>
+    <button class="tn-btn" id="tn-theme-btn" aria-label="Motyw jasny/ciemny" title="Motyw">☾</button>
+    <div class="tn-palette-wrap">
+      <button class="tn-btn" id="tn-palette-btn" aria-label="Paleta kolorów" title="Palety" aria-haspopup="menu" aria-expanded="false">◐</button>
+      <div class="tn-palette-menu" id="tn-palette-menu" role="menu">
+        <button type="button" data-palette="default" class="is-active"><span class="tn-swatches"><span style="background:#f5f2ea"></span><span style="background:#7b4dff"></span></span>Default</button>
+        <button type="button" data-palette="combo01"><span class="tn-swatches"><span style="background:#CAE8E8"></span><span style="background:#28469E"></span></span>Ocean</button>
+        <button type="button" data-palette="combo02"><span class="tn-swatches"><span style="background:#FAAE62"></span><span style="background:#3E0856"></span></span>Sunset</button>
+        <button type="button" data-palette="combo03"><span class="tn-swatches"><span style="background:#B0EDF9"></span><span style="background:#04344C"></span></span>Sky</button>
+        <button type="button" data-palette="combo04"><span class="tn-swatches"><span style="background:#FFFBD4"></span><span style="background:#A90E02"></span></span>Milano</button>
+        <button type="button" data-palette="combo05"><span class="tn-swatches"><span style="background:#FFFE15"></span><span style="background:#0C1E29"></span></span>Neon</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bg-outline" aria-hidden="true">Stopki</div>
+  <div class="wrap">
+    <div class="kicker">LucDoroDesign · Oferta</div>
+    <h1>Stopki mailowe, które wyglądają jak <em>Twoja marka</em></h1>
+    <p class="lead">Projektuję podpisy e-mail pod styl i funkcje Twojej firmy — dopasowane kolory, logo, przyciski, linki do social mediów i opinii Google. Poniżej 10 przykładów dla 10 różnych branż.</p>
+    <div class="cta-row">
+      <a class="btn btn-wa" href="https://wa.me/48795758555" target="_blank">Napisz na WhatsApp</a>
+      <a class="btn btn-olx" href="https://lucdoro.design/#kontakt">Napisz e-mail</a>
+      <span class="price-pill">już od 149 zł</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="showcase-section">
+  <div class="sec-head">
+    <h2>10 przykładów dla 10 branż</h2>
+    <p>Każdy podpis to inny styl, kolor i układ. Nazwiska firm i stanowiska są przykładowe.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. PRAWO -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Kancelaria prawna</span><span class="ex-no">01</span></div>
+      <div class="ex-stage" style="background:#f6f4ef;;color:#6b665f">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">W nawiązaniu do rozmowy przesyłam szczegóły propozycji.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig" style="font-family:Georgia,'Playfair Display',serif;">
+          <div class="row" style="border-left:3px solid #c0a062;padding-left:18px;">
+            <div>
+              <div class="nm" style="color:#1e293b;font-size:18px;">Łukasz Dorociak</div>
+              <div style="font-family:'Playfair Display',serif;font-style:italic;color:#c0a062;font-size:13px;margin-top:2px;">Radca Prawny · Kancelaria Nowak &amp; Partnerzy</div>
+              <div class="ct" style="color:#5b6472;margin-top:10px;font-family:'Manrope',sans-serif;">
+                <a href="mailto:hello@lucdoro.design" style="color:#1e293b;">hello@lucdoro.design</a> · +48 795 758 555<br>
+                <a href="https://lucdoro.design" style="color:#1e293b;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Klasyka: szeryfowa typografia, złoty akcent, powaga i zaufanie.</p>
+    </div>
+
+    <!-- 2. STOMATOLOGIA -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Klinika / stomatologia</span><span class="ex-no">02</span></div>
+      <div class="ex-stage" style="background:#ffffff;;color:#6b665f">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Załączam wycenę zgodnie z ustaleniami.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:#e6f7f6;color:#0ea5a4;border:1px solid #c3ebe9;">D+</div>
+            <div>
+              <div class="nm" style="color:#0f2e2d;">Łukasz Dorociak</div>
+              <div class="po" style="color:#0ea5a4;">Lekarz Stomatolog</div>
+              <div class="ct" style="color:#5a706f;margin-top:8px;">
+                DentiCare Clinic · <a href="tel:+48795758555" style="color:#0f2e2d;">+48 795 758 555</a><br>
+                <a href="mailto:hello@lucdoro.design" style="color:#0ea5a4;">hello@lucdoro.design</a> · <a href="https://lucdoro.design" style="color:#0ea5a4;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Czysto i higienicznie: biel, morska zieleń, zaokrąglony monogram.</p>
+    </div>
+
+    <!-- 3. GASTRONOMIA -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Restauracja</span><span class="ex-no">03</span></div>
+      <div class="ex-stage" style="background:#1a1512;;color:#b09a80">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Bardzo dziękuję za wiadomość — odpowiadam poniżej.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:transparent;border:1px solid #e0a458;color:#e0a458;border-radius:50%;font-family:'Playfair Display',serif;">TB</div>
+            <div>
+              <div class="nm" style="color:#f3e7d6;font-family:'Playfair Display',serif;">Łukasz Dorociak</div>
+              <div class="po" style="color:#e0a458;letter-spacing:2px;">Szef Kuchni · Trattoria Bella</div>
+              <div class="ct" style="color:#b09a80;margin-top:8px;">
+                <a href="https://lucdoro.design" style="color:#f3e7d6;">lucdoro.design</a> · <a href="tel:+48795758555" style="color:#f3e7d6;">+48 795 758 555</a><br>
+                <a href="mailto:hello@lucdoro.design" style="color:#e0a458;">hello@lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Nastrojowo: ciepła czerń, bursztyn i elegancki serif jak w menu.</p>
+    </div>
+
+    <!-- 4. TECH / STARTUP -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Startup / tech</span><span class="ex-no">04</span></div>
+      <div class="ex-stage" style="background:#0b1020;;color:#8ea6c9">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Potwierdzam termin naszego spotkania.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:linear-gradient(135deg,#6366f1,#22d3ee);color:#fff;">N</div>
+            <div>
+              <div class="nm" style="color:#eaf0ff;">Łukasz Dorociak</div>
+              <div class="po" style="color:#22d3ee;">Head of Product · Nimbus AI</div>
+              <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                <a href="https://lucdoro.design" style="text-decoration:none;font-size:11px;font-weight:700;color:#eaf0ff;background:#1a2440;border:1px solid #2b3a63;border-radius:8px;padding:7px 12px;">Product</a>
+                <a href="mailto:hello@lucdoro.design" style="text-decoration:none;font-size:11px;font-weight:700;color:#0b1020;background:#22d3ee;border-radius:8px;padding:7px 12px;">E-mail</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Nowocześnie: gradient, granat, przyciski-pigułki w stylu SaaS.</p>
+    </div>
+
+    <!-- 5. FITNESS -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Fitness / trener</span><span class="ex-no">05</span></div>
+      <div class="ex-stage" style="background:#0a0a0a;;color:#8a8a8a">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Cieszę się, że mogę pomóc w tej sprawie.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:#b6ff3a;color:#0a0a0a;border-radius:10px;">IP</div>
+            <div>
+              <div class="nm" style="color:#ffffff;text-transform:uppercase;letter-spacing:1px;font-family:'Syne',sans-serif;">Łukasz Dorociak</div>
+              <div class="po" style="color:#b6ff3a;letter-spacing:2px;">Trener Personalny · IronPulse</div>
+              <div class="ct" style="color:#8a8a8a;margin-top:8px;">
+                <a href="tel:+48795758555" style="color:#fff;">+48 795 758 555</a> · <a href="https://wa.me/48795758555" style="color:#b6ff3a;">WhatsApp</a><br>
+                <a href="https://lucdoro.design" style="color:#fff;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Energia: czerń, jaskrawa limonka, mocna wersalikowa typografia.</p>
+    </div>
+
+    <!-- 6. NIERUCHOMOŚCI -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Nieruchomości</span><span class="ex-no">06</span></div>
+      <div class="ex-stage" style="background:#14181f;;color:#9a9488">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Prześlę dokumenty do końca tygodnia.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row" style="gap:18px;">
+            <div class="mono" style="background:#1e2531;color:#cBad7a;border:1px solid #cBad7a;color:#c9ad7a;">PE</div>
+            <div>
+              <div class="nm" style="color:#f0eee9;">Łukasz Dorociak</div>
+              <div class="po" style="color:#c9ad7a;">Doradca ds. Nieruchomości · Prestige Estates</div>
+              <div class="ct" style="color:#9a9488;margin-top:8px;">
+                <a href="tel:+48795758555" style="color:#f0eee9;">+48 795 758 555</a> · <a href="mailto:hello@lucdoro.design" style="color:#f0eee9;">hello@lucdoro.design</a><br>
+                <a href="https://lucdoro.design" style="color:#c9ad7a;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Prestiż: głęboki grafit i szampański złoty — premium bez przepychu.</p>
+    </div>
+
+    <!-- 7. FINANSE / KSIĘGOWOŚĆ -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Biuro rachunkowe</span><span class="ex-no">07</span></div>
+      <div class="ex-stage" style="background:#ffffff;;color:#6b665f">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Zapraszam do zapoznania się z ofertą.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:#1d4ed8;color:#fff;border-radius:10px;">FA</div>
+            <div>
+              <div class="nm" style="color:#0f172a;">Łukasz Dorociak</div>
+              <div class="po" style="color:#1d4ed8;">Główny Księgowy · FinAxis</div>
+              <div class="ct" style="color:#64748b;margin-top:8px;border-left:2px solid #e2e8f0;padding-left:10px;">
+                <a href="mailto:hello@lucdoro.design" style="color:#0f172a;">hello@lucdoro.design</a><br>
+                <a href="tel:+48795758555" style="color:#0f172a;">+48 795 758 555</a> · <a href="https://lucdoro.design" style="color:#1d4ed8;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Rzetelnie: firmowy błękit, biel i porządek — zaufanie liczb.</p>
+    </div>
+
+    <!-- 8. AGENCJA KREATYWNA -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Agencja kreatywna</span><span class="ex-no">08</span></div>
+      <div class="ex-stage" style="background:#faf7ff;;color:#6b5b83">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Dziękuję za zainteresowanie — czekam na odpowiedź.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:linear-gradient(135deg,#ff6b6b,#a855f7);color:#fff;border-radius:50%;">K</div>
+            <div>
+              <div class="nm" style="color:#1b0f2e;">Łukasz Dorociak</div>
+              <div class="po" style="background:linear-gradient(90deg,#ff6b6b,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent;">Creative Director · Studio Kolektyw</div>
+              <div class="ct" style="color:#6b5b83;margin-top:8px;">
+                <a href="https://lucdoro.design" style="color:#1b0f2e;">lucdoro.design</a> · <a href="https://www.instagram.com/lucdoro.design/" style="color:#a855f7;">Instagram</a><br>
+                <a href="mailto:hello@lucdoro.design" style="color:#1b0f2e;">hello@lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Odważnie: gradient coral–fiolet, okrągły monogram, luz i charakter.</p>
+    </div>
+
+    <!-- 9. BEAUTY -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Beauty / salon</span><span class="ex-no">09</span></div>
+      <div class="ex-stage" style="background:#fff5f8;;color:#9c6b81">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">W nawiązaniu do rozmowy przesyłam szczegóły propozycji.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:#fce1ec;color:#e11d74;border-radius:50%;font-family:'Playfair Display',serif;">L</div>
+            <div>
+              <div class="nm" style="color:#3d1226;font-family:'Playfair Display',serif;">Łukasz Dorociak</div>
+              <div class="po" style="color:#e11d74;letter-spacing:2px;">Kosmetolog · Lumière Beauty</div>
+              <div class="ct" style="color:#9c6b81;margin-top:8px;">
+                <a href="https://wa.me/48795758555" style="color:#e11d74;">Umów wizytę</a> · <a href="tel:+48795758555" style="color:#3d1226;">+48 795 758 555</a><br>
+                <a href="https://lucdoro.design" style="color:#3d1226;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Delikatnie: pudrowy róż, elegancki serif i miękkie kształty.</p>
+    </div>
+
+    <!-- 10. ARCHITEKTURA -->
+    <div class="ex-wrap">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Architektura / studio</span><span class="ex-no">10</span></div>
+      <div class="ex-stage" style="background:#f4f4f2;;color:#666666">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Załączam wycenę zgodnie z ustaleniami.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig" style="font-family:'Manrope',sans-serif;">
+          <div style="display:flex;gap:20px;align-items:flex-start;">
+            <div style="flex-shrink:0;">
+              <div style="width:56px;height:56px;border:1.5px solid #1a1a1a;position:relative;background:transparent;">
+                <div style="position:absolute;top:50%;left:-4px;right:-4px;height:1px;background:#1a1a1a;"></div>
+                <div style="position:absolute;top:-4px;bottom:-4px;left:50%;width:1px;background:#1a1a1a;"></div>
+                <div style="position:absolute;top:3px;left:4px;font-family:'Playfair Display',serif;font-size:9px;color:#1a1a1a;font-style:italic;">Ł.D</div>
+              </div>
+              <div style="font-family:'Roboto Mono',monospace;font-size:8.5px;color:#8a8a88;letter-spacing:1.2px;margin-top:10px;text-align:center;">N50°04'</div>
+            </div>
+            <div style="flex:1;min-width:0;padding-top:2px;">
+              <div class="nm" style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:400;font-size:22px;color:#0e0e0e;letter-spacing:-.015em;line-height:1.15;">Łukasz Dorociak</div>
+              <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#8a8a88;margin-top:8px;font-weight:600;">Architekt <span style="color:#1a1a1a;margin:0 4px;">·</span> Forma Studio</div>
+              <div style="margin-top:16px;padding-top:12px;border-top:1px solid #d8d5d0;font-size:11px;color:#5a5a58;line-height:1.8;letter-spacing:.04em;">
+                <a href="mailto:hello@lucdoro.design" style="color:#1a1a1a;">hello@lucdoro.design</a> <span style="color:#c8c5c0;margin:0 4px;">·</span> <a href="tel:+48795758555" style="color:#5a5a58;">+48 795 758 555</a><br>
+                <a href="https://lucdoro.design" style="color:#1a1a1a;border-bottom:1px solid #1a1a1a;padding-bottom:1px;">lucdoro.design</a> <span style="color:#8a8a88;margin-left:8px;">Warszawa · PL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Minimalizm: Manrope light, cienka linia akcentu, dużo powietrza — czysta forma.</p>
+    </div>
+
+  </div>
+
+  <div class="sec-head">
+    <span class="sec-head-badge">Wersja PRO · 249 zł</span>
+    <h2>Poziom wyżej — funkcje niedostępne w wersji standard</h2>
+    <p>Social media, klauzule prawne, zdjęcia, banery promocyjne, mapa dojazdu, widget opinii Google i CTA do zbierania recenzji — stopka pracuje na Ciebie mocniej.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 11. SOCIAL MEDIA -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">E-commerce · social media</span><span class="ex-no">11</span></div>
+      <div class="ex-stage" style="background:#101014;;color:#8f8c96">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Bardzo dziękuję za wiadomość — odpowiadam poniżej.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:#f2efe8;color:#101014;border-radius:14px;">V</div>
+            <div>
+              <div class="nm" style="color:#f2efe8;">Łukasz Dorociak</div>
+              <div class="po" style="color:#ff7849;">Brand Manager · Vestio Wear</div>
+              <div class="ct" style="color:#8f8c96;margin-top:6px;">
+                <a href="mailto:hello@lucdoro.design" style="color:#f2efe8;">hello@lucdoro.design</a> · <a href="https://lucdoro.design" style="color:#f2efe8;">lucdoro.design</a>
+              </div>
+              <div class="soc">
+                <a href="https://www.instagram.com/lucdoro.design/" target="_blank" rel="noopener" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);" title="Instagram">IG</a>
+                <a href="https://lucdoro.design" style="background:#000;border:1px solid #333;" title="TikTok">TT</a>
+                <a href="https://lucdoro.design" style="background:#1877f2;" title="Facebook">f</a>
+                <a href="https://www.youtube.com/@LucDoroDesign" target="_blank" rel="noopener" style="background:#ff0000;" title="YouTube">▶</a>
+                <a href="https://lucdoro.design" style="background:#0a66c2;" title="LinkedIn">in</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Pełny rząd ikon social — każda klikalna, kolory brandów lub monochrom.</p>
+    </div>
+
+    <!-- 12. KLAUZULA PRAWNA -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Korporacja · klauzula</span><span class="ex-no">12</span></div>
+      <div class="ex-stage" style="background:#ffffff;;color:#6b665f">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Potwierdzam termin naszego spotkania.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:#0f3d2e;color:#d9c58a;border-radius:8px;font-size:15px;">VH</div>
+            <div>
+              <div class="nm" style="color:#12241d;">Łukasz Dorociak</div>
+              <div class="po" style="color:#0f3d2e;">Dyrektor Operacyjny · Verdant Holding S.A.</div>
+              <div class="ct" style="color:#5f6d66;margin-top:6px;">
+                <a href="mailto:hello@lucdoro.design" style="color:#12241d;">hello@lucdoro.design</a> · +48 795 758 555 · <a href="https://lucdoro.design" style="color:#0f3d2e;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+          <div class="clause" style="color:#9aa39e;border-top:1px solid #e4e9e6;">
+            Niniejsza wiadomość wraz z załącznikami jest poufna i przeznaczona wyłącznie dla adresata. Jeśli otrzymali ją Państwo omyłkowo, prosimy o poinformowanie nadawcy i usunięcie wiadomości. Administratorem danych osobowych jest Verdant Holding S.A. — więcej: lucdoro.design/rodo.
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Klauzula poufności / RODO drobnym drukiem — wymóg w wielu firmach, elegancko wpleciony.</p>
+    </div>
+
+    <!-- 13. ZE ZDJĘCIEM -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Konsultant · zdjęcie</span><span class="ex-no">13</span></div>
+      <div class="ex-stage" style="background:#f7f5f1;;color:#7a715f">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Cieszę się, że mogę pomóc w tej sprawie.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <a href="https://lucdoro.design/#o-mnie" title="Zobacz profil"><img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Zdjęcie przykładowe" style="border:3px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.15);"></a>
+            <div>
+              <div class="nm" style="color:#241f1a;">Łukasz Dorociak</div>
+              <div class="po" style="color:#b3762f;">Konsultant Biznesowy · Attura Advisory</div>
+              <div class="ct" style="color:#7a715f;margin-top:6px;">
+                +48 795 758 555 · <a href="mailto:hello@lucdoro.design" style="color:#241f1a;">hello@lucdoro.design</a>
+              </div>
+              <a href="https://wa.me/48795758555" style="display:inline-block;margin-top:9px;background:#241f1a;color:#f7f5f1;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 14px;border-radius:999px;">Umów konsultację</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Zdjęcie buduje relację od pierwszego maila (tu: portret stockowy jako przykład).</p>
+    </div>
+
+    <!-- 14. BANER PROMO -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Marketing · baner promo</span><span class="ex-no">14</span></div>
+      <div class="ex-stage" style="background:#ffffff;flex-direction:column;gap:14px;;color:#6b665f">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Prześlę dokumenty do końca tygodnia.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div class="mono" style="background:#111;color:#fff;border-radius:50%;font-size:14px;">GW</div>
+            <div>
+              <div class="nm" style="color:#111;">Łukasz Dorociak</div>
+              <div class="po" style="color:#6d28d9;">Growth Lead · GrowWave Agency</div>
+              <div class="ct" style="color:#6b7280;margin-top:4px;">
+                <a href="mailto:hello@lucdoro.design" style="color:#111;">hello@lucdoro.design</a> · <a href="https://lucdoro.design" style="color:#6d28d9;">lucdoro.design</a>
+              </div>
+            </div>
+          </div>
+          <a href="https://lucdoro.design" style="display:block;margin-top:14px;text-decoration:none;border-radius:12px;overflow:hidden;">
+            <svg width="100%" height="64" viewBox="0 0 440 64" preserveAspectRatio="xMidYMid slice" role="img">
+              <defs><linearGradient id="pb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6d28d9"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+              <rect width="440" height="64" fill="url(#pb)"/>
+              <circle cx="400" cy="8" r="42" fill="rgba(255,255,255,.15)"/>
+              <circle cx="30" cy="60" r="26" fill="rgba(255,255,255,.12)"/>
+              <text x="22" y="28" font-family="Manrope,Arial" font-size="14" font-weight="800" fill="#fff">−20% na audyt marketingowy</text>
+              <text x="22" y="47" font-family="Manrope,Arial" font-size="11" fill="rgba(255,255,255,.85)">tylko do końca miesiąca → kliknij i sprawdź</text>
+            </svg>
+          </a>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Baner pod podpisem = darmowa powierzchnia reklamowa w każdym mailu.</p>
+    </div>
+
+    <!-- 15. CREATOR / PODCAST -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Twórca · podcast</span><span class="ex-no">15</span></div>
+      <div class="ex-stage" style="background:#17121f;;color:#8d7fa5">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Zapraszam do zapoznania się z ofertą.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="row">
+            <div style="width:58px;height:58px;border-radius:12px;flex-shrink:0;overflow:hidden;">
+              <svg width="58" height="58" viewBox="0 0 58 58">
+                <defs><linearGradient id="cv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f97316"/><stop offset="1" stop-color="#db2777"/></linearGradient></defs>
+                <rect width="58" height="58" fill="url(#cv)"/>
+                <polygon points="23,18 42,29 23,40" fill="#fff"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nm" style="color:#f5eefc;">Łukasz Dorociak</div>
+              <div class="po" style="color:#f97316;">Host · Podcast „Po Godzinach”</div>
+              <div class="ct" style="margin-top:7px;">
+                <a href="https://open.spotify.com/playlist/37i9dQZF1F5p3rmiWPIYgZ?si=0c34998da5624229" style="color:#1db954;font-weight:700;">d -_- b Spotify</a><span style="color:#4e4460;"> · </span>
+                <a href="https://www.youtube.com/@LucDoroDesign" target="_blank" rel="noopener" style="color:#f5eefc;">YouTube</a><span style="color:#4e4460;"> · </span>
+                <a href="https://www.instagram.com/lucdoro.design/" target="_blank" rel="noopener" style="color:#f5eefc;">Instagram</a>
+              </div>
+              <div class="ct" style="color:#8d7fa5;">Nowy odcinek w każdy czwartek</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Okładka odcinka jako grafika + linki do platform — stopka jak mini-promo.</p>
+    </div>
+
+    <!-- 16. FOTOGRAF / PORTFOLIO STRIP -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+      <div class="ex-top"><span class="ex-tag">Fotograf · portfolio</span><span class="ex-no">16</span></div>
+      <div class="ex-stage" style="background:#0e0e0e;flex-direction:column;;color:#8a8a8a">
+        <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Kontakt w sprawie współpracy</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Dziękuję za zainteresowanie — czekam na odpowiedź.</p><p>Pozdrawiam,</p></div></div>
+        <div class="sig">
+          <div class="nm" style="color:#f4f4f4;font-family:'Roboto Mono',monospace;letter-spacing:1px;">ŁUKASZ DOROCIAK</div>
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#8a8a8a;margin-top:3px;font-family:'Roboto Mono',monospace;">Fotografia — Studio Kadr</div>
+          <div style="display:flex;gap:6px;margin-top:12px;">
+            <a href="https://lucdoro.design/#projekty" title="Portfolio 1"><svg width="64" height="44" viewBox="0 0 64 44"><defs><linearGradient id="p1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#365f8c"/><stop offset="1" stop-color="#0e1a26"/></linearGradient></defs><rect width="64" height="44" rx="4" fill="url(#p1)"/><circle cx="46" cy="12" r="6" fill="rgba(255,255,255,.7)"/></svg></a>
+            <a href="https://lucdoro.design/#projekty" title="Portfolio 2"><svg width="64" height="44" viewBox="0 0 64 44"><defs><linearGradient id="p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8c5a36"/><stop offset="1" stop-color="#261208"/></linearGradient></defs><rect width="64" height="44" rx="4" fill="url(#p2)"/><polygon points="0,44 24,16 40,34 52,24 64,36 64,44" fill="rgba(0,0,0,.35)"/></svg></a>
+            <a href="https://lucdoro.design/#projekty" title="Portfolio 3"><svg width="64" height="44" viewBox="0 0 64 44"><defs><linearGradient id="p3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a8c69"/><stop offset="1" stop-color="#0c1a10"/></linearGradient></defs><rect width="64" height="44" rx="4" fill="url(#p3)"/><rect x="10" y="10" width="20" height="24" rx="2" fill="rgba(255,255,255,.18)"/></svg></a>
+            <a href="https://lucdoro.design/#projekty" style="width:64px;height:44px;border-radius:4px;border:1px dashed #4a4a4a;display:flex;align-items:center;justify-content:center;color:#8a8a8a;font-size:10px;text-decoration:none;font-family:'Roboto Mono',monospace;">+35 →</a>
+          </div>
+          <div class="ct" style="color:#8a8a8a;margin-top:10px;font-family:'Roboto Mono',monospace;font-size:11px;">
+            hello@lucdoro.design / +48 795 758 555 / <a href="https://lucdoro.design" style="color:#f4f4f4;">lucdoro.design</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="ex-note">Pasek miniatur prac (tu: grafiki poglądowe) — portfolio w każdym mailu.</p>
+    </div>
+
+    <!-- 17. MAPA / LOKALIZACJA -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+        <div class="ex-top"><span class="ex-tag">Lokalny biznes · mapa dojazdu</span><span class="ex-no">17</span></div>
+        <div class="ex-stage" style="background:#e8f4e0;color:#4a5d3a;">
+          <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Zapraszamy do nas</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Zapraszamy w środę o 18:00 — poniżej wskazówki dojazdu.</p><p>Pozdrawiam,</p></div></div>
+          <div class="sig">
+            <div class="row">
+              <div class="mono" style="background:#4a7c3a;color:#fff;">M</div>
+              <div>
+                <div class="nm" style="color:#2a3d1a;">Łukasz Dorociak</div>
+                <div class="po" style="color:#4a7c3a;">Właściciel · Bistro Mostro</div>
+                <div class="ct" style="color:#5a6d4a;margin-top:8px;">
+                  <a href="https://www.google.com/maps/search/?api=1&query=Rynek+Główny+Kraków" target="_blank" rel="noopener" style="color:#2a3d1a;">📍 Rynek Główny 15, 31-042 Kraków</a><br>
+                  <a href="tel:+48795758555" style="color:#2a3d1a;">+48 795 758 555</a> · <a href="mailto:hello@lucdoro.design" style="color:#4a7c3a;">hello@lucdoro.design</a>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Rynek+Główny+Kraków" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;padding:8px 14px;background:#4a7c3a;color:#fff;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none;letter-spacing:.5px;text-transform:uppercase;">→ Nawiguj do nas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="ex-note">Adres z pinezką + klikalna nawigacja Google Maps — must-have dla restauracji, salonów, biur.</p>
+    </div>
+
+    <!-- 18. OPINIE GOOGLE - DISPLAY -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+        <div class="ex-top"><span class="ex-tag">Google Reviews · widget</span><span class="ex-no">18</span></div>
+        <div class="ex-stage" style="background:#f8fafc;color:#5b6472;">
+          <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Odpowiedź na Twoje zapytanie</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Dziękuję za wiadomość — poniżej wracam z propozycją.</p><p>Pozdrawiam,</p></div></div>
+          <div class="sig">
+            <div class="row">
+              <div class="mono" style="background:#4285f4;color:#fff;font-family:'Syne',sans-serif;">G</div>
+              <div>
+                <div class="nm" style="color:#0f172a;">Łukasz Dorociak</div>
+                <div class="po" style="color:#4285f4;">Founder · Mesa Studio</div>
+                <div class="ct" style="color:#5b6472;margin-top:6px;">
+                  <a href="mailto:hello@lucdoro.design" style="color:#0f172a;">hello@lucdoro.design</a> · <a href="https://lucdoro.design" style="color:#4285f4;">lucdoro.design</a>
+                </div>
+                <a href="https://www.google.com/search?q=Mesa+Studio+opinie" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;margin-top:12px;padding:9px 14px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.06);">
+                  <span style="color:#f59e0b;font-size:15px;letter-spacing:1px;">★★★★★</span>
+                  <span style="font-size:13px;color:#0f172a;font-weight:800;">4.9</span>
+                  <span style="font-size:11px;color:#64748b;">· 127 opinii Google</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="ex-note">Widget z oceną i liczbą opinii Google — buduje zaufanie w kilka sekund. Klikalny link do pełnej listy recenzji.</p>
+    </div>
+
+    <!-- 19. CTA OPINII GOOGLE -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+        <div class="ex-top"><span class="ex-tag">CTA opinii · zbieranie</span><span class="ex-no">19</span></div>
+        <div class="ex-stage" style="background:#fef3c7;color:#78716c;">
+          <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Dziękuję za zaufanie</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Dziękuję za skorzystanie z usługi — mam nadzieję, że wszystko było OK.</p><p>Pozdrawiam,</p></div></div>
+          <div class="sig">
+            <div class="row">
+              <div class="mono" style="background:#f59e0b;color:#fff;font-family:'Syne',sans-serif;">★</div>
+              <div>
+                <div class="nm" style="color:#1c1917;">Łukasz Dorociak</div>
+                <div class="po" style="color:#a16207;">Właściciel · Zakład Foto Klisza</div>
+                <div class="ct" style="color:#78716c;margin-top:6px;">
+                  <a href="mailto:hello@lucdoro.design" style="color:#1c1917;">hello@lucdoro.design</a> · <a href="tel:+48795758555" style="color:#1c1917;">+48 795 758 555</a>
+                </div>
+                <a href="https://search.google.com/local/writereview?placeid=PLACEHOLDER" target="_blank" rel="noopener" style="display:block;margin-top:12px;padding:12px 16px;background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;border-radius:10px;text-decoration:none;font-size:12px;font-weight:800;text-align:center;letter-spacing:.5px;box-shadow:0 8px 20px rgba(245,158,11,.35);">★ ZOSTAW OPINIĘ W GOOGLE · 30 SEK</a>
+                <div style="font-size:10px;color:#a8a29e;margin-top:6px;text-align:center;">Twoja opinia pomoże innym znaleźć nas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="ex-note">CTA z bezpośrednim linkiem do formularza Google Review — więcej opinii bez proszenia telefonem, automatycznie w każdym mailu.</p>
+    </div>
+
+    <!-- 20. ANIMOWANY BANER GIF -->
+    <div class="ex-wrap ex-wrap--pro">
+      <div class="ex">
+        <div class="ex-top"><span class="ex-tag">Animowany baner · GIF/SVG</span><span class="ex-no">20</span></div>
+        <div class="ex-stage" style="background:#0e0e12;color:#8a8590;">
+          <div class="gmail-preamble"><div class="gm-head"><div class="gm-row"><span class="gm-lbl">Do</span><span class="gm-val">klient@firma.pl</span></div><div class="gm-row"><span class="gm-lbl">Temat</span><span class="gm-val">Zobacz nasze najnowsze projekty</span></div></div><div class="gm-body"><p>Dzień dobry,</p><p class="gm-mock">Zapraszam do najnowszej realizacji — animacja poniżej.</p><p>Pozdrawiam,</p></div></div>
+          <div class="sig">
+            <div class="row">
+              <div class="mono" style="background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);color:#fff;">GD</div>
+              <div>
+                <div class="nm" style="color:#f3e8ff;">Łukasz Dorociak</div>
+                <div class="po" style="color:#c084fc;">Motion Designer · Ghost Dynamics</div>
+                <div class="ct" style="color:#8a8590;margin-top:6px;">
+                  <a href="mailto:hello@lucdoro.design" style="color:#f3e8ff;">hello@lucdoro.design</a> · <a href="https://lucdoro.design" style="color:#c084fc;">lucdoro.design</a>
+                </div>
+                <a href="https://lucdoro.design/#projekty" style="display:block;margin-top:12px;border-radius:10px;overflow:hidden;text-decoration:none;">
+                  <svg width="100%" height="72" viewBox="0 0 400 72" style="display:block;">
+                    <defs>
+                      <linearGradient id="gifBg20" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stop-color="#ec4899"><animate attributeName="stop-color" values="#ec4899;#8b5cf6;#3b82f6;#ec4899" dur="4s" repeatCount="indefinite"/></stop>
+                        <stop offset="1" stop-color="#3b82f6"><animate attributeName="stop-color" values="#3b82f6;#ec4899;#8b5cf6;#3b82f6" dur="4s" repeatCount="indefinite"/></stop>
+                      </linearGradient>
+                    </defs>
+                    <rect width="400" height="72" fill="url(#gifBg20)" rx="10"/>
+                    <circle cx="360" cy="20" r="26" fill="rgba(255,255,255,.14)"><animate attributeName="r" values="26;32;26" dur="2.5s" repeatCount="indefinite"/></circle>
+                    <circle cx="30" cy="62" r="14" fill="rgba(255,255,255,.12)"><animate attributeName="cy" values="62;52;62" dur="3s" repeatCount="indefinite"/></circle>
+                    <text x="22" y="32" font-family="Manrope,Arial" font-size="15" font-weight="800" fill="#fff">Nowa realizacja — zobacz!</text>
+                    <text x="22" y="52" font-family="Manrope,Arial" font-size="11" fill="rgba(255,255,255,.85)">▶ premiere animacji · kliknij po więcej</text>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="ex-note">Animowany baner SVG (lub GIF) z pulsującymi elementami i zmieniającym się gradientem — dynamiczny akcent w każdym mailu.</p>
+    </div>
+
+
+
+  </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing">
+    <h2>Jak to działa</h2>
+    <div class="feat">
+      <div><h3>1 · Twój styl</h3><p>Wysyłasz logo i kolory (lub biorę je z Twojej strony). Dobieram typografię i układ pod markę.</p></div>
+      <div><h3>2 · Funkcje</h3><p>Przyciski, linki do social mediów, WhatsApp, opinie Google, baner promocyjny — co potrzebujesz.</p></div>
+      <div><h3>3 · Gotowe do Gmaila</h3><p>Dostajesz plik i krótką instrukcję wklejenia. Wersja PL/EN, jasna i ciemna — na życzenie.</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0 0;text-align:left;">
+      <div style="background:#0f0f12;border:1px solid #2b2b32;border-radius:16px;padding:24px;color:#f2efe8;">
+        <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#a09a91;margin-bottom:6px;">Standard</div>
+        <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#f2efe8;">149 zł</div>
+        <div style="color:#a09a91;font-size:12px;margin-top:8px;line-height:1.5;">Klasyczny podpis pod markę (10 stylów) — logo, kolor, kontakt, linki.</div>
+      </div>
+      <div style="background:linear-gradient(180deg,#1a1030,#0f0f22);border:1px solid rgba(181,140,255,.5);border-radius:16px;padding:24px;position:relative;color:#f2efe8;">
+        <div style="position:absolute;top:-10px;right:14px;background:linear-gradient(135deg,#7b4dff,#b58cff);color:#fff;font-family:'Roboto Mono',monospace;font-size:9px;letter-spacing:1.5px;font-weight:800;padding:5px 11px;border-radius:999px;text-transform:uppercase;box-shadow:0 6px 16px rgba(123,77,255,.5);">PRO</div>
+        <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b58cff;margin-bottom:6px;">Wersja rozszerzona</div>
+        <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#b58cff;">249 zł</div>
+        <div style="color:#c4bfb8;font-size:12px;margin-top:8px;line-height:1.5;">Standard + social media, RODO, zdjęcia, banery, mapa Google, opinie Google, animowany GIF.</div>
+      </div>
+    </div>
+    <div class="cta-row" style="margin-top:26px;">
+      <a class="btn btn-wa" href="https://wa.me/48795758555" target="_blank">Napisz na WhatsApp</a>
+      <a class="btn btn-olx" href="mailto:hello@lucdoro.design">hello@lucdoro.design</a>
+    </div>
+  </section>
+
+  <p class="disclaim">Nazwy firm (Nowak &amp; Partnerzy, DentiCare, Trattoria Bella, Nimbus AI, IronPulse, Prestige Estates, FinAxis, Studio Kolektyw, Lumière Beauty, Forma Studio, Vestio Wear, Verdant Holding, Attura Advisory, GrowWave, „Po Godzinach", Studio Kadr) oraz stanowiska są fikcyjne i służą wyłącznie jako przykłady zakresu usługi. Zdjęcie portretowe i grafiki mają charakter poglądowy. Dane kontaktowe należą do LucDoroDesign.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:var(--txt);">LucDoroDesign</div>
+    <div class="fcta">
+      <a class="btn btn-olx" href="https://lucdoro.design" target="_blank">lucdoro.design</a>
+      <a class="btn btn-olx" href="https://www.instagram.com/lucdoro.design/" target="_blank">Instagram</a>
+      <a class="btn btn-olx" href="https://open.spotify.com/playlist/37i9dQZF1F5p3rmiWPIYgZ?si=0c34998da5624229" target="_blank" style="color:#1db954;border-color:rgba(29,185,84,.4);">d -_- b&nbsp;&nbsp;Spotify</a>
+    </div>
+    <div>© LucDoroDesign · Łukasz Dorociak · hello@lucdoro.design · +48 795 758 555</div>
+  </div>
+</footer>
+
+<script>
+/* KEYBOARD CONTROLS Word-like (Tab, Ctrl+Home, Ctrl+End) */
+(function(){
+  document.addEventListener('keydown', function(e){
+    var el = e.target;
+    if (!(el instanceof HTMLTextAreaElement || el instanceof HTMLInputElement)) return;
+    var isTextarea = el.tagName === 'TEXTAREA';
+    var isTextInput = ['text','email','tel','url','search'].indexOf(el.type) !== -1 || !el.type;
+    if (e.key === 'Tab' && isTextarea && !e.shiftKey){
+      e.preventDefault(); var s=el.selectionStart,ee=el.selectionEnd;
+      el.value = el.value.slice(0,s)+'\t'+el.value.slice(ee);
+      el.selectionStart = el.selectionEnd = s+1;
+      el.dispatchEvent(new Event('input',{bubbles:true}));
+      return;
+    }
+    if (e.key === 'Tab' && isTextarea && e.shiftKey){
+      var s2=el.selectionStart;
+      if (s2 > 0 && el.value[s2-1] === '\t'){
+        e.preventDefault();
+        el.value = el.value.slice(0,s2-1)+el.value.slice(s2);
+        el.selectionStart = el.selectionEnd = s2-1;
+        el.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+      return;
+    }
+    if (e.key === 'Home' && (e.ctrlKey||e.metaKey) && (isTextarea||isTextInput)){
+      var val=el.value||'', pos=el.selectionStart;
+      var lineEnd = isTextarea ? val.indexOf('\n', pos) : val.length;
+      if (lineEnd === -1) lineEnd = val.length;
+      if (pos === lineEnd || pos === val.length){
+        e.preventDefault();
+        var lineStart = isTextarea ? (val.lastIndexOf('\n', pos-1)+1) : 0;
+        el.selectionStart = lineStart; el.selectionEnd = pos;
+      }
+    }
+    if (e.key === 'End' && (e.ctrlKey||e.metaKey) && (isTextarea||isTextInput)){
+      var val3=el.value||'', pos3=el.selectionStart;
+      var lineStart3 = isTextarea ? (val3.lastIndexOf('\n', pos3-1)+1) : 0;
+      if (pos3 === lineStart3 || pos3 === 0){
+        e.preventDefault();
+        var lineEnd3 = isTextarea ? val3.indexOf('\n', pos3) : val3.length;
+        if (lineEnd3 === -1) lineEnd3 = val3.length;
+        el.selectionStart = pos3; el.selectionEnd = lineEnd3;
+      }
+    }
+  });
+})();
+
+/* PALETTE + THEME sync z lucdoro.design (localStorage shared) */
+(function(){
+  var STORAGE_PAL = 'lucdoro-palette';
+  var STORAGE_THEME = 'theme';
+  var html = document.documentElement;
+  var themeBtn = document.getElementById('tn-theme-btn');
+  var palBtn = document.getElementById('tn-palette-btn');
+  var palMenu = document.getElementById('tn-palette-menu');
+  if (!themeBtn || !palBtn || !palMenu) return;
+  var palChips = palMenu.querySelectorAll('button');
+
+  function applyTheme(t){
+    html.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? '☾' : '☀';
+    try { localStorage.setItem(STORAGE_THEME, t); } catch(e){}
+  }
+  function applyPal(p){
+    if (p && p !== 'default'){ html.setAttribute('data-palette', p); }
+    else { html.removeAttribute('data-palette'); p = 'default'; }
+    palChips.forEach(function(c){ c.classList.toggle('is-active', c.dataset.palette === p); });
+    try { localStorage.setItem(STORAGE_PAL, p); } catch(e){}
+  }
+
+  var savedTheme = 'dark';
+  try { savedTheme = localStorage.getItem(STORAGE_THEME) || 'dark'; } catch(e){}
+  applyTheme(savedTheme);
+  // Stopki mailowe — zawsze default paleta (nie dziedziczy palety z głównej strony)
+  applyPal('default');
+
+  themeBtn.addEventListener('click', function(){
+    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  palBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = palMenu.classList.toggle('is-open');
+    palBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(e){
+    if (!palMenu.contains(e.target) && e.target !== palBtn){
+      palMenu.classList.remove('is-open');
+      palBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  palChips.forEach(function(c){
+    c.addEventListener('click', function(){
+      applyPal(c.dataset.palette);
+      palMenu.classList.remove('is-open');
+      palBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
+
+<!-- GMAIL COMPOSE WINDOW — pre-fill lead form (ukryty feature: click "Utwórz") -->
+<div class="gm-compose-window" id="gm-compose-window" aria-hidden="true">
+  <div class="gm-cw-header">
+    <span>Nowa wiadomość · do LucDoroDesign</span>
+    <div class="gm-cw-actions">
+      <button type="button" id="gm-cw-close" aria-label="Zamknij">×</button>
+    </div>
+  </div>
+  <div class="gm-cw-fields">
+    <div class="gm-cw-field">
+      <label>Do:</label>
+      <input type="email" value="hello@lucdoro.design" readonly>
+    </div>
+    <div class="gm-cw-field">
+      <label>Temat:</label>
+      <input type="text" id="gm-cw-subject" value="Zamawiam stopkę mailową">
+    </div>
+  </div>
+  <div class="gm-cw-body-wrap">
+    <p class="gm-cw-intro">Cześć Łukasz! Chciałbym zamówić:</p>
+    <div class="gm-cw-picks" id="gm-cw-picks">
+      <button type="button" class="gm-pick" data-pick="Standard 149 zł · klasyczny podpis pod markę">
+        <span class="gm-pick-icon"></span>
+        <span class="gm-pick-label">Standard · klasyczny podpis</span>
+        <span class="gm-pick-price">149 zł</span>
+      </button>
+      <button type="button" class="gm-pick" data-pick="PRO 249 zł · social + mapa + opinie Google + banery">
+        <span class="gm-pick-icon"></span>
+        <span class="gm-pick-label">PRO · rozszerzona (social, mapa, opinie, banery)</span>
+        <span class="gm-pick-price">249 zł</span>
+      </button>
+      <button type="button" class="gm-pick" data-pick="Nie wiem jeszcze — poproszę o poradę">
+        <span class="gm-pick-icon"></span>
+        <span class="gm-pick-label">Nie wiem jeszcze — poproszę o poradę</span>
+      </button>
+      <button type="button" class="gm-pick" data-pick="Coś innego niż stopka — mam inny projekt">
+        <span class="gm-pick-icon"></span>
+        <span class="gm-pick-label">Coś innego — mam inny projekt graficzny</span>
+      </button>
+    </div>
+    <div class="gm-cw-section">Kontakt zwrotny</div>
+    <div class="gm-cw-inputs">
+      <input type="text" id="gm-cw-name" placeholder="Imię / firma">
+      <input type="email" id="gm-cw-email" placeholder="Twój email">
+    </div>
+    <div class="gm-cw-section">Krótki opis (opcjonalnie)</div>
+    <textarea class="gm-cw-textarea" id="gm-cw-message" placeholder="Branża, styl, kolory, deadline — co się przyda żebym mógł od razu odpowiedzieć konkretnie."></textarea>
+  </div>
+  <div class="gm-cw-footer">
+    <button type="button" class="gm-cw-send" id="gm-cw-send">Wyślij →</button>
+    <button type="button" class="gm-cw-wa" id="gm-cw-wa">WhatsApp</button>
+    <span class="gm-cw-hint">Klik = auto</span>
+  </div>
+</div>
+
+<!-- GMAIL MODAL — otwiera się po kliknięciu stopki, pokazuje interface Gmail z podpiętą stopką -->
+<div class="gmail-modal" id="gmail-modal" aria-hidden="true" role="dialog" aria-label="Podgląd stopki w Gmailu">
+  <button class="gm-close" id="gm-close" aria-label="Zamknij podgląd" title="Zamknij (Esc)">×</button>
+  <div class="gm-frame">
+    <div class="gm-top">
+      <div class="gm-logo">M</div>
+      <div class="gm-title">Gmail</div>
+      <div class="gm-search">Przeszukaj pocztę</div>
+    </div>
+    <aside class="gm-side">
+      <button class="gm-compose" type="button">✎ Utwórz</button>
+      <a class="gm-nav-item active">📥 Odebrane <span class="gm-count">12</span></a>
+      <a class="gm-nav-item">⭐ Oznaczone gwiazdką</a>
+      <a class="gm-nav-item">🕐 Odłożone</a>
+      <a class="gm-nav-item">➤ Wysłane</a>
+      <a class="gm-nav-item">📝 Wersje robocze <span class="gm-count">3</span></a>
+      <a class="gm-nav-item">🏷 Kategorie</a>
+      <a class="gm-nav-item">🗑 Kosz</a>
+    </aside>
+    <main class="gm-main">
+      <!-- POŁOWA JASNA: default Gmail (białe tło) -->
+      <div class="gm-half gm-half-light">
+        <div class="gm-half-badge">☀ Tryb jasny · default</div>
+        <h1 class="gm-subject">Odpowiedź na Twoje zapytanie<span class="gm-label" id="gm-label-light">Odebrane</span></h1>
+        <div class="gm-meta">
+          <div class="gm-avatar">K</div>
+          <div class="gm-meta-body">
+            <div><strong>Klient</strong> <em>&lt;klient@firma.pl&gt;</em></div>
+            <div class="gm-to">do mnie</div>
+          </div>
+          <div class="gm-time">13:47</div>
+        </div>
+        <div class="gm-body">
+          <p>Dzień dobry,</p>
+          <p>Bardzo dziękuję za wiadomość i szczegółową propozycję. Wracam z jedną kwestią — czy realizacja mogłaby rozpocząć się jeszcze w tym miesiącu?</p>
+          <p>Pozdrawiam,</p>
+          <div class="gm-sig-slot" id="gm-sig-slot-light"><!-- sig --></div>
+        </div>
+        <div class="gm-actions">
+          <button type="button">↩ Odpowiedz</button>
+          <button type="button">→ Przekaż dalej</button>
+        </div>
+      </div>
+      <!-- POŁOWA CIEMNA: Gmail dark mode -->
+      <div class="gm-half gm-half-dark">
+        <div class="gm-half-badge">☾ Tryb ciemny · dark mode</div>
+        <h1 class="gm-subject">Odpowiedź na Twoje zapytanie<span class="gm-label" id="gm-label-dark">Odebrane</span></h1>
+        <div class="gm-meta">
+          <div class="gm-avatar">K</div>
+          <div class="gm-meta-body">
+            <div><strong>Klient</strong> <em>&lt;klient@firma.pl&gt;</em></div>
+            <div class="gm-to">do mnie</div>
+          </div>
+          <div class="gm-time">13:47</div>
+        </div>
+        <div class="gm-body">
+          <p>Dzień dobry,</p>
+          <p>Bardzo dziękuję za wiadomość i szczegółową propozycję. Wracam z jedną kwestią — czy realizacja mogłaby rozpocząć się jeszcze w tym miesiącu?</p>
+          <p>Pozdrawiam,</p>
+          <div class="gm-sig-slot" id="gm-sig-slot-dark"><!-- sig --></div>
+        </div>
+        <div class="gm-actions">
+          <button type="button">↩ Odpowiedz</button>
+          <button type="button">→ Przekaż dalej</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+/* CLICK-TO-OPEN-MODAL — kliknięcie stopki otwiera podgląd w interfejsie Gmail (split light+dark) */
+(function(){
+  var modal = document.getElementById('gmail-modal');
+  var slotLight = document.getElementById('gm-sig-slot-light');
+  var slotDark = document.getElementById('gm-sig-slot-dark');
+  var labelLight = document.getElementById('gm-label-light');
+  var labelDark = document.getElementById('gm-label-dark');
+  var closeBtn = document.getElementById('gm-close');
+  if (!modal || !slotLight || !slotDark) return;
+
+  function openModal(sigEl, tag, stageBg){
+    slotLight.innerHTML = '';
+    slotDark.innerHTML = '';
+    // Owija stopkę we własne tło ex-stage — signature nie tonie na dark bg Gmaila
+    function wrap(bg){
+      var w = document.createElement('div');
+      w.style.cssText = 'padding:20px 22px;border-radius:10px;' + (bg || '');
+      w.appendChild(sigEl.cloneNode(true));
+      return w;
+    }
+    slotLight.appendChild(wrap(stageBg));
+    slotDark.appendChild(wrap(stageBg));
+    if (tag && labelLight && labelDark){
+      labelLight.textContent = tag;
+      labelDark.textContent = tag;
+    }
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    slotLight.innerHTML = '';
+    slotDark.innerHTML = '';
+    // zamknij też cennik jeśli otwarty
+    var cennik = document.getElementById('gm-cennik');
+    if (cennik) cennik.classList.remove('is-open');
+  }
+
+  document.querySelectorAll('.ex').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if (e.target.closest('a')) return;
+      var sig = card.querySelector('.sig');
+      var stage = card.querySelector('.ex-stage');
+      var tagEl = card.querySelector('.ex-tag');
+      var tag = tagEl ? tagEl.textContent.trim() : '';
+      // Wyciągnij inline style ex-stage — zachowa oryginalne tło i kolor pod stopkę
+      var stageBg = stage ? (stage.getAttribute('style') || '') : '';
+      if (sig) openModal(sig, tag, stageBg);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+})();
+
+/* GMAIL COMPOSE — lead form: click "Utwórz" otwiera pre-fill do LucDoroDesign */
+(function(){
+  var composeBtn = document.querySelector('.gm-compose');
+  var cw = document.getElementById('gm-compose-window');
+  if (!composeBtn || !cw) return;
+  var cwClose = document.getElementById('gm-cw-close');
+  var subjectInput = document.getElementById('gm-cw-subject');
+  var nameInput = document.getElementById('gm-cw-name');
+  var emailInput = document.getElementById('gm-cw-email');
+  var messageArea = document.getElementById('gm-cw-message');
+  var picks = document.querySelectorAll('#gm-cw-picks .gm-pick');
+  var sendBtn = document.getElementById('gm-cw-send');
+  var waBtn = document.getElementById('gm-cw-wa');
+
+  composeBtn.style.cursor = 'pointer';
+  composeBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    cw.classList.toggle('is-open');
+    cw.setAttribute('aria-hidden', cw.classList.contains('is-open') ? 'false' : 'true');
+  });
+  if (cwClose){
+    cwClose.addEventListener('click', function(e){
+      e.stopPropagation();
+      cw.classList.remove('is-open');
+      cw.setAttribute('aria-hidden','true');
+    });
+  }
+
+  // Toggle picks + auto-update subject
+  picks.forEach(function(pick){
+    pick.addEventListener('click', function(){
+      pick.classList.toggle('is-picked');
+      updateSubject();
+    });
+  });
+  function updateSubject(){
+    var picked = Array.from(picks).filter(function(p){return p.classList.contains('is-picked');});
+    if (!picked.length){
+      subjectInput.value = 'Zamawiam stopkę mailową';
+      return;
+    }
+    if (picked.length === 1){
+      var label = picked[0].querySelector('.gm-pick-label').textContent.trim();
+      subjectInput.value = 'Zamawiam: ' + label;
+    } else {
+      subjectInput.value = 'Zamawiam ' + picked.length + ' opcje z oferty';
+    }
+  }
+
+  function buildBody(){
+    var picked = Array.from(picks).filter(function(p){return p.classList.contains('is-picked');});
+    var lines = ['Cześć Łukasz,', ''];
+    if (picked.length){
+      lines.push('Chcę zamówić:');
+      picked.forEach(function(p){ lines.push('- ' + p.dataset.pick); });
+      lines.push('');
+    }
+    var name = (nameInput.value || '').trim();
+    var email = (emailInput.value || '').trim();
+    if (name) lines.push('Firma / imię: ' + name);
+    if (email) lines.push('Email zwrotny: ' + email);
+    var msg = (messageArea.value || '').trim();
+    if (msg){
+      lines.push('');
+      lines.push('Opis:');
+      lines.push(msg);
+    }
+    lines.push('');
+    lines.push('Pozdrawiam');
+    return lines.join('\n');
+  }
+
+  if (sendBtn){
+    sendBtn.addEventListener('click', function(){
+      var subject = encodeURIComponent(subjectInput.value || 'Zamawiam stopkę mailową');
+      var body = encodeURIComponent(buildBody());
+      window.location.href = 'mailto:hello@lucdoro.design?subject=' + subject + '&body=' + body;
+    });
+  }
+  if (waBtn){
+    waBtn.addEventListener('click', function(){
+      var subject = subjectInput.value || 'Zamawiam stopkę mailową';
+      var body = '*' + subject + '*\n\n' + buildBody();
+      var url = 'https://wa.me/48795758555?text=' + encodeURIComponent(body);
+      window.open(url, '_blank', 'noopener');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

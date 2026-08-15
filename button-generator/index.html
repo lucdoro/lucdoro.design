@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LucDoroDesign — Generator buttonów (Steam / stream panels)</title>
+<style>
+  :root{
+    --ink:#0d0d10; --paper:#f1f0f6; --violet:#7b4dff; --violet-l:#b58cff;
+    --surface:#131319; --surface2:#181820; --border:#2b2b36; --text:#f2efe8; --muted:#a09a91;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--ink);color:var(--text);font-family:'Manrope',system-ui,sans-serif;min-height:100vh}
+  header{display:flex;align-items:baseline;gap:14px;padding:18px 24px;border-bottom:1px solid var(--border)}
+  header h1{font-family:'Syne',sans-serif;font-weight:700;font-size:18px}
+  header .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet-l);font-weight:600}
+  .wrap{display:grid;grid-template-columns:340px 1fr;gap:0;min-height:calc(100vh - 60px)}
+  aside{border-right:1px solid var(--border);padding:16px 18px;overflow-y:auto;max-height:calc(100vh - 60px)}
+  main{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;gap:22px}
+  #stage{padding:40px;border-radius:16px;transition:background .2s}
+  fieldset{border:1px solid var(--border);border-radius:10px;padding:12px 12px 14px;margin-bottom:14px}
+  legend{font-family:'Syne',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet-l);padding:0 6px;font-weight:700}
+  label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin:7px 0}
+  label>span{flex:0 0 108px}
+  input[type=text]{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 8px;font-size:12px;font-family:inherit}
+  input[type=range]{flex:1;accent-color:var(--violet)}
+  input[type=color]{width:34px;height:26px;border:1px solid var(--border);border-radius:6px;background:none;padding:0;cursor:pointer}
+  select{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px;font-size:12px}
+  .val{width:34px;text-align:right;font-variant-numeric:tabular-nums;font-size:11px;color:var(--text)}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  button{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--violet);color:#fff;border:0;border-radius:999px;padding:11px 22px;cursor:pointer}
+  button.ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  button:hover{filter:brightness(1.1)}
+  textarea{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 8px;font-size:11px;font-family:monospace;min-height:52px}
+  .hint{font-size:10.5px;color:var(--muted);line-height:1.5;margin-top:4px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Generator buttonów</h1>
+  <span class="tag">LucDoroDesign ✦ SVG ✦ Steam / stream panels</span>
+</header>
+<div class="wrap">
+<aside>
+  <fieldset><legend>Preset</legend>
+    <label><span>Zestaw</span><select id="preset"></select></label>
+  </fieldset>
+  <fieldset><legend>Teksty i font</legend>
+    <label><span>Tytuł</span><input type="text" id="title" value="DONATE"></label>
+    <label><span>Podtytuł</span><input type="text" id="subtitle" value="ZAWSZE MILE WIDZIANE"></label>
+    <label><span>Font</span><select id="font">
+      <option value="Syne" selected>Syne (system LDD)</option>
+      <option value="Manrope">Manrope (system LDD)</option>
+      <option value="Arial, sans-serif">Arial / systemowy</option>
+    </select></label>
+    <label><span>Rozmiar tytułu</span><input type="range" id="titleSize" min="24" max="72" value="46"><span class="val" id="titleSizeV">46</span></label>
+  </fieldset>
+  <fieldset><legend>Kolory</legend>
+    <label><span>Pas / akcent</span><input type="color" id="accent" value="#7b4dff">
+        <span>Tło ikony</span><input type="color" id="iconBg" value="#7b4dff"></label>
+    <label><span>Panel od</span><input type="color" id="panel1" value="#3a3a40">
+        <span>Panel do</span><input type="color" id="panel2" value="#121214"></label>
+    <label><span>Tekst</span><input type="color" id="textCol" value="#ffffff">
+        <span>Tło podglądu</span><input type="color" id="stageBg" value="#0d0d10"></label>
+  </fieldset>
+  <fieldset><legend>Ikona</legend>
+    <label><span>Symbol</span><select id="icon"></select></label>
+    <label><span>Skala ikony</span><input type="range" id="iconScale" min="40" max="120" value="78"><span class="val" id="iconScaleV">78</span></label>
+    <details><summary class="hint">własna ikona (path SVG, viewBox 0 0 24 24)</summary>
+      <textarea id="customPath" placeholder="M12 2L2 22h20z"></textarea>
+    </details>
+  </fieldset>
+  <fieldset><legend>Refleks (połysk)</legend>
+    <label><span>Siła</span><input type="range" id="glossOp" min="0" max="60" value="16"><span class="val" id="glossOpV">16</span></label>
+    <label><span>Pozycja</span><input type="range" id="glossPos" min="-40" max="100" value="18"><span class="val" id="glossPosV">18</span></label>
+    <label><span>Szerokość</span><input type="range" id="glossW" min="10" max="90" value="42"><span class="val" id="glossWV">42</span></label>
+  </fieldset>
+  <fieldset><legend>Cień</legend>
+    <label><span>Rozmycie</span><input type="range" id="shBlur" min="0" max="30" value="10"><span class="val" id="shBlurV">10</span></label>
+    <label><span>Odsunięcie</span><input type="range" id="shDy" min="0" max="24" value="7"><span class="val" id="shDyV">7</span></label>
+    <label><span>Krycie</span><input type="range" id="shOp" min="0" max="90" value="55"><span class="val" id="shOpV">55</span></label>
+  </fieldset>
+  <fieldset><legend>Tłoczenie / bevel</legend>
+    <label><span>Światło góry</span><input type="range" id="embTop" min="0" max="70" value="26"><span class="val" id="embTopV">26</span></label>
+    <label><span>Cień dołu</span><input type="range" id="embBot" min="0" max="70" value="34"><span class="val" id="embBotV">34</span></label>
+    <label><span>Ring ikony</span><input type="range" id="ring" min="0" max="16" value="8"><span class="val" id="ringV">8</span></label>
+  </fieldset>
+  <fieldset><legend>Neumorphism (soft UI)</legend>
+    <label><span>Wypukłość zew.</span><input type="range" id="neuOut" min="0" max="40" value="14"><span class="val" id="neuOutV">14</span></label>
+    <label><span>Wklęsłość wew.</span><input type="range" id="neuIn" min="0" max="40" value="10"><span class="val" id="neuInV">10</span></label>
+    <label><span>Rozmycie środka</span><input type="range" id="innerBlur" min="0" max="20" value="0"><span class="val" id="innerBlurV">0</span></label>
+    <label><span>Światło (kąt)</span><input type="range" id="neuAngle" min="0" max="360" value="315"><span class="val" id="neuAngleV">315</span></label>
+  </fieldset>
+  <fieldset><legend>Własne SVG</legend>
+    <label><span>Wgraj plik SVG</span><input type="file" id="svgUpload" accept=".svg,image/svg+xml" style="flex:1;font-size:11px;color:var(--muted)"></label>
+    <div class="hint" style="font-size:11px;color:var(--muted);margin-top:4px;">Automatycznie wyciągnie <code style="color:var(--violet-l);">&lt;path&gt;</code> i zastosuje jako ikonę. Ideal: viewBox 24×24.</div>
+  </fieldset>
+  <fieldset><legend>Geometria</legend>
+    <label><span>Szerokość</span><input type="range" id="w" min="420" max="900" value="640"><span class="val" id="wV">640</span></label>
+    <label><span>Wysokość</span><input type="range" id="h" min="120" max="260" value="168"><span class="val" id="hV">168</span></label>
+    <label><span>Promień rogów</span><input type="range" id="rad" min="0" max="40" value="18"><span class="val" id="radV">18</span></label>
+    <label><span>Pas dolny</span><input type="range" id="stripeH" min="0" max="40" value="18"><span class="val" id="stripeHV">18</span></label>
+  </fieldset>
+</aside>
+<main>
+  <div id="stage"></div>
+  <div class="btns">
+    <button id="dlSvg">Pobierz SVG</button>
+    <button id="dlPng">Pobierz PNG ×2</button>
+    <button class="ghost" id="rand">Losuj duotone LDD</button>
+  </div>
+  <p class="hint" style="max-width:520px;text-align:center">Każdy button to samodzielny wektor. SVG ma osadzone fonty (Syne/Manrope),
+  więc otworzy się poprawnie w Illustratorze / Affinity / przeglądarce. Ikony są edytowalne — wklej własny path 24×24.</p>
+</main>
+</div>
+<script>
+/* ---------- ikony (viewBox 0 0 24 24) ---------- */
+const ICONS = {
+  "Dolar":"M12 1a1 1 0 0 1 1 1v1.06c2.05.22 3.77 1.32 4.13 3.13a1 1 0 1 1-1.96.4c-.17-.86-1.02-1.53-2.17-1.72V9.9c2.44.55 4.5 1.42 4.5 3.85 0 2.16-1.86 3.51-4.5 3.75V19a1 1 0 1 1-2 0v-1.53c-2.33-.28-4.05-1.5-4.4-3.44a1 1 0 1 1 1.97-.36c.18 1 1.09 1.7 2.43 1.9v-4.1C8.63 10.9 6.7 10.05 6.7 7.7c0-2.1 1.8-3.4 4.3-3.63V2a1 1 0 0 1 1-1Zm-1 4.1c-1.34.17-2.3.8-2.3 1.6 0 .86.8 1.3 2.3 1.68V5.1Zm2 6.93v3.9c1.5-.17 2.5-.85 2.5-1.73 0-.95-.94-1.5-2.5-2.17Z",
+  "Play":"M8 5.14a1 1 0 0 1 1.5-.86l10 5.86a1 1 0 0 1 0 1.72l-10 5.86A1 1 0 0 1 8 16.86V5.14Z",
+  "Serce":"M12 21S3 14.4 3 8.9C3 6 5.2 4 7.8 4c1.7 0 3.2.9 4.2 2.3C13 4.9 14.5 4 16.2 4 18.8 4 21 6 21 8.9 21 14.4 12 21 12 21Z",
+  "Gwiazda":"M12 2l2.9 6.26 6.6.72-4.9 4.55 1.32 6.47L12 16.77 6.08 20l1.32-6.47L2.5 8.98l6.6-.72L12 2Z",
+  "Czat":"M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z",
+  "Telefon":"M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 3v12h8V5H8Zm3 14h2v1h-2v-1Z",
+  "Schowek":"M9 3h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a1 1 0 0 1 1-1Zm-1 6h8v2H8V9Zm0 4h8v2H8v-2Z",
+  "Monitor":"M3 4h18a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-7v2h3v2H7v-2h3v-2H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 2v9h16V6H4Z",
+  "Zębatka":"M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm9.4 5.4-2.1 1.2c.05-.4.1-.9.1-1.3l2-1.6-1-3.4-2.6.3a7 7 0 0 0-1.8-1.6l.3-2.6L12.9 3l-1.2 2.3h-1.4L9.1 3 5.7 4.4l.3 2.6c-.7.4-1.3 1-1.8 1.6l-2.6-.3-1 3.4 2 1.6c0 .4 0 .9.1 1.3L.6 15.8l2 2.9 2.4-1a7 7 0 0 0 2 1.2l.5 2.6h3.4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-2.9Z",
+  "Kciuk":"M2 10h4v11H2V10Zm20 2a2 2 0 0 0-2-2h-5.3l.9-4.4A2 2 0 0 0 13.7 3L8 9.4V21h10a2 2 0 0 0 2-1.6l2-7.4V12Z",
+  "Łuk LDD":"M3 16a9 9 0 0 1 18 0h-2.2a6.8 6.8 0 0 0-13.6 0H3Z",
+  "Koperta":"M2 5h20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.4 2L12 12.6 20.6 7H3.4Z"
+};
+const PRESETS = [
+  {n:"DONATE / wsparcie", t:"DONATE", s:"ZAWSZE MILE WIDZIANE", i:"Dolar", a:"#1DB954"},
+  {n:"KOMENDY", t:"KOMENDY", s:"URUCHOM GOD MODE", i:"Zębatka", a:"#C0501F"},
+  {n:"TOP DONATE", t:"TOP DONATE", s:"DZIĘKUJĘ ZA WASZE WSPARCIE", i:"Gwiazda", a:"#E7C500"},
+  {n:"REGULAMIN", t:"REGULAMIN", s:"ZASADY NA KANALE", i:"Schowek", a:"#F26B1D"},
+  {n:"YOUTUBE", t:"YOUTUBE", s:"SUBSKRYBUJ MÓJ KANAŁ", i:"Play", a:"#E01F1F"},
+  {n:"O MNIE", t:"O MNIE", s:"KILKA ZDAŃ NA TEMAT", i:"Serce", a:"#7b4dff"},
+  {n:"FACEBOOK", t:"FACEBOOK", s:"POLUB MÓJ FANPAGE", i:"Kciuk", a:"#1D63E0"},
+  {n:"MÓJ PC", t:"MÓJ PC", s:"OSPRZĘT / HARDWARE", i:"Monitor", a:"#8A2BE2"},
+  {n:"SMS", t:"SMS", s:"DONATE PRZEZ TELEFON", i:"Telefon", a:"#D01F4A"},
+  {n:"KONTAKT", t:"KONTAKT", s:"HELLO@LUCDORO.DESIGN", i:"Koperta", a:"#7b4dff"},
+  {n:"LDD ŁUK", t:"LUCDORO", s:"PORTFOLIO → LUCDORO.DESIGN", i:"Łuk LDD", a:"#b58cff"}
+];
+const DUOS = [["#0d0d10","#7b4dff"],["#28469E","#CAE8E8"],["#3E0856","#FAAE62"],["#04344C","#B0EDF9"],["#A90E02","#FFFBD4"],["#0C1E29","#FFFE15"]];
+
+const $ = id => document.getElementById(id);
+const iconSel = $("icon");
+Object.keys(ICONS).forEach(k=>{const o=document.createElement("option");o.value=k;o.textContent=k;iconSel.appendChild(o);});
+const presetSel = $("preset");
+PRESETS.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p.n;presetSel.appendChild(o);});
+
+/* ---------- osadzanie fontów (base64) — dla samodzielnego SVG i eksportu PNG ---------- */
+let FONT_CSS = "";
+async function embedFonts(){
+  try{
+    const css = await (await fetch("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@500;600;700&display=swap")).text();
+    const urls = [...css.matchAll(/src: url\((.*?)\) format\('woff2'\)/g)].map(m=>m[1]);
+    const faces = [...css.matchAll(/@font-face \{[\s\S]*?\}/g)].map(m=>m[0]);
+    let out = "";
+    for (let i=0;i<faces.length;i++){
+      // tylko latin i latin-ext
+      const block = faces[i];
+      if(!/U\+0000-00FF|U\+0100-02BA|U\+0102-0103|latin/i.test(block) && !/U\+0000/.test(block)) {}
+      const url = block.match(/url\((.*?)\)/)[1];
+      const buf = await (await fetch(url)).arrayBuffer();
+      const b64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
+      out += block.replace(/url\(.*?\) format\('woff2'\)/, `url(data:font/woff2;base64,${b64}) format('woff2')`) + "\n";
+    }
+    FONT_CSS = out;
+    render();
+  }catch(e){ console.log("fonty: fallback systemowy", e); }
+}
+embedFonts();
+
+/* ---------- render SVG ---------- */
+function v(id){ return $(id).value; }
+function render(){
+  const W=+v("w"), H=+v("h"), R=+v("rad"), SH=+v("stripeH");
+  const font = v("font"), tSize=+v("titleSize");
+  const gOp=+v("glossOp")/100, gPos=+v("glossPos")/100, gW=+v("glossW")/100;
+  const shB=+v("shBlur"), shD=+v("shDy"), shO=+v("shOp")/100;
+  const eT=+v("embTop")/100, eB=+v("embBot")/100, ring=+v("ring");
+  const cx = W-90, cy=(H-SH)/2 + 4, rOut=Math.min((H-SH)/2-8, 62), rIn=rOut-ring;
+  const iconScale = +v("iconScale")/100;
+  const custom = v("customPath").trim();
+  const path = custom || ICONS[v("icon")];
+  const pad = 14 + shB + shD;
+  const gx = W*gPos;
+  // Neumorphism params
+  const neuOut = +v("neuOut"), neuIn = +v("neuIn"), innerBlur = +v("innerBlur");
+  const neuAngle = +v("neuAngle") * Math.PI / 180;
+  const neuDx = Math.round(Math.cos(neuAngle) * (neuOut/2));
+  const neuDy = Math.round(Math.sin(neuAngle) * (neuOut/2));
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W+pad*2}" height="${H+pad*2}" viewBox="${-pad} ${-pad} ${W+pad*2} ${H+pad*2}">
+<defs>
+  <style>${FONT_CSS}
+    .t{font-family:'${font.split(",")[0]}',${font.includes(",")?font.split(",").slice(1).join(","):"sans-serif"};}
+  </style>
+  <linearGradient id="pg" x1="0" y1="0" x2="0.7" y2="1">
+    <stop offset="0" stop-color="${v("panel1")}"/><stop offset="1" stop-color="${v("panel2")}"/>
+  </linearGradient>
+  <linearGradient id="stg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="${v("accent")}"/><stop offset="1" stop-color="${v("accent")}" stop-opacity="0.75"/>
+  </linearGradient>
+  <radialGradient id="bevel" cx="0.35" cy="0.3" r="1">
+    <stop offset="0" stop-color="#4a4a52"/><stop offset="0.55" stop-color="#1a1a1e"/><stop offset="1" stop-color="#000"/>
+  </radialGradient>
+  <clipPath id="clip"><rect x="0" y="0" width="${W}" height="${H}" rx="${R}"/></clipPath>
+  <filter id="ds" x="-30%" y="-30%" width="160%" height="180%">
+    ${neuOut>0?`<feDropShadow dx="${neuDx}" dy="${neuDy}" stdDeviation="${neuOut/1.5}" flood-color="#000" flood-opacity="0.55"/>
+    <feDropShadow dx="${-neuDx}" dy="${-neuDy}" stdDeviation="${neuOut/1.5}" flood-color="#fff" flood-opacity="0.08"/>`:''}
+    <feDropShadow dx="0" dy="${shD}" stdDeviation="${shB}" flood-color="#000" flood-opacity="${shO}"/>
+  </filter>
+  ${neuIn>0?`<filter id="innerShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="${neuIn/2}"/>
+    <feOffset dx="${neuIn/2}" dy="${neuIn/2}" result="off1"/>
+    <feFlood flood-color="#000" flood-opacity="0.55"/>
+    <feComposite in2="off1" operator="in" result="dark"/>
+    <feGaussianBlur in="SourceAlpha" stdDeviation="${neuIn/2}"/>
+    <feOffset dx="${-neuIn/2}" dy="${-neuIn/2}" result="off2"/>
+    <feFlood flood-color="#fff" flood-opacity="0.12"/>
+    <feComposite in2="off2" operator="in" result="light"/>
+    <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="dark"/><feMergeNode in="light"/></feMerge>
+  </filter>`:''}
+  ${innerBlur>0?`<filter id="innerBlur"><feGaussianBlur stdDeviation="${innerBlur/3}"/></filter>`:''}
+</defs>
+<g filter="url(#ds)">
+  <rect x="0" y="0" width="${W}" height="${H}" rx="${R}" fill="url(#pg)" ${neuIn>0?'filter="url(#innerShadow)"':''}/>
+  <g clip-path="url(#clip)" ${innerBlur>0?'filter="url(#innerBlur)"':''}>
+    <rect x="0" y="${H-SH}" width="${W}" height="${SH}" fill="url(#stg)"/>
+    <polygon points="${gx},0 ${gx+W*gW},0 ${gx+W*gW-H*0.55},${H} ${gx-H*0.55},${H}" fill="#fff" opacity="${gOp}"/>
+    <rect x="1.5" y="1.5" width="${W-3}" height="${H-3}" rx="${Math.max(R-1.5,0)}" fill="none" stroke="#fff" stroke-opacity="${eT}" stroke-width="2"/>
+    <rect x="1.5" y="2.5" width="${W-3}" height="${H-4}" rx="${Math.max(R-1.5,0)}" fill="none" stroke="#000" stroke-opacity="${eB}" stroke-width="3" transform="translate(0,1.5)"/>
+  </g>
+  <circle cx="${cx}" cy="${cy}" r="${rOut}" fill="url(#bevel)" stroke="#000" stroke-opacity="${eB}" stroke-width="2"/>
+  <circle cx="${cx}" cy="${cy}" r="${rOut-1.5}" fill="none" stroke="#fff" stroke-opacity="${eT*0.9}" stroke-width="1.5"/>
+  <circle cx="${cx}" cy="${cy}" r="${rIn}" fill="${v("iconBg")}"/>
+  <path d="M ${cx-rIn} ${cy} a ${rIn} ${rIn} 0 0 1 ${rIn*2} 0 z" fill="#fff" opacity="${gOp*0.9}" transform="rotate(-18 ${cx} ${cy})"/>
+  <g transform="translate(${cx},${cy}) scale(${(rIn*2/24)*iconScale*0.82}) translate(-12,-12)">
+    <path d="${path}" fill="#fff"/>
+  </g>
+  <text class="t" x="34" y="${(H-SH)/2 - 2}" font-size="${tSize}" font-weight="800" fill="${v("textCol")}" letter-spacing="1">${esc(v("title"))}</text>
+  <text class="t" x="35" y="${(H-SH)/2 + 26}" font-size="${Math.round(tSize*0.4)}" font-weight="600" fill="${v("textCol")}" opacity="0.82" letter-spacing="2.5">${esc(v("subtitle"))}</text>
+</g>
+</svg>`;
+  $("stage").innerHTML = svg;
+  $("stage").style.background = v("stageBg");
+  ["titleSize","glossOp","glossPos","glossW","shBlur","shDy","shOp","embTop","embBot","ring","w","h","rad","stripeH","iconScale","neuOut","neuIn","innerBlur","neuAngle"]
+    .forEach(id=>$(id+"V") && ($(id+"V").textContent = v(id)));
+}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+// SVG upload — wyciąga <path d="..."> z wgranego pliku
+$("svgUpload") && $("svgUpload").addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 500 * 1024) { alert("SVG za duży (max 500 KB)"); return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    const svgText = reader.result;
+    // Parse SVG i wyciągnij pierwszą <path d="...">
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(svgText, "image/svg+xml");
+    const paths = doc.querySelectorAll("path");
+    if (!paths.length) { alert("Nie znaleziono <path> w tym SVG"); return; }
+    // Weź pierwszy path z atrybutem d (może być wiele — łączymy)
+    const combined = Array.from(paths).map(p => p.getAttribute("d")).filter(Boolean).join(" ");
+    $("customPath").value = combined;
+    render();
+  };
+  reader.readAsText(file);
+});
+
+document.querySelectorAll("input,select,textarea").forEach(el=>el.addEventListener("input",render));
+presetSel.addEventListener("change",()=>{
+  const p = PRESETS[+presetSel.value];
+  $("title").value=p.t; $("subtitle").value=p.s; $("icon").value=p.i; $("accent").value=p.a; $("iconBg").value=p.a;
+  render();
+});
+$("rand").addEventListener("click",()=>{
+  const d = DUOS[Math.floor(Math.random()*DUOS.length)];
+  $("panel2").value=d[0]; $("panel1").value=shade(d[0],28); $("accent").value=d[1]; $("iconBg").value=d[1]; $("stageBg").value=d[0];
+  render();
+});
+function shade(hex,amt){const n=parseInt(hex.slice(1),16);
+  const r=Math.min(255,(n>>16)+amt),g=Math.min(255,((n>>8)&255)+amt),b=Math.min(255,(n&255)+amt);
+  return "#"+((r<<16)|(g<<8)|b).toString(16).padStart(6,"0");}
+
+$("dlSvg").addEventListener("click",()=>{
+  const blob = new Blob([$("stage").innerHTML],{type:"image/svg+xml"});
+  dl(URL.createObjectURL(blob), fname()+".svg");
+});
+$("dlPng").addEventListener("click",()=>{
+  const svgEl = $("stage").querySelector("svg");
+  const w = +svgEl.getAttribute("width")*2, h=+svgEl.getAttribute("height")*2;
+  const img = new Image();
+  img.onload = ()=>{
+    const c = document.createElement("canvas"); c.width=w; c.height=h;
+    c.getContext("2d").drawImage(img,0,0,w,h);
+    dl(c.toDataURL("image/png"), fname()+".png");
+  };
+  img.src = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent($("stage").innerHTML);
+});
+function fname(){return "button-"+v("title").toLowerCase().replace(/[^a-z0-9]+/g,"-");}
+function dl(href,name){const a=document.createElement("a");a.href=href;a.download=name;a.click();}
+render();
+</script>
+</body>
+</html>

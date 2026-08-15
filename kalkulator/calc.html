@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LucDoroDesign — Kalkulator wyceny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d10; --panel:#161619; --line:#2b2b32;
+    --txt:#f2efe8; --muted:#a09a91; --accent:#b58cff; --accent2:#7b4dff;
+    --ok:#1DB954; --warn:#e07a5f;
+  }
+  :root[data-theme="light"]{
+    --bg:#f5f2ea; --panel:#ffffff; --line:#e4dfd0;
+    --txt:#1a1a1e; --muted:#5a554d; --accent:#7b4dff; --accent2:#5a2ee0;
+    --ok:#1DB954; --warn:#c85a3f;
+  }
+  /* KOLOR AKCJI — identyczny z guzikiem WhatsApp na stronie glownej */
+  :root{--wa-bg:#25d366;--wa-shadow:37,211,102;--wa-fg:#fff}
+  :root[data-theme="light"]:not([data-palette]){--wa-bg:#1DB954;--wa-shadow:29,185,84;--wa-fg:#fff}
+  :root[data-palette="combo01"][data-theme="light"]{--wa-bg:#E5555C;--wa-fg:#fff}
+  :root[data-palette="combo01"][data-theme="dark"]{--wa-bg:#FF7B85;--wa-fg:#0f1a2e}
+  :root[data-palette="combo02"][data-theme="light"]{--wa-bg:#00A0A0;--wa-fg:#fff}
+  :root[data-palette="combo02"][data-theme="dark"]{--wa-bg:#00E5A0;--wa-fg:#082018}
+  :root[data-palette="combo03"][data-theme="light"]{--wa-bg:#E67E22;--wa-fg:#fff}
+  :root[data-palette="combo03"][data-theme="dark"]{--wa-bg:#FFB74D;--wa-fg:#1a0f00}
+  :root[data-palette="combo04"][data-theme="light"]{--wa-bg:#3D7A4A;--wa-fg:#fff}
+  :root[data-palette="combo04"][data-theme="dark"]{--wa-bg:#5DAA6F;--wa-fg:#0A1F10}
+  :root[data-palette="combo05"][data-theme="light"]{--wa-bg:#D9186B;--wa-fg:#fff}
+  :root[data-palette="combo05"][data-theme="dark"]{--wa-bg:#FF3A9E;--wa-fg:#1a0018}
+  /* PALETY — zsynchronizowane z powloka /kalkulator/ */
+  :root{--panel2:var(--panel);}
+  :root[data-palette="combo01"][data-theme="light"]{--bg:#CAE8E8; --panel:#DEF0F0; --line:#A0C4C4; --txt:#28469E; --muted:#4864B0; --accent:#28469E; --accent2:#E5555C;}
+  :root[data-palette="combo01"][data-theme="dark"]{--bg:#28469E; --panel:#334FA8; --line:#4260B4; --txt:#CAE8E8; --muted:#A0C4C4; --accent:#CAE8E8; --accent2:#FF7B85;}
+  :root[data-palette="combo02"][data-theme="light"]{--bg:#FDE1B8; --panel:#FFEDD5; --line:#E8CCA0; --txt:#3A241C; --muted:#7A5A48; --accent:#C24A2E; --accent2:#7A1E5C;}
+  :root[data-palette="combo02"][data-theme="dark"]{--bg:#3E0856; --panel:#4E1866; --line:#6E3886; --txt:#FAAE62; --muted:#E09E52; --accent:#FAAE62; --accent2:#00E5A0;}
+  :root[data-palette="combo03"][data-theme="light"]{--bg:#B0EDF9; --panel:#C4F0F9; --line:#88C4D8; --txt:#04344C; --muted:#24546C; --accent:#04344C; --accent2:#E67E22;}
+  :root[data-palette="combo03"][data-theme="dark"]{--bg:#04344C; --panel:#14546C; --line:#2A5A72; --txt:#B0EDF9; --muted:#88CDE0; --accent:#B0EDF9; --accent2:#FFB74D;}
+  :root[data-palette="combo04"][data-theme="light"]{--bg:#F5EDEF; --panel:#FAF3F5; --line:#E5D0D6; --txt:#3A0F1D; --muted:#7A5060; --accent:#7A1E5C; --accent2:#3D7A4A;}
+  :root[data-palette="combo04"][data-theme="dark"]{--bg:#2A0F1A; --panel:#3A1826; --line:#4A2536; --txt:#F5EDEF; --muted:#B89AA8; --accent:#D07DAD; --accent2:#5DAA6F;}
+  :root[data-palette="combo05"][data-theme="light"]{--bg:#FFFE15; --panel:#FFFF3C; --line:#D0CE10; --txt:#0C1E29; --muted:#243E49; --accent:#0C1E29; --accent2:#D9186B;}
+  :root[data-palette="combo05"][data-theme="dark"]{--bg:#0C1E29; --panel:#182E39; --line:#3E5E69; --txt:#FFFE15; --muted:#E0DE35; --accent:#FFFE15; --accent2:#FF3A9E;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--txt); font-family:'Manrope',system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px; -webkit-font-smoothing:antialiased;}
+  h1{font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:clamp(28px,4vw,42px); letter-spacing:-.02em; margin-bottom:6px;}
+  h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:700;}
+  .sub{color:var(--muted); font-size:14px; margin-bottom:24px; max-width:640px; line-height:1.6;}
+  .wrap{display:grid; grid-template-columns:1fr 360px; gap:20px; max-width:1280px; margin:0 auto;}
+  @media(max-width:980px){.wrap{grid-template-columns:1fr;}}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px; margin-bottom:20px; box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 20px 40px -20px rgba(0,0,0,.35);}
+  .card h2{font-family:'Roboto Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:2.5px; color:var(--accent); margin-bottom:16px; font-weight:700;}
+  table{width:100%; border-collapse:collapse; font-size:14px;}
+  th{text-align:left; color:var(--muted); font-weight:600; font-size:10px; text-transform:uppercase; letter-spacing:1.5px; padding:8px 10px; border-bottom:1px solid var(--line);}
+  td{padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  tr.grp td{background:var(--panel2); color:var(--accent); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; padding:10px; border-radius:8px;}
+  input[type=number], input[type=text], select{
+    background:var(--panel2); border:1px solid var(--line); color:var(--txt);
+    border-radius:8px; padding:7px 10px; font-size:14px; width:100%; font-family:inherit;
+    transition:border-color .2s;
+  }
+  input[type=number]{text-align:right;}
+  input:focus, select:focus{outline:none; border-color:var(--accent);}
+  .qty{width:64px;}
+  .price{width:92px;}
+  /* Quantity control: − [n] + */
+  .qty-ctrl{display:inline-flex; align-items:center; gap:0; border:1px solid var(--line); border-radius:10px; background:var(--panel2); overflow:hidden; height:34px;}
+  .qty-ctrl button{background:transparent; color:var(--txt); border:none; width:30px; height:100%; font-size:16px; font-weight:600; cursor:pointer; padding:0; margin:0; display:flex; align-items:center; justify-content:center; transition:background .15s,color .15s;}
+  .qty-ctrl button:hover{background:var(--accent); color:#fff;}
+  .qty-ctrl button:active{transform:scale(.92);}
+  .qty-ctrl input.qty{width:36px; border:none; border-radius:0; background:transparent; padding:0; text-align:center; font-weight:700; font-variant-numeric:tabular-nums; font-size:14px; height:100%;}
+  .qty-ctrl input.qty::-webkit-outer-spin-button, .qty-ctrl input.qty::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;}
+  .qty-ctrl input.qty{-moz-appearance:textfield;}
+  .qty-ctrl input.qty:focus{outline:none;}
+  /* Language switcher */
+  .lang-switch{position:fixed; top:20px; right:20px; z-index:100; display:flex; gap:2px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:3px; box-shadow:0 8px 24px rgba(0,0,0,.25);}
+  .lang-tile{background:transparent; color:var(--muted); border:none; padding:6px 14px; font-size:11px; font-weight:700; letter-spacing:1px; cursor:pointer; border-radius:12px; text-transform:uppercase; font-family:'Roboto Mono',monospace; transition:all .2s;}
+  .lang-tile.active{background:var(--accent); color:#fff;}
+  .rowsum{text-align:right; white-space:nowrap; color:var(--txt); font-variant-numeric:tabular-nums;}
+  .muted{color:var(--muted);}
+  .settings label{display:block; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:12px 0 4px;}
+  .settings .row{display:flex; gap:10px; align-items:center;}
+  .settings small{color:var(--muted); display:block; margin-top:3px; font-size:12px; text-transform:none; letter-spacing:0;}
+  .sticky{position:sticky; top:84px;}
+  .sumline{display:flex; justify-content:space-between; padding:7px 0; font-size:14px; border-bottom:1px dashed var(--line);}
+  .sumline span:last-child{font-variant-numeric:tabular-nums;}
+  .total{display:flex; justify-content:space-between; padding:14px 0 4px; font-size:22px; font-weight:700;}
+  .total span:last-child{color:var(--accent);}
+  .vatline{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); padding:2px 0;}
+  .warnbox{background:rgba(224,122,95,.12); border:1px solid var(--warn); color:var(--warn); border-radius:8px; padding:10px 12px; font-size:13px; margin-top:12px; display:none;}
+  button{background:var(--wa-bg); color:var(--wa-fg); border:none; border-radius:12px; padding:14px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:14px; font-family:inherit; letter-spacing:.3px; box-shadow:0 8px 24px -8px rgba(123,77,255,.5); transition:transform .2s,box-shadow .2s;}
+  button:hover{transform:translateY(-1px); box-shadow:none;}
+  button.ghost{background:transparent; color:var(--muted); border:1px solid var(--line); font-weight:500; font-size:13px; padding:10px; box-shadow:none;}
+  button.ghost:hover{color:var(--txt); border-color:var(--accent); transform:none; box-shadow:none;}
+  .copied{color:var(--ok); font-size:13px; text-align:center; margin-top:8px; height:16px;}
+  .hint{font-size:12px; color:var(--muted); margin-top:10px;}
+  .gauge{margin:16px 0 4px; text-align:center;}
+  .gauge svg{width:100%; max-width:260px;}
+  .gaugeLabel{font-size:13px; color:var(--muted); margin-top:2px;}
+  .gaugeLabel b{color:var(--txt);}
+  .gaugeVerdict{font-size:14px; font-weight:700; margin-top:4px;}
+  .below{color:var(--ok);} .near{color:var(--accent);} .above{color:var(--warn);}
+
+  /* ACCORDION grup — pionowa lista, header nad pozycjami */
+  .groups-list{display:flex; flex-direction:column; gap:10px; margin:0 -22px;}
+  .group-sec{background:var(--panel2); border:1px solid var(--line); border-radius:12px; overflow:hidden; transition:border-color .25s, box-shadow .25s;}
+  .group-sec.is-open{border-color:var(--accent);}
+  .group-head{width:100%; display:flex; align-items:center; gap:14px; padding:14px 18px; background:transparent; border:none; border-radius:11px; cursor:pointer; text-align:left; font-family:inherit; color:var(--txt); position:relative; transition:background .2s; outline:none;}
+  .group-head:hover{background:color-mix(in srgb, var(--accent) 12%, transparent);}
+  .group-head:focus{outline:none;}
+  .group-head:focus-visible{background:color-mix(in srgb, var(--accent) 12%, transparent); box-shadow:inset 0 0 0 2px color-mix(in srgb, var(--accent) 50%, transparent);}
+  .group-head-num{font-family:'Roboto Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--muted); font-weight:700; min-width:28px;}
+  .group-sec.is-open .group-head{border-radius:11px 11px 0 0;}
+  .group-sec.is-open .group-head-num{color:var(--accent);}
+  .group-head-name{flex:1; font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:20px; line-height:1.15;}
+  .group-head-meta{font-family:'Roboto Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); padding:4px 10px; border-radius:99px; background:color-mix(in srgb, var(--txt) 6%, transparent);}
+  .group-head-arrow{width:26px; height:26px; border-radius:50%; background:color-mix(in srgb, var(--accent) 12%, transparent); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; transition:transform .3s, background .25s, color .25s;}
+  .group-sec.is-open .group-head-arrow{transform:rotate(180deg); background:var(--accent); color:#fff;}
+  .group-body{overflow:hidden; max-height:0; transition:max-height .4s cubic-bezier(.22,1,.36,1);}
+  .group-body.is-open{max-height:2400px;}
+  .group-body-inner{padding:0 14px 14px; border-top:1px solid var(--line);}
+  .group-body-inner table{margin-top:8px;}
+
+  /* LANG KAFELKI (bigger toggle) */
+  .lang-tiles{display:none;}
+  .lang-tile{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 16px; cursor:pointer; font-family:inherit; color:var(--muted); font-weight:700; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; transition:all .2s; display:flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(0,0,0,.25);}
+  .lang-tile-flag{font-size:16px; line-height:1;}
+  .lang-tile-code{font-family:'Roboto Mono',monospace;}
+  .lang-tile-cur{font-size:10px; color:var(--muted); font-weight:600; letter-spacing:.5px; text-transform:none; opacity:.6;}
+  .lang-tile:hover{border-color:var(--accent); color:var(--txt);}
+  .lang-tile.active{background:var(--wa-bg); color:var(--wa-fg); border-color:transparent;}
+  /* waska kolumna (iframe / mobile): przelacznik w przeplywie, zeby nie zaslanial tytulu */
+  @media(max-width:720px){.lang-tiles{position:static; justify-content:flex-end; margin:0 0 16px;}}
+  .lang-tile.active .lang-tile-cur{color:rgba(255,255,255,.8); opacity:.9;}
+</style>
+</head>
+<body>
+<div class="lang-tiles" role="tablist" aria-label="Język / Language">
+  <button type="button" class="lang-tile active" data-lang="pl">
+    <span class="lang-tile-flag">🇵🇱</span>
+    <span class="lang-tile-code">PL</span>
+    <span class="lang-tile-cur">· zł</span>
+  </button>
+  <button type="button" class="lang-tile" data-lang="en">
+    <span class="lang-tile-flag">🇬🇧</span>
+    <span class="lang-tile-code">EN</span>
+    <span class="lang-tile-cur">· €</span>
+  </button>
+</div>
+<div style="max-width:1280px; margin:0 auto 20px;">
+  <h1 data-i18n="title.h1">LucDoro<span>Design</span> — kalkulator wyceny</h1>
+  <div class="sub" data-i18n="title.sub">Ceny netto, edytowalne. Zmiany cen bazowych zapisują się w tej przeglądarce. Minimalna wartość zlecenia: <b>300 zł netto</b>.</div>
+</div>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Pozycje</h2>
+      <div class="groups-list" id="groups-list"></div>
+      <table id="items" style="display:none;"><tbody></tbody></table>
+      <div class="hint">Kliknij nazwę kategorii — rozwinie się lista pozycji. Ilość 0 = pozycja nieaktywna.</div>
+    </div>
+
+    <div class="card settings">
+      <h2>Parametry zlecenia</h2>
+      <label>Termin realizacji</label>
+      <select id="rush">
+        <option value="0">Standard — do 7 dni roboczych (bez dopłaty)</option>
+        <option value="25">Przyspieszony — do 3 dni (+25%)</option>
+        <option value="50">Ekspres — 24–48 h (+50%)</option>
+      </select>
+
+      <label>Rundy poprawek</label>
+      <div class="row">
+        <div style="flex:1">
+          <input type="number" id="revUsed" value="2" min="0"> <small>łącznie rund</small>
+        </div>
+        <div style="flex:1">
+          <input type="number" id="revFree" value="2" min="0"> <small>w cenie</small>
+        </div>
+        <div style="flex:1">
+          <input type="number" id="revPrice" value="80" min="0"> <small>zł / dodatkowa runda</small>
+        </div>
+      </div>
+
+      <label>Kontakt telefoniczny / spotkania (cykle 30 min)</label>
+      <div class="row">
+        <div style="flex:1">
+          <input type="number" id="callUsed" value="1" min="0"> <small>łącznie cykli</small>
+        </div>
+        <div style="flex:1">
+          <input type="number" id="callFree" value="1" min="0"> <small>w cenie</small>
+        </div>
+        <div style="flex:1">
+          <input type="number" id="callPrice" value="50" min="0"> <small>zł / dodatkowy cykl</small>
+        </div>
+      </div>
+
+      <label>Dostawa</label>
+      <select id="delivery">
+        <option value="0">Odbiór plików online / e-mail (0 zł)</option>
+        <option value="35">Wysyłka kurierem (+35 zł)</option>
+        <option value="60">Dostawa osobista — Śląsk (+60 zł)</option>
+        <option value="custom">Inna kwota…</option>
+      </select>
+      <input type="number" id="deliveryCustom" value="0" min="0" style="display:none; margin-top:6px;" placeholder="kwota zł">
+
+      <label>Rabat (%)</label>
+      <input type="number" id="discount" value="0" min="0" max="90">
+
+      <label style="display:flex; align-items:center; gap:8px; text-transform:none; letter-spacing:0; font-size:14px; color:var(--txt);">
+        <input type="checkbox" id="vat" checked style="width:auto;"> Faktura VAT 23%
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <div class="card sticky">
+      <h2>Wycena</h2>
+      <div id="sumItems"></div>
+      <div class="sumline"><span class="muted">Pozycje razem</span><span id="sBase">0 zł</span></div>
+      <div class="sumline" id="lRush" style="display:none"><span class="muted">Dopłata za termin</span><span id="sRush">0 zł</span></div>
+      <div class="sumline" id="lRev" style="display:none"><span class="muted">Dodatkowe poprawki</span><span id="sRev">0 zł</span></div>
+      <div class="sumline" id="lCall" style="display:none"><span class="muted">Dodatkowe kontakty</span><span id="sCall">0 zł</span></div>
+      <div class="sumline" id="lDel" style="display:none"><span class="muted">Dostawa</span><span id="sDel">0 zł</span></div>
+      <div class="sumline" id="lDisc" style="display:none"><span class="muted">Rabat</span><span id="sDisc">0 zł</span></div>
+      <div class="total"><span>Netto</span><span id="sNet">0 zł</span></div>
+      <div class="vatline" id="lVat"><span>VAT 23%</span><span id="sVat">0 zł</span></div>
+      <div class="vatline" id="lGross"><span><b>Brutto</b></span><span id="sGross"><b>0 zł</b></span></div>
+      <div class="gauge" id="gaugeBox" style="display:none">
+        <svg viewBox="0 0 220 130">
+          <defs>
+            <linearGradient id="ggrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#f7e3b6"/>
+              <stop offset="50%" stop-color="#e8b14e"/>
+              <stop offset="100%" stop-color="#8a5c15"/>
+            </linearGradient>
+          </defs>
+          <path d="M 25 110 A 85 85 0 0 1 195 110" fill="none" stroke="url(#ggrad)" stroke-width="16" stroke-linecap="round"/>
+          <line x1="110" y1="110" x2="110" y2="38" stroke="#2a2f3a" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="22" y="128" fill="#9aa0ab" font-size="10">−50%</text>
+          <text x="98" y="24" fill="#9aa0ab" font-size="10">średnia</text>
+          <text x="176" y="128" fill="#9aa0ab" font-size="10">+50%</text>
+          <g id="needle" transform="rotate(0 110 110)">
+            <line x1="110" y1="110" x2="110" y2="34" stroke="#e8e6e1" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="110" cy="110" r="6" fill="#e8e6e1"/>
+          </g>
+          <text id="gaugePct" x="110" y="98" text-anchor="middle" fill="#e8e6e1" font-size="17" font-weight="bold"></text>
+        </svg>
+        <div class="gaugeLabel">Średnia rynkowa dla tego zakresu: <b id="marketVal">—</b> netto</div>
+        <div class="gaugeVerdict" id="gaugeVerdict"></div>
+      </div>
+      <div class="warnbox" id="minWarn">Wycena poniżej minimum 300 zł netto — podnieś zakres albo dolicz do pakietu.</div>
+      <button id="copyBtn">Kopiuj wycenę do maila</button>
+      <div class="copied" id="copied"></div>
+      <button class="ghost" id="resetBtn">Wyzeruj ilości i parametry</button>
+      <button class="ghost" id="resetPrices">Przywróć ceny domyślne</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// [nazwa, cena LucDoro netto, średnia rynkowa netto]
+const CATALOG = [
+  ["Branding", [
+    ["Logo — nowy projekt", 900, 1500],
+    ["Logo — redesign / odświeżenie", 600, 1000],
+    ["Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)", 3500, 5500],
+    ["Mini księga znaku / brandbook", 800, 1300],
+    ["Nazwa firmy / naming", 500, 900]
+  ]],
+  ["Projekty graficzne", [
+    ["Wizytówka — projekt", 150, 220],
+    ["Baner / billboard — projekt", 300, 400],
+    ["Ulotka — projekt (do A5, 2 strony)", 250, 350],
+    ["Plakat — projekt", 250, 350],
+    ["Rollup — projekt", 300, 400],
+    ["Menu / karta — projekt", 400, 550],
+    ["Okleina / magnesy na auto — projekt", 500, 750],
+    ["Naklejki / etykiety — projekt", 200, 300],
+    ["Koszulka / odzież — projekt nadruku", 200, 300],
+    ["Grafika social media — 1 kreacja", 120, 180],
+    ["Wersja językowa / adaptacja projektu", 250, 350],
+    ["Poprawa / przygotowanie plików do druku", 50, 90]
+  ]],
+  ["Grafika AI / Midjourney", [
+    ["Aranżacja produktowa AI — 1 scena (Midjourney + retusz Photoshop)", 200, 350],
+    ["Wariantowanie scen — batch 5 kadrów tego samego produktu", 550, 850],
+    ["Portret / postać AI (lifestyle, model) — 1 kadr", 180, 300],
+    ["Koncepcja odzieżowa (mockup na AI-modelu) — 1 grafika", 250, 400],
+    ["Tekstura / background layer AI — 1 komplet (3–5 wariantów)", 300, 500],
+    ["Prompt engineering + custom style pack (do reużycia)", 500, 900],
+    ["Upscale + fotoreal retusz (skin/detal/oświetlenie) — per grafika", 80, 150],
+    ["Batch usuwania tła + porządkowanie zasobów (do 100 plików)", 200, 400]
+  ]],
+  ["Druk (z pośrednictwem)", [
+    ["Wizytówki — druk 500 szt.", 150, 200],
+    ["Ulotki — druk 1000 szt. A6", 250, 320],
+    ["Baner z oczkami — 1 m²", 120, 150],
+    ["Rollup z konstrukcją — produkcja", 400, 500],
+    ["Plakat — druk (do 50×100)", 90, 130]
+  ]],
+  ["Strony WWW", [
+    ["Landing page / one-page", 1500, 2500],
+    ["Strona firmowa (WordPress / statyczna)", 2900, 4800],
+    ["Sklep internetowy", 4500, 8000],
+    ["Opieka nad stroną — miesiąc", 200, 350]
+  ]],
+  ["Newsletter / e-mail marketing", [
+    ["Szablon HTML maila — responsywny, kodowany", 1500, 2200],
+    ["Szablon „lite” — grafika bez kodowania (do kreatora mailingu)", 400, 550],
+    ["Wariant modułu oferty (zdjęcie, cena, metraż, CTA) — 1 szt", 120, 180],
+    ["Wdrożenie w systemie mailingowym + testy klientów pocztowych", 200, 300],
+    ["Przygotowanie 1 wydania newslettera (do 6 ofert)", 250, 350],
+    ["Abonament: 2 wydania miesięcznie", 500, 500],
+    ["Abonament kwartalny: 2 wydania/mies. (rabat 10%)", 450, 450]
+  ]]
+];
+
+const LS_KEY = "ldd_cennik_prices_v1";
+const LIVE_PRICES_URL = "prices.json";
+const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 min
+let savedPrices = {};
+let livePrices = {};      // ostatnio pobrane z prices.json
+let liveMeta = {};
+try { savedPrices = JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch(e){}
+
+const list = document.getElementById("groups-list");
+let rows = [];
+CATALOG.forEach(([group, items], gi) => {
+  const sec = document.createElement("section");
+  sec.className = "group-sec";
+  sec.dataset.gid = "g" + gi;
+
+  const head = document.createElement("button");
+  head.type = "button";
+  head.className = "group-head";
+  head.setAttribute("aria-expanded", "false");
+  head.innerHTML = `
+    <span class="group-head-num">${String(gi+1).padStart(2,'0')}</span>
+    <span class="group-head-name" data-name-pl="${group}">${group}</span>
+    <span class="group-head-meta"><span class="group-head-meta-txt">${items.length} pozycji</span></span>
+    <span class="group-head-arrow" aria-hidden="true">▾</span>
+  `;
+
+  const body = document.createElement("div");
+  body.className = "group-body";
+  body.innerHTML = `<div class="group-body-inner">
+    <table><thead><tr><th data-i18n="th.service">Usługa</th><th style="width:110px" data-i18n="th.qty">Ilość</th><th style="width:110px" data-i18n="th.price">Cena netto</th><th style="width:110px;text-align:right" data-i18n="th.sum">Suma</th></tr></thead><tbody></tbody></table>
+  </div>`;
+  const bodyTbody = body.querySelector("tbody");
+
+  items.forEach(([name, price, market]) => {
+    const tr = document.createElement("tr");
+    const p = savedPrices[name] !== undefined ? savedPrices[name]
+            : (livePrices[name] !== undefined ? livePrices[name] : price);
+    tr.innerHTML = `<td class="itemname" data-name-pl="${name}">${name}</td>
+      <td><div class="qty-ctrl"><button type="button" class="qminus" aria-label="−">−</button><input type="number" class="qty" min="0" value="0"><button type="button" class="qplus" aria-label="+">+</button></div></td>
+      <td><input type="number" class="price" min="0" value="${p}"></td>
+      <td class="rowsum muted">—</td>`;
+    bodyTbody.appendChild(tr);
+    const qty = tr.querySelector(".qty");
+    tr.querySelector(".qminus").addEventListener("click", () => { qty.value = Math.max(0, (+qty.value||0) - 1); qty.dispatchEvent(new Event("input",{bubbles:true})); });
+    tr.querySelector(".qplus").addEventListener("click", () => { qty.value = (+qty.value||0) + 1; qty.dispatchEvent(new Event("input",{bubbles:true})); });
+    rows.push({name, defPrice: price, market, tr, group, groupIdx: gi,
+      qty, price: tr.querySelector(".price"),
+      sum: tr.querySelector(".rowsum")});
+  });
+
+  sec.appendChild(head);
+  sec.appendChild(body);
+  list.appendChild(sec);
+
+  head.addEventListener("click", () => {
+    const isOpen = sec.classList.toggle("is-open");
+    body.classList.toggle("is-open", isOpen);
+    head.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+});
+// Otwórz pierwszą kategorię domyślnie
+const firstSec = list.firstElementChild;
+if (firstSec){
+  firstSec.classList.add("is-open");
+  firstSec.querySelector(".group-body").classList.add("is-open");
+  firstSec.querySelector(".group-head").setAttribute("aria-expanded", "true");
+}
+
+const $ = id => document.getElementById(id);
+let LANG = 'pl';
+const EUR_RATE = 4.30; // 1 EUR = 4.30 PLN
+const fmt = n => {
+  if (LANG === 'en'){
+    return (n / EUR_RATE).toLocaleString("en-GB", {minimumFractionDigits:0, maximumFractionDigits:2}) + " €";
+  }
+  return n.toLocaleString("pl-PL", {minimumFractionDigits:0, maximumFractionDigits:2}) + " zł";
+};
+
+function calc(){
+  let base = 0, marketBase = 0, lines = [];
+  const prices = {};
+  rows.forEach(r => {
+    const q = +r.qty.value || 0, p = +r.price.value || 0;
+    prices[r.name] = p;
+    const s = q * p;
+    r.sum.textContent = q > 0 ? fmt(s) : "—";
+    r.sum.classList.toggle("muted", q === 0);
+    if (q > 0){ base += s; marketBase += q * r.market; lines.push(`• ${r.name} × ${q} — ${fmt(s)} netto`); }
+  });
+  try { localStorage.setItem(LS_KEY, JSON.stringify(prices)); } catch(e){}
+
+  const rushPct = +$("rush").value;
+  const rush = base * rushPct / 100;
+
+  const revExtra = Math.max(0, (+$("revUsed").value||0) - (+$("revFree").value||0));
+  const rev = revExtra * (+$("revPrice").value||0);
+
+  const callExtra = Math.max(0, (+$("callUsed").value||0) - (+$("callFree").value||0));
+  const call = callExtra * (+$("callPrice").value||0);
+
+  let del = $("delivery").value === "custom" ? (+$("deliveryCustom").value||0) : +$("delivery").value;
+  $("deliveryCustom").style.display = $("delivery").value === "custom" ? "block" : "none";
+
+  const sub = base + rush + rev + call + del;
+  const disc = sub * (+$("discount").value||0) / 100;
+  const net = sub - disc;
+  const vatOn = $("vat").checked;
+  const vat = vatOn ? net * 0.23 : 0;
+
+  $("sBase").textContent = fmt(base);
+  show("lRush", rush, "sRush"); show("lRev", rev, "sRev");
+  show("lCall", call, "sCall"); show("lDel", del, "sDel");
+  $("lDisc").style.display = disc > 0 ? "flex" : "none";
+  $("sDisc").textContent = "−" + fmt(disc);
+  $("sNet").textContent = fmt(net);
+  $("lVat").style.display = vatOn ? "flex" : "none";
+  $("lGross").style.display = vatOn ? "flex" : "none";
+  $("sVat").textContent = fmt(vat);
+  $("sGross").innerHTML = "<b>" + fmt(net + vat) + "</b>";
+  $("minWarn").style.display = (net > 0 && net < 300) ? "block" : "none";
+
+  // Wskaźnik ceny rynkowej — te same dopłaty co w wycenie, bez rabatu
+  const marketNet = marketBase + marketBase * rushPct / 100 + rev + call + del;
+  let ratio = 0;
+  if (marketNet > 0 && net > 0){
+    ratio = net / marketNet;
+    const clamped = Math.min(1.5, Math.max(0.5, ratio));
+    const angle = (clamped - 1) * 180; // 0.5x → −90°, 1x → 0°, 1.5x → +90°
+    $("needle").setAttribute("transform", `rotate(${angle} 110 110)`);
+    const pct = Math.round((ratio - 1) * 100);
+    $("gaugePct").textContent = (pct > 0 ? "+" : "") + pct + "%";
+    $("marketVal").textContent = fmt(marketNet);
+    const v = $("gaugeVerdict");
+    if (ratio < 0.95){ v.textContent = "Poniżej średniej rynkowej"; v.className = "gaugeVerdict below"; }
+    else if (ratio <= 1.05){ v.textContent = "W okolicy średniej rynkowej"; v.className = "gaugeVerdict near"; }
+    else { v.textContent = "Powyżej średniej rynkowej"; v.className = "gaugeVerdict above"; }
+    $("gaugeBox").style.display = "block";
+  } else {
+    $("gaugeBox").style.display = "none";
+  }
+
+  // Zywy paragon w prawym panelu — komplet wybranych pozycji przy kazdej zmianie
+  try {
+    var sel = rows.filter(r => (+r.qty.value || 0) > 0).map(r => {
+      var q = +r.qty.value || 0, u = +r.price.value || 0;
+      return {name:r.name, qty:q, price:u, sum:q*u, group:r.group};
+    });
+    window.parent.postMessage({type:'selection', items:sel,
+      extras:{rush:rush, rushPct:rushPct, rev:rev, call:call, del:del, disc:disc},
+      net:net, vat:vat, vatOn:vatOn, gross:net+vat}, '*');
+  } catch(e){}
+
+  return {lines, base, rush, rushPct, rev, revExtra, call, callExtra, del, disc, net, vat, vatOn, marketNet, ratio};
+}
+function show(lineId, val, sumId){
+  $(lineId).style.display = val > 0 ? "flex" : "none";
+  $(sumId).textContent = fmt(val);
+}
+
+document.body.addEventListener("input", calc);
+document.body.addEventListener("change", calc);
+
+$("copyBtn").addEventListener("click", () => {
+  const c = calc();
+  if (!c.lines.length){ $("copied").textContent = "Zaznacz najpierw pozycje."; return; }
+  let t = "WYCENA — LucDoroDesign\n\n" + c.lines.join("\n") + "\n";
+  if (c.rush > 0) t += `• Termin przyspieszony (+${c.rushPct}%) — ${fmt(c.rush)}\n`;
+  t += `• Poprawki: ${$("revFree").value} rundy w cenie`;
+  if (c.revExtra > 0) t += `, dodatkowe ${c.revExtra} — ${fmt(c.rev)}`;
+  t += `\n• Konsultacje tel.: ${$("callFree").value} × 30 min w cenie`;
+  if (c.callExtra > 0) t += `, dodatkowe ${c.callExtra} — ${fmt(c.call)}`;
+  t += "\n";
+  if (c.del > 0) t += `• Dostawa — ${fmt(c.del)}\n`;
+  if (c.disc > 0) t += `• Rabat — −${fmt(c.disc)}\n`;
+  t += `\nRAZEM NETTO: ${fmt(c.net)}`;
+  if (c.vatOn) t += `\nVAT 23%: ${fmt(c.vat)}\nBRUTTO: ${fmt(c.net + c.vat)}`;
+  if (c.marketNet > 0 && c.ratio > 0 && c.ratio < 0.98){
+    t += `\n\nDla porównania: średnia cena rynkowa takiego zakresu to ok. ${fmt(c.marketNet)} netto — ta oferta jest ${Math.round((1 - c.ratio) * 100)}% poniżej średniej.`;
+  }
+  t += "\n\nWycena ważna 14 dni. Termin liczony od akceptacji wyceny i przesłania materiałów.";
+  navigator.clipboard.writeText(t).then(() => {
+    $("copied").textContent = "Skopiowano — wklej do maila.";
+    setTimeout(() => $("copied").textContent = "", 3000);
+  });
+});
+
+$("resetBtn").addEventListener("click", () => {
+  rows.forEach(r => r.qty.value = 0);
+  $("rush").value = "0"; $("revUsed").value = 2; $("revFree").value = 2; $("revPrice").value = 80;
+  $("callUsed").value = 1; $("callFree").value = 1; $("callPrice").value = 50;
+  $("delivery").value = "0"; $("deliveryCustom").value = 0; $("discount").value = 0; $("vat").checked = true;
+  calc();
+});
+$("resetPrices").addEventListener("click", () => {
+  rows.forEach(r => r.price.value = r.defPrice);
+  try { localStorage.removeItem(LS_KEY); } catch(e){}
+  calc();
+});
+
+calc();
+
+// LIVE PRICES — fetch prices.json + auto-refresh co 5 min
+async function fetchLivePrices(){
+  try {
+    const bust = "?t=" + Date.now();
+    const r = await fetch(LIVE_PRICES_URL + bust, {cache:"no-store"});
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    if (data && data.prices && typeof data.prices === "object"){
+      livePrices = data.prices;
+      liveMeta = data._meta || {};
+      applyLivePrices();
+      updateLiveIndicator(true);
+      return true;
+    }
+  } catch(e){
+    console.warn("Live prices fetch failed:", e);
+    updateLiveIndicator(false);
+  }
+  return false;
+}
+function applyLivePrices(){
+  // Aktualizuj input.price w każdym wierszu jeśli user nie zmienił lokalnie
+  rows.forEach(r => {
+    if (savedPrices[r.name] !== undefined) return; // user override wins
+    if (livePrices[r.name] !== undefined){
+      r.price.value = livePrices[r.name];
+    }
+  });
+  calc();
+}
+function updateLiveIndicator(ok){
+  let el = document.getElementById("live-indicator");
+  if (!el){
+    el = document.createElement("div");
+    el.id = "live-indicator";
+    el.style.cssText = "position:fixed;top:16px;right:16px;background:color-mix(in srgb, var(--panel) 94%, transparent);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--txt);padding:8px 12px;border-radius:12px;font-size:11px;font-family:inherit;display:flex;align-items:center;gap:8px;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.3);";
+    document.body.appendChild(el);
+  }
+  const dot = ok ? "●" : "○";
+  const color = ok ? "#7dc98f" : "#e07a5f";
+  const label = ok ? "LIVE" : "OFFLINE";
+  const time = liveMeta && liveMeta.updated ? new Date(liveMeta.updated).toLocaleString("pl-PL",{dateStyle:"short",timeStyle:"short"}) : "";
+  el.innerHTML = `<span style="color:${color};font-size:14px;line-height:1;">${dot}</span> <b>${label}</b>${time?` · <span style="color:var(--muted);">${time}</span>`:""}`;
+}
+
+// Init + auto-refresh
+fetchLivePrices();
+setInterval(fetchLivePrices, REFRESH_INTERVAL_MS);
+// Refresh po powrocie do zakładki
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) fetchLivePrices();
+});
+
+// Theme via URL param (?theme=light) — dla split view
+(function(){
+  var params = new URLSearchParams(location.search);
+  var t = params.get('theme') === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  var p = params.get('palette');
+  if (p && p !== 'default') document.documentElement.setAttribute('data-palette', p);
+})();
+
+// KEYBOARD CONTROLS Word-like (Tab, Ctrl+Home, Ctrl+End)
+(function(){
+  document.addEventListener('keydown', function(e){
+    var el = e.target;
+    if (!(el instanceof HTMLTextAreaElement || el instanceof HTMLInputElement)) return;
+    var isTextarea = el.tagName === 'TEXTAREA';
+    var isTextInput = ['text','email','tel','url','search','number'].indexOf(el.type) !== -1 || !el.type;
+    if (e.key === 'Tab' && isTextarea && !e.shiftKey){
+      e.preventDefault(); var s=el.selectionStart,ee=el.selectionEnd;
+      el.value = el.value.slice(0,s)+'\t'+el.value.slice(ee);
+      el.selectionStart = el.selectionEnd = s+1;
+      el.dispatchEvent(new Event('input',{bubbles:true}));
+      return;
+    }
+    if (e.key === 'Home' && (e.ctrlKey||e.metaKey) && (isTextarea||isTextInput)){
+      var val=el.value||'', pos=el.selectionStart;
+      var lineEnd = isTextarea ? val.indexOf('\n', pos) : val.length;
+      if (lineEnd === -1) lineEnd = val.length;
+      if (pos === lineEnd || pos === val.length){
+        e.preventDefault();
+        var lineStart = isTextarea ? (val.lastIndexOf('\n', pos-1)+1) : 0;
+        el.selectionStart = lineStart; el.selectionEnd = pos;
+      }
+    }
+    if (e.key === 'End' && (e.ctrlKey||e.metaKey) && (isTextarea||isTextInput)){
+      var val3=el.value||'', pos3=el.selectionStart;
+      var lineStart3 = isTextarea ? (val3.lastIndexOf('\n', pos3-1)+1) : 0;
+      if (pos3 === lineStart3 || pos3 === 0){
+        e.preventDefault();
+        var lineEnd3 = isTextarea ? val3.indexOf('\n', pos3) : val3.length;
+        if (lineEnd3 === -1) lineEnd3 = val3.length;
+        el.selectionStart = pos3; el.selectionEnd = lineEnd3;
+      }
+    }
+  });
+})();
+
+// PostMessage do parent (wrapper) — powiadamiaj o wybranej pozycji + apply-collection + get-state
+(function(){
+  function notify(row){
+    if (window.parent === window) return;
+    var name = row.tr.querySelector('td')?.textContent.trim();
+    var price = +row.price.value || 0;
+    var market = row.market;
+    window.parent.postMessage({type:'service-select', name, price, market}, '*');
+  }
+  rows.forEach(r => {
+    r.tr.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      notify(r);
+      document.querySelectorAll('#items tr').forEach(t => t.style.background = '');
+      r.tr.style.background = 'rgba(232,177,78,.08)';
+    });
+    r.tr.style.cursor = 'pointer';
+    r.price.addEventListener('input', () => {
+      if (r.tr.style.background) notify(r);
+    });
+  });
+
+  // Nasłuchuj apply-collection i get-state z wrappera
+  window.addEventListener('message', (e) => {
+    if (!e.data) return;
+    if (e.data.type === 'set-lang' && (e.data.lang === 'pl' || e.data.lang === 'en')){
+      applyLang(e.data.lang);
+      return;
+    }
+    if (e.data.type === 'apply-collection' && Array.isArray(e.data.items)){
+      // Zeruj wszystkie qty
+      rows.forEach(r => { r.qty.value = 0; });
+      // Ustaw qty dla wybranych items (dopasowanie po nazwie)
+      var toOpen = [];
+      e.data.items.forEach(item => {
+        var r = rows.find(x => x.name === item.name);
+        if (r){
+          r.qty.value = item.qty;
+          r.tr.style.background = 'color-mix(in srgb, var(--wa-bg) 16%, transparent)';
+          var sec = r.tr.closest('.group-sec');
+          if (sec && toOpen.indexOf(sec) === -1) toOpen.push(sec);
+        }
+      });
+      // Rozwin kategorie, w ktorych cokolwiek ustawiono — inaczej zmiany sa niewidoczne
+      toOpen.forEach(function(sec){
+        sec.classList.add('is-open');
+        var b = sec.querySelector('.group-body');
+        if (b) b.classList.add('is-open');
+      });
+      calc();
+      // Odeslij wrapperowi komplet pakietu (nazwa, ceny, sumy) do widoku kart
+      var applied = [];
+      e.data.items.forEach(item => {
+        var r = rows.find(x => x.name === item.name);
+        if (!r) return;
+        var unit = +r.price.value || 0, q = +r.qty.value || 0;
+        applied.push({name:r.name, qty:q, price:unit, sum:unit*q, market:r.market || 0, group:r.group});
+      });
+      window.parent.postMessage({
+        type:'collection-applied',
+        name: e.data.name || 'Pakiet',
+        items: applied,
+        total: applied.reduce((a,b) => a + b.sum, 0)
+      }, '*');
+      // Scroll do pierwszej zastosowanej pozycji (po rozwinieciu)
+      var first = e.data.items[0];
+      if (first){
+        var r = rows.find(x => x.name === first.name);
+        if (r) setTimeout(function(){ r.tr.scrollIntoView({behavior:'smooth', block:'center'}); }, 120);
+      }
+    }
+    if (e.data.type === 'get-state'){
+      var items = rows.map(r => ({name:r.name, qty:+r.qty.value || 0}));
+      window.parent.postMessage({type:'state', items:items, saveAs:e.data.saveAs}, '*');
+    }
+  });
+})();
+
+/* ============================================================
+   i18n (PL/EN) — tłumaczenia i przełącznik waluty PLN/EUR
+   ============================================================ */
+const I18N = {
+  pl: {
+    'title.h1': 'LucDoro<span>Design</span> — kalkulator wyceny',
+    'title.sub': 'Ceny netto, edytowalne. Zmiany cen bazowych zapisują się w tej przeglądarce. Minimalna wartość zlecenia: <b>300 zł netto</b>.',
+    'h2.items': 'Pozycje',
+    'h2.params': 'Parametry zlecenia',
+    'h2.quote': 'Wycena',
+    'th.service': 'Usługa', 'th.qty': 'Ilość', 'th.price': 'Cena netto', 'th.sum': 'Suma',
+    'lbl.rush': 'Termin realizacji',
+    'opt.rush.0': 'Standard — do 7 dni roboczych (bez dopłaty)',
+    'opt.rush.25': 'Przyspieszony — do 3 dni (+25%)',
+    'opt.rush.50': 'Ekspres — 24–48 h (+50%)',
+    'lbl.rev': 'Rundy poprawek',
+    'small.revUsed': 'łącznie rund', 'small.revFree': 'w cenie', 'small.revPrice': 'zł / dodatkowa runda',
+    'lbl.call': 'Kontakt telefoniczny / spotkania (cykle 30 min)',
+    'small.callUsed': 'łącznie cykli', 'small.callFree': 'w cenie', 'small.callPrice': 'zł / dodatkowy cykl',
+    'lbl.delivery': 'Dostawa',
+    'opt.del.0': 'Odbiór plików online / e-mail (0 zł)',
+    'opt.del.35': 'Wysyłka kurierem (+35 zł)',
+    'opt.del.60': 'Dostawa osobista — Śląsk (+60 zł)',
+    'opt.del.custom': 'Inna kwota…',
+    'lbl.discount': 'Rabat (%)',
+    'lbl.vat': 'Faktura VAT 23%',
+    'sum.items': 'Pozycje razem', 'sum.rush': 'Dopłata za termin', 'sum.rev': 'Dodatkowe poprawki',
+    'sum.call': 'Dodatkowe kontakty', 'sum.del': 'Dostawa', 'sum.disc': 'Rabat',
+    'sum.net': 'Netto', 'sum.vat': 'VAT 23%', 'sum.gross': 'Brutto',
+    'btn.copy': 'Kopiuj wycenę do maila', 'btn.reset': 'Wyzeruj ilości i parametry', 'btn.resetPrices': 'Przywróć ceny domyślne',
+    'hint.items': 'Ilość 0 = pozycja nieaktywna. Ceny „druk" to ceny dla klienta — koszt drukarni pilnuj osobno.',
+    'warn.min': 'Wycena poniżej minimum 300 zł netto — podnieś zakres albo dolicz do pakietu.',
+  },
+  en: {
+    'title.h1': 'LucDoro<span>Design</span> — pricing calculator',
+    'title.sub': 'Net prices, editable. Base price changes are saved in this browser. Minimum order value: <b>70 € net</b>.',
+    'h2.items': 'Items',
+    'h2.params': 'Order parameters',
+    'h2.quote': 'Quote',
+    'th.service': 'Service', 'th.qty': 'Qty', 'th.price': 'Unit price', 'th.sum': 'Total',
+    'lbl.rush': 'Deadline',
+    'opt.rush.0': 'Standard — up to 7 working days (no extra fee)',
+    'opt.rush.25': 'Priority — up to 3 days (+25%)',
+    'opt.rush.50': 'Express — 24–48 h (+50%)',
+    'lbl.rev': 'Revision rounds',
+    'small.revUsed': 'total rounds', 'small.revFree': 'included', 'small.revPrice': '€ / extra round',
+    'lbl.call': 'Phone / meetings (30 min slots)',
+    'small.callUsed': 'total slots', 'small.callFree': 'included', 'small.callPrice': '€ / extra slot',
+    'lbl.delivery': 'Delivery',
+    'opt.del.0': 'Online / e-mail file delivery (0 €)',
+    'opt.del.35': 'Courier shipping (+8 €)',
+    'opt.del.60': 'Personal delivery — Silesia region (+14 €)',
+    'opt.del.custom': 'Custom amount…',
+    'lbl.discount': 'Discount (%)',
+    'lbl.vat': 'VAT 23% invoice',
+    'sum.items': 'Items subtotal', 'sum.rush': 'Rush fee', 'sum.rev': 'Extra revisions',
+    'sum.call': 'Extra meetings', 'sum.del': 'Delivery', 'sum.disc': 'Discount',
+    'sum.net': 'Net', 'sum.vat': 'VAT 23%', 'sum.gross': 'Gross',
+    'btn.copy': 'Copy quote to e-mail', 'btn.reset': 'Reset quantities & parameters', 'btn.resetPrices': 'Restore default prices',
+    'hint.items': 'Qty 0 = item inactive. "Print" prices are client-facing — track printhouse cost separately.',
+    'warn.min': 'Quote below minimum — increase scope or add to a package.',
+  }
+};
+
+// Grupy katalogu (PL → EN)
+const GROUPS_EN = {
+  'Branding': 'Branding',
+  'Projekty graficzne': 'Graphic design',
+  'Grafika AI / Midjourney': 'AI Graphics / Midjourney',
+  'Druk (z pośrednictwem)': 'Print (fulfillment)',
+  'Strony WWW': 'Websites',
+  'Newsletter / e-mail marketing': 'Newsletter / e-mail marketing'
+};
+
+// Nazwy pozycji (PL → EN)
+const ITEMS_EN = {
+  'Logo — nowy projekt': 'Logo — new design',
+  'Logo — redesign / odświeżenie': 'Logo — redesign / refresh',
+  'Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)': 'Full visual identity (logo, colors, type, materials)',
+  'Mini księga znaku / brandbook': 'Mini brandbook',
+  'Nazwa firmy / naming': 'Company name / naming',
+  'Wizytówka — projekt': 'Business card — design',
+  'Baner / billboard — projekt': 'Banner / billboard — design',
+  'Ulotka — projekt (do A5, 2 strony)': 'Flyer — design (up to A5, 2 pages)',
+  'Plakat — projekt': 'Poster — design',
+  'Rollup — projekt': 'Rollup — design',
+  'Menu / karta — projekt': 'Menu / card — design',
+  'Okleina / magnesy na auto — projekt': 'Car wrap / magnets — design',
+  'Naklejki / etykiety — projekt': 'Stickers / labels — design',
+  'Koszulka / odzież — projekt nadruku': 'T-shirt / apparel — print design',
+  'Grafika social media — 1 kreacja': 'Social media graphic — 1 creative',
+  'Wersja językowa / adaptacja projektu': 'Language variant / adaptation',
+  'Poprawa / przygotowanie plików do druku': 'Print file prep',
+  'Aranżacja produktowa AI — 1 scena (Midjourney + retusz Photoshop)': 'AI product scene — 1 shot (Midjourney + Photoshop retouch)',
+  'Wariantowanie scen — batch 5 kadrów tego samego produktu': 'Scene variants — batch of 5 shots of the same product',
+  'Portret / postać AI (lifestyle, model) — 1 kadr': 'AI portrait / figure (lifestyle, model) — 1 shot',
+  'Koncepcja odzieżowa (mockup na AI-modelu) — 1 grafika': 'Apparel concept (mockup on AI model) — 1 graphic',
+  'Tekstura / background layer AI — 1 komplet (3–5 wariantów)': 'AI texture / background layer — 1 set (3–5 variants)',
+  'Prompt engineering + custom style pack (do reużycia)': 'Prompt engineering + custom style pack (reusable)',
+  'Upscale + fotoreal retusz (skin/detal/oświetlenie) — per grafika': 'Upscale + photoreal retouch (skin/detail/lighting) — per graphic',
+  'Batch usuwania tła + porządkowanie zasobów (do 100 plików)': 'Batch background removal + asset cleanup (up to 100 files)',
+  'Wizytówki — druk 500 szt.': 'Business cards — print 500 pcs.',
+  'Ulotki — druk 1000 szt. A6': 'Flyers — print 1000 pcs. A6',
+  'Baner z oczkami — 1 m²': 'Banner with eyelets — 1 m²',
+  'Rollup z konstrukcją — produkcja': 'Rollup with stand — production',
+  'Plakat — druk (do 50×100)': 'Poster — print (up to 50×100)',
+  'Landing page / one-page': 'Landing page / one-page',
+  'Strona firmowa (WordPress / statyczna)': 'Business website (WordPress / static)',
+  'Sklep internetowy': 'Online store',
+  'Opieka nad stroną — miesiąc': 'Website maintenance — monthly',
+  'Szablon HTML maila — responsywny, kodowany': 'Responsive HTML email template — coded',
+  'Szablon „lite” — grafika bez kodowania (do kreatora mailingu)': '"Lite" template — graphics only (for mailing builder)',
+  'Wariant modułu oferty (zdjęcie, cena, metraż, CTA) — 1 szt': 'Offer module variant (image, price, size, CTA) — 1 pc',
+  'Wdrożenie w systemie mailingowym + testy klientów pocztowych': 'Setup in mailing system + email client tests',
+  'Przygotowanie 1 wydania newslettera (do 6 ofert)': '1 newsletter issue prep (up to 6 offers)',
+  'Abonament: 2 wydania miesięcznie': 'Subscription: 2 issues per month',
+  'Abonament kwartalny: 2 wydania/mies. (rabat 10%)': 'Quarterly subscription: 2 issues/month (10% off)'
+};
+
+function applyLang(lang){
+  LANG = lang;
+  document.documentElement.lang = lang;
+  const dict = I18N[lang] || I18N.pl;
+  // Apply keyed translations
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  // Group headers (name + meta)
+  document.querySelectorAll('.group-head-name').forEach(nameEl => {
+    const pl = nameEl.getAttribute('data-name-pl');
+    if (pl) nameEl.textContent = lang === 'en' ? (GROUPS_EN[pl] || pl) : pl;
+  });
+  document.querySelectorAll('.group-head-meta-txt').forEach(metaTxt => {
+    const n = parseInt(metaTxt.textContent, 10) || 0;
+    metaTxt.textContent = lang === 'en' ? `${n} items` : `${n} pozycji`;
+  });
+  // Item names
+  document.querySelectorAll('td.itemname').forEach(td => {
+    const pl = td.getAttribute('data-name-pl');
+    td.textContent = lang === 'en' ? (ITEMS_EN[pl] || pl) : pl;
+  });
+  // Update lang switch active state
+  document.querySelectorAll('.lang-tile').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  // Save + recalc (updates all fmt() sums, sum labels via data-i18n above)
+  try { localStorage.setItem('ldd_cennik_lang', lang); } catch(e){}
+  calc();
+}
+
+// Mark group rows for translation
+// group-tile [data-name-pl] set inline during creation
+
+// Mark HTML labels/opts with data-i18n so applyLang can translate
+function tagI18n(){
+  const map = [
+    ['#items thead th:nth-child(1)', 'th.service'],
+    ['#items thead th:nth-child(2)', 'th.qty'],
+    ['#items thead th:nth-child(3)', 'th.price'],
+    ['#items thead th:nth-child(4)', 'th.sum'],
+    ['.hint', 'hint.items'],
+    ['#minWarn', 'warn.min'],
+    ['#copyBtn', 'btn.copy'],
+    ['#resetBtn', 'btn.reset'],
+    ['#resetPrices', 'btn.resetPrices'],
+  ];
+  map.forEach(([sel, key]) => { const el = document.querySelector(sel); if (el) el.setAttribute('data-i18n', key); });
+  // H2 nagłówki
+  document.querySelectorAll('.card h2').forEach((h, i) => {
+    h.setAttribute('data-i18n', ['h2.items','h2.params','h2.quote'][i] || '');
+  });
+  // Sum lines: znajdź span.muted w każdym .sumline
+  const sumMap = {'sBase':'sum.items','sRush':'sum.rush','sRev':'sum.rev','sCall':'sum.call','sDel':'sum.del','sDisc':'sum.disc'};
+  Object.entries(sumMap).forEach(([spanId, key]) => {
+    const s = document.getElementById(spanId);
+    if (s && s.previousElementSibling) s.previousElementSibling.setAttribute('data-i18n', key);
+  });
+  // Total labels
+  const totalSpan = document.querySelector('.total span:first-child'); if (totalSpan) totalSpan.setAttribute('data-i18n', 'sum.net');
+  const vatSpan = document.querySelector('#lVat span:first-child'); if (vatSpan) vatSpan.setAttribute('data-i18n', 'sum.vat');
+  const grossSpan = document.querySelector('#lGross span:first-child b'); if (grossSpan) grossSpan.setAttribute('data-i18n', 'sum.gross');
+  // Settings labels — pierwsze 5 label w .settings
+  const settingLabels = document.querySelectorAll('.settings label');
+  const settingKeys = ['lbl.rush','lbl.rev','lbl.call','lbl.delivery','lbl.discount','lbl.vat'];
+  settingLabels.forEach((l, i) => { if (settingKeys[i]) l.setAttribute('data-i18n', settingKeys[i]); });
+  // Select options
+  const rushOpts = document.querySelectorAll('#rush option');
+  ['opt.rush.0','opt.rush.25','opt.rush.50'].forEach((k, i) => rushOpts[i] && rushOpts[i].setAttribute('data-i18n', k));
+  const delOpts = document.querySelectorAll('#delivery option');
+  ['opt.del.0','opt.del.35','opt.del.60','opt.del.custom'].forEach((k, i) => delOpts[i] && delOpts[i].setAttribute('data-i18n', k));
+}
+tagI18n();
+
+// Lang switch buttons
+document.querySelectorAll('.lang-tile').forEach(b => {
+  b.addEventListener('click', () => applyLang(b.dataset.lang));
+});
+// Restore saved language
+try {
+  const saved = localStorage.getItem('ldd_cennik_lang');
+  if (saved === 'en') applyLang('en');
+} catch(e){}
+</script>
+</body>
+</html>

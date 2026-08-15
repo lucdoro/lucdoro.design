@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Disallow WordPress backend (site uses static index.html but WP is behind)
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/cache/
+Disallow: /tmp-edges/
+Disallow: /webpage_tracker/
+Disallow: /.tmb/
+Disallow: /ALFA_DATA/
+
+Sitemap: https://lucdoro.design/sitemap.xml

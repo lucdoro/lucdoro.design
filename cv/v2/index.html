@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Łukasz Dorociak — CV · LucDoroDesign</title>
+<meta name="description" content="Łukasz Dorociak — Graphic Designer. 10+ lat doświadczenia w druku, digitalu i AI. DTP, prepress, mockupy, wizualizacje produktowe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..700&family=Roboto+Mono:wght@500;700&family=Bricolage+Grotesque:opsz,wght@12..96,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d10; --panel:#161619; --line:#2b2b32; --txt:#f2efe8; --mut:#a09a91;
+  --acc:#b58cff; --acc2:#7b4dff; --ok:#1DB954;
+  --content-wide:1320px;
+  --font-fraunces:'Fraunces',Georgia,serif;
+  --font-bricolage:'Bricolage Grotesque',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:96px;}
+body{background:var(--bg);color:var(--txt);font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+
+.container-wide{width:min(100% - 2rem, var(--content-wide));margin-inline:auto;}
+
+/* HEADER — sticky, blur, outline title (matching main) */
+.header{position:sticky;top:0;z-index:100;background:color-mix(in srgb, var(--bg) 62%, transparent);backdrop-filter:blur(32px) saturate(160%);-webkit-backdrop-filter:blur(32px) saturate(160%);border-bottom:1px solid rgba(255,255,255,.08);}
+.header-bg-title{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding-left:clamp(180px,22vw,360px);font-family:var(--font-fraunces);font-style:italic;font-weight:400;font-size:clamp(3rem,8vw,7.5rem);letter-spacing:-.04em;line-height:1.05;color:transparent;-webkit-text-stroke:1px var(--acc);pointer-events:none;user-select:none;z-index:0;opacity:.3;white-space:nowrap;overflow:hidden;}
+.header-bg-title em{font-style:italic;font-weight:600;-webkit-text-stroke:1px var(--acc2);}
+@media(max-width:640px){.header-bg-title{display:none;}}
+.nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 24px;min-height:160px;max-width:1600px;margin:0 auto;flex-wrap:wrap;}
+.brand-wrap{display:inline-flex;align-items:center;gap:16px;text-decoration:none;color:var(--txt);flex-shrink:0;}
+.brand-logo{height:76px;width:auto;display:block;object-fit:contain;flex-shrink:0;}
+@media(max-width:768px){.brand-logo{height:64px;}.nav{min-height:auto;padding:12px 16px;gap:12px;}}
+@media(max-width:480px){.brand-logo{height:56px;}}
+.nav-links{display:flex;flex-direction:column;gap:6px;align-items:center;font-size:13px;}
+.nav-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.nav-links a{position:relative;color:var(--txt);padding:8px 14px;border-radius:999px;overflow:hidden;transition:color .3s;isolation:isolate;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);}
+.nav-links a::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--acc2),var(--acc));transform:translateY(101%);transition:transform .35s cubic-bezier(.7,0,.3,1);z-index:-1;border-radius:999px;}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::before{transform:translateY(0);}
+.nav-back{color:var(--txt);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;transition:border-color .2s,color .2s;}
+.nav-back:hover{border-color:var(--acc);color:var(--acc);}
+
+/* HERO */
+.hero{padding:clamp(3rem,8vw,7rem) 0 clamp(2rem,5vw,4rem);position:relative;overflow:hidden;}
+.hero-grid{display:grid;grid-template-columns:1fr .8fr;gap:clamp(2rem,5vw,5rem);align-items:end;}
+@media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:2rem;}}
+.hero-copy .eyebrow{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:16px;display:inline-block;}
+.hero-copy h1{font-family:var(--font-fraunces);font-style:italic;font-weight:400;font-size:clamp(3.5rem,8vw,6.5rem);line-height:1;letter-spacing:-.03em;margin-bottom:16px;background:linear-gradient(135deg,#f2efe8 30%,var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-copy .role{font-family:'Roboto Mono',monospace;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--mut);margin-bottom:24px;}
+.hero-copy .role b{color:var(--acc);font-weight:700;}
+.hero-copy .bio{color:var(--mut);font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.7;max-width:58ch;}
+.hero-copy .bio b{color:var(--txt);font-weight:600;}
+.hero-visual{position:relative;min-height:280px;display:flex;align-items:flex-end;}
+.mono{font-family:var(--font-fraunces);font-style:italic;font-weight:400;font-size:clamp(11rem,25vw,22rem);line-height:.85;color:transparent;-webkit-text-stroke:2px var(--acc);letter-spacing:-.08em;user-select:none;}
+
+/* Contact */
+.contact-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:32px;padding:24px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb, var(--acc) 4%, transparent);}
+.contact-item{display:flex;align-items:center;gap:12px;font-size:14px;}
+.contact-item .k{width:32px;height:32px;border-radius:8px;background:color-mix(in srgb, var(--acc) 15%, transparent);color:var(--acc);display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-weight:700;font-size:12px;flex-shrink:0;}
+.contact-item a{color:var(--txt);transition:color .2s;}
+.contact-item a:hover{color:var(--acc);}
+
+/* SECTION DIVIDERS (matching main) */
+.quote-strip{position:relative;overflow:hidden;height:clamp(4rem,10vw,10rem);pointer-events:none;user-select:none;margin:0;}
+.quote-strip-inner{position:relative;height:100%;display:flex;align-items:center;gap:clamp(.6rem,1.2vw,1.2rem);}
+.quote-strip-mark{width:clamp(2.5rem,5vw,4rem);height:clamp(2.5rem,5vw,4rem);background:transparent;border:1.5px solid var(--acc);flex-shrink:0;border-radius:6px;position:relative;z-index:2;transform:translateX(var(--sq-tx,0)) rotate(var(--sq-rot,0deg));will-change:transform;}
+.quote-strip-text{position:absolute;left:calc(clamp(2.5rem,5vw,4rem) + clamp(.6rem,1.2vw,1.2rem));top:50%;transform:translateY(-50%) translateX(calc(var(--tx,100vw) + var(--sway,0px)));white-space:nowrap;font-family:var(--font-fraunces);font-style:italic;font-weight:400;font-size:clamp(3.5rem,10vw,8rem);letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1.5px var(--acc);line-height:1;will-change:transform;}
+.quote-strip--bricolage .quote-strip-text{font-family:var(--font-bricolage);font-style:normal;font-weight:700;letter-spacing:-.04em;-webkit-text-stroke-width:1.5px;}
+@media(max-width:640px){.quote-strip{height:clamp(3rem,8vw,6rem);}.quote-strip-mark{width:2rem;height:2rem;border-radius:4px;border-width:1px;}.quote-strip-text{font-size:clamp(2.5rem,8vw,4.5rem);-webkit-text-stroke-width:1px;left:calc(2rem + 8px);}.quote-strip--bricolage .quote-strip-text{-webkit-text-stroke-width:1px;}}
+
+/* SECTIONS */
+.section{padding:clamp(2rem,5vw,4rem) 0;position:relative;}
+.section-head{margin-bottom:clamp(1.5rem,3vw,2.5rem);}
+.section-head h2{font-family:var(--font-fraunces);font-style:italic;font-weight:400;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.02em;max-width:16ch;}
+.section-head .kicker{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:12px;display:inline-block;}
+
+/* EXPERIENCE */
+.jobs{display:flex;flex-direction:column;gap:16px;}
+.job{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:20px 24px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb, var(--panel) 60%, transparent);transition:border-color .3s,transform .3s;}
+.job:hover{border-color:var(--acc);transform:translateY(-2px);}
+.job .num{font-family:var(--font-bricolage);font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);color:transparent;-webkit-text-stroke:1.5px var(--acc);letter-spacing:-.03em;line-height:1;align-self:start;}
+.job h3{font-size:clamp(1rem,1.4vw,1.2rem);font-weight:700;letter-spacing:-.01em;margin-bottom:6px;line-height:1.3;}
+.job .meta{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acc);margin-bottom:10px;}
+.job .meta b{color:var(--txt);font-weight:600;}
+.job .meta .sep{color:var(--mut);opacity:.4;margin:0 .4em;}
+.job p:not(.meta){color:var(--mut);font-size:.94rem;line-height:1.65;}
+@media(max-width:640px){.job{grid-template-columns:1fr;gap:8px;padding:18px 20px;}}
+
+/* SKILLS + EDU (2 col) */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);}
+@media(max-width:820px){.two-col{grid-template-columns:1fr;}}
+.skill-group{margin-bottom:24px;padding-bottom:24px;border-bottom:1px dashed var(--line);}
+.skill-group:last-child{border-bottom:none;}
+.skill-group .lbl{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:10px;display:inline-block;}
+.skill-group p{color:var(--txt);font-size:.95rem;line-height:1.65;margin-bottom:6px;}
+.skill-group p i{color:var(--mut);font-style:italic;}
+
+/* CTA */
+.cta{padding:clamp(3rem,6vw,5rem) 0 clamp(4rem,8vw,7rem);}
+.cta-panel{padding:clamp(2rem,4vw,3rem);border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg, color-mix(in srgb, var(--acc) 14%, transparent), color-mix(in srgb, var(--acc) 3%, transparent));text-align:center;}
+.cta-panel h2{font-family:var(--font-fraunces);font-style:italic;font-weight:400;font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:12px;}
+.cta-panel p{color:var(--mut);margin-bottom:24px;}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:700;font-size:14px;letter-spacing:.5px;transition:transform .2s,background .3s,box-shadow .3s;}
+.btn-primary{background:linear-gradient(135deg,var(--acc2),var(--acc));color:#fff;box-shadow:0 8px 24px -8px rgba(123,77,255,.5);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(123,77,255,.7);}
+.btn-ghost{border:1px solid var(--line);color:var(--txt);}
+.btn-ghost:hover{border-color:var(--acc);color:var(--acc);}
+
+/* Footer */
+footer{padding:32px 0 48px;text-align:center;color:var(--mut);font-size:12px;border-top:1px solid var(--line);}
+footer a{color:var(--acc);}
+
+/* RODO */
+.rodo{max-width:70ch;margin:0 auto;padding:20px;font-size:11px;color:var(--mut);opacity:.65;line-height:1.55;text-align:center;font-style:italic;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-bg-title" aria-hidden="true">Curri<em>culum</em></div>
+  <div class="nav">
+    <a class="brand-wrap" href="https://lucdoro.design" aria-label="LucDoroDesign — powrót">
+      <img class="brand-logo" src="https://lucdoro.design/assets/logo.png" alt="LucDoroDesign">
+    </a>
+    <nav class="nav-links" aria-label="Główna nawigacja">
+      <div class="nav-row">
+        <a href="https://lucdoro.design/#projekty">Projekty</a>
+        <a href="https://lucdoro.design/#o-mnie">O studiu</a>
+        <a href="https://lucdoro.design/#uslugi">Usługi</a>
+        <a href="https://lucdoro.design/#proces">Proces</a>
+        <a href="https://lucdoro.design/#kontakt">Kontakt</a>
+      </div>
+      <div class="nav-row">
+        <a href="../">CV klasyczne</a>
+        <a href="https://lucdoro.design/stopki-mailowe/">Stopki</a>
+        <a href="https://lucdoro.design/kreator/">Kreator</a>
+        <a href="https://lucdoro.design/kalkulator/">Kalkulator</a>
+        <a href="https://lucdoro.design/galeria-ai/">Galeria AI</a>
+      </div>
+    </nav>
+    <a class="nav-back" href="https://lucdoro.design">← powrót</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container-wide hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Curriculum Vitae · 2026</span>
+      <h1>Łukasz<br>Dorociak</h1>
+      <p class="role"><b>Graphic Designer</b> · druk / digital / AI</p>
+      <p class="bio">Grafik z <b>10+ latami doświadczenia</b> w materiałach produktowych, DTP i kreacjach reklamowych (druk + digital). Specjalizuję się w mockupach i wizualizacjach produktu — od 2022 łączę generatywną AI (Midjourney) z dopracowaniem w Photoshopie: spójność światła, detalu i kolorystyki. Przy skali stosuję batch processing i proste automatyzacje.</p>
+    </div>
+    <div class="hero-visual">
+      <span class="mono" aria-hidden="true">ŁD</span>
+    </div>
+  </div>
+  <div class="container-wide">
+    <div class="contact-row">
+      <div class="contact-item"><span class="k">@</span><a href="mailto:hello@lucdoro.design">hello@lucdoro.design</a></div>
+      <div class="contact-item"><span class="k">T</span><a href="tel:+48795758555">+48 795 758 555</a></div>
+      <div class="contact-item"><span class="k">W</span><a href="https://lucdoro.design">lucdoro.design</a></div>
+      <div class="contact-item"><span class="k">L</span>Świętochłowice</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER 01 -->
+<div class="quote-strip quote-strip--bricolage"><div class="container-wide quote-strip-inner"><span class="quote-strip-mark" aria-hidden="true"></span><span class="quote-strip-text">01</span></div></div>
+
+<!-- EXPERIENCE -->
+<section class="section" id="doswiadczenie">
+  <div class="container-wide">
+    <div class="section-head">
+      <span class="kicker">Doświadczenie</span>
+      <h2>Ścieżka zawodowa</h2>
+    </div>
+    <div class="jobs">
+
+      <article class="job">
+        <span class="num">01</span>
+        <div>
+          <h3>Grafik / twórca materiałów produktowych</h3>
+          <p class="meta"><b>02.2019 — obecnie</b><span class="sep">·</span>Lucdorodesign (freelance)</p>
+          <p>Projekty dla klientów z różnych branż (druk + digital: materiały reklamowe, produktowe, DTP); aranżacje produktowe i warianty kreacji z użyciem AI, dopracowanie w Photoshopie; wsadowe przygotowanie materiałów w projektach wielowariantowych.</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <span class="num">02</span>
+        <div>
+          <h3>Grafik odzieżowy / materiały kolekcyjne</h3>
+          <p class="meta"><b>2019 — obecnie</b><span class="sep">·</span>Pour La Amour du Truc (freelance)</p>
+          <p>Grafiki na odzież i materiały promocyjne; mockupy (manekin/lifestyle), pliki produkcyjne, iteracje i akceptacje; współpraca z produkcją, w tym zagraniczną.</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <span class="num">03</span>
+        <div>
+          <h3>DTP Operator</h3>
+          <p class="meta"><b>01.2018 — 09.2018</b><span class="sep">·</span>Lauren Peso Polska S.A.</p>
+          <p>Layout i skład treści, przygotowanie materiałów na potrzeby kanałów cyfrowych.</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <span class="num">04</span>
+        <div>
+          <h3>DTP / Grafik</h3>
+          <p class="meta"><b>06.2017 — 09.2017</b><span class="sep">·</span>Advert Studio</p>
+          <p>Skład i przygotowanie materiałów graficznych do druku i digitalu, praca na briefach.</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <span class="num">05</span>
+        <div>
+          <h3>DTP / Prepress + fotografia produktowa 360°</h3>
+          <p class="meta"><b>12.2015 — 11.2016</b><span class="sep">·</span>MidOceanBrands</p>
+          <p>Materiały produktowe (DTP, prepress, przygotowanie plików); fotografia produktowa 360° (Orbitvu Alphashoot) — spójność ujęć, materiał do katalogu.</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <span class="num">06</span>
+        <div>
+          <h3>Fotolaborant</h3>
+          <p class="meta"><b>2004 — 2006</b><span class="sep">·</span>Fujifilm / Fotolab (Auchan)</p>
+          <p>Kontrola jakości koloru i ekspozycji, praca w procesie foto.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER Skills -->
+<div class="quote-strip"><div class="container-wide quote-strip-inner"><span class="quote-strip-mark" aria-hidden="true"></span><span class="quote-strip-text">Skills</span></div></div>
+
+<!-- SKILLS + EDUCATION -->
+<section class="section" id="umiejetnosci">
+  <div class="container-wide">
+    <div class="section-head">
+      <span class="kicker">Umiejętności i wykształcenie</span>
+      <h2>Warsztat i baza</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="skill-group">
+          <span class="lbl">AI w grafice produktowej</span>
+          <p>Midjourney — sceny produktowe, aranżacje, lifestyle, wariantowanie</p>
+          <p><i>łączenie AI + Photoshop dla spójności światła i detalu</i></p>
+        </div>
+        <div class="skill-group">
+          <span class="lbl">Narzędzia</span>
+          <p>Adobe Photoshop · Illustrator · InDesign</p>
+          <p>Affinity Designer</p>
+          <p>Orbitvu Alphashoot 360</p>
+        </div>
+        <div class="skill-group">
+          <span class="lbl">Specjalizacja</span>
+          <p>Mockupy i wizualizacje produktów <i>(opakowania, odzież, ekspozycje, wrapy)</i></p>
+          <p>DTP / prepress — materiały produktowe i marketingowe</p>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group">
+          <span class="lbl">Automatyzacja</span>
+          <p>Batch processing plików <i>(usuwanie tła, konwersje, porządkowanie zasobów)</i></p>
+          <p>Python / Bash — proste narzędzia wspierające pracę</p>
+        </div>
+        <div class="skill-group">
+          <span class="lbl">Języki</span>
+          <p>Polski <i>(ojczysty)</i></p>
+          <p>Angielski <i>(B2/C1)</i></p>
+        </div>
+        <div class="skill-group">
+          <span class="lbl">Wykształcenie</span>
+          <p>VIII LO im. Marii Skłodowskiej-Curie</p>
+          <p>Policealne Studium Informatyczne, Chorzów <i>(informatyka, 4 semestry)</i></p>
+          <p>Kurs EITCA <i>(grafika komputerowa)</i></p>
+          <p>Szkolenie Fujifilm <i>(Warszawa)</i></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER Contact -->
+<div class="quote-strip"><div class="container-wide quote-strip-inner"><span class="quote-strip-mark" aria-hidden="true"></span><span class="quote-strip-text">Contact</span></div></div>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container-wide">
+    <div class="cta-panel">
+      <h2>Porozmawiajmy o Twoim projekcie</h2>
+      <p>Odpowiadam w ciągu 24h roboczych. Bez zbędnej formalizacji, konkretnie.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="mailto:hello@lucdoro.design">✉ hello@lucdoro.design</a>
+        <a class="btn btn-primary" href="https://wa.me/48795758555" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-ghost" href="https://lucdoro.design">↗ Portfolio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rodo">
+Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji procesu rekrutacji (zgodnie z ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych, Dz. U. z 2018, poz. 1000, oraz zgodnie z RODO 2016/679).
+</div>
+
+</main>
+
+<footer>
+  © 2026 <a href="https://lucdoro.design">lucdoro.design</a> · Łukasz Dorociak · Świętochłowice · Wersja LucDoroDesign
+</footer>
+
+<script>
+/* Section divider scroll animation — same mechanics as main site */
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var strips = document.querySelectorAll('.quote-strip');
+  if (!strips.length) return;
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var vh = window.innerHeight;
+    var vw = window.innerWidth;
+    for (var i = 0; i < strips.length; i++){
+      var strip = strips[i];
+      var text = strip.querySelector('.quote-strip-text');
+      var mark = strip.querySelector('.quote-strip-mark');
+      if (!text) continue;
+      var r = strip.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) continue;
+      var startTop = vh * 0.75;
+      var endTop = 200;
+      var raw = (startTop - r.top) / (startTop - endTop);
+      var textProg = Math.max(0, Math.min(1, raw * 2));
+      var containerWidth = Math.min(vw - 32, 1320);
+      var slideDist = containerWidth - 80;
+      var tx = Math.max(0, (1 - textProg) * slideDist);
+      var rollProg = Math.max(0, Math.min(1, (raw - 0.5) * 2));
+      var containerLeft = Math.max(16, (vw - 1320) / 2);
+      var rollDist = containerLeft + 24;
+      var sqTx = -rollProg * rollDist;
+      var sqRot = -(rollProg * rollDist / 200) * 360;
+      var sway = Math.sin(rollProg * Math.PI * 5) * Math.exp(-rollProg * 3) * 10;
+      text.style.setProperty('--tx', tx.toFixed(1) + 'px');
+      text.style.setProperty('--sway', sway.toFixed(2) + 'px');
+      if (mark){
+        mark.style.setProperty('--sq-tx', sqTx.toFixed(1) + 'px');
+        mark.style.setProperty('--sq-rot', sqRot.toFixed(1) + 'deg');
+      }
+    }
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
+  window.addEventListener('resize', function(){
+    if (!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>
