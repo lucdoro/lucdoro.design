@@ -714,6 +714,21 @@ window.addEventListener('message', (e) => {
 // Init
 renderCollections();
 
+// Auto-zastosuj pakiet z linku (?preset=starter) — np. z kart-paragonów na stronie głównej
+(function(){
+  const urlPreset = new URLSearchParams(location.search).get('preset');
+  if (!urlPreset) return;
+  const p = PRESETS.find(x => x.id === urlPreset);
+  if (!p) return;
+  const iframe = document.getElementById('calc-frame');
+  const tryApply = () => applyCollection(p);
+  if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+    tryApply();
+  } else {
+    iframe.addEventListener('load', tryApply, {once:true});
+  }
+})();
+
 // ── MOBILE SHOWCASE DRAWER ──
 const IS_MOBILE = () => window.matchMedia('(max-width: 900px)').matches;
 const splitRight = document.getElementById('split-right');

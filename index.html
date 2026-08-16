@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Syne:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Syne:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Serif:ital@0;1&family=Roboto+Mono:wght@400..700&display=swap" rel="stylesheet">
 <style>
 :root, [data-theme="light"] {
 --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -527,6 +527,31 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;tr
 .service-index{font-size:var(--text-xs);letter-spacing:.14em;color:var(--color-text-faint);padding-top:.25rem}
 .service-item h3{font-size:var(--text-lg);margin-bottom:var(--space-3)}
 .service-item p{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65}
+/* PAKIETY — widoczne paragony, gotowe zestawy usług */
+.packages-intro{max-width:640px;margin:0 auto var(--space-10);text-align:center}
+.packages-intro .section-copy{margin:0 auto}
+.packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
+.pkg-receipt{position:relative;display:flex;flex-direction:column;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:1.5rem 1.35rem 2.25rem;font-family:'Roboto Mono',monospace;box-shadow:var(--shadow-md);-webkit-mask:conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/16px 100% repeat-x;mask:conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/16px 100% repeat-x;transition:transform .3s ease,box-shadow .3s ease}
+.pkg-receipt:nth-child(odd){transform:rotate(-.6deg)}
+.pkg-receipt:nth-child(even){transform:rotate(.6deg)}
+.pkg-receipt:hover{transform:rotate(0) translateY(-6px);box-shadow:var(--shadow-lg)}
+.pkg-r-head{border-bottom:1px dashed var(--color-border);padding-bottom:.85rem;margin-bottom:.85rem}
+.pkg-r-brand{font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-faint)}
+.pkg-r-name{font-family:var(--font-fraunces);font-style:italic;font-weight:600;font-size:var(--text-xl);color:var(--color-primary);margin:.35rem 0 .15rem}
+.pkg-r-desc{font-size:var(--text-xs);color:var(--color-text-muted)}
+.pkg-r-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:.85rem}
+.pkg-r-row{display:flex;align-items:baseline;gap:.4rem;font-size:var(--text-sm);color:var(--color-text)}
+.pkg-r-item-name{min-width:0}
+.pkg-r-fill{flex:1;min-width:0;border-bottom:1px dotted var(--color-text-faint);margin-bottom:.2rem}
+.pkg-r-val{white-space:nowrap;color:var(--color-text-muted);flex-shrink:0}
+.pkg-r-sep{border-top:1px dashed var(--color-border);margin-bottom:.85rem}
+.pkg-r-total{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;font-weight:700;font-size:var(--text-sm);letter-spacing:.04em;text-transform:uppercase;margin-bottom:1.1rem}
+.pkg-r-total span{min-width:0}
+.pkg-r-total b{font-family:var(--font-body);font-size:var(--text-lg);color:var(--color-primary);text-transform:none;letter-spacing:0;white-space:nowrap;flex-shrink:0}
+.pkg-r-cta{margin-top:auto;text-align:center;font-family:var(--font-body)}
+.packages-note{max-width:640px;margin:var(--space-8) auto 0;text-align:center;font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6}
+.packages-note strong{color:var(--color-text)}
+@media (max-width:640px){.packages-grid{grid-template-columns:1fr}.pkg-receipt:nth-child(odd),.pkg-receipt:nth-child(even){transform:none}}
 .process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6)}
 .process-card{padding:var(--space-8);border:1px solid var(--color-border);border-radius:var(--radius-xl);background:var(--color-surface)}
 .process-card span{display:inline-flex;width:2.5rem;height:2.5rem;border-radius:50%;align-items:center;justify-content:center;background:var(--color-primary-highlight);color:var(--color-primary);font-weight:800;margin-bottom:var(--space-5)}
@@ -811,6 +836,7 @@ html{scroll-padding-top:72px}
 <span class="nav-pill" aria-hidden="true"></span>
 <div class="nav-row">
 <a href="#projekty" data-i18n="nav.projects" data-target="projekty">Projekty</a>
+<a href="#pakiety" data-i18n="nav.packages" data-target="pakiety">Pakiety</a>
 <a href="#o-mnie" data-i18n="nav.about" data-target="o-mnie">O studiu</a>
 <a href="#uslugi" data-i18n="nav.services" data-target="uslugi">Usługi</a>
 <a href="#proces" data-i18n="nav.process" data-target="proces">Proces</a>
@@ -880,6 +906,7 @@ html{scroll-padding-top:72px}
 <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
 <nav>
 <a href="#projekty" class="mobile-nav-link" data-i18n="nav.projects">Projekty</a>
+<a href="#pakiety" class="mobile-nav-link" data-i18n="nav.packages">Pakiety</a>
 <a href="#uslugi" class="mobile-nav-link" data-i18n="nav.services">Usługi</a>
 <a href="#proces" class="mobile-nav-link" data-i18n="nav.process">Proces</a>
 <a href="#o-mnie" class="mobile-nav-link" data-i18n="nav.about">O studiu</a>
@@ -1111,6 +1138,96 @@ E-mail
 </div>
 </section>
 <div class="quote-strip"><div class="container-wide quote-strip-inner"><span class="quote-strip-mark" aria-hidden="true"></span><span class="quote-strip-text">Work</span></div></div>
+<section class="section" id="pakiety">
+<div class="container-wide">
+<div class="packages-intro reveal">
+<span class="eyebrow" data-i18n="packages.eyebrow">Gotowce</span>
+<h2 class="section-title" data-i18n="packages.h2">Wybierz <em>gotowy pakiet</em> i ruszamy od razu.</h2>
+<p class="section-copy" data-i18n="packages.copy">Najczęściej zamawiane zestawy usług w jednej cenie — bez wyceniania od zera. Wybierz i zamów, albo dostosuj w kalkulatorze.</p>
+</div>
+<div class="packages-grid reveal">
+<article class="pkg-receipt">
+<div class="pkg-r-head">
+<div class="pkg-r-brand">LucDoroDesign</div>
+<div class="pkg-r-name" data-i18n="packages.starter.name">🚀 Starter</div>
+<div class="pkg-r-desc" data-i18n="packages.starter.desc">Logo · Wizytówka · Ulotka A5</div>
+</div>
+<div class="pkg-r-list">
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.starter.i1">Logo — nowy projekt</span><span class="pkg-r-fill"></span><span class="pkg-r-val">900 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.starter.i2">Wizytówka — projekt</span><span class="pkg-r-fill"></span><span class="pkg-r-val">150 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.starter.i3">Ulotka — projekt (do A5, 2 strony)</span><span class="pkg-r-fill"></span><span class="pkg-r-val">250 zł</span></div>
+</div>
+<div class="pkg-r-sep"></div>
+<div class="pkg-r-total"><span data-i18n="packages.total">SUMA PAKIETU</span><b>1300 zł</b></div>
+<a class="btn-primary pkg-r-cta" href="kalkulator/?preset=starter" data-i18n="packages.cta">Zamów ten pakiet →</a>
+</article>
+<article class="pkg-receipt">
+<div class="pkg-r-head">
+<div class="pkg-r-brand">LucDoroDesign</div>
+<div class="pkg-r-name" data-i18n="packages.rebranding.name">✨ Rebranding kompletny</div>
+<div class="pkg-r-desc" data-i18n="packages.rebranding.desc">Identyfikacja + baner + 3× social</div>
+</div>
+<div class="pkg-r-list">
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.rebranding.i1">Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)</span><span class="pkg-r-fill"></span><span class="pkg-r-val">3500 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.rebranding.i2">Baner / billboard — projekt</span><span class="pkg-r-fill"></span><span class="pkg-r-val">300 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.rebranding.i3">Grafika social media — 1 kreacja</span><span class="pkg-r-fill"></span><span class="pkg-r-val">3 × 120 zł</span></div>
+</div>
+<div class="pkg-r-sep"></div>
+<div class="pkg-r-total"><span data-i18n="packages.total">SUMA PAKIETU</span><b>4160 zł</b></div>
+<a class="btn-primary pkg-r-cta" href="kalkulator/?preset=rebranding" data-i18n="packages.cta">Zamów ten pakiet →</a>
+</article>
+<article class="pkg-receipt">
+<div class="pkg-r-head">
+<div class="pkg-r-brand">LucDoroDesign</div>
+<div class="pkg-r-name" data-i18n="packages.firma.name">🌐 Firma online</div>
+<div class="pkg-r-desc" data-i18n="packages.firma.desc">Logo + strona firmowa + 5× social</div>
+</div>
+<div class="pkg-r-list">
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.firma.i1">Logo — nowy projekt</span><span class="pkg-r-fill"></span><span class="pkg-r-val">900 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.firma.i2">Strona firmowa (WordPress / statyczna)</span><span class="pkg-r-fill"></span><span class="pkg-r-val">2900 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.firma.i3">Grafika social media — 1 kreacja</span><span class="pkg-r-fill"></span><span class="pkg-r-val">5 × 120 zł</span></div>
+</div>
+<div class="pkg-r-sep"></div>
+<div class="pkg-r-total"><span data-i18n="packages.total">SUMA PAKIETU</span><b>4400 zł</b></div>
+<a class="btn-primary pkg-r-cta" href="kalkulator/?preset=firma-online" data-i18n="packages.cta">Zamów ten pakiet →</a>
+</article>
+<article class="pkg-receipt">
+<div class="pkg-r-head">
+<div class="pkg-r-brand">LucDoroDesign</div>
+<div class="pkg-r-name" data-i18n="packages.ecommerce.name">🛒 E-commerce start</div>
+<div class="pkg-r-desc" data-i18n="packages.ecommerce.desc">Sklep + landing + 5× social + mini-brand</div>
+</div>
+<div class="pkg-r-list">
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.ecommerce.i1">Sklep internetowy</span><span class="pkg-r-fill"></span><span class="pkg-r-val">4500 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.ecommerce.i2">Landing page / one-page</span><span class="pkg-r-fill"></span><span class="pkg-r-val">1500 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.ecommerce.i3">Grafika social media — 1 kreacja</span><span class="pkg-r-fill"></span><span class="pkg-r-val">5 × 120 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.ecommerce.i4">Mini księga znaku / brandbook</span><span class="pkg-r-fill"></span><span class="pkg-r-val">800 zł</span></div>
+</div>
+<div class="pkg-r-sep"></div>
+<div class="pkg-r-total"><span data-i18n="packages.total">SUMA PAKIETU</span><b>7400 zł</b></div>
+<a class="btn-primary pkg-r-cta" href="kalkulator/?preset=ecommerce" data-i18n="packages.cta">Zamów ten pakiet →</a>
+</article>
+<article class="pkg-receipt">
+<div class="pkg-r-head">
+<div class="pkg-r-brand">LucDoroDesign</div>
+<div class="pkg-r-name" data-i18n="packages.event.name">🎪 Pakiet eventowy</div>
+<div class="pkg-r-desc" data-i18n="packages.event.desc">Rollup + plakat + ulotka + baner</div>
+</div>
+<div class="pkg-r-list">
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.event.i1">Rollup — projekt</span><span class="pkg-r-fill"></span><span class="pkg-r-val">300 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.event.i2">Plakat — projekt</span><span class="pkg-r-fill"></span><span class="pkg-r-val">2 × 250 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.event.i3">Ulotka — projekt (do A5, 2 strony)</span><span class="pkg-r-fill"></span><span class="pkg-r-val">250 zł</span></div>
+<div class="pkg-r-row"><span class="pkg-r-item-name" data-i18n="packages.event.i4">Baner / billboard — projekt</span><span class="pkg-r-fill"></span><span class="pkg-r-val">300 zł</span></div>
+</div>
+<div class="pkg-r-sep"></div>
+<div class="pkg-r-total"><span data-i18n="packages.total">SUMA PAKIETU</span><b>1350 zł</b></div>
+<a class="btn-primary pkg-r-cta" href="kalkulator/?preset=eventowy" data-i18n="packages.cta">Zamów ten pakiet →</a>
+</article>
+</div>
+<p class="packages-note reveal" data-i18n="packages.note">Chcesz rozszerzyć pakiet o dodatkową usługę? W kalkulatorze zobaczysz osobny dodatkowy paragon z dopłatą — reszta pakietu zostaje bez zmian.</p>
+</div>
+</section>
+<div class="quote-strip"><div class="container-wide quote-strip-inner"><span class="quote-strip-mark" aria-hidden="true"></span><span class="quote-strip-text">Gotowce</span></div></div>
 <section class="section" id="uslugi">
 <div class="container-wide services-layout">
 <div class="services-sticky reveal">
@@ -1507,7 +1624,7 @@ var currentLang = 'pl';
 (function(){
   const T = {
     pl: {
-      'nav.projects':'Projekty','nav.services':'Usługi','nav.process':'Proces',
+      'nav.projects':'Projekty','nav.services':'Usługi','nav.process':'Proces','nav.packages':'Pakiety',
       'nav.about':'O studiu','nav.contact':'Kontakt','nav.cta':'Umów rozmowę',
       'nav.cv':'CV','nav.signatures':'Stopki','nav.creator':'Kreator','nav.calc':'Kalkulator','nav.blog':'Blog','nav.dev':'Dev',
       'nav.signaturesFull':'Stopki mailowe','nav.creatorFull':'Kreator stopek','nav.calcFull':'Kalkulator wyceny','nav.galleryFull':'Galeria AI','nav.devFull':'Developer — narzędzia',
@@ -1559,9 +1676,42 @@ var currentLang = 'pl';
       'footer.address':'Sportowa 7/6, 41-605 Świętochłowice',
       'footer.top':'Wróć na górę',
       'ui.lightmode':'Jasny',
+      'packages.eyebrow':'Gotowce',
+      'packages.h2':'Wybierz gotowy pakiet i ruszamy od razu.',
+      'packages.copy':'Najczęściej zamawiane zestawy usług w jednej cenie — bez wyceniania od zera. Wybierz i zamów, albo dostosuj w kalkulatorze.',
+      'packages.note':'Chcesz rozszerzyć pakiet o dodatkową usługę? W kalkulatorze zobaczysz osobny dodatkowy paragon z dopłatą — reszta pakietu zostaje bez zmian.',
+      'packages.total':'SUMA PAKIETU',
+      'packages.cta':'Zamów ten pakiet →',
+      'packages.starter.name':'🚀 Starter',
+      'packages.starter.desc':'Logo · Wizytówka · Ulotka A5',
+      'packages.starter.i1':'Logo — nowy projekt',
+      'packages.starter.i2':'Wizytówka — projekt',
+      'packages.starter.i3':'Ulotka — projekt (do A5, 2 strony)',
+      'packages.rebranding.name':'✨ Rebranding kompletny',
+      'packages.rebranding.desc':'Identyfikacja + baner + 3× social',
+      'packages.rebranding.i1':'Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)',
+      'packages.rebranding.i2':'Baner / billboard — projekt',
+      'packages.rebranding.i3':'Grafika social media — 1 kreacja',
+      'packages.firma.name':'🌐 Firma online',
+      'packages.firma.desc':'Logo + strona firmowa + 5× social',
+      'packages.firma.i1':'Logo — nowy projekt',
+      'packages.firma.i2':'Strona firmowa (WordPress / statyczna)',
+      'packages.firma.i3':'Grafika social media — 1 kreacja',
+      'packages.ecommerce.name':'🛒 E-commerce start',
+      'packages.ecommerce.desc':'Sklep + landing + 5× social + mini-brand',
+      'packages.ecommerce.i1':'Sklep internetowy',
+      'packages.ecommerce.i2':'Landing page / one-page',
+      'packages.ecommerce.i3':'Grafika social media — 1 kreacja',
+      'packages.ecommerce.i4':'Mini księga znaku / brandbook',
+      'packages.event.name':'🎪 Pakiet eventowy',
+      'packages.event.desc':'Rollup + plakat + ulotka + baner',
+      'packages.event.i1':'Rollup — projekt',
+      'packages.event.i2':'Plakat — projekt',
+      'packages.event.i3':'Ulotka — projekt (do A5, 2 strony)',
+      'packages.event.i4':'Baner / billboard — projekt',
     },
     en: {
-      'nav.projects':'Projects','nav.services':'Services','nav.process':'Process',
+      'nav.projects':'Projects','nav.services':'Services','nav.process':'Process','nav.packages':'Packages',
       'nav.about':'About','nav.contact':'Contact','nav.cta':'Book a call',
       'nav.cv':'CV','nav.signatures':'Signatures','nav.creator':'Creator','nav.calc':'Calculator','nav.blog':'Blog','nav.dev':'Dev',
       'nav.signaturesFull':'Email signatures','nav.creatorFull':'Signature creator','nav.calcFull':'Pricing calculator','nav.galleryFull':'AI Gallery','nav.devFull':'Developer — tools',
@@ -1613,6 +1763,39 @@ var currentLang = 'pl';
       'footer.address':'Graniczna 11b, 41-605 Świętochłowice, Poland',
       'footer.top':'Back to top',
       'ui.lightmode':'Light',
+      'packages.eyebrow':'Ready-made',
+      'packages.h2':'Pick a ready-made package and we start right away.',
+      'packages.copy':'The most frequently ordered service bundles at one price — no quoting from scratch. Pick one and order, or fine-tune it in the calculator.',
+      'packages.note':'Want to extend the package with an extra service? In the calculator you\'ll see a separate extra receipt with the surcharge — the rest of the package stays unchanged.',
+      'packages.total':'PACKAGE TOTAL',
+      'packages.cta':'Order this package →',
+      'packages.starter.name':'🚀 Starter',
+      'packages.starter.desc':'Logo · Business card · A5 flyer',
+      'packages.starter.i1':'Logo — new design',
+      'packages.starter.i2':'Business card — design',
+      'packages.starter.i3':'Flyer — design (up to A5, 2 pages)',
+      'packages.rebranding.name':'✨ Complete rebranding',
+      'packages.rebranding.desc':'Identity + banner + 3× social',
+      'packages.rebranding.i1':'Full visual identity (logo, colors, type, materials)',
+      'packages.rebranding.i2':'Banner / billboard — design',
+      'packages.rebranding.i3':'Social media graphic — 1 creative',
+      'packages.firma.name':'🌐 Online business',
+      'packages.firma.desc':'Logo + business website + 5× social',
+      'packages.firma.i1':'Logo — new design',
+      'packages.firma.i2':'Business website (WordPress / static)',
+      'packages.firma.i3':'Social media graphic — 1 creative',
+      'packages.ecommerce.name':'🛒 E-commerce start',
+      'packages.ecommerce.desc':'Store + landing page + 5× social + mini-brand',
+      'packages.ecommerce.i1':'Online store',
+      'packages.ecommerce.i2':'Landing page / one-page',
+      'packages.ecommerce.i3':'Social media graphic — 1 creative',
+      'packages.ecommerce.i4':'Mini brandbook',
+      'packages.event.name':'🎪 Event package',
+      'packages.event.desc':'Rollup + poster + flyer + banner',
+      'packages.event.i1':'Rollup — design',
+      'packages.event.i2':'Poster — design',
+      'packages.event.i3':'Flyer — design (up to A5, 2 pages)',
+      'packages.event.i4':'Banner / billboard — design',
     }
   };
 
