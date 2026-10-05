@@ -551,7 +551,17 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;tr
 .pkg-r-cta{margin-top:auto;text-align:center;font-family:var(--font-body)}
 .packages-note{max-width:640px;margin:var(--space-8) auto 0;text-align:center;font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6}
 .packages-note strong{color:var(--color-text)}
-@media (max-width:640px){.packages-grid{grid-template-columns:1fr}.pkg-receipt:nth-child(odd),.pkg-receipt:nth-child(even){transform:none}}
+.pkg-dots{display:none}
+/* Mobile: karuzela — jeden pakiet na całą szerokość, przesuwanie palcem w lewo/prawo */
+@media (max-width:640px){
+  .packages-grid{display:flex;gap:1rem;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:-1rem;padding:.25rem 1rem 1rem;scroll-padding-inline:1rem}
+  .packages-grid::-webkit-scrollbar{display:none}
+  .pkg-receipt{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always}
+  .pkg-receipt:nth-child(odd),.pkg-receipt:nth-child(even),.pkg-receipt:hover{transform:none}
+  .pkg-dots{display:flex;justify-content:center;align-items:center;gap:.5rem;margin-top:var(--space-4)}
+  .pkg-dot{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:var(--color-border);cursor:pointer;transition:width .25s ease,background .25s ease}
+  .pkg-dot.is-active{width:22px;background:var(--color-primary)}
+}
 .process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6)}
 .process-card{padding:var(--space-8);border:1px solid var(--color-border);border-radius:var(--radius-xl);background:var(--color-surface)}
 .process-card span{display:inline-flex;width:2.5rem;height:2.5rem;border-radius:50%;align-items:center;justify-content:center;background:var(--color-primary-highlight);color:var(--color-primary);font-weight:800;margin-bottom:var(--space-5)}
@@ -1224,6 +1234,7 @@ E-mail
 <a class="btn-primary pkg-r-cta" href="kalkulator/?preset=eventowy" data-i18n="packages.cta">Zamów ten pakiet →</a>
 </article>
 </div>
+<div class="pkg-dots" id="pkg-dots" role="tablist" aria-label="Pakiety"></div>
 <p class="packages-note reveal" data-i18n="packages.note">Chcesz rozszerzyć pakiet o dodatkową usługę? W kalkulatorze zobaczysz osobny dodatkowy paragon z dopłatą — reszta pakietu zostaje bez zmian.</p>
 </div>
 </section>
@@ -3013,6 +3024,30 @@ mobileNav?.querySelectorAll('a.mobile-nav-link').forEach(link => {
   window.addEventListener('load', run);
   window.addEventListener('resize', run, {passive:true});
   new MutationObserver(run).observe(navLinks, {childList:true, subtree:true, characterData:true});
+})();
+</script>
+<script>
+// Pakiety — kropki nawigacji karuzeli na mobile
+(function(){
+  var grid=document.querySelector('.packages-grid'),dots=document.getElementById('pkg-dots');
+  if(!grid||!dots)return;
+  var cards=[].slice.call(grid.querySelectorAll('.pkg-receipt'));
+  function step(){return cards[0].offsetWidth+(parseFloat(getComputedStyle(grid).columnGap)||0)}
+  cards.forEach(function(c,i){
+    var b=document.createElement('button');
+    b.type='button';b.className='pkg-dot'+(i?'':' is-active');
+    b.setAttribute('aria-label',(i+1)+' / '+cards.length);
+    b.addEventListener('click',function(){grid.scrollTo({left:i*step(),behavior:'smooth'})});
+    dots.appendChild(b);
+  });
+  var raf=0;
+  grid.addEventListener('scroll',function(){
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(function(){
+      var idx=Math.round(grid.scrollLeft/step());
+      [].forEach.call(dots.children,function(d,i){d.classList.toggle('is-active',i===idx)});
+    });
+  },{passive:true});
 })();
 </script>
 </body>
