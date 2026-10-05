@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<meta name="theme-color" content="#f1f0f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0d10" media="(prefers-color-scheme: dark)">
+
+<title>Blog — notatki i case-studies · LucDoroDesign</title>
+<meta name="description" content="Blog LucDoroDesign — case-studies, notatki o designie, developmencie i pracy w małym studio graficznym.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&family=Playfair+Display:wght@600;700&family=Roboto+Mono:wght@500;700&family=Fraunces:ital,opsz,wght@1,9..144,400..700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{--acc:#b58cff;--acc2:#1DB954;--bg:#0d0d10;--card:#161619;--line:#2b2b32;--txt:#f2efe8;--mut:#a09a91;}
+  html{overflow-x:hidden;max-width:100vw;scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--txt);font-family:'Manrope',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;max-width:100vw;cursor:default;-webkit-user-select:none;user-select:none;}
+  input,textarea,select,[contenteditable="true"]{cursor:text;-webkit-user-select:text;user-select:text;}
+  a,button,label,summary,[role="button"],[role="tab"],[role="menuitem"]{cursor:pointer;}
+  ::selection{background:transparent;}
+  ::-moz-selection{background:transparent;}
+  a{color:inherit;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  /* TOP NAV */
+  .top-nav{position:sticky;top:0;z-index:100;background:rgba(13,13,16,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:#f2efe8;}
+  .top-nav *{color:#f2efe8;}
+  .top-nav-back{display:inline-flex;align-items:center;gap:8px;color:#f2efe8;text-decoration:none;font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);transition:all .2s ease;}
+  .top-nav-back:hover{border-color:#b58cff;color:#b58cff;transform:translateX(-2px);}
+  .top-nav-brand{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#f2efe8;letter-spacing:.02em;}
+  .top-nav-links{display:flex;gap:14px;align-items:center;font-size:13px;}
+  .top-nav-links a{color:#a09a91;text-decoration:none;transition:color .2s;}
+  .top-nav-links a:hover{color:#b58cff;}
+  .tn-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:#f2efe8;width:36px;height:36px;border-radius:999px;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;}
+  .tn-btn:hover{border-color:#b58cff;color:#b58cff;}
+.tn-btn svg{width:18px;height:18px;display:block}
+.tn-btn .ti-sun{display:none}
+[data-theme="light"] .tn-btn .ti-moon{display:none}
+[data-theme="light"] .tn-btn .ti-sun{display:block}
+
+  .tn-lang-btn{width:auto;padding:0 10px;font-family:'Roboto Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;}
+  .tn-palette-wrap{position:relative;display:inline-block;}
+  .tn-palette-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:#1a1a1e;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);z-index:200;}
+  .tn-palette-menu.is-open{display:flex;}
+  .tn-palette-menu button{background:transparent;border:0;color:#f2efe8;padding:9px 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;text-align:left;display:flex;align-items:center;gap:10px;transition:background .18s;}
+  .tn-palette-menu button:hover{background:rgba(255,255,255,.06);}
+  .tn-palette-menu button.is-active{background:color-mix(in srgb, var(--acc) 15%, transparent);color:#b58cff;}
+  .tn-swatches{display:inline-flex;gap:3px;}
+  .tn-swatches span{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.15);}
+  @media(max-width:640px){.top-nav{padding:10px 16px;}.top-nav-brand{display:none;}.top-nav-links{gap:10px;font-size:12px;}.tn-palette-menu{position:fixed;top:auto;bottom:14px;left:14px;right:14px;min-width:0;}}
+
+  /* HERO */
+  .hero{padding:80px 0 40px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:680px;height:420px;background:radial-gradient(closest-side,color-mix(in srgb, var(--acc) 22%, transparent),transparent);filter:blur(10px);z-index:0;}
+  .hero>*{position:relative;z-index:1;}
+  .bg-outline{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces','Playfair Display',serif;font-style:italic;font-weight:400;font-size:clamp(8rem,22vw,20rem);color:var(--bg);-webkit-text-stroke:1.5px var(--txt);letter-spacing:.06em;text-indent:.06em;line-height:.85;z-index:1;pointer-events:none;user-select:none;white-space:nowrap;opacity:.35;}
+  [data-theme="light"] .bg-outline{opacity:.45;}
+  @media(max-width:640px){.bg-outline{font-size:clamp(4rem,28vw,8rem);-webkit-text-stroke-width:1px;opacity:.28;}}
+  html:not([data-palette]) .bg-outline{opacity:.14;-webkit-text-stroke-width:1px;}
+  html:not([data-palette])[data-theme="light"] .bg-outline{opacity:.22;}
+  @media(max-width:640px){html:not([data-palette]) .bg-outline{opacity:.1;-webkit-text-stroke-width:.8px;}}
+  .hero>*:not(.bg-outline){position:relative;z-index:2;}
+  .kicker{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:20px;}
+  .hero-logo{display:block;margin:0 auto 22px;height:clamp(80px,10vw,120px);width:auto;object-fit:contain;}
+  [data-theme="light"] .hero-logo{filter:brightness(0) invert(0.05);}
+  .hero-blog-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(48px,8vw,88px);line-height:1;letter-spacing:-.04em;color:var(--txt);margin:0;}
+  h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,58px);line-height:1.05;letter-spacing:-.5px;}
+  h1 em{font-style:italic;color:var(--acc2);font-family:'Playfair Display',serif;font-weight:700;}
+  .lead{max-width:640px;margin:22px auto 0;color:var(--mut);font-size:17px;}
+
+  /* CATEGORY FILTER CHIPS */
+  :root{--tscale:1;}
+  .cats{margin-top:36px;display:flex;justify-content:center;padding:0 16px;}
+  .seg-rail{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:0;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:4px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb, var(--txt) 4%, transparent);backdrop-filter:blur(6px);scrollbar-width:none;-ms-overflow-style:none;}
+  .seg-rail::-webkit-scrollbar{display:none;}
+  .cat-chip,.seg-btn{flex:0 0 auto;background:transparent;border:0;border-radius:0;color:var(--mut);font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;padding:11px 22px;cursor:pointer;font-weight:600;position:relative;overflow:hidden;isolation:isolate;transition:color .28s ease;white-space:nowrap;}
+  .seg-rail>button:first-of-type{border-top-left-radius:14px;border-bottom-left-radius:14px;}
+  .seg-rail>button:last-of-type{border-top-right-radius:14px;border-bottom-right-radius:14px;}
+  .seg-rail>button+button::after{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--line);transition:opacity .2s ease;}
+  .seg-rail>button::before{content:"";position:absolute;inset:0;background:var(--cat-c1,#2f1c4a);box-shadow:inset 0 3px 0 var(--cat-c2,var(--acc));transform:translateY(101%);transition:transform .42s cubic-bezier(.68,0,.24,1);z-index:-1;}
+  .seg-rail>button:hover,.seg-rail>button.is-active{color:#fff;}
+  .seg-rail>button:hover::before,.seg-rail>button.is-active::before{transform:translateY(0);}
+  .seg-rail>button:hover::after,.seg-rail>button:hover+button::after,.seg-rail>button.is-active::after,.seg-rail>button.is-active+button::after{opacity:0;}
+  .seg-rail>button:focus-visible{outline:2px solid var(--acc);outline-offset:-3px;}
+  .cat-chip[data-cat="all"]{--cat-c1:#2f1c4a;--cat-c2:var(--acc);}
+  .cat-chip[data-cat="design"]{--cat-c1:#3d1f4a;--cat-c2:#7b4dff;}
+  .cat-chip[data-cat="case-study"]{--cat-c1:#1f3a3d;--cat-c2:#4dff9e;}
+  .cat-chip[data-cat="development"]{--cat-c1:#1f2a3d;--cat-c2:#4d9eff;}
+  .cat-chip[data-cat="thoughts"]{--cat-c1:#3d1f1f;--cat-c2:#ff9e4d;}
+  .tsize-btn{--cat-c1:#2f1c4a;--cat-c2:var(--acc);}
+  .tsize{display:flex;justify-content:center;padding:24px 16px 0;}
+  .tsize-label{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:1.4px;color:var(--mut);padding:0 14px 0 12px;text-transform:uppercase;user-select:none;}
+  @media(max-width:560px){.cat-chip,.seg-btn{padding:10px 15px;letter-spacing:1.1px;}}
+
+  /* POSTS GRID */
+  .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:48px 0 64px;}
+  @media(max-width:920px){.posts{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){.posts{grid-template-columns:1fr;}}
+  .post-card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s;display:flex;flex-direction:column;}
+  .post-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb, var(--acc) 40%, transparent);}
+  .post-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d10;isolation:isolate;}
+  .post-thumb-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .8s cubic-bezier(.22,1,.36,1),filter .5s ease;filter:brightness(.8) contrast(1.05) saturate(1.05);}
+  .post-card:hover .post-thumb-photo{transform:scale(1.08);filter:brightness(.9) contrast(1.05) saturate(1.1);}
+  .post-thumb::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,var(--cat-c1),var(--cat-c2));mix-blend-mode:multiply;opacity:.35;}
+  .post-thumb::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55) 100%);}
+  .post-thumb[data-cat="design"]{--cat-c1:#3d1f4a;--cat-c2:#7b4dff;}
+  .post-thumb[data-cat="case-study"]{--cat-c1:#1f3a3d;--cat-c2:#4dff9e;}
+  .post-thumb[data-cat="development"]{--cat-c1:#1f2a3d;--cat-c2:#4d9eff;}
+  .post-thumb[data-cat="thoughts"]{--cat-c1:#3d1f1f;--cat-c2:#ff9e4d;}
+  .post-thumb-svg{position:absolute;top:14px;right:14px;width:64px;height:64px;z-index:3;opacity:.9;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .3s;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5));}
+  .post-card:hover .post-thumb-svg{transform:rotate(-8deg) scale(1.1);opacity:1;}
+  .post-thumb-svg svg{width:100%;height:100%;display:block;}
+  .post-thumb-num{position:absolute;top:14px;left:16px;font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:56px;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.75);letter-spacing:-.05em;line-height:1;z-index:3;}
+  .post-thumb-cat{z-index:3!important;}
+  .post-thumb-cat{position:absolute;bottom:14px;left:16px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.2);font-weight:700;z-index:2;}
+  .post-body{padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .post-title{font-family:'Syne',sans-serif;font-weight:700;font-size:calc(19px * var(--tscale,1));line-height:1.25;letter-spacing:-.01em;color:var(--txt);}
+  .post-excerpt{color:var(--mut);font-size:calc(13.5px * var(--tscale,1));line-height:1.6;flex:1;}
+  .post-meta{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);border-top:1px dashed rgba(255,255,255,.08);padding-top:12px;margin-top:6px;display:flex;justify-content:space-between;align-items:center;}
+  .post-meta b{color:var(--acc);font-weight:700;}
+
+  /* PALETY */
+  :root[data-palette="combo01"][data-theme="light"]{--bg:#CAE8E8;--card:#DEF0F0;--line:#A0C4C4;--txt:#28469E;--mut:#4864B0;--acc:#28469E;;--acc2:#E5555C;}
+  :root[data-palette="combo01"][data-theme="dark"]{--bg:#28469E;--card:#334FA8;--line:#4260B4;--txt:#CAE8E8;--mut:#A0C4C4;--acc:#CAE8E8;;--acc2:#FF7B85;}
+  :root[data-palette="combo02"][data-theme="light"]{--bg:#FDE1B8;--card:#FFEDD5;--line:#E8CCA0;--txt:#3A241C;--mut:#7A5A48;--acc:#C24A2E;;--acc2:#7A1E5C;}
+  :root[data-palette="combo02"][data-theme="dark"]{--bg:#3E0856;--card:#4E1866;--line:#6E3886;--txt:#FAAE62;--mut:#E09E52;--acc:#FAAE62;;--acc2:#00E5A0;}
+  :root[data-palette="combo03"][data-theme="light"]{--bg:#B0EDF9;--card:#C4F0F9;--line:#88C4D8;--txt:#04344C;--mut:#24546C;--acc:#04344C;;--acc2:#E67E22;}
+  :root[data-palette="combo03"][data-theme="dark"]{--bg:#04344C;--card:#14546C;--line:#2A5A72;--txt:#B0EDF9;--mut:#88CDE0;--acc:#B0EDF9;;--acc2:#FFB74D;}
+  :root[data-palette="combo04"][data-theme="light"]{--bg:#F5EDEF;--card:#FAF3F5;--line:#E5D0D6;--txt:#3A0F1D;--mut:#7A5060;--acc:#7A1E5C;;--acc2:#3D7A4A;}
+  :root[data-palette="combo04"][data-theme="dark"]{--bg:#2A0F1A;--card:#3A1826;--line:#4A2536;--txt:#F5EDEF;--mut:#B89AA8;--acc:#D07DAD;;--acc2:#5DAA6F;}
+  :root[data-palette="combo05"][data-theme="light"]{--bg:#FFFE15;--card:#FFFF3C;--line:#D0CE10;--txt:#0C1E29;--mut:#243E49;--acc:#0C1E29;;--acc2:#D9186B;}
+  :root[data-palette="combo05"][data-theme="dark"]{--bg:#0C1E29;--card:#182E39;--line:#3E5E69;--txt:#FFFE15;--mut:#E0DE35;--acc:#FFFE15;;--acc2:#FF3A9E;}
+  :root[data-theme="light"]:not([data-palette]){--bg:#f5f2ea;--card:#ffffff;--line:#e4dfd0;--txt:#1a1a1e;--mut:#5a554d;--acc:#7b4dff;--acc2:#1DB954;}
+
+  footer{padding:44px 24px 40px;text-align:center;color:var(--mut);font-size:12px;border-top:1px solid rgba(255,255,255,.06);margin-top:40px;font-family:'Roboto Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;}
+  footer a{color:var(--acc);text-decoration:none;font-weight:700;}
+  footer a:hover{text-decoration:underline;}
+.nav-links a[aria-current="page"],.mobile-nav a[aria-current="page"]{color:var(--color-primary);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
+</style>
+
+<link rel="canonical" href="https://lucdoro.design/blog/">
+<meta property="og:url" content="https://lucdoro.design/blog/">
+<meta property="og:image" content="https://lucdoro.design/assets/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta property="og:locale" content="pl_PL">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Blog — notatki i case-studies","url":"https://lucdoro.design/blog/","description":"Blog LucDoroDesign — case-studies, notatki o designie, developmencie i pracy w małym studio graficznym.","inLanguage":"pl-PL","author":{"@type":"Person","name":"Łukasz Dorociak"}}</script>
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  (function() {
+    var u="https://lucdoro.design/webpage_tracker/";
+    _paq.push(["setTrackerUrl", u+"matomo.php"]);
+    _paq.push(["setSiteId", "1"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+    g.async=true; g.src=u+"matomo.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Nawigacja">
+  <a class="top-nav-back" href="https://lucdoro.design" aria-label="Powrót do strony głównej">← lucdoro.design</a>
+  <div class="top-nav-brand">Blog · LucDoroDesign</div>
+  <div class="top-nav-links">
+    <a href="https://lucdoro.design/developer/">Developer</a>
+    <a href="https://lucdoro.design/#kontakt">Kontakt</a>
+    <button class="tn-btn" id="tn-theme-btn" aria-label="Motyw jasny/ciemny" title="Motyw"><svg class="ti ti-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+    <button class="tn-btn tn-lang-btn" id="tn-lang-btn" aria-label="Change language / Zmień język" title="PL / EN">EN</button>
+    <div class="tn-palette-wrap">
+      <button class="tn-btn" id="tn-palette-btn" aria-label="Paleta kolorów" title="Palety" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="7.5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="16.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="16.5" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg></button>
+      <div class="tn-palette-menu" id="tn-palette-menu" role="menu">
+        <button type="button" data-palette="default" class="is-active"><span class="tn-swatches"><span style="background:#f5f2ea"></span><span style="background:#7b4dff"></span></span>Default</button>
+        <button type="button" data-palette="combo01"><span class="tn-swatches"><span style="background:#CAE8E8"></span><span style="background:#28469E"></span></span>Ocean</button>
+        <button type="button" data-palette="combo02"><span class="tn-swatches"><span style="background:#FDE1B8"></span><span style="background:#C24A2E"></span></span>Sunset</button>
+        <button type="button" data-palette="combo03"><span class="tn-swatches"><span style="background:#B0EDF9"></span><span style="background:#04344C"></span></span>Sky</button>
+        <button type="button" data-palette="combo04"><span class="tn-swatches"><span style="background:#F5EDEF"></span><span style="background:#7A1E5C"></span></span>Milano</button>
+        <button type="button" data-palette="combo05"><span class="tn-swatches"><span style="background:#FFFE15"></span><span style="background:#0C1E29"></span></span>Neon</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bg-outline" aria-hidden="true">Blog</div>
+  <div class="wrap" style="text-align:center;">
+    <img class="hero-logo" src="https://lucdoro.design/assets/logo.png" alt="LucDoroDesign">
+    <h1 class="hero-blog-title">Blog</h1>
+    <div class="cats" role="tablist" aria-label="Filtruj kategorie" style="margin-top:32px;">
+      <div class="seg-rail" role="tablist"><button type="button" class="cat-chip is-active" data-cat="all">Wszystkie</button>
+      <button type="button" class="cat-chip" data-cat="design">Design</button>
+      <button type="button" class="cat-chip" data-cat="case-study">Case-study</button>
+      <button type="button" class="cat-chip" data-cat="development">Development</button>
+      <button type="button" class="cat-chip" data-cat="thoughts">Thoughts</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="tsize">
+  <div class="seg-rail" role="group" aria-label="Wielkość tekstu">
+    <span class="tsize-label" aria-hidden="true">Aa</span>
+    <button type="button" class="seg-btn tsize-btn is-active" data-t="1">100%</button>
+    <button type="button" class="seg-btn tsize-btn" data-t="1.1">+10%</button>
+    <button type="button" class="seg-btn tsize-btn" data-t="1.2">+20%</button>
+    <button type="button" class="seg-btn tsize-btn" data-t="1.3">+30%</button>
+  </div>
+</div>
+
+
+<main class="wrap">
+  <div class="posts" id="posts">
+
+    <a class="post-card" data-cat="design" href="paleta-fioletu-zieleni/">
+      <div class="post-thumb" data-cat="design">
+        <span class="post-thumb-num">01</span>
+        <span class="post-thumb-cat">Design</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="22" cy="24" r="14"/><circle cx="38" cy="24" r="14"/><circle cx="30" cy="38" r="14"/></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Kolor, który nie zdradza — jak zbudowałem paletę lucdoro.design</h2>
+        <p class="post-excerpt">Dlaczego fiolet #7b4dff + zielony #1DB954 zamiast bezpiecznego brandbook-owego szarego. Notatka o tym co robi paleta gdy zaczynasz projekt sam, bez zespołu który cię zatrzyma.</p>
+        <div class="post-meta"><span>2026-08-04</span><span><b>6 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="case-study" href="smakk-case-study/">
+      <div class="post-thumb" data-cat="case-study">
+        <span class="post-thumb-num">02</span>
+        <span class="post-thumb-cat">Case-study</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"><g transform="translate(30 30)"><circle r="22" opacity=".4"/><path fill="#fff" stroke-width="1.5" d="M0 -22 L4 -10 L0 -14 L-4 -10 Z M0 22 L4 10 L0 14 L-4 10 Z M-22 0 L-10 -4 L-14 0 L-10 4 Z M22 0 L10 -4 L14 0 L10 4 Z" opacity=".9"/><circle r="8" fill="#fff" opacity=".92"/></g></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">SMAKK — od łowickiej wycinanki do islandzkiego kiosku samoobsługowego</h2>
+        <p class="post-excerpt">Rebranding polskiego bistro na Islandii. Logo, menu i digital kiosk na Raspberry Pi. Co poszło dobrze, co pociągnąłem 3× i dlaczego papier ważył więcej niż ekran.</p>
+        <div class="post-meta"><span>2026-07-18</span><span><b>9 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="development" href="statyczne-html-2026/">
+      <div class="post-thumb" data-cat="development">
+        <span class="post-thumb-num">03</span>
+        <span class="post-thumb-cat">Development</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="14" width="48" height="34" rx="4"/><line x1="6" y1="22" x2="54" y2="22"/><g font-family="Roboto Mono, monospace" font-size="8" fill="#fff" stroke="none" font-weight="700"><text x="12" y="38" text-anchor="start">&lt;/&gt;</text></g></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Statyczne HTML w 2026 — dlaczego zrezygnowałem z Reacta</h2>
+        <p class="post-excerpt">Portfolio przepisane z Next.js na jeden 165KB HTML. LCP z 2.4s → 0.3s. Kiedy static ma sens, a kiedy jest premature optymalizacja. Konkretne liczby, nie manifesto.</p>
+        <div class="post-meta"><span>2026-06-30</span><span><b>7 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="thoughts" href="male-studio-vs-korpo/">
+      <div class="post-thumb" data-cat="thoughts">
+        <span class="post-thumb-num">04</span>
+        <span class="post-thumb-cat">Thoughts</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="22" r="9" fill="#fff" opacity=".9"/><rect x="30" y="14" width="24" height="18" rx="2" fill="#fff" opacity=".9"/><line x1="10" y1="42" x2="50" y2="42"/><text x="30" y="55" font-family="Syne, sans-serif" font-weight="800" font-size="10" fill="#fff" stroke="none" text-anchor="middle">VS</text></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Dlaczego małe studio grafiki wygrywa z korpoagencją</h2>
+        <p class="post-excerpt">I kiedy przegrywa. Trzy lata na freelance, dwa jako sub do dużej agencji — obserwacje o tym gdzie mały jest szybszy, gdzie duży twardszy, i co tak naprawdę kupuje klient.</p>
+        <div class="post-meta"><span>2026-06-12</span><span><b>5 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="design" href="logo-gotowy-font-prawa-autorskie/">
+      <div class="post-thumb" data-cat="design">
+        <span class="post-thumb-num">06</span>
+        <span class="post-thumb-cat">Design</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="22" cy="24" r="14"/><circle cx="38" cy="24" r="14"/><circle cx="30" cy="38" r="14"/></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Czy logo może być unikalne, gdy używasz gotowego fontu?</h2>
+        <p class="post-excerpt">Licencje fontów, rejestracja znaku towarowego i realne prawa do logo złożonego z gotowego kroju pisma. Co wolno, czego nie i jak zwiększyć szansę na ochronę.</p>
+        <div class="post-meta"><span>2025-03-20</span><span><b>3 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="design" href="idealna-wizytowka-6-pytan/">
+      <div class="post-thumb" data-cat="design">
+        <span class="post-thumb-num">07</span>
+        <span class="post-thumb-cat">Design</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="22" cy="24" r="14"/><circle cx="38" cy="24" r="14"/><circle cx="30" cy="38" r="14"/></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Jak stworzyć idealną wizytówkę? Sześć pytań przed startem projektu</h2>
+        <p class="post-excerpt">Kolory, układ, treść, cel, grafika i wykończenie. Sześć pytań, na które warto odpowiedzieć zanim projektant zacznie rysować.</p>
+        <div class="post-meta"><span>2025-03-20</span><span><b>2 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="case-study" href="wizytowki-szablon-czy-projektant/">
+      <div class="post-thumb" data-cat="case-study">
+        <span class="post-thumb-num">08</span>
+        <span class="post-thumb-cat">Case-study</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"><g transform="translate(30 30)"><circle r="22" opacity=".4"/><path fill="#fff" stroke-width="1.5" d="M0 -22 L4 -10 L0 -14 L-4 -10 Z M0 22 L4 10 L0 14 L-4 10 Z M-22 0 L-10 -4 L-14 0 L-10 4 Z M22 0 L10 -4 L14 0 L10 4 Z" opacity=".9"/><circle r="8" fill="#fff" opacity=".92"/></g></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Wizytówki z szablonu czy od projektanta — studium przypadku</h2>
+        <p class="post-excerpt">Ta sama wizytówka zrobiona w Canvie i zaprojektowana od zera. Gdzie leżą realne różnice — spady, CMYK, czytelność, koszt.</p>
+        <div class="post-meta"><span>2025-02-08</span><span><b>2 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="thoughts" href="dlaczego-logo-nie-kosztuje-100-zl/">
+      <div class="post-thumb" data-cat="thoughts">
+        <span class="post-thumb-num">09</span>
+        <span class="post-thumb-cat">Thoughts</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="22" r="9" fill="#fff" opacity=".9"/><rect x="30" y="14" width="24" height="18" rx="2" fill="#fff" opacity=".9"/><line x1="10" y1="42" x2="50" y2="42"/><text x="30" y="55" font-family="Syne, sans-serif" font-weight="800" font-size="10" fill="#fff" stroke="none" text-anchor="middle">VS</text></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Dlaczego logo nie kosztuje 100 zł, a proces twórczy to więcej niż kilka kliknięć</h2>
+        <p class="post-excerpt">Klient nie ma pomysłu na logo i oczekuje ceny 100 zł. Co realnie dzieje się między briefem a plikiem EPS — pięć etapów, których nie widać w wycenie.</p>
+        <div class="post-meta"><span>2025-01-28</span><span><b>3 min</b> czytania</span></div>
+      </div>
+    </a>
+
+    <a class="post-card" data-cat="thoughts" href="marketing-i-identyfikacja-wizualna/">
+      <div class="post-thumb" data-cat="thoughts">
+        <span class="post-thumb-num">10</span>
+        <span class="post-thumb-cat">Thoughts</span>
+        <div class="post-thumb-svg" aria-hidden="true"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="22" r="9" fill="#fff" opacity=".9"/><rect x="30" y="14" width="24" height="18" rx="2" fill="#fff" opacity=".9"/><line x1="10" y1="42" x2="50" y2="42"/><text x="30" y="55" font-family="Syne, sans-serif" font-weight="800" font-size="10" fill="#fff" stroke="none" text-anchor="middle">VS</text></svg></div>
+      </div>
+      <div class="post-body">
+        <h2 class="post-title">Marketing i identyfikacja wizualna — nierozłączny duet</h2>
+        <p class="post-excerpt">Identyfikacja wizualna to fundament działań marketingowych, nie ich ozdoba. Co się dzieje, gdy logo na ulotce nie zgadza się z logo na stronie.</p>
+        <div class="post-meta"><span>2025-01-20</span><span><b>2 min</b> czytania</span></div>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  © 2026 · <a href="https://lucdoro.design">LucDoroDesign</a> · Crafted in Świętochłowice
+</footer>
+
+<script>
+/* PARALLAX na bg-outline */
+(function(){
+  var el = document.querySelector('.bg-outline');
+  if (!el || !('requestAnimationFrame' in window)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var mx=0, my=0, sy=0, cx=0, cy=0, csy=0, running=false;
+  function tick(){
+    cx += (mx-cx)*.08; cy += (my-cy)*.08; csy += (sy-csy)*.12;
+    el.style.transform = 'translate3d(' + (cx*32).toFixed(1) + 'px,' + (cy*22 + csy*.4).toFixed(1) + 'px,0)';
+    if (Math.abs(mx-cx)>.001 || Math.abs(my-cy)>.001 || Math.abs(sy-csy)>.5) requestAnimationFrame(tick); else running=false;
+  }
+  function start(){ if(!running){running=true;requestAnimationFrame(tick);} }
+  el.style.willChange='transform';
+  window.addEventListener('mousemove', function(e){ mx=(e.clientX/innerWidth-.5)*2; my=(e.clientY/innerHeight-.5)*2; start(); }, {passive:true});
+  window.addEventListener('scroll', function(){ sy=scrollY; start(); }, {passive:true});
+  sy=scrollY; start();
+})();
+
+/* Category filter */
+(function(){
+  var chips = document.querySelectorAll('.cat-chip');
+  var posts = document.querySelectorAll('.post-card');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var cat = chip.dataset.cat;
+      chips.forEach(function(c){c.classList.toggle('is-active', c===chip);});
+      posts.forEach(function(p){
+        p.style.display = (cat==='all' || p.dataset.cat===cat) ? '' : 'none';
+      });
+    });
+  });
+})();
+
+/* PALETTE + THEME */
+/* EN/PL toggle — swap html[lang] i wszystkie elementy z data-i18n-en */
+(function(){
+  var btn = document.getElementById('tn-lang-btn');
+  if (!btn) return;
+  var html = document.documentElement;
+  var STORAGE = 'lucdoro-lang';
+  function apply(lang){
+    html.setAttribute('lang', lang);
+    btn.textContent = lang === 'en' ? 'PL' : 'EN';
+    document.querySelectorAll('[data-i18n-en],[data-i18n-pl]').forEach(function(el){
+      var pl = el.dataset.i18nPl || el.getAttribute('data-orig-pl') || el.textContent;
+      var en = el.dataset.i18nEn;
+      if (!el.getAttribute('data-orig-pl')) el.setAttribute('data-orig-pl', el.textContent);
+      el.textContent = (lang === 'en' && en) ? en : (el.getAttribute('data-orig-pl') || pl);
+    });
+    try { localStorage.setItem(STORAGE, lang); } catch(e){}
+  }
+  var saved = 'pl'; try { saved = localStorage.getItem(STORAGE) || 'pl'; } catch(e){}
+  apply(saved);
+  btn.addEventListener('click', function(){
+    apply(html.getAttribute('lang') === 'en' ? 'pl' : 'en');
+  });
+})();
+
+(function(){
+  var STORAGE_PAL='lucdoro-palette', STORAGE_THEME='theme';
+  var html=document.documentElement;
+  var themeBtn=document.getElementById('tn-theme-btn');
+  var palBtn=document.getElementById('tn-palette-btn');
+  var palMenu=document.getElementById('tn-palette-menu');
+  if(!themeBtn||!palBtn||!palMenu) return;
+  var palChips=palMenu.querySelectorAll('button');
+  function applyTheme(t){ html.setAttribute('data-theme',t); themeBtn.title = t === 'dark' ? 'Tryb ciemny' : 'Tryb jasny'; try{localStorage.setItem(STORAGE_THEME,t);}catch(e){} }
+  function applyPal(p){ if(p&&p!=='default') html.setAttribute('data-palette',p); else{html.removeAttribute('data-palette');p='default';} palChips.forEach(function(c){c.classList.toggle('is-active',c.dataset.palette===p);}); try{localStorage.setItem(STORAGE_PAL,p);}catch(e){} }
+  var savedTheme='dark', savedPal='default';
+  try{savedTheme=localStorage.getItem(STORAGE_THEME)||'dark';}catch(e){}
+  try{savedPal=localStorage.getItem(STORAGE_PAL)||'default';}catch(e){}
+  applyTheme(savedTheme); applyPal(savedPal);
+  themeBtn.addEventListener('click',function(){applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark');});
+  palBtn.addEventListener('click',function(e){e.stopPropagation();var o=palMenu.classList.toggle('is-open');palBtn.setAttribute('aria-expanded',o?'true':'false');});
+  document.addEventListener('click',function(e){if(!palMenu.contains(e.target)&&e.target!==palBtn){palMenu.classList.remove('is-open');palBtn.setAttribute('aria-expanded','false');}});
+  palChips.forEach(function(c){c.addEventListener('click',function(){applyPal(c.dataset.palette);palMenu.classList.remove('is-open');palBtn.setAttribute('aria-expanded','false');});});
+})();
+</script>
+
+
+<script>
+/* Wielkość tekstu — 100/110/120/130%, zapamiętywana w przeglądarce */
+(function(){
+  var KEY='ld-tscale';
+  var btns=document.querySelectorAll('.tsize-btn');
+  if(!btns.length) return;
+  function apply(v,save){
+    document.documentElement.style.setProperty('--tscale',v);
+    btns.forEach(function(b){b.classList.toggle('is-active', b.dataset.t===v);});
+    if(save){ try{ localStorage.setItem(KEY,v); }catch(e){} }
+  }
+  var saved='1';
+  try{ saved=localStorage.getItem(KEY)||'1'; }catch(e){}
+  if(['1','1.1','1.2','1.3'].indexOf(saved)<0) saved='1';
+  apply(saved,false);
+  btns.forEach(function(b){ b.addEventListener('click',function(){ apply(b.dataset.t,true); }); });
+})();
+</script>
+
+<script>
+/* oznacz w menu link do strony, na ktorej jestesmy */
+(function(){
+  var here=location.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+  document.querySelectorAll('.nav-links a[href], .mobile-nav a[href]').forEach(function(a){
+    var u; try{ u=new URL(a.getAttribute('href'), location.href); }catch(e){ return; }
+    if(u.host!==location.host||u.hash) return;
+    var p=u.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+    if(p===here) a.setAttribute('aria-current','page');
+  });
+})();
+</script>
+</body>
+</html>

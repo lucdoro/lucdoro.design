@@ -6,16 +6,16 @@
 <title>LucDoroDesign — Kalkulator wyceny</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0d0d10; --panel:#161619; --line:#2b2b32;
-    --txt:#f2efe8; --muted:#a09a91; --accent:#b58cff; --accent2:#7b4dff;
+    --txt:#f2efe8; --muted:#a09a91; --accent:#b58cff; --accent2:#7b4dff; --accent-text:#b58cff;
     --ok:#1DB954; --warn:#e07a5f;
   }
   :root[data-theme="light"]{
     --bg:#f5f2ea; --panel:#ffffff; --line:#e4dfd0;
-    --txt:#1a1a1e; --muted:#5a554d; --accent:#7b4dff; --accent2:#5a2ee0;
+    --txt:#1a1a1e; --muted:#5a554d; --accent:#7b4dff; --accent2:#5a2ee0; --accent-text:#7b4dff;
     --ok:#1DB954; --warn:#c85a3f;
   }
   /* KOLOR AKCJI — identyczny z guzikiem WhatsApp na stronie glownej */
@@ -23,33 +23,75 @@
   :root[data-theme="light"]:not([data-palette]){--wa-bg:#1DB954;--wa-shadow:29,185,84;--wa-fg:#fff}
   :root[data-palette="combo01"][data-theme="light"]{--wa-bg:#E5555C;--wa-fg:#fff}
   :root[data-palette="combo01"][data-theme="dark"]{--wa-bg:#FF7B85;--wa-fg:#0f1a2e}
-  :root[data-palette="combo02"][data-theme="light"]{--wa-bg:#00A0A0;--wa-fg:#fff}
+  :root[data-palette="combo02"][data-theme="light"]{--wa-bg:#6E1E8C;--wa-shadow:110,30,140;--wa-fg:#fff}
   :root[data-palette="combo02"][data-theme="dark"]{--wa-bg:#00E5A0;--wa-fg:#082018}
   :root[data-palette="combo03"][data-theme="light"]{--wa-bg:#E67E22;--wa-fg:#fff}
   :root[data-palette="combo03"][data-theme="dark"]{--wa-bg:#FFB74D;--wa-fg:#1a0f00}
-  :root[data-palette="combo04"][data-theme="light"]{--wa-bg:#3D7A4A;--wa-fg:#fff}
-  :root[data-palette="combo04"][data-theme="dark"]{--wa-bg:#5DAA6F;--wa-fg:#0A1F10}
+  :root[data-palette="combo04"][data-theme="light"]{--wa-bg:#D6153B;--wa-fg:#fff}
+  :root[data-palette="combo04"][data-theme="dark"]{--wa-bg:#C1354F;--wa-fg:#fff}
   :root[data-palette="combo05"][data-theme="light"]{--wa-bg:#D9186B;--wa-fg:#fff}
   :root[data-palette="combo05"][data-theme="dark"]{--wa-bg:#FF3A9E;--wa-fg:#1a0018}
   /* PALETY — zsynchronizowane z powloka /kalkulator/ */
   :root{--panel2:var(--panel);}
-  :root[data-palette="combo01"][data-theme="light"]{--bg:#CAE8E8; --panel:#DEF0F0; --line:#A0C4C4; --txt:#28469E; --muted:#4864B0; --accent:#28469E; --accent2:#E5555C;}
-  :root[data-palette="combo01"][data-theme="dark"]{--bg:#28469E; --panel:#334FA8; --line:#4260B4; --txt:#CAE8E8; --muted:#A0C4C4; --accent:#CAE8E8; --accent2:#FF7B85;}
-  :root[data-palette="combo02"][data-theme="light"]{--bg:#FDE1B8; --panel:#FFEDD5; --line:#E8CCA0; --txt:#3A241C; --muted:#7A5A48; --accent:#C24A2E; --accent2:#7A1E5C;}
-  :root[data-palette="combo02"][data-theme="dark"]{--bg:#3E0856; --panel:#4E1866; --line:#6E3886; --txt:#FAAE62; --muted:#E09E52; --accent:#FAAE62; --accent2:#00E5A0;}
-  :root[data-palette="combo03"][data-theme="light"]{--bg:#B0EDF9; --panel:#C4F0F9; --line:#88C4D8; --txt:#04344C; --muted:#24546C; --accent:#04344C; --accent2:#E67E22;}
-  :root[data-palette="combo03"][data-theme="dark"]{--bg:#04344C; --panel:#14546C; --line:#2A5A72; --txt:#B0EDF9; --muted:#88CDE0; --accent:#B0EDF9; --accent2:#FFB74D;}
-  :root[data-palette="combo04"][data-theme="light"]{--bg:#F5EDEF; --panel:#FAF3F5; --line:#E5D0D6; --txt:#3A0F1D; --muted:#7A5060; --accent:#7A1E5C; --accent2:#3D7A4A;}
-  :root[data-palette="combo04"][data-theme="dark"]{--bg:#2A0F1A; --panel:#3A1826; --line:#4A2536; --txt:#F5EDEF; --muted:#B89AA8; --accent:#D07DAD; --accent2:#5DAA6F;}
-  :root[data-palette="combo05"][data-theme="light"]{--bg:#FFFE15; --panel:#FFFF3C; --line:#D0CE10; --txt:#0C1E29; --muted:#243E49; --accent:#0C1E29; --accent2:#D9186B;}
-  :root[data-palette="combo05"][data-theme="dark"]{--bg:#0C1E29; --panel:#182E39; --line:#3E5E69; --txt:#FFFE15; --muted:#E0DE35; --accent:#FFFE15; --accent2:#FF3A9E;}
+  :root[data-palette="combo01"][data-theme="light"]{--bg:#CAE8E8; --panel:#DEF0F0; --line:#A0C4C4; --txt:#28469E; --muted:#4864B0; --accent:#28469E; --accent2:#E5555C; --accent-text:#D8434B;}
+  :root[data-palette="combo01"][data-theme="dark"]{--bg:#28469E; --panel:#334FA8; --line:#4260B4; --txt:#CAE8E8; --muted:#A0C4C4; --accent:#CAE8E8; --accent2:#FF7B85; --accent-text:#FF9BA3;}
+  :root[data-palette="combo02"][data-theme="light"]{--bg:#FDE1B8; --panel:#FFEDD5; --line:#E4C49B; --txt:#33201A; --muted:#7A5A48; --accent:#6E1E8C; --accent2:#A63A8E; --accent-text:#6E1E8C;}
+  :root[data-palette="combo02"][data-theme="dark"]{--bg:#3E0856; --panel:#4E1866; --line:#6E3886; --txt:#FAAE62; --muted:#E09E52; --accent:#FAAE62; --accent2:#00E5A0; --accent-text:#00E5A0;}
+  :root[data-palette="combo03"][data-theme="light"]{--bg:#B0EDF9; --panel:#C4F0F9; --line:#88C4D8; --txt:#04344C; --muted:#24546C; --accent:#04344C; --accent2:#E67E22; --accent-text:#C96A12;}
+  :root[data-palette="combo03"][data-theme="dark"]{--bg:#04344C; --panel:#14546C; --line:#2A5A72; --txt:#B0EDF9; --muted:#88CDE0; --accent:#B0EDF9; --accent2:#FFB74D; --accent-text:#FFC978;}
+  :root[data-palette="combo04"][data-theme="light"]{--bg:#F5EDEF; --panel:#FAF3F5; --line:#E5D0D6; --txt:#3A0F1D; --muted:#7A5060; --accent:#D6153B; --accent2:#A80F2E; --accent-text:#D6153B;}
+  /* Milano jasny: znaczniki po rozwinieciu kategorii/kolekcji wracaja do poprzedniego ciemnego odcienia — sam akcent (nagłówki, ceny) zostaje czerwony */
+  :root[data-palette="combo04"][data-theme="light"] .group-sec.is-open .group-head,
+  :root[data-palette="combo04"][data-theme="light"] .cp-sec.is-open .cp-head{border-bottom-color:#2A0F1A}
+  :root[data-palette="combo04"][data-theme="light"] .group-sec.is-open .group-head-num,
+  :root[data-palette="combo04"][data-theme="light"] .cp-sec.is-open .cp-head-meta b{color:#2A0F1A}
+  :root[data-palette="combo04"][data-theme="light"] .group-sec.is-open .group-head-arrow,
+  :root[data-palette="combo04"][data-theme="light"] .cp-sec.is-open .cp-head-arrow{background:#2A0F1A}
+  :root[data-palette="combo04"][data-theme="dark"]{--bg:#2A0F1A; --panel:#3A1826; --line:#4A2536; --txt:#F5EDEF; --muted:#B89AA8; --accent:#D07DAD; --accent2:#C1354F; --accent-text:#D07DAD;}
+  :root[data-palette="combo05"][data-theme="light"]{--bg:#FFFE15; --panel:#FFFF3C; --line:#D0CE10; --txt:#0C1E29; --muted:#243E49; --accent:#0C1E29; --accent2:#D9186B; --accent-text:#C0135F;}
+  :root[data-palette="combo05"][data-theme="dark"]{--bg:#0C1E29; --panel:#182E39; --line:#3E5E69; --txt:#FFFE15; --muted:#E0DE35; --accent:#FFFE15; --accent2:#FF3A9E; --accent-text:#FF6EB8;}
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--bg); color:var(--txt); font-family:'Manrope',system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px; -webkit-font-smoothing:antialiased;}
-  h1{font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:clamp(28px,4vw,42px); letter-spacing:-.02em; margin-bottom:6px;}
-  h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:700;}
+  html{overflow-x:hidden; max-width:100vw;}
+  /* Suwak bez tla — widoczny tylko kciuk w akcencie motywu.
+     Ta ramka siedzi w srodku layoutu, wiec szara belka scrollbara
+     czytala sie jak pusty pasek miedzy kolumnami. */
+  html{scrollbar-width:thin; scrollbar-color:var(--accent) transparent;}
+  ::-webkit-scrollbar{width:10px; height:10px; background:transparent;}
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-track-piece,
+  ::-webkit-scrollbar-corner{background:transparent; border:0; box-shadow:none;}
+  ::-webkit-scrollbar-button{display:none; width:0; height:0;}
+  ::-webkit-scrollbar-thumb{background:var(--accent); border-radius:99px; border:2px solid transparent; background-clip:padding-box;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent2); background-clip:padding-box;}
+  body{background:var(--bg); color:var(--txt); font-family:'Manrope',system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px; -webkit-font-smoothing:antialiased; overflow-x:hidden; max-width:100vw;}
+  /* Identyfikacja lucdoro.design: display = Syne 600, tracking -.035em,
+     akcent = ta sama rodzina kursywa w kolorze marki (.hero h1 / .hero h1 em) */
+  h1{font-family:'Syne',sans-serif; font-style:normal; font-weight:600; font-size:clamp(26px,3.4vw,36px); letter-spacing:-.035em; line-height:1.12; text-transform:none; margin-bottom:6px;}
+  h1 em{font-style:italic; font-weight:600; color:var(--accent-text,var(--accent)); letter-spacing:-.02em;}
+  h1 span{color:var(--accent-text,var(--accent)); font-weight:600;}
+  /* Wyszukiwarka pozycji — glowne pytanie usera brzmi "jest to w cenniku czy nie",
+     wiec zero trafien musi dac jednoznaczna odpowiedz, nie pusta liste. */
+  .searchbar{position:relative; margin:0 0 16px;}
+  .searchbar .s-in{width:100%; padding:13px 42px 13px 42px; border:1px solid var(--line); border-radius:12px; background:var(--panel); color:var(--txt); font-family:inherit; font-size:14px;}
+  .searchbar .s-in:focus{outline:none; border-color:var(--accent);}
+  .searchbar .s-ico{position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--muted); pointer-events:none; display:block;}
+  .searchbar .s-ico svg{width:100%; height:100%; display:block;}
+  .searchbar .s-clear{position:absolute; right:9px; top:50%; transform:translateY(-50%); width:26px; height:26px; padding:0; display:none; align-items:center; justify-content:center; background:transparent; border:0; box-shadow:none; border-radius:50%; color:var(--muted); cursor:pointer; letter-spacing:0;}
+  .searchbar .s-clear svg{width:13px; height:13px;}
+  .searchbar .s-clear:hover{color:var(--txt); transform:translateY(-50%);}
+  .searchbar.has-q .s-clear{display:flex;}
+  .q-count{font-family:'Roboto Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin:-8px 0 14px; min-height:13px;}
+  .q-empty{display:none; margin:0 0 16px; padding:16px 18px; border:1px solid var(--line); border-left:2px solid var(--accent); border-radius:0 12px 12px 0; background:color-mix(in srgb, var(--txt) 4%, transparent);}
+  .q-empty b{display:block; font-size:14px; margin-bottom:6px;}
+  .q-empty span{display:block; font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:12px;}
+  .q-empty a{display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:11px; background:var(--wa-bg); color:var(--wa-fg); text-decoration:none; font-weight:700; font-size:12.5px; letter-spacing:.3px;}
+  .q-hidden{display:none !important;}
   .sub{color:var(--muted); font-size:14px; margin-bottom:24px; max-width:640px; line-height:1.6;}
-  .wrap{display:grid; grid-template-columns:1fr 360px; gap:20px; max-width:1280px; margin:0 auto;}
-  @media(max-width:980px){.wrap{grid-template-columns:1fr;}}
+  .wrap{display:grid; grid-template-columns:1fr minmax(360px, 30%); gap:20px; max-width:1900px; margin:0 auto;}
+  /* w iframe (waska kolumna) trzymamy uklad 2-kolumnowy tak dlugo, jak sie da */
+  @media(max-width:1100px){.wrap{grid-template-columns:1fr minmax(320px, 34%); gap:16px;}}
+  @media(max-width:900px){.wrap{grid-template-columns:1fr 290px; gap:14px;} body{padding:18px;}}
+  @media(max-width:760px){.wrap{grid-template-columns:1fr; gap:16px;}}
   .card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px; margin-bottom:20px; box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 20px 40px -20px rgba(0,0,0,.35);}
   .card h2{font-family:'Roboto Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:2.5px; color:var(--accent); margin-bottom:16px; font-weight:700;}
   table{width:100%; border-collapse:collapse; font-size:14px;}
@@ -68,7 +110,7 @@
   .price{width:92px;}
   /* Quantity control: − [n] + */
   .qty-ctrl{display:inline-flex; align-items:center; gap:0; border:1px solid var(--line); border-radius:10px; background:var(--panel2); overflow:hidden; height:34px;}
-  .qty-ctrl button{background:transparent; color:var(--txt); border:none; width:30px; height:100%; font-size:16px; font-weight:600; cursor:pointer; padding:0; margin:0; display:flex; align-items:center; justify-content:center; transition:background .15s,color .15s;}
+  .qty-ctrl button{background:transparent; color:var(--txt); border:none; box-shadow:none; width:30px; height:100%; font-size:16px; font-weight:600; cursor:pointer; padding:0; margin:0; display:flex; align-items:center; justify-content:center; transition:background .15s,color .15s;}
   .qty-ctrl button:hover{background:var(--accent); color:#fff;}
   .qty-ctrl button:active{transform:scale(.92);}
   .qty-ctrl input.qty{width:36px; border:none; border-radius:0; background:transparent; padding:0; text-align:center; font-weight:700; font-variant-numeric:tabular-nums; font-size:14px; height:100%;}
@@ -91,38 +133,88 @@
   .total span:last-child{color:var(--accent);}
   .vatline{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); padding:2px 0;}
   .warnbox{background:rgba(224,122,95,.12); border:1px solid var(--warn); color:var(--warn); border-radius:8px; padding:10px 12px; font-size:13px; margin-top:12px; display:none;}
-  button{background:var(--wa-bg); color:var(--wa-fg); border:none; border-radius:12px; padding:14px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:14px; font-family:inherit; letter-spacing:.3px; box-shadow:0 8px 24px -8px rgba(123,77,255,.5); transition:transform .2s,box-shadow .2s;}
+  button{background:var(--wa-bg); color:var(--wa-fg); border:none; border-radius:12px; padding:14px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:14px; font-family:inherit; letter-spacing:.3px; box-shadow:none; transition:transform .2s,box-shadow .2s;}
   button:hover{transform:translateY(-1px); box-shadow:none;}
   button.ghost{background:transparent; color:var(--muted); border:1px solid var(--line); font-weight:500; font-size:13px; padding:10px; box-shadow:none;}
   button.ghost:hover{color:var(--txt); border-color:var(--accent); transform:none; box-shadow:none;}
+  /* Formularz wysylki wyceny — rozwija sie pod przyciskiem */
+  .sendbox{margin-top:10px; padding:14px; border:1px solid var(--line); border-radius:12px; background:color-mix(in srgb, var(--txt) 4%, transparent); display:flex; flex-direction:column; gap:8px;}
+  .sendbox[hidden]{display:none;}
+  .sf-lab{font-family:'Roboto Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted);}
+  .sf-in{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--panel); color:var(--txt); font-family:inherit; font-size:14px;}
+  .sf-in:focus{outline:none; border-color:var(--accent);}
+  .sf-hp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0;}
+  .sf-row{display:flex; gap:8px;}
+  .sf-row button{margin-top:6px;}
+  .sf-note{font-size:11px; color:var(--muted); line-height:1.5;}
+  .copied.err{color:var(--warn);}
   .copied{color:var(--ok); font-size:13px; text-align:center; margin-top:8px; height:16px;}
   .hint{font-size:12px; color:var(--muted); margin-top:10px;}
-  .gauge{margin:16px 0 4px; text-align:center;}
-  .gauge svg{width:100%; max-width:260px;}
+  .gauge{margin:16px 0 4px; text-align:center; position:relative;}
+  .gauge svg{width:100%; max-width:260px; color:var(--txt); overflow:visible;}
   .gaugeLabel{font-size:13px; color:var(--muted); margin-top:2px;}
   .gaugeLabel b{color:var(--txt);}
   .gaugeVerdict{font-size:14px; font-weight:700; margin-top:4px;}
   .below{color:var(--ok);} .near{color:var(--accent);} .above{color:var(--warn);}
+  /* Dwa tryby wskaznika oplacalnosci: kolorowy gauge (domyslny) i monochromatyczny e-papier —
+     e-papier to CALKIEM OSOBNY widok (nie filtr na tym samym), zeby wygladal jak cyfrowy
+     zegar/wyswietlacz LCD + bardzo uproszczony wykres gieldowy (pasek pozycji), zawsze
+     w tych samych szarosciach niezaleznie od wybranej palety. */
+  .gauge-mode-toggle{display:inline-flex; gap:2px; border:1px solid var(--line); border-radius:99px; padding:2px; background:var(--panel); margin-bottom:10px;}
+  .gauge-mode-btn{border:0; background:transparent; font-family:'Roboto Mono',monospace; font-size:9.5px; letter-spacing:.6px; text-transform:uppercase; padding:5px 10px; border-radius:99px; color:var(--muted); cursor:pointer; font-weight:700; transition:background .2s,color .2s;}
+  .gauge-mode-btn.is-active{background:var(--accent); color:#fff;}
+  /* Prawdziwy e-ink: matowy, bez polysku/cienia/gradientu, papierowa szarosc (nie chlodny szary),
+     ostre kanty (male zaokraglenie jak bezel czytnika), ziarno tla jak tekstura papieru,
+     bez animacji/przejsc (bistabilny wyswietlacz "przeskakuje", nie plynie). */
+  .gauge-epaper{display:none; margin:16px 0 4px; padding:16px 16px 14px; border:1px solid #B7B2A2; border-radius:3px;
+    background-color:#EAE6D9;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+    text-align:center;}
+  .gauge-epaper.is-active{display:block;}
+  .gep-value{display:block; font-family:'Roboto Mono',monospace; font-weight:700; font-size:34px; letter-spacing:.02em; color:#1A1A1A; font-variant-numeric:tabular-nums;}
+  .gep-track{position:relative; height:3px; background:#C9C4B2; border-radius:0; margin:18px 4px 5px;}
+  .gep-fill{position:absolute; top:0; height:3px; background:#1A1A1A; transition:none;}
+  .gep-mid{position:absolute; top:-4px; left:50%; width:1px; height:11px; background:#8C8672; transform:translateX(-.5px);}
+  .gep-marker{position:absolute; top:-5px; width:1px; height:13px; background:#1A1A1A; transition:none;}
+  .gep-scale{display:flex; justify-content:space-between; font-family:'Roboto Mono',monospace; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:#6E6858; margin:3px 4px 0;}
+  .gep-label{font-family:'Roboto Mono',monospace; font-size:12px; letter-spacing:.02em; color:#6E6858; margin-top:14px;}
+  .gep-label b{color:#1A1A1A; font-weight:700;}
+  .gep-verdict{font-family:'Roboto Mono',monospace; font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#1A1A1A; margin-top:5px;}
 
   /* ACCORDION grup — pionowa lista, header nad pozycjami */
   .groups-list{display:flex; flex-direction:column; gap:10px; margin:0 -22px;}
   .group-sec{background:var(--panel2); border:1px solid var(--line); border-radius:12px; overflow:hidden; transition:border-color .25s, box-shadow .25s;}
-  .group-sec.is-open{border-color:var(--accent);}
-  .group-head{width:100%; display:flex; align-items:center; gap:14px; padding:14px 18px; background:transparent; border:none; border-radius:11px; cursor:pointer; text-align:left; font-family:inherit; color:var(--txt); position:relative; transition:background .2s; outline:none;}
+  .group-sec.is-open{border-color:var(--line);}
+  .group-head{width:100%; display:flex; align-items:center; gap:14px; padding:14px 18px; background:transparent; border:none; box-shadow:none; border-radius:11px; cursor:pointer; text-align:left; font-family:inherit; color:var(--txt); position:relative; transition:background .2s; outline:none;}
   .group-head:hover{background:color-mix(in srgb, var(--accent) 12%, transparent);}
   .group-head:focus{outline:none;}
   .group-head:focus-visible{background:color-mix(in srgb, var(--accent) 12%, transparent); box-shadow:inset 0 0 0 2px color-mix(in srgb, var(--accent) 50%, transparent);}
   .group-head-num{font-family:'Roboto Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--muted); font-weight:700; min-width:28px;}
-  .group-sec.is-open .group-head{border-radius:11px 11px 0 0;}
+  .group-sec.is-open .group-head{border-radius:11px 11px 0 0; border-bottom:2px solid var(--accent);}
+  .group-sec.is-open .group-body-inner{border-top:none;}
   .group-sec.is-open .group-head-num{color:var(--accent);}
-  .group-head-name{flex:1; font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:20px; line-height:1.15;}
+  /* .section-title z lucdoro.design: Syne 600, -.02em */
+  .group-head-name{flex:1; font-family:'Syne',sans-serif; font-style:normal; font-weight:600; font-size:19px; line-height:1.15; letter-spacing:-.02em; text-transform:none;}
   .group-head-meta{font-family:'Roboto Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); padding:4px 10px; border-radius:99px; background:color-mix(in srgb, var(--txt) 6%, transparent);}
   .group-head-arrow{width:26px; height:26px; border-radius:50%; background:color-mix(in srgb, var(--accent) 12%, transparent); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; transition:transform .3s, background .25s, color .25s;}
   .group-sec.is-open .group-head-arrow{transform:rotate(180deg); background:var(--accent); color:#fff;}
   .group-body{overflow:hidden; max-height:0; transition:max-height .4s cubic-bezier(.22,1,.36,1);}
   .group-body.is-open{max-height:2400px;}
-  .group-body-inner{padding:0 14px 14px; border-top:1px solid var(--line);}
+  .group-body-inner{padding:0 14px 14px; border-top:1px solid var(--line); overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  @media(max-width:600px){
+    .group-body-inner table th[style*="110px"]{width:auto!important; padding-left:6px; padding-right:6px;}
+    .group-body-inner table input.price{width:56px;}
+    .group-body-inner .qty-ctrl button{width:24px;}
+    .group-body-inner .qty-ctrl input.qty{width:26px;}
+    table{font-size:12.5px;}
+  }
   .group-body-inner table{margin-top:8px;}
+  /* WYBRANE POZYCJE — neutralny przycien + pasek akcentu.
+     Wczesniej tlo bralo 16% --wa-bg: na nasyconych paletach (zolta + roz) robilo sie bloto. */
+  tbody tr.is-cart{background:color-mix(in srgb, var(--txt) 6%, transparent); box-shadow:inset 3px 0 0 var(--accent);}
+  tbody tr.is-cart .itemname{font-weight:600; color:var(--txt);}
+  tbody tr.is-cart .rowsum{color:var(--accent); font-weight:700;}
+  tbody tr.is-preview{background:color-mix(in srgb, var(--txt) 3.5%, transparent); box-shadow:inset 3px 0 0 color-mix(in srgb, var(--accent) 45%, transparent);}
 
   /* LANG KAFELKI (bigger toggle) */
   .lang-tiles{display:none;}
@@ -135,7 +227,69 @@
   /* waska kolumna (iframe / mobile): przelacznik w przeplywie, zeby nie zaslanial tytulu */
   @media(max-width:720px){.lang-tiles{position:static; justify-content:flex-end; margin:0 0 16px;}}
   .lang-tile.active .lang-tile-cur{color:rgba(255,255,255,.8); opacity:.9;}
+  /* ── KOLEKCJE (pod Wyceną) ───────────────────────────────── */
+  .cp-section-title{font-family:'Roboto Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); font-weight:700; margin:14px 0 8px;}
+  .cp-section-title:first-of-type{margin-top:0;}
+  /* Kolekcje jako akordeon — ten sam wzorzec co .group-sec w Pozycjach */
+  .cp-sec{background:color-mix(in srgb, var(--txt) 6%, transparent); border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-bottom:8px; transition:border-color .18s;}
+  .cp-sec:hover{border-color:color-mix(in srgb, var(--accent) 50%, transparent);}
+  .cp-head{width:100%; display:flex; align-items:center; gap:12px; padding:14px 15px; background:transparent; border:none; box-shadow:none; border-radius:11px; cursor:pointer; text-align:left; font-family:inherit; color:var(--txt); margin-top:0; transition:background .2s; outline:none;}
+  .cp-head:hover{background:color-mix(in srgb, var(--accent) 12%, transparent); transform:none;}
+  .cp-head:focus{outline:none;}
+  .cp-head:focus-visible{background:color-mix(in srgb, var(--accent) 12%, transparent); box-shadow:inset 0 0 0 2px color-mix(in srgb, var(--accent) 50%, transparent);}
+  .cp-sec.is-open .cp-head{border-radius:11px 11px 0 0; border-bottom:2px solid var(--accent);}
+  .cp-head-txt{flex:1; min-width:0; display:flex; flex-direction:column; gap:4px;}
+  .cp-head-name{font-family:'Syne',sans-serif; font-weight:600; font-size:16px; line-height:1.2; letter-spacing:-.02em; color:var(--txt); overflow-wrap:break-word;}
+  .cp-head-meta{font-family:'Roboto Mono',monospace; font-size:10px; letter-spacing:.4px; color:var(--muted); white-space:nowrap;}
+  .cp-head-meta b{color:var(--txt); font-weight:700;}
+  .cp-sec.is-open .cp-head-meta b{color:var(--accent);}
+  .cp-head .cp-ico{width:20px; height:20px;}
+  .cp-head-arrow{width:22px; height:22px; flex:none; border-radius:50%; background:color-mix(in srgb, var(--accent) 12%, transparent); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; line-height:1; transition:transform .3s, background .25s, color .25s;}
+  .cp-sec.is-open .cp-head-arrow{transform:rotate(180deg); background:var(--accent); color:#fff;}
+  .cp-body{overflow:hidden; max-height:0; transition:max-height .4s cubic-bezier(.22,1,.36,1);}
+  .cp-body.is-open{max-height:1400px;}
+  .cp-body-inner{padding:11px 13px 12px; border-top:1px solid var(--line);}
+  .cp-sec.is-open .cp-body-inner{border-top:none;}
+  /* Ikony pakietow: Lucide 0.469.0 (ISC), pobrane z unpkg i osadzone inline */
+  .cp-title{display:flex; align-items:center; gap:9px; min-width:0;}
+  .cp-ico{width:17px; height:17px; flex:none; color:var(--accent); display:block;}
+  .cp-ico svg{width:100%; height:100%; display:block;}
+  .cp-btn.danger .cp-ico{width:14px; height:14px; color:inherit;}
+  .cp-name{font-weight:700; color:var(--txt); font-size:13.5px; display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .cp-count{font-family:'Roboto Mono',monospace; font-size:9.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); font-weight:600; white-space:nowrap; padding:3px 8px; border-radius:99px; background:color-mix(in srgb, var(--txt) 8%, transparent);}
+  .cp-desc{color:var(--muted); font-size:11.5px; line-height:1.5; font-style:italic;}
+  .cp-list{list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; border-top:1px dashed var(--line);}
+  .cp-list li{display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:5px 0; font-size:11.5px; line-height:1.4; color:var(--muted); border-bottom:1px dashed var(--line);}
+  .cp-list li:last-child{border-bottom:0;}
+  .cp-list li span{flex:1;}
+  .cp-list li b{font-family:'Roboto Mono',monospace; font-size:10.5px; color:var(--txt); font-weight:700; white-space:nowrap;}
+  .cp-actions{display:flex; gap:6px; margin-top:6px;}
+  .cp-btn{flex:1; background:transparent; border:1px solid var(--line); color:var(--txt); padding:7px 10px; border-radius:8px; font-family:inherit; font-size:11px; font-weight:600; cursor:pointer; width:auto; margin-top:0; box-shadow:none; transition:all .18s;}
+  .cp-btn:hover{border-color:var(--accent); color:var(--accent); transform:none;}
+  .cp-btn.primary{background:var(--wa-bg); border-color:transparent; color:var(--wa-fg);}
+  .cp-btn.primary:hover{color:var(--wa-fg); border-color:transparent; filter:brightness(1.08);}
+  .cp-btn.danger{flex:0 0 auto; padding:7px 12px;}
+  .cp-btn.danger:hover{border-color:var(--warn); color:var(--warn);}
+  .cp-empty{color:var(--muted); font-size:11.5px; font-style:italic; text-align:center; padding:12px 0;}
+  .cp-save-row{display:flex; gap:6px; margin-top:6px;}
+  .cp-save-row input{flex:1; background:color-mix(in srgb, var(--txt) 6%, transparent); border:1px solid var(--line); color:var(--txt); padding:8px 12px; border-radius:8px; font-family:inherit; font-size:12px; outline:none; width:auto;}
+  .cp-save-row input:focus{border-color:var(--accent);}
+  .cp-save-row .cp-btn{flex:0 0 auto; padding:8px 14px;}
 </style>
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  (function() {
+    var u="https://lucdoro.design/webpage_tracker/";
+    _paq.push(["setTrackerUrl", u+"matomo.php"]);
+    _paq.push(["setSiteId", "1"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+    g.async=true; g.src=u+"matomo.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
 </head>
 <body>
 <div class="lang-tiles" role="tablist" aria-label="Język / Language">
@@ -150,8 +304,8 @@
     <span class="lang-tile-cur">· €</span>
   </button>
 </div>
-<div style="max-width:1280px; margin:0 auto 20px;">
-  <h1 data-i18n="title.h1">LucDoro<span>Design</span> — kalkulator wyceny</h1>
+<div style="max-width:1900px; margin:0 auto 20px;">
+  <h1 data-i18n="title.h1">LucDoroDesign <em>kalkulator wyceny</em></h1>
   <div class="sub" data-i18n="title.sub">Ceny netto, edytowalne. Zmiany cen bazowych zapisują się w tej przeglądarce. Minimalna wartość zlecenia: <b>300 zł netto</b>.</div>
 </div>
 
@@ -159,6 +313,18 @@
   <div>
     <div class="card">
       <h2>Pozycje</h2>
+      <div class="searchbar" id="searchbar">
+        <span class="s-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg></span>
+        <input class="s-in" id="q" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Szukaj w cenniku — np. opakowanie, wizytówka, sklep" data-i18n-ph="q.ph">
+        <button type="button" class="s-clear" id="q-clear" aria-label="Wyczyść"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+      </div>
+      <div class="q-count" id="q-count"></div>
+      <div class="q-empty" id="q-empty">
+        <b data-i18n="q.none">Nie ma tego w cenniku.</b>
+        <span data-i18n="q.none.sub">Nie znaczy, że tego nie zrobię — to po prostu robota wyceniana indywidualnie. Napisz, co dokładnie potrzebujesz, odpiszę z konkretną kwotą.</span>
+        <a id="q-empty-wa" href="https://wa.me/48795758555" target="_blank" rel="noopener" data-i18n="q.none.cta">Zapytaj o wycenę → WhatsApp</a>
+      </div>
       <div class="groups-list" id="groups-list"></div>
       <table id="items" style="display:none;"><tbody></tbody></table>
       <div class="hint">Kliknij nazwę kategorii — rozwinie się lista pozycji. Ilość 0 = pozycja nieaktywna.</div>
@@ -230,8 +396,12 @@
       <div class="total"><span>Netto</span><span id="sNet">0 zł</span></div>
       <div class="vatline" id="lVat"><span>VAT 23%</span><span id="sVat">0 zł</span></div>
       <div class="vatline" id="lGross"><span><b>Brutto</b></span><span id="sGross"><b>0 zł</b></span></div>
+      <div class="gauge-mode-toggle" id="gaugeModeToggle" role="group" aria-label="Tryb wskaznika oplacalnosci" style="display:none">
+        <button type="button" class="gauge-mode-btn is-active" id="gaugeModeColor">Kolor</button>
+        <button type="button" class="gauge-mode-btn" id="gaugeModeEpaper">E-Papier</button>
+      </div>
       <div class="gauge" id="gaugeBox" style="display:none">
-        <svg viewBox="0 0 220 130">
+        <svg viewBox="0 -8 220 156">
           <defs>
             <linearGradient id="ggrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stop-color="#f7e3b6"/>
@@ -240,24 +410,63 @@
             </linearGradient>
           </defs>
           <path d="M 25 110 A 85 85 0 0 1 195 110" fill="none" stroke="url(#ggrad)" stroke-width="16" stroke-linecap="round"/>
-          <line x1="110" y1="110" x2="110" y2="38" stroke="#2a2f3a" stroke-width="1" stroke-dasharray="3 4"/>
-          <text x="22" y="128" fill="#9aa0ab" font-size="10">−50%</text>
-          <text x="98" y="24" fill="#9aa0ab" font-size="10">średnia</text>
-          <text x="176" y="128" fill="#9aa0ab" font-size="10">+50%</text>
+          <line x1="110" y1="110" x2="110" y2="42" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity=".35"/>
+          <!-- opisy skali: srednia NAD lukiem, zakresy pod nim -->
+          <text x="110" y="4" text-anchor="middle" fill="currentColor" opacity=".6" font-size="10" letter-spacing=".08em">ŚREDNIA</text>
+          <text x="24" y="130" fill="currentColor" opacity=".6" font-size="10">−50%</text>
+          <text x="196" y="130" text-anchor="end" fill="currentColor" opacity=".6" font-size="10">+50%</text>
+          <!-- wskazowka krotsza, zeby nie wchodzila w luk ani w liczbe -->
           <g id="needle" transform="rotate(0 110 110)">
-            <line x1="110" y1="110" x2="110" y2="34" stroke="#e8e6e1" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="110" cy="110" r="6" fill="#e8e6e1"/>
+            <line x1="110" y1="110" x2="110" y2="46" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="110" cy="110" r="5.5" fill="currentColor"/>
+            <circle cx="110" cy="110" r="2" fill="var(--panel)"/>
           </g>
-          <text id="gaugePct" x="110" y="98" text-anchor="middle" fill="#e8e6e1" font-size="17" font-weight="bold"></text>
+          <!-- wartosc POD piastą — wczesniej siedziala na wskazowce i byla nieczytelna -->
+          <text id="gaugePct" x="110" y="142" text-anchor="middle" fill="currentColor" style="fill:currentColor" font-size="24" font-weight="800" letter-spacing="-.02em"></text>
         </svg>
         <div class="gaugeLabel">Średnia rynkowa dla tego zakresu: <b id="marketVal">—</b> netto</div>
         <div class="gaugeVerdict" id="gaugeVerdict"></div>
       </div>
+      <div class="gauge-epaper" id="gaugeEpaperBox">
+        <div class="gep-value" id="gepPct">—</div>
+        <div class="gep-track">
+          <div class="gep-fill" id="gepFill"></div>
+          <div class="gep-mid"></div>
+          <div class="gep-marker" id="gepMarker"></div>
+        </div>
+        <div class="gep-scale"><span>-50%</span><span>ŚREDNIA</span><span>+50%</span></div>
+        <div class="gep-label">Średnia rynkowa dla tego zakresu: <b id="marketVal2">—</b> netto</div>
+        <div class="gep-verdict" id="gepVerdict"></div>
+      </div>
       <div class="warnbox" id="minWarn">Wycena poniżej minimum 300 zł netto — podnieś zakres albo dolicz do pakietu.</div>
-      <button id="copyBtn">Kopiuj wycenę do maila</button>
+      <button id="copyBtn">Wyślij wycenę na maila</button>
+      <div class="sendbox" id="sendBox" hidden>
+        <div><label class="sf-lab" for="sfName" data-i18n="sf.name">Imię</label>
+        <input class="sf-in" id="sfName" type="text" autocomplete="given-name" maxlength="60" placeholder="Jak się do Ciebie zwracać?"></div>
+        <div><label class="sf-lab" for="sfMail" data-i18n="sf.mail">Twój e-mail</label>
+        <input class="sf-in" id="sfMail" type="email" autocomplete="email" maxlength="254" placeholder="ty@firma.pl"></div>
+        <input class="sf-hp" id="sfCompany" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="sf-row">
+          <button type="button" id="sfSend" data-i18n="sf.send">Wyślij</button>
+          <button type="button" class="ghost" id="sfCancel" data-i18n="sf.cancel">Anuluj</button>
+        </div>
+        <div class="sf-note" data-i18n="sf.note">Wycena trafi na Twój adres, a kopia do mnie — odezwę się z potwierdzeniem.</div>
+      </div>
       <div class="copied" id="copied"></div>
       <button class="ghost" id="resetBtn">Wyzeruj ilości i parametry</button>
       <button class="ghost" id="resetPrices">Przywróć ceny domyślne</button>
+    </div>
+
+    <div class="card">
+      <h2>Kolekcje</h2>
+      <div class="cp-section-title">Gotowe pakiety</div>
+      <div id="cp-presets"></div>
+      <div class="cp-section-title">Twoje kolekcje</div>
+      <div id="cp-saved"></div>
+      <div class="cp-save-row">
+        <input type="text" id="cp-name-input" placeholder="Nazwa kolekcji…">
+        <button type="button" class="cp-btn primary" id="cp-save-btn">Zapisz</button>
+      </div>
     </div>
   </div>
 </div>
@@ -380,13 +589,8 @@ CATALOG.forEach(([group, items], gi) => {
     head.setAttribute("aria-expanded", isOpen ? "true" : "false");
   });
 });
-// Otwórz pierwszą kategorię domyślnie
-const firstSec = list.firstElementChild;
-if (firstSec){
-  firstSec.classList.add("is-open");
-  firstSec.querySelector(".group-body").classList.add("is-open");
-  firstSec.querySelector(".group-head").setAttribute("aria-expanded", "true");
-}
+// Wszystkie kategorie startuja zwiniete — na telefonie rozwinieta pierwsza
+// grupa zasypywala ekran tabela, zanim uzytkownik zdazyl zobaczyc liste kategorii.
 
 const $ = id => document.getElementById(id);
 let LANG = 'pl';
@@ -426,7 +630,8 @@ function calc(){
   const sub = base + rush + rev + call + del;
   const disc = sub * (+$("discount").value||0) / 100;
   const net = sub - disc;
-  const vatOn = $("vat").checked;
+  const vatChk = $("vat");
+  const vatOn = vatChk ? vatChk.checked : true;
   const vat = vatOn ? net * 0.23 : 0;
 
   $("sBase").textContent = fmt(base);
@@ -453,13 +658,37 @@ function calc(){
     $("gaugePct").textContent = (pct > 0 ? "+" : "") + pct + "%";
     $("marketVal").textContent = fmt(marketNet);
     const v = $("gaugeVerdict");
-    if (ratio < 0.95){ v.textContent = "Poniżej średniej rynkowej"; v.className = "gaugeVerdict below"; }
-    else if (ratio <= 1.05){ v.textContent = "W okolicy średniej rynkowej"; v.className = "gaugeVerdict near"; }
-    else { v.textContent = "Powyżej średniej rynkowej"; v.className = "gaugeVerdict above"; }
-    $("gaugeBox").style.display = "block";
+    // liczba na mierniku dostaje ten sam kolor co werdykt
+    const pctEl = $("gaugePct");
+    if (ratio < 0.95){ v.textContent = "Poniżej średniej rynkowej"; v.className = "gaugeVerdict below"; pctEl.setAttribute("class","below"); }
+    else if (ratio <= 1.05){ v.textContent = "W okolicy średniej rynkowej"; v.className = "gaugeVerdict near"; pctEl.setAttribute("class","near"); }
+    else { v.textContent = "Powyżej średniej rynkowej"; v.className = "gaugeVerdict above"; pctEl.setAttribute("class","above"); }
+
+    // E-Papier — ten sam ratio, ale jako uproszczony pasek pozycji (jak wykres gieldowy) + odczyt LCD
+    const posPct = (clamped - 0.5) * 100; // 0.5x→0%, 1x→50% (srednia), 1.5x→100%
+    $("gepPct").textContent = (pct > 0 ? "+" : "") + pct + "%";
+    $("marketVal2").textContent = fmt(marketNet);
+    $("gepFill").style.left = Math.min(50, posPct) + "%";
+    $("gepFill").style.width = Math.abs(posPct - 50) + "%";
+    $("gepMarker").style.left = posPct + "%";
+    const gv = $("gepVerdict");
+    if (ratio < 0.95) gv.textContent = "▼ poniżej średniej rynkowej";
+    else if (ratio <= 1.05) gv.textContent = "● w okolicy średniej rynkowej";
+    else gv.textContent = "▲ powyżej średniej rynkowej";
+
+    let gm = "color";
+    try { gm = localStorage.getItem("lucdoro_calc_gauge_mode") || "color"; } catch(e){}
+    $("gaugeModeToggle").style.display = "inline-flex";
+    $("gaugeBox").style.display = gm === "epaper" ? "none" : "block";
+    $("gaugeEpaperBox").classList.toggle("is-active", gm === "epaper");
   } else {
     $("gaugeBox").style.display = "none";
+    $("gaugeEpaperBox").classList.remove("is-active");
+    $("gaugeModeToggle").style.display = "none";
   }
+
+  // Zamowienie klienta przezywa przeladowanie ramki (zmiana motywu/palety) i F5
+  saveCart();
 
   // Zywy paragon w prawym panelu — komplet wybranych pozycji przy kazdej zmianie
   try {
@@ -472,6 +701,7 @@ function calc(){
       net:net, vat:vat, vatOn:vatOn, gross:net+vat}, '*');
   } catch(e){}
 
+  try { if (window.mstackRender) window.mstackRender(net); } catch(e){}
   return {lines, base, rush, rushPct, rev, revExtra, call, callExtra, del, disc, net, vat, vatOn, marketNet, ratio};
 }
 function show(lineId, val, sumId){
@@ -482,35 +712,81 @@ function show(lineId, val, sumId){
 document.body.addEventListener("input", calc);
 document.body.addEventListener("change", calc);
 
-$("copyBtn").addEventListener("click", () => {
+function sfMsg(txt, isErr){
+  const el = $("copied");
+  el.textContent = txt;
+  el.classList.toggle("err", !!isErr);
+}
+
+function quotePayload(){
   const c = calc();
-  if (!c.lines.length){ $("copied").textContent = "Zaznacz najpierw pozycje."; return; }
-  let t = "WYCENA — LucDoroDesign\n\n" + c.lines.join("\n") + "\n";
-  if (c.rush > 0) t += `• Termin przyspieszony (+${c.rushPct}%) — ${fmt(c.rush)}\n`;
-  t += `• Poprawki: ${$("revFree").value} rundy w cenie`;
-  if (c.revExtra > 0) t += `, dodatkowe ${c.revExtra} — ${fmt(c.rev)}`;
-  t += `\n• Konsultacje tel.: ${$("callFree").value} × 30 min w cenie`;
-  if (c.callExtra > 0) t += `, dodatkowe ${c.callExtra} — ${fmt(c.call)}`;
-  t += "\n";
-  if (c.del > 0) t += `• Dostawa — ${fmt(c.del)}\n`;
-  if (c.disc > 0) t += `• Rabat — −${fmt(c.disc)}\n`;
-  t += `\nRAZEM NETTO: ${fmt(c.net)}`;
-  if (c.vatOn) t += `\nVAT 23%: ${fmt(c.vat)}\nBRUTTO: ${fmt(c.net + c.vat)}`;
-  if (c.marketNet > 0 && c.ratio > 0 && c.ratio < 0.98){
-    t += `\n\nDla porównania: średnia cena rynkowa takiego zakresu to ok. ${fmt(c.marketNet)} netto — ta oferta jest ${Math.round((1 - c.ratio) * 100)}% poniżej średniej.`;
-  }
-  t += "\n\nWycena ważna 14 dni. Termin liczony od akceptacji wyceny i przesłania materiałów.";
-  navigator.clipboard.writeText(t).then(() => {
-    $("copied").textContent = "Skopiowano — wklej do maila.";
-    setTimeout(() => $("copied").textContent = "", 3000);
+  const items = rows.filter(r => (+r.qty.value || 0) > 0).map(r => {
+    const q = +r.qty.value || 0, u = +r.price.value || 0;
+    return {name:r.name, qty:q, price:u, sum:q*u};
   });
+  return {c, items};
+}
+
+const sendBox = $("sendBox");
+
+$("copyBtn").addEventListener("click", () => {
+  const {c} = quotePayload();
+  if (!c.lines.length){ sfMsg("Zaznacz najpierw pozycje.", true); return; }
+  sendBox.hidden = !sendBox.hidden;
+  sfMsg("");
+  if (!sendBox.hidden) $("sfName").focus();
+});
+
+$("sfCancel").addEventListener("click", () => { sendBox.hidden = true; sfMsg(""); });
+
+$("sfSend").addEventListener("click", () => {
+  const {c, items} = quotePayload();
+  const name  = $("sfName").value.trim();
+  const email = $("sfMail").value.trim();
+  if (!items.length){ sfMsg("Zaznacz najpierw pozycje.", true); return; }
+  if (!name){ sfMsg("Podaj imię.", true); $("sfName").focus(); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ sfMsg("Podaj poprawny adres e-mail.", true); $("sfMail").focus(); return; }
+
+  const btn = $("sfSend");
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = "Wysyłam…";
+  sfMsg("");
+
+  fetch("send-quote.php", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      company: $("sfCompany").value,   // honeypot — boty wypelniaja, ludzie nie widza
+      items: items,
+      extras: {rush:c.rush, rev:c.rev, call:c.call, del:c.del, disc:c.disc},
+      net: c.net, vat: c.vat, vatOn: c.vatOn, gross: c.net + c.vat
+    })
+  })
+  .then(r => r.json().catch(() => ({ok:false, error:"Serwer zwrócił nieczytelną odpowiedź."})))
+  .then(d => {
+    if (d && d.ok){
+      sendBox.hidden = true;
+      $("sfName").value = ""; $("sfMail").value = "";
+      sfMsg("Wysłane — sprawdź skrzynkę (także spam).");
+      setTimeout(() => sfMsg(""), 6000);
+    } else {
+      sfMsg((d && d.error) || "Nie udało się wysłać.", true);
+    }
+  })
+  .catch(() => sfMsg("Brak połączenia z serwerem.", true))
+  .finally(() => { btn.disabled = false; btn.textContent = label; });
 });
 
 $("resetBtn").addEventListener("click", () => {
   rows.forEach(r => r.qty.value = 0);
   $("rush").value = "0"; $("revUsed").value = 2; $("revFree").value = 2; $("revPrice").value = 80;
   $("callUsed").value = 1; $("callFree").value = 1; $("callPrice").value = 50;
-  $("delivery").value = "0"; $("deliveryCustom").value = 0; $("discount").value = 0; $("vat").checked = true;
+  $("delivery").value = "0"; $("deliveryCustom").value = 0; $("discount").value = 0;
+  const vatEl = $("vat"); if (vatEl) vatEl.checked = true;
+  if (window.clearRowSelection) window.clearRowSelection();
+  try { sessionStorage.removeItem(CART_KEY); } catch(e){}
   calc();
 });
 $("resetPrices").addEventListener("click", () => {
@@ -519,6 +795,52 @@ $("resetPrices").addEventListener("click", () => {
   calc();
 });
 
+/* ── KOSZYK KLIENTA — przetrwanie przeladowania ramki ─────────
+   Przelacznik motywu/palety w wrapperze podmienia src iframe'a,
+   co bez tego kasowaloby cale zamowienie. sessionStorage, wiec
+   nowa wizyta startuje czysto, ale F5 i zmiana stylu nie boli.  */
+const CART_KEY = 'ldd_kalk_cart_v1';
+const PARAM_IDS = ['rush','revUsed','revFree','revPrice','callUsed','callFree','callPrice','delivery','deliveryCustom','discount'];
+
+function saveCart(){
+  try {
+    const items = {};
+    rows.forEach(r => { const q = +r.qty.value || 0; if (q > 0) items[r.name] = q; });
+    const params = {};
+    PARAM_IDS.forEach(id => { const el = $(id); if (el) params[id] = el.value; });
+    const vatEl = $("vat");
+    sessionStorage.setItem(CART_KEY, JSON.stringify({items, params, vat: vatEl ? vatEl.checked : true}));
+  } catch(e){}
+}
+
+function restoreCart(){
+  let data = null;
+  try { data = JSON.parse(sessionStorage.getItem(CART_KEY) || 'null'); } catch(e){}
+  if (!data || typeof data !== 'object') return;
+
+  const items = data.items || {};
+  const toOpen = [];
+  rows.forEach(r => {
+    const q = +items[r.name] || 0;
+    if (q > 0){
+      r.qty.value = q;
+      const sec = r.tr.closest('.group-sec');
+      if (sec && toOpen.indexOf(sec) === -1) toOpen.push(sec);
+    }
+  });
+  toOpen.forEach(sec => {
+    sec.classList.add('is-open');
+    const b = sec.querySelector('.group-body');
+    if (b) b.classList.add('is-open');
+  });
+
+  const params = data.params || {};
+  PARAM_IDS.forEach(id => { const el = $(id); if (el && params[id] !== undefined) el.value = params[id]; });
+  const vatEl = $("vat");
+  if (vatEl && typeof data.vat === 'boolean') vatEl.checked = data.vat;
+}
+
+restoreCart();
 calc();
 
 // LIVE PRICES — fetch prices.json + auto-refresh co 5 min
@@ -552,17 +874,24 @@ function applyLivePrices(){
   calc();
 }
 function updateLiveIndicator(ok){
+  const dot = ok ? "\u25CF" : "\u25CB";
+  const color = ok ? "#7dc98f" : "#e07a5f";
+  const label = ok ? "LIVE" : "OFFLINE";
+  const time = liveMeta && liveMeta.updated ? new Date(liveMeta.updated).toLocaleString("pl-PL",{dateStyle:"short",timeStyle:"short"}) : "";
+  // W splicie plakietka nalezy do prawego okna — tu tylko nadajemy stan.
+  if (window.parent !== window){
+    const own = document.getElementById("live-indicator");
+    if (own) own.remove();
+    try { window.parent.postMessage({type:"live", ok:ok, dot:dot, color:color, label:label, time:time}, "*"); } catch(e){}
+    return;
+  }
   let el = document.getElementById("live-indicator");
   if (!el){
     el = document.createElement("div");
     el.id = "live-indicator";
-    el.style.cssText = "position:fixed;top:16px;right:16px;background:color-mix(in srgb, var(--panel) 94%, transparent);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--txt);padding:8px 12px;border-radius:12px;font-size:11px;font-family:inherit;display:flex;align-items:center;gap:8px;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.3);";
+    el.style.cssText = "position:fixed;bottom:16px;left:16px;background:color-mix(in srgb, var(--panel) 94%, transparent);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--txt);padding:8px 12px;border-radius:12px;font-size:11px;font-family:inherit;display:flex;align-items:center;gap:8px;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:.7;";
     document.body.appendChild(el);
   }
-  const dot = ok ? "●" : "○";
-  const color = ok ? "#7dc98f" : "#e07a5f";
-  const label = ok ? "LIVE" : "OFFLINE";
-  const time = liveMeta && liveMeta.updated ? new Date(liveMeta.updated).toLocaleString("pl-PL",{dateStyle:"short",timeStyle:"short"}) : "";
   el.innerHTML = `<span style="color:${color};font-size:14px;line-height:1;">${dot}</span> <b>${label}</b>${time?` · <span style="color:var(--muted);">${time}</span>`:""}`;
 }
 
@@ -581,6 +910,29 @@ document.addEventListener("visibilitychange", () => {
   document.documentElement.setAttribute('data-theme', t);
   var p = params.get('palette');
   if (p && p !== 'default') document.documentElement.setAttribute('data-palette', p);
+})();
+
+// Tryb wskaznika oplacalnosci: kolorowy gauge / monochromatyczny e-papier (osobny widok, uniwersalny dla kazdej palety)
+(function(){
+  var KEY = 'lucdoro_calc_gauge_mode';
+  var btnColor = document.getElementById('gaugeModeColor');
+  var btnEpaper = document.getElementById('gaugeModeEpaper');
+  if (!btnColor || !btnEpaper) return;
+  function setActive(mode){
+    btnColor.classList.toggle('is-active', mode !== 'epaper');
+    btnEpaper.classList.toggle('is-active', mode === 'epaper');
+  }
+  var saved = 'color';
+  try { saved = localStorage.getItem(KEY) || 'color'; } catch(e){}
+  setActive(saved);
+  btnColor.addEventListener('click', function(){
+    try{ localStorage.setItem(KEY,'color'); }catch(e){}
+    setActive('color'); if (typeof calc === 'function') calc();
+  });
+  btnEpaper.addEventListener('click', function(){
+    try{ localStorage.setItem(KEY,'epaper'); }catch(e){}
+    setActive('epaper'); if (typeof calc === 'function') calc();
+  });
 })();
 
 // KEYBOARD CONTROLS Word-like (Tab, Ctrl+Home, Ctrl+End)
@@ -622,23 +974,49 @@ document.addEventListener("visibilitychange", () => {
 
 // PostMessage do parent (wrapper) — powiadamiaj o wybranej pozycji + apply-collection + get-state
 (function(){
+  var selectedRow = null;
+
+  function refreshRowBg(r){
+    var q = +r.qty.value || 0;
+    r.tr.classList.toggle('is-cart', q > 0);
+    r.tr.classList.toggle('is-preview', q === 0 && r === selectedRow);
+  }
+  window.refreshAllRowBg = function(){ rows.forEach(refreshRowBg); };
+  // Wyzerowanie musi tez zdjac podswietlenie wierszy i podglad
+  window.clearRowSelection = function(){ selectedRow = null; rows.forEach(refreshRowBg); };
+
   function notify(row){
     if (window.parent === window) return;
     var name = row.tr.querySelector('td')?.textContent.trim();
     var price = +row.price.value || 0;
     var market = row.market;
-    window.parent.postMessage({type:'service-select', name, price, market}, '*');
+    // 'name' jest tym, co widac w tabeli (po EN przy jezyku angielskim) — rodzic
+    // potrzebuje jeszcze klucza polskiego, zeby trafic w opisy uslugi.
+    window.parent.postMessage({type:'service-select', name, key:row.name, price, market}, '*');
   }
   rows.forEach(r => {
     r.tr.addEventListener('click', (e) => {
       if (e.target.tagName === 'INPUT') return;
+      // Stepper ma wlasna robote — tapniecie w -/+ nie moze dodatkowo
+      // przelaczac calego wiersza, bo "+" z 1 na 2 zdejmowalby pozycje.
+      if (e.target.closest && e.target.closest('.qty-ctrl')) return;
+      if (window.matchMedia('(max-width:760px)').matches){
+        var had = (+r.qty.value || 0) > 0;
+        r.qty.value = had ? 0 : 1;
+        r.qty.dispatchEvent(new Event('input', {bubbles:true}));
+        // Dolozenie pozycji chowa paragon — wraca on dopiero na "Zamawiam".
+        if (!had && window.parent !== window){
+          try { window.parent.postMessage({type:'stack-add'}, '*'); } catch(err){}
+        }
+      }
       notify(r);
-      document.querySelectorAll('#items tr').forEach(t => t.style.background = '');
-      r.tr.style.background = 'rgba(232,177,78,.08)';
+      selectedRow = r;
+      window.refreshAllRowBg();
     });
     r.tr.style.cursor = 'pointer';
+    r.qty.addEventListener('input', () => refreshRowBg(r));
     r.price.addEventListener('input', () => {
-      if (r.tr.style.background) notify(r);
+      if (r.tr.classList.contains('is-cart') || r.tr.classList.contains('is-preview')) notify(r);
     });
   });
 
@@ -650,52 +1028,212 @@ document.addEventListener("visibilitychange", () => {
       return;
     }
     if (e.data.type === 'apply-collection' && Array.isArray(e.data.items)){
-      // Zeruj wszystkie qty
-      rows.forEach(r => { r.qty.value = 0; });
-      // Ustaw qty dla wybranych items (dopasowanie po nazwie)
-      var toOpen = [];
-      e.data.items.forEach(item => {
-        var r = rows.find(x => x.name === item.name);
-        if (r){
-          r.qty.value = item.qty;
-          r.tr.style.background = 'color-mix(in srgb, var(--wa-bg) 16%, transparent)';
-          var sec = r.tr.closest('.group-sec');
-          if (sec && toOpen.indexOf(sec) === -1) toOpen.push(sec);
-        }
-      });
-      // Rozwin kategorie, w ktorych cokolwiek ustawiono — inaczej zmiany sa niewidoczne
-      toOpen.forEach(function(sec){
-        sec.classList.add('is-open');
-        var b = sec.querySelector('.group-body');
-        if (b) b.classList.add('is-open');
-      });
-      calc();
-      // Odeslij wrapperowi komplet pakietu (nazwa, ceny, sumy) do widoku kart
-      var applied = [];
-      e.data.items.forEach(item => {
-        var r = rows.find(x => x.name === item.name);
-        if (!r) return;
-        var unit = +r.price.value || 0, q = +r.qty.value || 0;
-        applied.push({name:r.name, qty:q, price:unit, sum:unit*q, market:r.market || 0, group:r.group});
-      });
-      window.parent.postMessage({
-        type:'collection-applied',
-        name: e.data.name || 'Pakiet',
-        items: applied,
-        total: applied.reduce((a,b) => a + b.sum, 0)
-      }, '*');
-      // Scroll do pierwszej zastosowanej pozycji (po rozwinieciu)
-      var first = e.data.items[0];
-      if (first){
-        var r = rows.find(x => x.name === first.name);
-        if (r) setTimeout(function(){ r.tr.scrollIntoView({behavior:'smooth', block:'center'}); }, 120);
-      }
+      applyCollectionItems(e.data.items, e.data.name);
     }
     if (e.data.type === 'get-state'){
       var items = rows.map(r => ({name:r.name, qty:+r.qty.value || 0}));
       window.parent.postMessage({type:'state', items:items, saveAs:e.data.saveAs}, '*');
     }
   });
+
+  function applyCollectionItems(list, collName){
+    // Zeruj wszystkie qty
+    rows.forEach(r => { r.qty.value = 0; });
+    // Ustaw qty dla wybranych items (dopasowanie po nazwie)
+    var toOpen = [];
+    list.forEach(item => {
+      var r = rows.find(x => x.name === item.name);
+      if (r){
+        r.qty.value = item.qty;
+        var sec = r.tr.closest('.group-sec');
+        if (sec && toOpen.indexOf(sec) === -1) toOpen.push(sec);
+      }
+    });
+    window.refreshAllRowBg();
+    // Rozwin kategorie, w ktorych cokolwiek ustawiono — inaczej zmiany sa niewidoczne
+    toOpen.forEach(function(sec){
+      sec.classList.add('is-open');
+      var b = sec.querySelector('.group-body');
+      if (b) b.classList.add('is-open');
+    });
+    calc();
+    // Odeslij wrapperowi komplet pakietu (nazwa, ceny, sumy) do widoku kart
+    var applied = [];
+    list.forEach(item => {
+      var r = rows.find(x => x.name === item.name);
+      if (!r) return;
+      var unit = +r.price.value || 0, q = +r.qty.value || 0;
+      applied.push({name:r.name, qty:q, price:unit, sum:unit*q, market:r.market || 0, group:r.group});
+    });
+    if (window.parent !== window){
+      window.parent.postMessage({
+        type:'collection-applied',
+        name: collName || 'Pakiet',
+        items: applied,
+        total: applied.reduce((a,b) => a + b.sum, 0)
+      }, '*');
+    }
+    // Scroll do pierwszej zastosowanej pozycji (po rozwinieciu)
+    var first = list[0];
+    if (first){
+      var r = rows.find(x => x.name === first.name);
+      if (r) setTimeout(function(){ r.tr.scrollIntoView({behavior:'smooth', block:'center'}); }, 120);
+    }
+  }
+
+  /* ── KOLEKCJE — karta pod Wyceną ─────────────────────────── */
+  var PRESETS = [
+    {id:"starter", name:"Starter", desc:"Logo · Wizytówka · Ulotka A5", items:[
+      {name:"Logo — nowy projekt", qty:1},
+      {name:"Wizytówka — projekt", qty:1},
+      {name:"Ulotka — projekt (do A5, 2 strony)", qty:1}
+    ]},
+    {id:"rebranding", name:"Rebranding kompletny", desc:"Identyfikacja + baner + 3× social", items:[
+      {name:"Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)", qty:1},
+      {name:"Baner / billboard — projekt", qty:1},
+      {name:"Grafika social media — 1 kreacja", qty:3}
+    ]},
+    {id:"firma-online", name:"Firma online", desc:"Logo + strona firmowa + 5× social", items:[
+      {name:"Logo — nowy projekt", qty:1},
+      {name:"Strona firmowa (WordPress / statyczna)", qty:1},
+      {name:"Grafika social media — 1 kreacja", qty:5}
+    ]},
+    {id:"ecommerce", name:"E-commerce start", desc:"Sklep + landing + 5× social + mini-brand", items:[
+      {name:"Sklep internetowy", qty:1},
+      {name:"Landing page / one-page", qty:1},
+      {name:"Grafika social media — 1 kreacja", qty:5},
+      {name:"Mini księga znaku / brandbook", qty:1}
+    ]},
+    {id:"eventowy", name:"Pakiet eventowy", desc:"Rollup + plakat + ulotka + baner", items:[
+      {name:"Rollup — projekt", qty:1},
+      {name:"Plakat — projekt", qty:2},
+      {name:"Ulotka — projekt (do A5, 2 strony)", qty:1},
+      {name:"Baner / billboard — projekt", qty:1}
+    ]}
+  ];
+  // Lucide 0.469.0 (ISC) — inline, zero requestow do CDN
+  var CP_ICONS = {
+    "starter": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" /> <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" /> <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /> <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></svg>',
+    "rebranding": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /> <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /> <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /> <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /> <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" /></svg>',
+    "firma-online": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></svg>',
+    "ecommerce": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /> <path d="M3 6h18" /> <path d="M16 10a4 4 0 0 1-8 0" /></svg>',
+    "eventowy": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z" /> <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></svg>',
+    "bookmark": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" /></svg>',
+    "trash-2": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18" /> <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /> <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /> <line x1="10" x2="10" y1="11" y2="17" /> <line x1="14" x2="14" y1="11" y2="17" /></svg>'
+  };
+  function cpIco(k){ return '<span class="cp-ico">' + (CP_ICONS[k]||'') + '</span>'; }
+  var CP_KEY = 'ldd_kalk_collections_v1';
+  function cpGet(){ try { return JSON.parse(localStorage.getItem(CP_KEY) || '[]'); } catch(e){ return []; } }
+  function cpSet(list){ try { localStorage.setItem(CP_KEY, JSON.stringify(list)); } catch(e){} }
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  function cpSum(items){
+    return items.reduce(function(a, i){
+      var r = rows.find(x => x.name === i.name);
+      return a + (r ? (+r.price.value || 0) * (+i.qty || 0) : 0);
+    }, 0);
+  }
+  function cpHead(icoHtml, name, items){
+    return '<button type="button" class="cp-head" aria-expanded="false">' +
+      icoHtml +
+      '<span class="cp-head-txt">' +
+        '<span class="cp-head-name">' + esc(name) + '</span>' +
+        '<span class="cp-head-meta">' + items.length + ' poz. · <b>' + fmt(cpSum(items)) + '</b></span>' +
+      '</span>' +
+      '<span class="cp-head-arrow" aria-hidden="true">▾</span>' +
+    '</button>';
+  }
+
+  function cpComposition(items){
+    return '<ul class="cp-list">' + items.map(i =>
+      '<li><span>' + esc(i.name) + '</span><b>× ' + i.qty + '</b></li>').join('') + '</ul>';
+  }
+
+  function renderCollections(){
+    var presetsEl = document.getElementById('cp-presets');
+    if (!presetsEl) return;
+    presetsEl.innerHTML = PRESETS.map(p =>
+      '<div class="cp-sec">' +
+        cpHead(cpIco(p.id), p.name, p.items) +
+        '<div class="cp-body"><div class="cp-body-inner">' +
+          '<div class="cp-desc">' + esc(p.desc) + '</div>' +
+          cpComposition(p.items) +
+          '<div class="cp-actions"><button type="button" class="cp-btn primary" data-apply="preset:' + p.id + '">Zastosuj</button></div>' +
+        '</div></div>' +
+      '</div>').join('');
+
+    var saved = cpGet();
+    var savedEl = document.getElementById('cp-saved');
+    if (!saved.length){
+      savedEl.innerHTML = '<div class="cp-empty">Brak zapisanych — ustaw ilości w cenniku i zapisz jako kolekcję.</div>';
+    } else {
+      savedEl.innerHTML = saved.map(c =>
+        '<div class="cp-sec">' +
+          cpHead(cpIco('bookmark'), c.name, c.items) +
+          '<div class="cp-body"><div class="cp-body-inner">' +
+            cpComposition(c.items) +
+            '<div class="cp-actions">' +
+              '<button type="button" class="cp-btn primary" data-apply="saved:' + c.id + '">Zastosuj</button>' +
+              '<button type="button" class="cp-btn danger" data-delete="' + c.id + '" aria-label="Usun kolekcje">' + cpIco('trash-2') + '</button>' +
+            '</div>' +
+          '</div></div>' +
+        '</div>').join('');
+    }
+
+    document.querySelectorAll('.cp-head').forEach(head => {
+      head.addEventListener('click', () => {
+        var sec = head.closest('.cp-sec');
+        var body = sec.querySelector('.cp-body');
+        var open = !sec.classList.contains('is-open');
+        // jeden otwarty naraz — jak w segregatorze
+        document.querySelectorAll('.cp-sec.is-open').forEach(o => {
+          o.classList.remove('is-open');
+          o.querySelector('.cp-body').classList.remove('is-open');
+          o.querySelector('.cp-head').setAttribute('aria-expanded','false');
+        });
+        sec.classList.toggle('is-open', open);
+        body.classList.toggle('is-open', open);
+        head.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+
+    document.querySelectorAll('[data-apply]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        var parts = btn.dataset.apply.split(':');
+        var source = parts[0] === 'preset' ? PRESETS : cpGet();
+        var coll = source.find(c => c.id === parts[1]);
+        if (!coll) return;
+        applyCollectionItems(coll.items, coll.name);
+        var orig = btn.textContent;
+        btn.textContent = '✓ Zastosowano';
+        setTimeout(() => { btn.textContent = orig; }, 1600);
+      });
+    });
+    document.querySelectorAll('[data-delete]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        cpSet(cpGet().filter(c => c.id !== btn.dataset.delete));
+        renderCollections();
+      });
+    });
+  }
+
+  var cpSaveBtn = document.getElementById('cp-save-btn');
+  if (cpSaveBtn) cpSaveBtn.addEventListener('click', () => {
+    var input = document.getElementById('cp-name-input');
+    var name = (input.value || '').trim();
+    if (!name){ alert('Podaj nazwę kolekcji'); return; }
+    var picked = rows.filter(r => (+r.qty.value || 0) > 0).map(r => ({name:r.name, qty:+r.qty.value}));
+    if (!picked.length){ alert('Ustaw ilość > 0 przy wybranych pozycjach'); return; }
+    var saved = cpGet();
+    saved.push({id:'c' + Date.now(), name:name, items:picked});
+    cpSet(saved);
+    input.value = '';
+    renderCollections();
+  });
+
+  window.renderCollections = renderCollections;
+  renderCollections();
+  window.refreshAllRowBg();   // podswietl wiersze odtworzone z sessionStorage
 })();
 
 /* ============================================================
@@ -703,7 +1241,7 @@ document.addEventListener("visibilitychange", () => {
    ============================================================ */
 const I18N = {
   pl: {
-    'title.h1': 'LucDoro<span>Design</span> — kalkulator wyceny',
+    'title.h1': 'LucDoroDesign <em>kalkulator wyceny</em>',
     'title.sub': 'Ceny netto, edytowalne. Zmiany cen bazowych zapisują się w tej przeglądarce. Minimalna wartość zlecenia: <b>300 zł netto</b>.',
     'h2.items': 'Pozycje',
     'h2.params': 'Parametry zlecenia',
@@ -727,12 +1265,16 @@ const I18N = {
     'sum.items': 'Pozycje razem', 'sum.rush': 'Dopłata za termin', 'sum.rev': 'Dodatkowe poprawki',
     'sum.call': 'Dodatkowe kontakty', 'sum.del': 'Dostawa', 'sum.disc': 'Rabat',
     'sum.net': 'Netto', 'sum.vat': 'VAT 23%', 'sum.gross': 'Brutto',
-    'btn.copy': 'Kopiuj wycenę do maila', 'btn.reset': 'Wyzeruj ilości i parametry', 'btn.resetPrices': 'Przywróć ceny domyślne',
+    'btn.copy': 'Wyślij wycenę na maila', 'sf.name': 'Imię', 'sf.mail': 'Twój e-mail', 'sf.send': 'Wyślij', 'sf.cancel': 'Anuluj', 'sf.note': 'Wycena trafi na Twój adres, a kopia do mnie — odezwę się z potwierdzeniem.', 'btn.reset': 'Wyzeruj ilości i parametry', 'btn.resetPrices': 'Przywróć ceny domyślne',
     'hint.items': 'Ilość 0 = pozycja nieaktywna. Ceny „druk" to ceny dla klienta — koszt drukarni pilnuj osobno.',
+    'q.ph': 'Szukaj w cenniku — np. opakowanie, wizytówka, sklep',
+    'q.none': 'Nie ma tego w cenniku.',
+    'q.none.sub': 'Nie znaczy, że tego nie zrobię — to po prostu robota wyceniana indywidualnie. Napisz, co dokładnie potrzebujesz, odpiszę z konkretną kwotą.',
+    'q.none.cta': 'Zapytaj o wycenę → WhatsApp',
     'warn.min': 'Wycena poniżej minimum 300 zł netto — podnieś zakres albo dolicz do pakietu.',
   },
   en: {
-    'title.h1': 'LucDoro<span>Design</span> — pricing calculator',
+    'title.h1': 'LucDoroDesign <em>pricing calculator</em>',
     'title.sub': 'Net prices, editable. Base price changes are saved in this browser. Minimum order value: <b>70 € net</b>.',
     'h2.items': 'Items',
     'h2.params': 'Order parameters',
@@ -756,8 +1298,12 @@ const I18N = {
     'sum.items': 'Items subtotal', 'sum.rush': 'Rush fee', 'sum.rev': 'Extra revisions',
     'sum.call': 'Extra meetings', 'sum.del': 'Delivery', 'sum.disc': 'Discount',
     'sum.net': 'Net', 'sum.vat': 'VAT 23%', 'sum.gross': 'Gross',
-    'btn.copy': 'Copy quote to e-mail', 'btn.reset': 'Reset quantities & parameters', 'btn.resetPrices': 'Restore default prices',
+    'btn.copy': 'Send quote by e-mail', 'sf.name': 'First name', 'sf.mail': 'Your e-mail', 'sf.send': 'Send', 'sf.cancel': 'Cancel', 'sf.note': 'The quote goes to your inbox and a copy to me — I will follow up.', 'btn.reset': 'Reset quantities & parameters', 'btn.resetPrices': 'Restore default prices',
     'hint.items': 'Qty 0 = item inactive. "Print" prices are client-facing — track printhouse cost separately.',
+    'q.ph': 'Search the price list — e.g. packaging, business card, shop',
+    'q.none': 'Not in the price list.',
+    'q.none.sub': 'That does not mean I will not do it — it is simply quoted individually. Tell me what you need and I will come back with a number.',
+    'q.none.cta': 'Ask for a quote → WhatsApp',
     'warn.min': 'Quote below minimum — increase scope or add to a package.',
   }
 };
@@ -817,6 +1363,74 @@ const ITEMS_EN = {
   'Abonament kwartalny: 2 wydania/mies. (rabat 10%)': 'Quarterly subscription: 2 issues/month (10% off)'
 };
 
+// ── WYSZUKIWARKA W CENNIKU ──
+// Filtruje wiersze i kategorie. Przy zerze trafien nie zostawia pustej listy,
+// tylko mowi wprost "nie ma tego w cenniku" i daje link do wyceny indywidualnej.
+const runSearch = (function(){
+  const box = document.getElementById('searchbar');
+  const inp = document.getElementById('q');
+  const clr = document.getElementById('q-clear');
+  const cnt = document.getElementById('q-count');
+  const nores = document.getElementById('q-empty');
+  const wa = document.getElementById('q-empty-wa');
+  if (!inp) return function(){};
+
+  const norm = t => (t || '').toLowerCase().replace(/ł/g, 'l')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const hay = r => norm([r.name, ITEMS_EN[r.name] || '', r.group, GROUPS_EN[r.group] || ''].join(' '));
+
+  let prev = null;   // stan rozwiniecia kategorii sprzed wyszukiwania
+  const secs = () => Array.prototype.slice.call(document.querySelectorAll('.group-sec'));
+  const setOpen = (sec, open) => {
+    sec.classList.toggle('is-open', open);
+    sec.querySelector('.group-body').classList.toggle('is-open', open);
+    sec.querySelector('.group-head').setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+
+  function run(){
+    const raw = inp.value.trim();
+    box.classList.toggle('has-q', raw.length > 0);
+
+    if (!raw){
+      secs().forEach((sec, i) => { sec.classList.remove('q-hidden'); if (prev) setOpen(sec, !!prev[i]); });
+      rows.forEach(r => r.tr.classList.remove('q-hidden'));
+      cnt.textContent = ''; nores.style.display = 'none'; prev = null;
+      return;
+    }
+    if (!prev) prev = secs().map(sec => sec.classList.contains('is-open'));
+
+    const toks = norm(raw).split(/\s+/).filter(Boolean);
+    const per = {};
+    let hits = 0;
+    rows.forEach(r => {
+      if (!r._hay) r._hay = hay(r);
+      const ok = toks.every(t => r._hay.indexOf(t) !== -1);
+      r.tr.classList.toggle('q-hidden', !ok);
+      if (ok){ hits++; per[r.groupIdx] = (per[r.groupIdx] || 0) + 1; }
+    });
+    secs().forEach((sec, i) => { const has = !!per[i]; sec.classList.toggle('q-hidden', !has); setOpen(sec, has); });
+
+    const en = LANG === 'en';
+    if (hits){
+      cnt.textContent = en
+        ? hits + (hits === 1 ? ' match' : ' matches') + ' in the price list'
+        : hits + ' ' + (hits === 1 ? 'pozycja' : (hits < 5 ? 'pozycje' : 'pozycji')) + ' w cenniku';
+      nores.style.display = 'none';
+    } else {
+      cnt.textContent = en ? 'no matches' : 'brak trafień';
+      nores.style.display = 'block';
+      wa.href = 'https://wa.me/48795758555?text=' + encodeURIComponent(en
+        ? 'Hi! I searched the calculator for "' + raw + '" and it is not in the price list. Could you quote it?'
+        : 'Cześć! Szukałem w kalkulatorze: "' + raw + '" — nie ma tego w cenniku. Wycenisz indywidualnie?');
+    }
+  }
+
+  inp.addEventListener('input', run);
+  inp.addEventListener('keydown', e => { if (e.key === 'Escape'){ inp.value = ''; run(); } });
+  clr.addEventListener('click', () => { inp.value = ''; run(); inp.focus(); });
+  return run;
+})();
+
 function applyLang(lang){
   LANG = lang;
   document.documentElement.lang = lang;
@@ -824,7 +1438,16 @@ function applyLang(lang){
   // Apply keyed translations
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
-    if (dict[k] !== undefined) el.innerHTML = dict[k];
+    if (dict[k] === undefined) return;
+    // Uwaga: label VAT zawiera <input id="vat"> — innerHTML skasowalby go
+    // i calc() wywalalby sie na $("vat").checked (martwa prawa strona).
+    const ctrl = el.querySelector('input, select, textarea');
+    if (ctrl){
+      Array.prototype.slice.call(el.childNodes).forEach(n => { if (n.nodeType === 3) el.removeChild(n); });
+      el.appendChild(document.createTextNode(' ' + dict[k]));
+    } else {
+      el.innerHTML = dict[k];
+    }
   });
   // Group headers (name + meta)
   document.querySelectorAll('.group-head-name').forEach(nameEl => {
@@ -840,6 +1463,14 @@ function applyLang(lang){
     const pl = td.getAttribute('data-name-pl');
     td.textContent = lang === 'en' ? (ITEMS_EN[pl] || pl) : pl;
   });
+  // Placeholdery (np. wyszukiwarka) — osobny atrybut, bo innerHTML ich nie ruszy
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const k = el.getAttribute('data-i18n-ph');
+    if (dict[k] !== undefined) el.setAttribute('placeholder', dict[k]);
+  });
+  // Licznik trafien trzyma tekst w JS, wiec musi przeliczyc sie po zmianie jezyka
+  try { runSearch(); } catch(e){}
+  try { window.renderCollections(); } catch(e){}
   // Update lang switch active state
   document.querySelectorAll('.lang-tile').forEach(b => {
     b.classList.toggle('active', b.dataset.lang === lang);
@@ -901,6 +1532,404 @@ try {
   const saved = localStorage.getItem('ldd_cennik_lang');
   if (saved === 'en') applyLang('en');
 } catch(e){}
+</script>
+<style>
+/* ====== TELEFON: kalkulator miesci sie na szerokosc ======
+   Zrodlo przepelnienia: .wrap ma kolumne 1fr, a to znaczy minmax(auto,1fr) —
+   szeroka tabela (4 kolumny) rozpychala kolumne gridu do 408px przy ekranie
+   390px. body{overflow-x:hidden} to ucinalo, wiec kolumny "Cena netto" i
+   "Suma" byly nie tylko niewidoczne, ale i nieosiagalne. minmax(0,1fr)
+   odbiera zawartosci prawo do rozpychania, a tabela zamienia sie w liste. */
+@media(max-width:760px){
+  body{padding:12px}
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  .card{min-width:0}
+
+  /* naglowek kategorii — dluga nazwa nie moze wypchnac licznika pozycji */
+  .group-head{gap:9px; padding:12px 12px; min-width:0}
+  .group-head-num{min-width:22px}
+  .group-head-name{font-size:16px; min-width:0}
+  .group-head-meta{flex-shrink:0; font-size:9px; padding:3px 7px; letter-spacing:1px}
+  .group-head-arrow{width:23px; height:23px; flex-shrink:0}
+
+  /* rozwinieta kategoria: wiersze sa wyzsze niz w tabeli, wiec sztywny
+     max-height:2400px ucinalby dolne pozycje */
+  .group-body.is-open{max-height:none}
+  .group-body-inner{overflow-x:visible; padding:0 12px 10px}
+
+  /* tabela -> lista kart */
+  .group-body-inner table{display:block; margin-top:4px; font-size:14px}
+  .group-body-inner thead{display:none}
+  .group-body-inner tbody{display:block; width:100%}
+  .group-body-inner tbody tr{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto;
+    grid-template-areas:"nazwa nazwa nazwa" "ilosc cena suma";
+    gap:9px 12px; align-items:end;
+    padding:13px 2px; border-bottom:1px solid var(--line);
+  }
+  .group-body-inner tbody tr:last-child{border-bottom:none}
+  .group-body-inner tbody td{display:block; border:none; padding:0}
+  .group-body-inner tbody td.itemname{grid-area:nazwa; font-weight:600; line-height:1.35}
+  .group-body-inner tbody tr td:nth-child(2){grid-area:ilosc}
+  .group-body-inner tbody tr td:nth-child(3){grid-area:cena}
+  .group-body-inner tbody tr td:nth-child(4){grid-area:suma; text-align:right}
+  .group-body-inner tbody tr td:nth-child(2),
+  .group-body-inner tbody tr td:nth-child(3),
+  .group-body-inner tbody tr td:nth-child(4){display:flex; flex-direction:column; gap:4px}
+  .group-body-inner tbody tr td:nth-child(4){align-items:flex-end}
+  .group-body-inner tbody tr td:nth-child(2)::before{content:"Ilość"}
+  .group-body-inner tbody tr td:nth-child(3)::before{content:"Cena netto"}
+  .group-body-inner tbody tr td:nth-child(4)::before{content:"Suma"}
+  :root[lang="en"] .group-body-inner tbody tr td:nth-child(2)::before{content:"Qty"}
+  :root[lang="en"] .group-body-inner tbody tr td:nth-child(3)::before{content:"Net price"}
+  :root[lang="en"] .group-body-inner tbody tr td:nth-child(4)::before{content:"Total"}
+  .group-body-inner tbody tr td:nth-child(2)::before,
+  .group-body-inner tbody tr td:nth-child(3)::before,
+  .group-body-inner tbody tr td:nth-child(4)::before{
+    font-size:9px; letter-spacing:1.3px; text-transform:uppercase;
+    color:var(--muted); font-weight:600; line-height:1;
+  }
+  .group-body-inner tbody td.rowsum{font-variant-numeric:tabular-nums}
+
+  /* palec potrzebuje wiekszego celu niz mysz */
+  .group-body-inner table input.price{width:100%; min-width:0; text-align:right; padding:8px 10px}
+  .group-body-inner .qty-ctrl{height:38px}
+  .group-body-inner .qty-ctrl button{width:36px; font-size:18px}
+  .group-body-inner .qty-ctrl input.qty{width:38px; font-size:15px}
+}
+</style>
+<style>
+/* ====== TELEFON: gotowe zestawy przed listami pozycji ======
+   .wrap trzyma dwie bezklasowe kolumny: lewa [Pozycje, Parametry],
+   prawa [Wycena, Kolekcje]. Na telefonie rozpuszczamy je przez
+   display:contents, zeby order dzialal na samych kartach — inaczej
+   Kolekcje, siedzace w prawej kolumnie, ladowalyby na samym dole. */
+@media(max-width:760px){
+  .wrap{display:grid; grid-template-columns:minmax(0,1fr); gap:0}
+  .wrap > div{display:contents}
+  .wrap > div:nth-child(2) > .card:not(.sticky){order:1}    /* Kolekcje — gotowe paki */
+  .wrap > div:nth-child(1) > .card:not(.settings){order:2}  /* Pozycje — cennik */
+  .wrap > div:nth-child(1) > .card.settings{order:3}        /* Parametry zlecenia */
+  .wrap > div:nth-child(2) > .card.sticky{order:4; position:static}  /* Wycena */
+}
+</style>
+
+<div id="mstack" class="mstack" hidden>
+  <button type="button" class="mstack-grip" id="mstack-grip" aria-expanded="true" aria-controls="mstack-list">
+    <svg viewBox="0 0 26 10" aria-hidden="true" focusable="false">
+      <path d="M1 1.5 13 8.5 25 1.5"/>
+    </svg>
+  </button>
+  <button type="button" class="mstack-more" id="mstack-more" hidden></button>
+  <div class="mstack-list" id="mstack-list"></div>
+  <div class="mstack-foot">
+    <div class="mstack-sum">
+      <b id="mstack-cnt">0</b>
+      <span id="mstack-net">0</span>
+    </div>
+    <button type="button" class="mstack-order" id="mstack-order">Zamawiam</button>
+  </div>
+</div>
+
+<style>
+/* STOS WYBRANYCH POZYCJI — tylko telefon.
+   Trzyma sie dolu ekranu, zeby tapniecie w cenniku zawsze dawalo widoczna
+   odpowiedz: nowy wiersz wsuwa sie od dolu. Pokazujemy trzy ostatnie —
+   przy osmiu pozycjach pelna lista zasypalaby cennik, ktory wlasnie
+   przegladamy. */
+.mstack{display:none}
+@media(max-width:760px){
+  .mstack[hidden]{display:none}
+  .mstack{
+    display:block; position:fixed; left:0; right:0; bottom:0; z-index:60;
+    background:var(--panel); border-top:1px solid var(--line);
+    border-radius:16px 16px 0 0;
+    box-shadow:0 -10px 30px rgba(0,0,0,.35);
+    padding:8px 12px calc(10px + env(safe-area-inset-bottom,0px));
+    max-height:56vh; display:flex; flex-direction:column; gap:6px;
+  }
+  /* Plaska strzalka — bez tla, ramki i kola. Jedyna jej robota to schowac
+     liste pod dolna krawedz; pasek z suma i "Zamawiam" zostaje zawsze. */
+  .mstack-grip{
+    appearance:none; background:transparent; border:0; box-shadow:none;
+    width:100%; padding:2px 0 6px; display:flex; justify-content:center;
+    cursor:pointer; color:var(--muted); flex-shrink:0;
+  }
+  .mstack-grip svg{
+    width:26px; height:10px; fill:none; stroke:currentColor; stroke-width:2;
+    stroke-linecap:round; stroke-linejoin:round;
+    transition:transform .26s cubic-bezier(.4,0,.2,1);
+  }
+  .mstack.is-collapsed .mstack-grip svg{transform:rotate(180deg)}
+  .mstack-list{
+    transition:max-height .26s cubic-bezier(.4,0,.2,1), opacity .2s;
+    max-height:42vh;
+  }
+  .mstack.is-collapsed .mstack-list{max-height:0; opacity:0}
+  .mstack.is-collapsed .mstack-more{display:none}
+  .mstack.is-collapsed .mstack-foot{border-top:0; padding-top:2px}
+
+  .mstack-more{
+    appearance:none; background:transparent; border:0; color:var(--muted); width:auto;
+    font:inherit; font-size:11px; letter-spacing:1.1px; text-transform:uppercase;
+    font-weight:700; padding:6px 2px; text-align:left; cursor:pointer;
+  }
+  .mstack-list{overflow-y:auto; -webkit-overflow-scrolling:touch; min-height:0}
+  .mstack-row{
+    display:grid; grid-template-columns:1fr auto auto; align-items:center;
+    gap:10px; padding:9px 2px; border-top:1px solid var(--line);
+    font-size:14px; line-height:1.3;
+  }
+  .mstack-list .mstack-row:first-child{border-top:0}
+  .mstack-name{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .mstack-qty{color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums}
+  .mstack-val{font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .mstack-row.is-new{animation:mstackIn .28s cubic-bezier(.34,1.3,.64,1)}
+  @keyframes mstackIn{
+    from{opacity:0; transform:translateY(14px)}
+    to{opacity:1; transform:none}
+  }
+  @media(prefers-reduced-motion:reduce){.mstack-row.is-new{animation:none}}
+  .mstack-foot{
+    display:flex; align-items:center; gap:10px;
+    border-top:1px solid var(--line); padding-top:9px; flex-shrink:0;
+  }
+  .mstack-sum{display:flex; flex-direction:column; gap:1px; min-width:0; flex:1 1 auto}
+  .mstack-sum b{font-size:10px; letter-spacing:1.2px; text-transform:uppercase;
+    color:var(--muted); font-weight:700; white-space:nowrap}
+  .mstack-sum span{font-size:18px; font-weight:800; font-variant-numeric:tabular-nums;
+    white-space:nowrap}
+  /* Arkusz kalkulatora daje kazdemu <button> width:100% — bez jawnego auto
+     "Zamawiam" rozpycha sie na cala listwe i przykrywa sume. */
+  .mstack-order{
+    appearance:none; border:0; cursor:pointer; font:inherit; font-weight:800;
+    font-size:14px; letter-spacing:.3px; padding:13px 20px; border-radius:12px;
+    background:var(--wa-bg); color:var(--wa-fg);
+    flex:0 0 auto; width:auto; max-width:56%; white-space:nowrap;
+    box-shadow:0 8px 20px rgba(var(--wa-shadow),.35);
+  }
+  .mstack-order:active{transform:scale(.97)}
+}
+
+/* Przelacznik zamiast ilosci — widoczny na kazdej szerokosci. */
+.qty-toggle{
+  appearance:none; cursor:pointer; font:inherit; font-size:13px; font-weight:700;
+  width:auto; padding:9px 16px; border-radius:10px; white-space:nowrap;
+  background:transparent; color:var(--muted);
+  border:1px solid var(--line); box-shadow:none;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.qty-toggle:hover{color:var(--txt); border-color:var(--accent)}
+.qty-toggle.is-on{
+  background:color-mix(in srgb, var(--accent) 16%, transparent);
+  color:var(--accent); border-color:var(--accent); 
+}
+.qty-toggle:active{transform:scale(.97)}
+@media(max-width:760px){
+  .qty-toggle{padding:11px 16px; font-size:14px}
+  /* Etykieta "ILOSC" nad przelacznikiem klamalaby — nie ma tu ilosci. */
+  .group-body-inner tbody tr.is-single td:nth-child(2)::before{content:"" !important}
+}
+
+/* Kreska akcentu przy zaznaczonym wierszu byla projektowana pod wiersz tabeli.
+   W widoku kartowym ciagnie sie przez cala wysokosc karty i wchodzi pod
+   etykiete "ILOSC". Na telefonie wybor znaczymy ptaszkiem przy nazwie. */
+@media(max-width:760px){
+  .group-body-inner tbody tr.is-cart,
+  .group-body-inner tbody tr.is-preview{box-shadow:none}
+  .group-body-inner tbody tr.is-cart{
+    background:color-mix(in srgb, var(--accent) 11%, transparent);
+    border-radius:10px; padding-left:10px; padding-right:10px;
+  }
+  /* Podglad bez wyboru nie ma juz sensu — tapniecie albo dodaje, albo zdejmuje. */
+  .group-body-inner tbody tr.is-preview{background:transparent}
+  .group-body-inner tbody tr.is-cart td.itemname::before{
+    content:"\2713"; color:var(--accent); font-weight:800; margin-right:7px;
+  }
+}
+</style>
+
+<script>
+(function(){
+  var box  = document.getElementById('mstack');
+  var list = document.getElementById('mstack-list');
+  var more = document.getElementById('mstack-more');
+  var cnt  = document.getElementById('mstack-cnt');
+  var netEl= document.getElementById('mstack-net');
+  var order= document.getElementById('mstack-order');
+  if (!box) return;
+
+  var WIDOCZNE = 3;   // ile ostatnich pozycji widac bez rozwijania
+  var ord = 0;        // kolejnosc dodania — decyduje, co jest "ostatnie"
+  var expanded = false;
+  var prev = [];      // nazwy z poprzedniego renderu, do wykrycia nowosci
+
+  var isMobile = function(){ return window.matchMedia('(max-width:760px)').matches; };
+  var EN = function(){ return document.documentElement.lang === 'en'; };
+
+  function wyslij(typ){
+    if (window.parent === window) return;
+    try { window.parent.postMessage({type:typ}, '*'); } catch(e){}
+  }
+
+  var grip = document.getElementById('mstack-grip');
+  var collapsed = false;
+
+  function opiszUchwyt(){
+    grip.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    grip.setAttribute('aria-label', collapsed
+      ? (EN() ? 'Show selected items' : 'Poka\u017c wybrane pozycje')
+      : (EN() ? 'Hide selected items' : 'Schowaj wybrane pozycje'));
+  }
+
+  grip.addEventListener('click', function(){
+    collapsed = !collapsed;
+    box.classList.toggle('is-collapsed', collapsed);
+    opiszUchwyt();
+    // Wysokosc zmienia sie przez cala animacje — miejsce pod stos oddajemy
+    // dopiero, gdy przestanie sie ruszac, inaczej dol cennika skacze.
+    setTimeout(function(){
+      document.body.style.paddingBottom = (box.offsetHeight + 14) + 'px';
+    }, 300);
+  });
+  opiszUchwyt();
+
+  more.addEventListener('click', function(){
+    expanded = !expanded;
+    window.mstackRender();
+  });
+  order.addEventListener('click', function(){ wyslij('order'); });
+  // Tapniecie w pozycje stosu tez otwiera szuflade — tam jest opis uslugi.
+  list.addEventListener('click', function(){ wyslij('order'); });
+
+  window.mstackRender = function(net){
+    if (!isMobile()){
+      box.hidden = true;
+      document.body.style.paddingBottom = '';
+      return;
+    }
+    // Numer porzadkowy nadajemy tutaj, a nie przy kliknieciu, zeby pozycje
+    // dolozone kolekcja albo stepperem tez trafialy na koniec stosu.
+    rows.forEach(function(r){
+      var q = +r.qty.value || 0;
+      if (q > 0){ if (!r._ord) r._ord = ++ord; }
+      else r._ord = 0;
+    });
+
+    var sel = rows.filter(function(r){ return (+r.qty.value || 0) > 0; })
+                  .sort(function(a,b){ return a._ord - b._ord; });
+
+    if (!sel.length){
+      box.hidden = true;
+      expanded = false;
+      collapsed = false;
+      box.classList.remove('is-collapsed');
+      opiszUchwyt();
+      prev = [];
+      document.body.style.paddingBottom = '';
+      return;
+    }
+    box.hidden = false;
+
+    var ukryte = expanded ? 0 : Math.max(0, sel.length - WIDOCZNE);
+    var widok = ukryte ? sel.slice(ukryte) : sel;
+
+    if (sel.length > WIDOCZNE){
+      more.hidden = false;
+      more.textContent = expanded
+        ? (EN() ? 'collapse \u2193' : 'zwi\u0144 \u2193')
+        : (EN() ? '+' + ukryte + ' more \u2191' : '+' + ukryte + ' wi\u0119cej \u2191');
+    } else {
+      more.hidden = true;
+    }
+
+    var nazwy = widok.map(function(r){ return r.name; });
+    list.innerHTML = '';
+    widok.forEach(function(r){
+      var q = +r.qty.value || 0, u = +r.price.value || 0;
+      var tr = document.createElement('div');
+      tr.className = 'mstack-row' + (prev.indexOf(r.name) === -1 && prev.length ? ' is-new' : '');
+      var nm = document.createElement('span');
+      nm.className = 'mstack-name';
+      nm.textContent = r.tr.querySelector('td') ? r.tr.querySelector('td').textContent.trim() : r.name;
+      var qt = document.createElement('span');
+      qt.className = 'mstack-qty';
+      qt.textContent = q > 1 ? ('\u00d7' + q) : '';
+      var vl = document.createElement('span');
+      vl.className = 'mstack-val';
+      vl.textContent = fmt(q * u);
+      tr.appendChild(nm); tr.appendChild(qt); tr.appendChild(vl);
+      list.appendChild(tr);
+    });
+    prev = nazwy;
+
+    cnt.textContent = EN()
+      ? (sel.length + (sel.length === 1 ? ' item' : ' items'))
+      : (sel.length + ' ' + (sel.length === 1 ? 'pozycja' : (sel.length < 5 ? 'pozycje' : 'pozycji')));
+    if (typeof net === 'number') netEl.textContent = fmt(net);
+    order.textContent = EN() ? 'Order' : 'Zamawiam';
+
+    // Stos zaslania dol strony — oddajemy mu tyle miejsca, ile faktycznie zajal,
+    // inaczej ostatnia pozycja cennika jest nie do dosiegniecia.
+    document.body.style.paddingBottom = (box.offsetHeight + 14) + 'px';
+  };
+
+  /* ── POZYCJE JEDNORAZOWE ───────────────────────────────────────────
+     Nikt nie zamawia dwoch ksiag znaku ani dwoch sklepow. Stepper przy
+     takiej pozycji sugerowal wybor, ktorego nie ma, i zajmowal pol karty.
+     Zostaje przelacznik — dziala tez na desktopie, gdzie tapniecie w
+     wiersz niczego nie dodaje. */
+  var JEDNORAZOWE = new Set(["Logo — nowy projekt", "Logo — redesign / odświeżenie", "Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)", "Mini księga znaku / brandbook", "Nazwa firmy / naming", "Prompt engineering + custom style pack (do reużycia)", "Landing page / one-page", "Strona firmowa (WordPress / statyczna)", "Sklep internetowy", "Szablon HTML maila — responsywny, kodowany", "Szablon „lite” — grafika bez kodowania (do kreatora mailingu)", "Wdrożenie w systemie mailingowym + testy klientów pocztowych"]);
+
+  function odswiezToggle(r){
+    if (!r.toggleBtn) return;
+    var on = (+r.qty.value || 0) > 0;
+    r.toggleBtn.textContent = on
+      ? (EN() ? '\u2713 In quote' : '\u2713 W wycenie')
+      : (EN() ? 'Add' : 'Dodaj');
+    r.toggleBtn.classList.toggle('is-on', on);
+    r.toggleBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+
+  rows.forEach(function(r){
+    if (!JEDNORAZOWE.has(r.name)) return;
+    var ctrl = r.tr.querySelector('.qty-ctrl');
+    if (!ctrl) return;
+    r.tr.classList.add('is-single');
+    // Sam atrybut hidden nie wystarcza — arkusz nadaje .qty-ctrl display:flex,
+    // a regula autora bije styl przegladarki dla [hidden].
+    ctrl.hidden = true;
+    ctrl.style.display = 'none';
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'qty-toggle';
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      var had = (+r.qty.value || 0) > 0;
+      r.qty.value = had ? 0 : 1;
+      r.qty.dispatchEvent(new Event('input', {bubbles:true}));
+      if (!had && window.parent !== window){
+        try { window.parent.postMessage({type:'stack-add'}, '*'); } catch(x){}
+      }
+      odswiezToggle(r);
+    });
+    ctrl.parentNode.appendChild(b);
+    r.toggleBtn = b;
+    odswiezToggle(r);
+  });
+
+  // Kolekcje, reset i przywrocenie koszyka zmieniaja qty z pominieciem
+  // przycisku — etykiete odswiezamy przy kazdym przeliczeniu.
+  var _render = window.mstackRender;
+  window.mstackRender = function(net){
+    rows.forEach(odswiezToggle);
+    return _render(net);
+  };
+
+  window.addEventListener('resize', function(){ window.mstackRender(); });
+  try { calc(); } catch(e){}
+})();
 </script>
 </body>
 </html>

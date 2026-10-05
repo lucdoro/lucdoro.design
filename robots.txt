@@ -1,11 +1,9 @@
 User-agent: *
 Allow: /
 
-# Disallow WordPress backend (site uses static index.html but WP is behind)
+# Panel i katalogi techniczne
 Disallow: /wp-admin/
-Disallow: /wp-includes/
-Disallow: /wp-content/plugins/
-Disallow: /wp-content/cache/
+Disallow: /wp-login.php
 Disallow: /tmp-edges/
 Disallow: /webpage_tracker/
 Disallow: /.tmb/

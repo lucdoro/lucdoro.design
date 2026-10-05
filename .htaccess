@@ -1,3 +1,54 @@
+# ===== Hardening starego WordPressa — dodane 2026-09-26 =====
+# Strona lucdoro.design jest statyczna (serwuje index.html). WordPress leży pod spodem
+# i nie jest potrzebny do jej działania. Poniższe reguły zamykają jego wejścia.
+#
+# KOKPIT WP: wpuszczony jest jeden adres IP, wpisany w regułach [PANEL WP].
+# Zmiana IP (inna sieć, restart routera) = podmień adres w obu liniach RewriteCond.
+# Zamknięcie na powrót = usuń obie linie RewriteCond.
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# xmlrpc.php — 824 ataki POST w samym wrześniu, statycznej stronie do niczego
+RewriteRule ^xmlrpc\.php$ - [F,L]
+
+# [PANEL WP] wpuszczony tylko jeden adres IP — reszta swiata dostaje 403.
+# UWAGA: w tej publicznej kopii adres jest zamaskowany (TWOJ_ADRES_IP).
+# Prawdziwa wartosc jest wylacznie w pliku na serwerze — nie wgrywaj tej kopii na produkcje bez podmiany.
+RewriteCond %{REMOTE_ADDR} !^TWOJ_ADRES_IP$
+RewriteRule ^wp-login\.php$ - [F,L]
+RewriteCond %{REMOTE_ADDR} !^TWOJ_ADRES_IP$
+RewriteRule ^wp-admin(/|$) - [F,L]
+RewriteRule ^wp-signup\.php$ - [F,L]
+
+# REST API: nie wystawiaj listy kont (wyciekała nazwa "admin")
+RewriteRule ^wp-json/wp/v2/users - [F,L]
+
+# kopie zapasowe, zrzuty baz i pliki konfiguracyjne — nigdy do pobrania
+RewriteRule \.(bak|sql|log|ini|sh|zip|tar|gz|save|old|orig|swp|swo)$ - [F,L]
+RewriteRule ^wp-config - [F,L]
+</IfModule>
+# ===== koniec hardeningu =====
+
+# BEGIN kanoniczny host (bez www) - dodane 2026-08-18
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.lucdoro\.design$ [NC]
+RewriteRule ^(.*)$ https://lucdoro.design/$1 [R=301,L]
+</IfModule>
+# END kanoniczny host
+
+# BEGIN LucDoro custom 404
+ErrorDocument 404 /404.html
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/(wp-admin|wp-login|wp-json|wp-cron|xmlrpc|webpage_tracker|oauth|olx)
+RewriteRule ^ - [R=404,L]
+</IfModule>
+# END LucDoro custom 404
+
 # BEGIN WordPress
 # Dyrektywy zawarte między „BEGIN WordPress” oraz „END WordPress” są generowane dynamicznie i powinny być modyfikowane tylko za pomocą
 # filtrów WordPressa. Zmiany dokonane bezpośrednio tutaj będą nadpisywane.
@@ -71,3 +122,56 @@ RewriteCond %{HTTP_REFERER} !^https://www\.serwer-lucdorodesign\.xaa\.pl$      [
 RewriteCond %{HTTP_REFERER} !^$
 RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
 
+# ===== Nowoczesne formaty obrazow (AVIF/WebP) — dodane 2026-09-26 =====
+# Oryginalne .jpg/.png zostaja nietkniete. Jesli obok lezy wariant .avif/.webp
+# i przegladarka go obsluguje, serwer podaje lzejszy plik pod tym samym adresem.
+# Wylaczenie: usun ten blok. Powrot do oryginalow jest natychmiastowy.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Najpierw wariant z pelna nazwa (foto.jpg.avif) — potrzebny tam, gdzie obok siebie
+# leza foto.jpg i foto.png i nie moga dzielic jednego pliku .avif.
+RewriteCond %{HTTP_ACCEPT} image/avif
+RewriteCond %{DOCUMENT_ROOT}/$1.$2.avif -f
+RewriteRule ^(.+)\.(jpe?g|png)$ /$1.$2.avif [T=image/avif,L]
+
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{DOCUMENT_ROOT}/$1.$2.webp -f
+RewriteRule ^(.+)\.(jpe?g|png)$ /$1.$2.webp [T=image/webp,L]
+
+# Dalej wariant ze skroconą nazwą (foto.avif)
+RewriteCond %{HTTP_ACCEPT} image/avif
+RewriteCond %{DOCUMENT_ROOT}/$1.avif -f
+RewriteRule ^(.+)\.(jpe?g|png)$ /$1.avif [T=image/avif,L]
+
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+RewriteRule ^(.+)\.(jpe?g|png)$ /$1.webp [T=image/webp,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+<FilesMatch "\.(jpe?g|png|avif|webp)$">
+Header append Vary Accept
+</FilesMatch>
+</IfModule>
+# ===== koniec =====
+
+# ===== PAMIEC PODRECZNA PRZEGLADARKI (cache) — dodane 2026-09-26 =====
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/avif "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png  "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+<IfModule mod_headers.c>
+  # HTML zawsze swiezy — zmiany na stronie widac od razu
+  <FilesMatch "\.html?$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>

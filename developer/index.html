@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<meta name="theme-color" content="#f1f0f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0d10" media="(prefers-color-scheme: dark)">
+
 <title data-i18n-en="Developer — homegrown tools · LucDoroDesign">Developer — autorskie narzędzia · LucDoroDesign</title>
 <meta data-i18n-en="Original apps and tools by LucDoroDesign — YT Whisper (local transcription), GPT Mode Panel, Unlimited Portal, Thought Visualizer." data-i18n-attr="content" name="description" content="Autorskie aplikacje i narzędzia LucDoroDesign — YT Whisper (lokalna transkrypcja), GPT Mode Panel, Unlimited Portal, Thought Visualizer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +38,11 @@
   .top-nav-links a:hover{color:#b58cff;}
   .tn-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:#f2efe8;width:36px;height:36px;border-radius:999px;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;}
   .tn-btn:hover{border-color:#b58cff;color:#b58cff;}
+.tn-btn svg{width:18px;height:18px;display:block}
+.tn-btn .ti-sun{display:none}
+[data-theme="light"] .tn-btn .ti-moon{display:none}
+[data-theme="light"] .tn-btn .ti-sun{display:block}
+
   .tn-lang-btn{width:auto;padding:0 10px;font-family:'Roboto Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;}
   .tn-palette-wrap{position:relative;display:inline-block;}
   .tn-palette-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:#1a1a1e;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);z-index:200;}
@@ -41,7 +52,7 @@
   .tn-palette-menu button.is-active{background:color-mix(in srgb, var(--acc) 15%, transparent);color:#b58cff;}
   .tn-swatches{display:inline-flex;gap:3px;}
   .tn-swatches span{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.15);}
-  @media(max-width:640px){.top-nav{padding:10px 16px;}.top-nav-brand{display:none;}.top-nav-links{gap:10px;font-size:12px;}.tn-palette-menu{position:fixed;top:auto;bottom:14px;left:14px;right:14px;min-width:0;}}
+  @media(max-width:640px){.top-nav{padding:10px 12px;gap:8px;flex-wrap:nowrap;}.top-nav-back{white-space:nowrap;flex:none;font-size:13px;padding:7px 12px;}.top-nav-links{flex:none;white-space:nowrap;gap:6px;}.tn-btn{width:32px;height:32px;font-size:13px;}.top-nav-brand{display:none;}.top-nav-links{gap:10px;font-size:12px;}.tn-palette-menu{position:fixed;top:auto;bottom:14px;left:14px;right:14px;min-width:0;}}
 
   /* HERO */
   .hero{padding:80px 0 56px;text-align:center;position:relative;overflow:hidden;}
@@ -120,7 +131,30 @@
   footer{padding:44px 24px 40px;text-align:center;color:var(--mut);font-size:12px;border-top:1px solid rgba(255,255,255,.06);margin-top:60px;font-family:'Roboto Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;}
   footer a{color:var(--acc);text-decoration:none;font-weight:700;}
   footer a:hover{text-decoration:underline;}
+.nav-links a[aria-current="page"],.mobile-nav a[aria-current="page"]{color:var(--color-primary);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
 </style>
+
+<link rel="canonical" href="https://lucdoro.design/developer/">
+<meta property="og:url" content="https://lucdoro.design/developer/">
+<meta property="og:image" content="https://lucdoro.design/assets/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta property="og:locale" content="pl_PL">
+<meta property="og:type" content="website">
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  (function() {
+    var u="https://lucdoro.design/webpage_tracker/";
+    _paq.push(["setTrackerUrl", u+"matomo.php"]);
+    _paq.push(["setSiteId", "1"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+    g.async=true; g.src=u+"matomo.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
 </head>
 <body>
 
@@ -128,14 +162,12 @@
   <a data-i18n-en="Back to homepage" data-i18n-attr="aria-label" class="top-nav-back" href="https://lucdoro.design" aria-label="Powrót do strony głównej">← lucdoro.design</a>
   <div data-i18n-en="Offering · Developer" class="top-nav-brand">Oferta · Developer</div>
   <div class="top-nav-links">
-    <a data-i18n-en="Signatures" href="https://lucdoro.design/stopki-mailowe/">Stopki</a>
-    <a data-i18n-en="Creator" href="https://lucdoro.design/kreator/">Kreator</a>
     <a data-i18n-en="Calculator" href="https://lucdoro.design/kalkulator/">Kalkulator</a>
     <a data-i18n-en="Contact" href="https://lucdoro.design/#kontakt">Kontakt</a>
-    <button data-i18n-en="Light/dark theme" data-i18n-attr="aria-label" class="tn-btn" id="tn-theme-btn" aria-label="Motyw jasny/ciemny" title="Motyw">☾</button>
+    <button data-i18n-en="Light/dark theme" data-i18n-attr="aria-label" class="tn-btn" id="tn-theme-btn" aria-label="Motyw jasny/ciemny" title="Motyw"><svg class="ti ti-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
     <button class="tn-btn tn-lang-btn" id="tn-lang-btn" aria-label="Change language / Zmień język" title="PL / EN">EN</button>
     <div class="tn-palette-wrap">
-      <button data-i18n-en="Colour palette" data-i18n-attr="aria-label" class="tn-btn" id="tn-palette-btn" aria-label="Paleta kolorów" title="Palety" aria-haspopup="menu" aria-expanded="false">◐</button>
+      <button data-i18n-en="Colour palette" data-i18n-attr="aria-label" class="tn-btn" id="tn-palette-btn" aria-label="Paleta kolorów" title="Palety" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="7.5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="16.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="16.5" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg></button>
       <div class="tn-palette-menu" id="tn-palette-menu" role="menu">
         <button type="button" data-palette="default" class="is-active"><span class="tn-swatches"><span style="background:#f5f2ea"></span><span style="background:#7b4dff"></span></span>Default</button>
         <button type="button" data-palette="combo01"><span class="tn-swatches"><span style="background:#CAE8E8"></span><span style="background:#28469E"></span></span>Ocean</button>
@@ -157,7 +189,7 @@
     <div class="cta-row">
       <a data-i18n-en="Download YT Whisper" class="btn btn-wa" href="YTWhisper/">Pobierz YT Whisper</a>
       <a data-i18n-en="Send an email" class="btn btn-olx" href="https://lucdoro.design/#kontakt">Napisz e-mail</a>
-      <span data-i18n-en="2 live · 3 coming soon" class="price-pill">2 live · 3 wkrótce</span>
+      <span data-i18n-en="2 live · 4 coming soon" class="price-pill">2 live · 4 wkrótce</span>
     </div>
   </div>
 </header>
@@ -165,7 +197,7 @@
 <main class="wrap">
   <section>
     <div class="sec-head">
-      <h2 data-i18n-en="5 projects, 5 different goals">5 projektów, 5 różnych celów</h2>
+      <h2 data-i18n-en="6 projects, 6 different goals">6 projektów, 6 różnych celów</h2>
       <p data-i18n-en="Each app solves one specific problem. No feature creep, no artificial scaling.">Każda apka rozwiązuje jeden konkretny problem. Bez feature-creepu, bez sztucznego skalowania.</p>
     </div>
 
@@ -273,6 +305,26 @@
         <p data-i18n-en="Internal tool for sorting sales leads out of email correspondence, feeding the Mail CRM — see <a href=&quot;https://lucdoro.design/polityka-prywatnosci-z-gmail_scrapper/&quot;>privacy policy</a>." class="ex-note">Narzędzie wewnętrzne do porządkowania leadów sprzedażowych z korespondencji, zasila Mail CRM — zobacz <a href="https://lucdoro.design/polityka-prywatnosci-z-gmail_scrapper/">politykę prywatności</a>.</p>
       </div>
 
+      <div class="ex-wrap">
+        <div class="ex is-soon">
+          <div class="ex-top">
+            <span data-i18n-en="Document scanning" class="ex-tag">Skanowanie dokumentów</span>
+            <span class="ex-no">06</span>
+          </div>
+          <div class="ex-stage">
+            <span class="ex-status soon" data-i18n-en="○ Coming soon">○ Wkrótce</span>
+            <div class="ex-title">Skaner <em>APP</em></div>
+            <div data-i18n-en="A phone-based document scanner — auto-capture, flat-field correction and perspective auto-straightening in the browser, no extra apps. Paired with a 3D-printed arm/mount for the phone, sold as a physical add-on." class="ex-desc">Skaner dokumentów telefonem — auto-capture, korekcja flat-field i auto-prostowanie perspektywy w przeglądarce, bez dodatkowych appek. W parze z drukowanym w 3D ramieniem/uchwytem na telefon, sprzedawanym jako fizyczny dodatek.</div>
+            <div class="ex-meta">
+              <span data-i18n-en="Platform <b>Web</b>">Platforma <b>Web</b></span>
+              <span data-i18n-en="Access <b>3/6/12 months</b>">Dostęp <b>3/6/12 mies.</b></span>
+              <span>PHP + MySQL</span>
+            </div>
+          </div>
+        </div>
+        <p data-i18n-en="Time-limited access to the app + optional physical phone mount. Online payments in progress." class="ex-note">Dostęp czasowy do appki + opcjonalny fizyczny uchwyt na telefon. Płatności online w przygotowaniu.</p>
+      </div>
+
     </div>
   </section>
 </main>
@@ -364,7 +416,7 @@
 
   function applyTheme(t){
     html.setAttribute('data-theme', t);
-    themeBtn.textContent = t === 'dark' ? '☾' : '☀';
+    themeBtn.title = t === 'dark' ? 'Tryb ciemny' : 'Tryb jasny';
     try { localStorage.setItem(STORAGE_THEME, t); } catch(e){}
   }
   function applyPal(p){
@@ -404,5 +456,17 @@
 })();
 </script>
 
+<script>
+/* oznacz w menu link do strony, na ktorej jestesmy */
+(function(){
+  var here=location.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+  document.querySelectorAll('.nav-links a[href], .mobile-nav a[href]').forEach(function(a){
+    var u; try{ u=new URL(a.getAttribute('href'), location.href); }catch(e){ return; }
+    if(u.host!==location.host||u.hash) return;
+    var p=u.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+    if(p===here) a.setAttribute('aria-current','page');
+  });
+})();
+</script>
 </body>
 </html>

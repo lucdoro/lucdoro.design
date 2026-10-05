@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<meta name="theme-color" content="#f1f0f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0d10" media="(prefers-color-scheme: dark)">
+
 <title>Kalkulator wyceny — LucDoroDesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +28,11 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 .top-nav-links a:hover{color:var(--acc);}
 .tn-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--txt);width:36px;height:36px;border-radius:999px;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;flex:none;}
 .tn-btn:hover{border-color:var(--acc);color:var(--acc);}
+.tn-btn svg{width:18px;height:18px;display:block}
+.tn-btn .ti-sun{display:none}
+[data-theme="light"] .tn-btn .ti-moon{display:none}
+[data-theme="light"] .tn-btn .ti-sun{display:block}
+
 .tn-lang-btn{width:auto;padding:0 10px;font-family:'Roboto Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;}
 .tn-palette-wrap{position:relative;display:inline-block;}
 .tn-palette-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:var(--card,#1a1a1e);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);z-index:200;}
@@ -42,11 +53,11 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
   
 }
 .split-left{position:relative;display:flex;flex-direction:column;}
-.split-right{position:relative;overflow:hidden;background:radial-gradient(ellipse at top right,color-mix(in srgb, var(--acc) 12%, var(--bg)) 0%,var(--bg) 60%);}
+.split-right{position:relative;overflow:hidden;background:var(--bg);}
 
 /* Theme toggle bar — nad iframe (nie overlap) */
-.calc-frame{border:0;width:100%;flex:1;background:#f8f6f0;transition:background .3s;display:block;}
-.calc-frame.dark{background:#0f1115;}
+.calc-frame{border:0;width:100%;flex:1;background:var(--bg);transition:background .3s;display:block;}
+.calc-frame.dark{background:var(--bg);}
 
 /* RIGHT SHOWCASE */
 .showcase{position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden;padding:0;}
@@ -57,7 +68,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 .showcase-empty--bottom p{color:var(--mut);font-size:13px;line-height:1.6;}
 @media(max-width:900px){
   .showcase-top{flex:none;padding:70px 16px 16px;}
-  .showcase-bottom{flex:none;padding:24px 16px;}
+  .showcase-bottom{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:24px 16px;}
 }
 /* Blob decoracje */
 
@@ -70,24 +81,25 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 /* Selected service card */
 .showcase-card{position:relative;z-index:1;max-width:520px;width:100%;}
 .showcase-eyebrow{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:20px;}
-.showcase-name{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(32px,4vw,56px);line-height:1.1;margin:0 0 24px;background:linear-gradient(135deg,var(--txt) 0%,var(--acc) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em;}
+.showcase-name{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(32px,4vw,56px);line-height:1.1;margin:0 0 24px;color:var(--txt);letter-spacing:-.02em;}
 .showcase-price-row{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:24px;}
-.showcase-price{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(48px,6vw,80px);background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;}
+.showcase-price{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(48px,6vw,80px);color:var(--acc);line-height:1;}
 .showcase-price-unit{color:var(--mut);font-size:14px;font-family:'Roboto Mono',monospace;letter-spacing:.5px;}
+.showcase-market-mine{color:#3E9C6B;}  /* zielen "taniej" — czytelna i na kremie, i na ciemnym; --ok tu nie istnieje */
 .showcase-market{color:var(--mut);font-size:13px;margin-bottom:24px;padding:12px 16px;background:rgba(255,255,255,.03);border-left:2px solid var(--acc);border-radius:0 8px 8px 0;}
 .showcase-market b{color:var(--txt);}
 .showcase-desc{color:var(--mut);line-height:1.75;font-size:14px;margin-bottom:28px;}
 .showcase-features{list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:10px;}
 .showcase-features li{padding-left:24px;position:relative;font-size:13.5px;color:var(--txt);}
 .showcase-features li::before{content:"✦";position:absolute;left:0;color:var(--acc);font-size:12px;top:2px;}
-.showcase-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--wa-bg);color:var(--wa-fg);text-decoration:none;border-radius:12px;font-weight:700;font-size:13px;letter-spacing:.3px;box-shadow:0 12px 32px rgba(123,77,255,.4);transition:transform .2s;}
+.showcase-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--wa-bg);color:var(--wa-fg);text-decoration:none;border-radius:12px;font-weight:700;font-size:13px;letter-spacing:.3px;box-shadow:none;transition:transform .2s;}
 .showcase-cta:hover{transform:translateY(-2px);}
 
 /* KOLEKCJE — floating panel top-right of right column */
 .collections-btn{position:absolute;top:14px;right:14px;z-index:20;background:var(--wa-bg);backdrop-filter:blur(12px);border:1px solid transparent;color:var(--wa-fg);padding:10px 16px;border-radius:12px;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.5px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 8px 26px rgba(var(--wa-shadow),.45);}
 .collections-btn:hover{transform:translateY(-1px) scale(1.03);box-shadow:0 10px 30px rgba(var(--wa-shadow),.6);}
-.collections-btn .cnt{background:linear-gradient(135deg,var(--acc2),var(--acc));color:#fff;font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 7px;border-radius:99px;font-weight:800;}
-.collections-panel{position:absolute;top:56px;right:14px;width:340px;max-width:calc(100vw - 28px);max-height:calc(100vh - 140px);background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:16px;padding:16px;z-index:21;display:none;flex-direction:column;gap:14px;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.collections-btn .cnt{background:var(--acc);color:#fff;font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 7px;border-radius:99px;font-weight:800;}
+.collections-panel{position:absolute;top:56px;right:14px;width:340px;max-width:calc(100% - 28px);max-height:calc(100% - 70px);background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:16px;padding:16px;z-index:21;display:none;flex-direction:column;gap:14px;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.6);}
 .collections-panel.is-open{display:flex;animation:panelIn .3s cubic-bezier(.22,1,.36,1);}
 @keyframes panelIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
 .cp-section-title{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:2px;}
@@ -108,6 +120,30 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 .cp-empty{color:var(--mut);font-size:11.5px;font-style:italic;text-align:center;padding:12px 0;}
 
 /* Mobile floating "podgląd" button — pokazuje się gdy user kliknął pozycję */
+.live-badge{position:absolute;right:16px;bottom:16px;z-index:30;display:none;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;font-size:11px;font-family:inherit;color:var(--txt);background:color-mix(in srgb, var(--card) 94%, transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);opacity:.75;pointer-events:none;}
+.live-badge.is-on{display:inline-flex;}
+/* Harmonijka opisow — ludzie nie odkrywali, ze pod pozycjami sa opisy.
+   Po zlozeniu koszyka dol pokazuje liste pozycji; domyslnie wszystko zwiniete. */
+.desc-acc{display:flex;flex-direction:column;gap:12px;}
+.desc-hint{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--mut);margin:0 0 18px;}
+.acc-item{border:1px solid var(--line);border-radius:11px;background:var(--card);overflow:hidden;transition:border-color .2s;}
+.acc-item.is-open{border-color:var(--line);}
+.acc-head{width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;background:transparent;border:0;color:var(--txt);font-family:inherit;font-size:13.5px;font-weight:600;line-height:1.3;text-align:left;cursor:pointer;transition:color .18s;}
+.acc-head:hover{color:var(--acc);}
+.acc-num{flex:none;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mut);}
+.acc-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.acc-price{flex:none;font-family:'Roboto Mono',monospace;font-size:11px;color:var(--mut);}
+.acc-chev{flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(45deg);transition:transform .22s;margin:-3px 2px 0 0;}
+.acc-item.is-open .acc-head{border-bottom:2px solid var(--acc);color:var(--txt);}
+.acc-item.is-open .acc-chev{transform:rotate(225deg);margin:2px 2px 0 0;}
+.acc-body{padding:24px 20px 22px;}
+.acc-body .showcase-card{max-width:none;}
+.acc-body .showcase-eyebrow{margin-bottom:12px;}
+.acc-body .showcase-name{font-size:clamp(24px,2.6vw,34px);margin-bottom:16px;}
+.acc-body .showcase-price{font-size:clamp(30px,3.4vw,46px);}
+.acc-body .showcase-price-row{margin-bottom:20px;}
+.acc-body .showcase-features{margin-bottom:24px;}
+
 .showcase-fab{display:none;position:fixed;bottom:20px;right:20px;z-index:50;background:var(--wa-bg);color:#fff;border:0;padding:14px 22px;border-radius:12px;font-family:inherit;font-weight:800;font-size:13px;letter-spacing:.3px;cursor:pointer;box-shadow:0 12px 32px rgba(123,77,255,.5);transition:transform .2s;}
 .showcase-fab:hover,.showcase-fab:active{transform:translateY(-2px);}
 .showcase-fab.is-visible{display:inline-flex;align-items:center;gap:8px;animation:fabPop .35s cubic-bezier(.34,1.56,.64,1);}
@@ -116,9 +152,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 @media(max-width:900px){
   .split{grid-template-columns:1fr;grid-template-rows:1fr;}
   .split-left{border-right:0;border-bottom:none;height:calc(100vh - 58px);}
-  .split-right{position:fixed;top:58px;left:0;right:0;bottom:0;transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);z-index:40;background:radial-gradient(ellipse at top right,color-mix(in srgb, var(--acc) 12%, var(--bg)) 0%,var(--bg) 60%);}
+  .split-right{position:fixed;top:58px;left:0;right:0;bottom:0;transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);z-index:40;background:var(--bg);}
   .split-right.is-open{transform:translateY(0);}
-  .collections-panel{position:fixed;top:auto;right:0;left:0;bottom:0;width:100%;max-width:none;max-height:75vh;border-radius:20px 20px 0 0;padding:20px 16px 24px;}
+  .collections-panel{position:fixed;top:auto;right:0;left:0;bottom:0;width:100%;max-width:none;max-height:75vh;border-radius:20px 20px 0 0;padding:20px 16px 24px;-webkit-overflow-scrolling:touch;}
   .collections-btn{top:auto;bottom:80px;right:14px;font-size:11px;padding:8px 14px;}
   /* Close button na mobile inside showcase */
   .showcase-close{display:flex!important;position:absolute;top:16px;right:16px;z-index:5;background:rgba(23,26,33,.85);border:1px solid rgba(255,255,255,.2);color:var(--txt);width:38px;height:38px;border-radius:50%;font-size:20px;line-height:1;padding:0;cursor:pointer;align-items:center;justify-content:center;}
@@ -168,8 +204,13 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
   .receipt-wrap{position:relative;width:100%;height:100%;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;justify-content:center;overflow:auto;padding:22px 26px;box-sizing:border-box;}
   .receipt-wrap .receipt{flex:1 1 260px;max-width:320px;}
   @media(max-width:900px){.receipt-wrap{flex-direction:column;padding:0;} .receipt-wrap .receipt{max-width:100%;width:100%;}}
-  .receipt{position:relative;width:100%;background:var(--card);border:1px solid var(--line);border-bottom:0;
-    border-radius:12px 12px 0 0;padding:20px 18px 30px;font-family:'Roboto Mono',monospace;color:var(--txt);
+  .receipt{position:relative;width:100%;background:var(--paper);border:1px solid var(--paper-line);border-bottom:0;
+    border-radius:12px 12px 0 0;padding:20px 18px 30px;font-family:'Roboto Mono',monospace;color:var(--paper-ink);
+    /* paragon jest paragonem w kazdej palecie — papier nie zmienia sie z motywem */
+    --paper:#FBF8F1; --paper-ink:#1A1815; --paper-mut:#8A8375; --paper-line:#D6CEBC;
+    /* delikatny cien — inaczej papier ginie na jasnej palecie; drop-shadow, bo box-shadow nie idzie za zabkami maski */
+    filter:drop-shadow(0 5px 14px rgba(0,0,0,.11));
+    --paper-acc:color-mix(in srgb, var(--wa-bg) 78%, #000);
     transform-origin:top center;
     -webkit-mask:conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/15px 100% repeat-x;
     mask:conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/15px 100% repeat-x;}
@@ -177,52 +218,86 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
   @keyframes unroll{from{clip-path:inset(0 0 100% 0);}to{clip-path:inset(0 0 0 0);}}
   /* zabkowana krawedz na dole — jak oderwany paragon */
 
-  .r-head{text-align:center;border-bottom:1px dashed var(--line);padding-bottom:12px;margin-bottom:12px;}
+  .r-head{text-align:center;border-bottom:1px dashed var(--paper-line);padding-bottom:12px;margin-bottom:12px;}
   .r-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;}
-  .r-sub{font-size:9.5px;letter-spacing:1.5px;color:var(--mut);margin-top:5px;text-transform:uppercase;}
+  .r-sub{font-size:9.5px;letter-spacing:1.5px;color:var(--paper-mut);margin-top:5px;text-transform:uppercase;}
   .r-pkg{margin-top:9px;display:inline-block;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
     color:var(--wa-fg);background:var(--wa-bg);padding:4px 10px;border-radius:8px;font-weight:700;}
   .r-item{margin-bottom:9px;}
   .r-row{display:flex;align-items:baseline;gap:6px;font-size:11.5px;}
   .r-row .r-name{flex:0 1 auto;}
-  .r-row .r-fill{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-3px);min-width:8px;}
+  .r-row .r-fill{flex:1;border-bottom:1px dotted var(--paper-line);transform:translateY(-3px);min-width:8px;}
   .r-row .r-val{white-space:nowrap;font-weight:700;}
-  .r-qty{font-size:9.5px;color:var(--mut);letter-spacing:.5px;margin-top:2px;}
-  .r-extra .r-name{color:var(--mut);}
-  .r-sep{border-top:1px dashed var(--line);margin:12px 0 10px;}
-  .r-tot{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--mut);margin-bottom:4px;}
-  .r-tot.net{font-size:15px;color:var(--txt);font-weight:700;margin:8px 0 6px;}
-  .r-tot.net b{color:var(--wa-bg);}
+  .r-qty{font-size:9.5px;color:var(--paper-mut);letter-spacing:.5px;margin-top:2px;}
+  .r-extra .r-name{color:var(--paper-mut);}
+  .r-sep{border-top:1px dashed var(--paper-line);margin:12px 0 10px;}
+  .r-tot{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--paper-mut);margin-bottom:4px;}
+  .r-tot.net{font-size:15px;color:var(--paper-ink);font-weight:700;margin:8px 0 6px;}
+  .r-tot.net b{color:var(--paper-acc);}
+  .r-save{color:#2F7A46 !important;}
   .r-cta{display:block;text-align:center;margin-top:16px;padding:12px 14px;background:var(--wa-bg);color:var(--wa-fg);
     text-decoration:none;border-radius:12px;font-family:'Manrope',sans-serif;font-weight:700;font-size:12.5px;}
-  .r-foot{text-align:center;font-size:9px;letter-spacing:1.2px;color:var(--mut);margin-top:14px;text-transform:uppercase;}
+  .r-foot{text-align:center;font-size:9px;letter-spacing:1.2px;color:var(--paper-mut);margin-top:14px;text-transform:uppercase;}
+  .r-desc{font-size:10.5px;line-height:1.6;color:var(--paper-mut);margin:10px 0;}
+  .r-feat{list-style:none;margin:0 0 12px;padding:0;font-size:10.5px;color:var(--paper-ink);}
+  .r-feat li{padding:3px 0 3px 14px;position:relative;}
+  .r-feat li::before{content:"◆";position:absolute;left:0;color:var(--paper-acc);font-size:7px;top:6px;}
+  .showcase-bottom .receipt-wrap{height:auto;min-height:100%;padding:0;}
+  .showcase-bottom .receipt-wrap .receipt{max-width:360px;}
 /* KOLOR AKCJI — identyczny z guzikiem WhatsApp na stronie glownej */
 :root{--wa-bg:#25d366;--wa-shadow:37,211,102;--wa-fg:#fff}
 :root[data-theme="light"]:not([data-palette]){--wa-bg:#1DB954;--wa-shadow:29,185,84;--wa-fg:#fff}
 :root[data-palette="combo01"][data-theme="light"]{--wa-bg:#E5555C;--wa-fg:#fff}
 :root[data-palette="combo01"][data-theme="dark"]{--wa-bg:#FF7B85;--wa-fg:#0f1a2e}
-:root[data-palette="combo02"][data-theme="light"]{--wa-bg:#00A0A0;--wa-fg:#fff}
+:root[data-palette="combo02"][data-theme="light"]{--wa-bg:#6E1E8C;--wa-shadow:110,30,140;--wa-fg:#fff}
 :root[data-palette="combo02"][data-theme="dark"]{--wa-bg:#00E5A0;--wa-fg:#082018}
 :root[data-palette="combo03"][data-theme="light"]{--wa-bg:#E67E22;--wa-fg:#fff}
 :root[data-palette="combo03"][data-theme="dark"]{--wa-bg:#FFB74D;--wa-fg:#1a0f00}
-:root[data-palette="combo04"][data-theme="light"]{--wa-bg:#3D7A4A;--wa-fg:#fff}
-:root[data-palette="combo04"][data-theme="dark"]{--wa-bg:#5DAA6F;--wa-fg:#0A1F10}
+:root[data-palette="combo04"][data-theme="light"]{--wa-bg:#D6153B;--wa-fg:#fff}
+:root[data-palette="combo04"][data-theme="dark"]{--wa-bg:#C1354F;--wa-fg:#fff}
 :root[data-palette="combo05"][data-theme="light"]{--wa-bg:#D9186B;--wa-fg:#fff}
 :root[data-palette="combo05"][data-theme="dark"]{--wa-bg:#FF3A9E;--wa-fg:#1a0018}
 /* PALETY — spojne z /developer/ */
 :root{--card:#161619;}
 :root[data-palette="combo01"][data-theme="light"]{--bg:#CAE8E8;--card:#DEF0F0;--line:#A0C4C4;--txt:#28469E;--mut:#4864B0;--acc:#28469E;--acc2:#E5555C;}
 :root[data-palette="combo01"][data-theme="dark"]{--bg:#28469E;--card:#334FA8;--line:#4260B4;--txt:#CAE8E8;--mut:#A0C4C4;--acc:#CAE8E8;--acc2:#FF7B85;}
-:root[data-palette="combo02"][data-theme="light"]{--bg:#FDE1B8;--card:#FFEDD5;--line:#E8CCA0;--txt:#3A241C;--mut:#7A5A48;--acc:#C24A2E;--acc2:#7A1E5C;}
+:root[data-palette="combo02"][data-theme="light"]{--bg:#FDE1B8;--card:#FFEDD5;--line:#E4C49B;--txt:#33201A;--mut:#7A5A48;--acc:#6E1E8C;--acc2:#A63A8E;}
 :root[data-palette="combo02"][data-theme="dark"]{--bg:#3E0856;--card:#4E1866;--line:#6E3886;--txt:#FAAE62;--mut:#E09E52;--acc:#FAAE62;--acc2:#00E5A0;}
 :root[data-palette="combo03"][data-theme="light"]{--bg:#B0EDF9;--card:#C4F0F9;--line:#88C4D8;--txt:#04344C;--mut:#24546C;--acc:#04344C;--acc2:#E67E22;}
 :root[data-palette="combo03"][data-theme="dark"]{--bg:#04344C;--card:#14546C;--line:#2A5A72;--txt:#B0EDF9;--mut:#88CDE0;--acc:#B0EDF9;--acc2:#FFB74D;}
-:root[data-palette="combo04"][data-theme="light"]{--bg:#F5EDEF;--card:#FAF3F5;--line:#E5D0D6;--txt:#3A0F1D;--mut:#7A5060;--acc:#7A1E5C;--acc2:#3D7A4A;}
-:root[data-palette="combo04"][data-theme="dark"]{--bg:#2A0F1A;--card:#3A1826;--line:#4A2536;--txt:#F5EDEF;--mut:#B89AA8;--acc:#D07DAD;--acc2:#5DAA6F;}
+:root[data-palette="combo04"][data-theme="light"]{--bg:#F5EDEF;--card:#FAF3F5;--line:#E5D0D6;--txt:#3A0F1D;--mut:#7A5060;--acc:#D6153B;--acc2:#A80F2E;}
+:root[data-palette="combo04"][data-theme="dark"]{--bg:#2A0F1A;--card:#3A1826;--line:#4A2536;--txt:#F5EDEF;--mut:#B89AA8;--acc:#D07DAD;--acc2:#C1354F;}
 :root[data-palette="combo05"][data-theme="light"]{--bg:#FFFE15;--card:#FFFF3C;--line:#D0CE10;--txt:#0C1E29;--mut:#243E49;--acc:#0C1E29;--acc2:#D9186B;}
 :root[data-palette="combo05"][data-theme="dark"]{--bg:#0C1E29;--card:#182E39;--line:#3E5E69;--txt:#FFFE15;--mut:#E0DE35;--acc:#FFFE15;--acc2:#FF3A9E;}
 :root[data-theme="light"]:not([data-palette]){--bg:#f5f2ea;--card:#ffffff;--line:#e4dfd0;--txt:#1a1a1e;--mut:#5a554d;--acc:#7b4dff;--acc2:#1DB954;}
+.nav-links a[aria-current="page"],.mobile-nav a[aria-current="page"]{color:var(--color-primary);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
 </style>
+
+<link rel="canonical" href="https://lucdoro.design/kalkulator/">
+<meta property="og:url" content="https://lucdoro.design/kalkulator/">
+<meta property="og:image" content="https://lucdoro.design/assets/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="description" content="Wyceń projekt graficzny w kilka kliknięć. Wybierz usługę z cennika, zobacz wstępny paragon i zakres prac, zapisz swój wybór i wyślij zapytanie.">
+<meta property="og:title" content="Kalkulator wyceny — LucDoroDesign">
+<meta property="og:description" content="Wyceń projekt graficzny w kilka kliknięć. Wybierz usługę z cennika, zobacz wstępny paragon i zakres prac, zapisz swój wybór i wyślij zapytanie.">
+
+<meta property="og:locale" content="pl_PL">
+<meta property="og:type" content="website">
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  (function() {
+    var u="https://lucdoro.design/webpage_tracker/";
+    _paq.push(["setTrackerUrl", u+"matomo.php"]);
+    _paq.push(["setSiteId", "1"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+    g.async=true; g.src=u+"matomo.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
 </head>
 <body>
 
@@ -230,20 +305,18 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
   <a class="top-nav-back" href="https://lucdoro.design" aria-label="Powrót do strony głównej">← lucdoro.design</a>
   <div class="top-nav-brand" data-i18n-en="Offering · Pricing calculator">Oferta · Kalkulator wyceny</div>
   <div class="top-nav-links">
-    <a href="https://lucdoro.design/stopki-mailowe/" data-i18n-en="Signatures">Stopki</a>
-    <a href="https://lucdoro.design/kreator/" data-i18n-en="Creator">Kreator</a>
     <a href="https://lucdoro.design/developer/">Developer</a>
     <a href="https://lucdoro.design/#kontakt" data-i18n-en="Contact">Kontakt</a>
-    <button class="tn-btn" id="tn-theme-btn" aria-label="Motyw jasny/ciemny" title="Motyw">☾</button>
+    <button class="tn-btn" id="tn-theme-btn" aria-label="Motyw jasny/ciemny" title="Motyw"><svg class="ti ti-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="ti ti-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
     <button class="tn-btn tn-lang-btn" id="tn-lang-btn" aria-label="Change language / Zmień język" title="PL / EN">EN</button>
     <div class="tn-palette-wrap">
-      <button class="tn-btn" id="tn-palette-btn" aria-label="Paleta kolorów" title="Palety" aria-haspopup="menu" aria-expanded="false">◐</button>
+      <button class="tn-btn" id="tn-palette-btn" aria-label="Paleta kolorów" title="Palety" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="7.5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="16.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="16.5" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg></button>
       <div class="tn-palette-menu" id="tn-palette-menu" role="menu">
         <button type="button" data-palette="default" class="is-active"><span class="tn-swatches"><span style="background:#f5f2ea"></span><span style="background:#7b4dff"></span></span>Default</button>
         <button type="button" data-palette="combo01"><span class="tn-swatches"><span style="background:#CAE8E8"></span><span style="background:#28469E"></span></span>Ocean</button>
         <button type="button" data-palette="combo02"><span class="tn-swatches"><span style="background:#FAAE62"></span><span style="background:#3E0856"></span></span>Sunset</button>
         <button type="button" data-palette="combo03"><span class="tn-swatches"><span style="background:#B0EDF9"></span><span style="background:#04344C"></span></span>Sky</button>
-        <button type="button" data-palette="combo04"><span class="tn-swatches"><span style="background:#F5EDEF"></span><span style="background:#7A1E5C"></span></span>Milano</button>
+        <button type="button" data-palette="combo04"><span class="tn-swatches"><span style="background:#F5EDEF"></span><span style="background:#D6153B"></span></span>Milano</button>
         <button type="button" data-palette="combo05"><span class="tn-swatches"><span style="background:#FFFE15"></span><span style="background:#0C1E29"></span></span>Neon</button>
       </div>
     </div>
@@ -252,37 +325,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 
 <div class="split">
   <div class="split-left">
-    
-    <iframe class="calc-frame dark" id="calc-frame" src="calc.html?theme=dark" title="Kalkulator wyceny"></iframe>
+    <iframe class="calc-frame dark" id="calc-frame" src="calc.html?theme=dark&v=20260911c" title="Kalkulator wyceny"></iframe>
   </div>
   <div class="split-right" id="split-right">
     <button class="showcase-close" id="showcase-close" aria-label="Zamknij podgląd">×</button>
-    <button class="collections-btn" id="collections-btn" title="Kolekcje pozycji">
-      📦 Kolekcje <span class="cnt" id="collections-count">0</span>
-    </button>
-    <div class="collections-panel" id="collections-panel" role="dialog" aria-label="Kolekcje">
-      <div>
-        <div data-i18n-en="Ready-made packages" class="cp-section-title">Gotowe pakiety</div>
-        <div id="cp-presets"></div>
-      </div>
-      <div>
-        <div data-i18n-en="Your collections" class="cp-section-title">Twoje kolekcje</div>
-        <div id="cp-saved"></div>
-      </div>
-      <div>
-        <div class="cp-section-title">Zapisz obecny wybór</div>
-        <div class="cp-save-row">
-          <input type="text" id="cp-name-input" placeholder="Nazwa kolekcji (np. Rebranding X)">
-          <button class="cp-btn primary" id="cp-save-btn">💾 Zapisz</button>
-        </div>
-      </div>
-    </div>
     <div class="showcase" id="showcase">
       <div class="showcase-top" id="showcase-top">
         <div class="showcase-empty">
           <div class="showcase-empty-icon">👈</div>
           <h2 data-i18n-en="Pick an item from the price list">Kliknij pozycję w cenniku</h2>
-          <p>Wybierz usługę po lewej — po prawej pojawi się wstępny paragon z ceną.</p>
+          <p data-i18n-en="Pick a service on the left — a preliminary receipt with the price shows up on the right.">Wybierz usługę po lewej — po prawej pojawi się wstępny paragon z ceną.</p>
         </div>
       </div>
       <div class="showcase-bottom" id="showcase-bottom">
@@ -291,6 +343,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
         </div>
       </div>
     </div>
+    <div class="live-badge" id="live-badge" aria-live="polite"></div>
   </div>
 </div>
 
@@ -299,6 +352,17 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 </button>
 
 <script>
+// Plakietka LIVE mieszka teraz w prawym oknie — ramka tylko przysyla stan
+window.addEventListener('message', function(e){
+  var d = e.data;
+  if (!d || d.type !== 'live') return;
+  var el = document.getElementById('live-badge');
+  if (!el) return;
+  el.innerHTML = '<span style="color:' + d.color + ';font-size:14px;line-height:1;">' + d.dot + '</span> <b>'
+    + d.label + '</b>' + (d.time ? ' · <span style="color:var(--mut);">' + d.time + '</span>' : '');
+  el.classList.add('is-on');
+});
+
 // THEME + PALETTE + LANG — wzorzec z /developer/
 (function(){
   var html = document.documentElement;
@@ -311,7 +375,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
 
   function applyTheme(t){
     html.setAttribute('data-theme', t);
-    themeBtn.textContent = t === 'dark' ? '☾' : '☀';
+    themeBtn.title = t === 'dark' ? 'Tryb ciemny' : 'Tryb jasny';
     if (frame) frame.classList.toggle('dark', t === 'dark');
     syncFrame();
     try { localStorage.setItem('theme', t); } catch(e){}
@@ -328,7 +392,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
     if (!frame || !frameReady) return;
     var t = html.getAttribute('data-theme') || 'dark';
     var p = html.getAttribute('data-palette') || 'default';
-    var want = 'calc.html?theme=' + t + '&palette=' + p;
+    var want = 'calc.html?theme=' + t + '&palette=' + p + '&v=20260911c';
     if (frame.getAttribute('src') !== want) frame.setAttribute('src', want);
   }
   var savedTheme = 'dark', savedPal = 'default';
@@ -365,12 +429,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
   var btn = document.getElementById('tn-lang-btn');
   if (!btn) return;
   var html = document.documentElement;
-  var nodes = document.querySelectorAll('[data-i18n-en]');
-  nodes.forEach(function(el){
-    if (el.getAttribute('data-i18n-pl') !== null) return;
-    var attr = el.getAttribute('data-i18n-attr');
-    el.setAttribute('data-i18n-pl', attr ? (el.getAttribute(attr) || '') : el.innerHTML);
-  });
+  // Wezly nie sa cache'owane: puste stany prawego okna wracaja przez innerHTML,
+  // wiec stara NodeList wskazywalaby na elementy odpiete od dokumentu.
+  function stamp(root){
+    (root || document).querySelectorAll('[data-i18n-en]').forEach(function(el){
+      if (el.getAttribute('data-i18n-pl') !== null) return;
+      var attr = el.getAttribute('data-i18n-attr');
+      el.setAttribute('data-i18n-pl', attr ? (el.getAttribute(attr) || '') : el.innerHTML);
+    });
+  }
+  stamp(document);
   var frame = document.getElementById('calc-frame');
   function syncFrame(lang){
     if (frame && frame.contentWindow) frame.contentWindow.postMessage({type:'set-lang', lang:lang}, '*');
@@ -378,15 +446,23 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
   function apply(lang){
     html.setAttribute('lang', lang);
     btn.textContent = lang === 'en' ? 'PL' : 'EN';
-    nodes.forEach(function(el){
+    paint(lang, document);
+    try { localStorage.setItem('lucdoro-lang', lang); } catch(e){}
+    syncFrame(lang);
+    // Paragon i harmonijka opisow sa generowane z JS — statyczny swap ich nie widzi.
+    try { window.rerenderRight && window.rerenderRight(); } catch(e){}
+  }
+  function paint(lang, root){
+    stamp(root);
+    (root || document).querySelectorAll('[data-i18n-en]').forEach(function(el){
       var val = lang === 'en' ? el.getAttribute('data-i18n-en') : el.getAttribute('data-i18n-pl');
       if (val === null) return;
       var attr = el.getAttribute('data-i18n-attr');
       if (attr) el.setAttribute(attr, val); else el.innerHTML = val;
     });
-    try { localStorage.setItem('lucdoro-lang', lang); } catch(e){}
-    syncFrame(lang);
   }
+  // Uzywane po przywroceniu pustego stanu prawego okna z migawki HTML
+  window.__i18nStatic = function(root){ paint(html.getAttribute('lang') === 'en' ? 'en' : 'pl', root); };
   var saved = 'pl';
   try { saved = localStorage.getItem('lucdoro-lang') || 'pl'; } catch(e){}
   apply(saved);
@@ -395,6 +471,221 @@ body{background:var(--bg);color:var(--txt);font-family:'Manrope',sans-serif;over
     apply(html.getAttribute('lang') === 'en' ? 'pl' : 'en');
   });
 })();
+
+// ── i18n PRAWEJ STRONY ──────────────────────────────────────
+// Lewa strona (calc.html) ma wlasny slownik. Tu jest blizniaczy — dla paragonu,
+// harmonijki opisow i podgladu pojedynczej pozycji.
+// Zasada: kluczem ZAWSZE jest nazwa polska (tak przychodzi z ramki w 'selection'),
+// angielski to wylacznie warstwa wyswietlania.
+const RLANG = () => document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'pl';
+const EUR_RATE = 4.30; // ten sam kurs co w calc.html — inaczej panele by sie rozjechaly
+const money = n => {
+  n = Math.round(+n || 0);
+  return RLANG() === 'en'
+    ? (n / EUR_RATE).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:2}) + ' €'
+    : n.toLocaleString('pl-PL') + ' zł';
+};
+
+const T_PL = {
+  pkg:'Pakiet', quote:'Wstępna wycena', extraSel:'Dodatkowo wybrane', orderSum:'Podsumowanie zamówienia',
+  pkgSum:'SUMA PAKIETU', pkgFoot:'Skład pakietu — szczegóły niżej ↓',
+  rush:'Tryb przyspieszony', rev:'Dodatkowe rundy poprawek', call:'Dodatkowe konsultacje',
+  del:'Dostawa', disc:'Rabat', netTotal:'NETTO RAZEM', vat:'VAT 23%', gross:'BRUTTO',
+  ctaOrder:'Zamów → WhatsApp', foot:'Wycena orientacyjna · ceny netto',
+  net:'NETTO', netLc:'netto', preReceipt:'Wstępny paragon', fromList:'z cennika',
+  market:'Średnia rynkowa', save:'Oszczędzasz', mine:' · u mnie ', eqSave:' = oszczędzasz ',
+  ctaItem:'Zamów tę pozycję → WhatsApp', ctaPkg:'Zamów ten pakiet → WhatsApp',
+  descHint:'Co dostajesz · kliknij, żeby rozwinąć opis', service:'Usługa',
+  fbDesc:'Wybrana pozycja z cennika. Odezwij się, żeby omówić szczegóły.',
+  waQuote:'Cześć! Interesuje mnie wycena:\n', waPkg:'Cześć! Interesuje mnie pakiet ',
+  waExtra:' + pozycje dodatkowe:\n', waTotal:'\nRazem netto: ',
+  waItem1:'Cześć! Interesuje mnie: ', waItem2:' za ', waItem3:' netto'
+};
+const T_EN = {
+  pkg:'Package', quote:'Preliminary quote', extraSel:'Also selected', orderSum:'Order summary',
+  pkgSum:'PACKAGE TOTAL', pkgFoot:'Package contents — details below ↓',
+  rush:'Rush mode', rev:'Extra revision rounds', call:'Extra consultations',
+  del:'Delivery', disc:'Discount', netTotal:'NET TOTAL', vat:'VAT 23%', gross:'GROSS',
+  ctaOrder:'Order → WhatsApp', foot:'Indicative quote · net prices',
+  net:'NET', netLc:'net', preReceipt:'Preliminary receipt', fromList:'from the price list',
+  market:'Market average', save:'You save', mine:' · my price ', eqSave:' = you save ',
+  ctaItem:'Order this item → WhatsApp', ctaPkg:'Order this package → WhatsApp',
+  descHint:'What you get · click to expand', service:'Service',
+  fbDesc:'Selected item from the price list. Get in touch and we will go through the details.',
+  waQuote:"Hi! I'd like a quote:\n", waPkg:"Hi! I'm interested in the package ",
+  waExtra:' + extra items:\n', waTotal:'\nTotal net: ',
+  waItem1:"Hi! I'm interested in: ", waItem2:' for ', waItem3:' net'
+};
+const t = k => (RLANG() === 'en' ? T_EN[k] : T_PL[k]) || T_PL[k] || k;
+const nItems = n => RLANG() === 'en' ? n + (n === 1 ? ' item' : ' items') : n + ' ' + (n === 1 ? 'pozycja' : 'pozycji');
+const nServ  = n => RLANG() === 'en' ? n + (n === 1 ? ' service' : ' services') : n + ' ' + (n === 1 ? 'usługa' : 'usługi');
+const CAT_EN = {'Branding':'Branding','DTP':'DTP','Social':'Social','Prepress':'Prepress','Druk':'Print','Web':'Web'};
+
+// Nazwy pozycji (PL → EN)
+const ITEMS_EN = {
+  'Logo — nowy projekt': 'Logo — new design',
+  'Logo — redesign / odświeżenie': 'Logo — redesign / refresh',
+  'Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)': 'Full visual identity (logo, colors, type, materials)',
+  'Mini księga znaku / brandbook': 'Mini brandbook',
+  'Nazwa firmy / naming': 'Company name / naming',
+  'Wizytówka — projekt': 'Business card — design',
+  'Baner / billboard — projekt': 'Banner / billboard — design',
+  'Ulotka — projekt (do A5, 2 strony)': 'Flyer — design (up to A5, 2 pages)',
+  'Plakat — projekt': 'Poster — design',
+  'Rollup — projekt': 'Rollup — design',
+  'Menu / karta — projekt': 'Menu / card — design',
+  'Okleina / magnesy na auto — projekt': 'Car wrap / magnets — design',
+  'Naklejki / etykiety — projekt': 'Stickers / labels — design',
+  'Koszulka / odzież — projekt nadruku': 'T-shirt / apparel — print design',
+  'Grafika social media — 1 kreacja': 'Social media graphic — 1 creative',
+  'Wersja językowa / adaptacja projektu': 'Language variant / adaptation',
+  'Poprawa / przygotowanie plików do druku': 'Print file prep',
+  'Aranżacja produktowa AI — 1 scena (Midjourney + retusz Photoshop)': 'AI product scene — 1 shot (Midjourney + Photoshop retouch)',
+  'Wariantowanie scen — batch 5 kadrów tego samego produktu': 'Scene variants — batch of 5 shots of the same product',
+  'Portret / postać AI (lifestyle, model) — 1 kadr': 'AI portrait / figure (lifestyle, model) — 1 shot',
+  'Koncepcja odzieżowa (mockup na AI-modelu) — 1 grafika': 'Apparel concept (mockup on AI model) — 1 graphic',
+  'Tekstura / background layer AI — 1 komplet (3–5 wariantów)': 'AI texture / background layer — 1 set (3–5 variants)',
+  'Prompt engineering + custom style pack (do reużycia)': 'Prompt engineering + custom style pack (reusable)',
+  'Upscale + fotoreal retusz (skin/detal/oświetlenie) — per grafika': 'Upscale + photoreal retouch (skin/detail/lighting) — per graphic',
+  'Batch usuwania tła + porządkowanie zasobów (do 100 plików)': 'Batch background removal + asset cleanup (up to 100 files)',
+  'Wizytówki — druk 500 szt.': 'Business cards — print 500 pcs.',
+  'Ulotki — druk 1000 szt. A6': 'Flyers — print 1000 pcs. A6',
+  'Baner z oczkami — 1 m²': 'Banner with eyelets — 1 m²',
+  'Rollup z konstrukcją — produkcja': 'Rollup with stand — production',
+  'Plakat — druk (do 50×100)': 'Poster — print (up to 50×100)',
+  'Landing page / one-page': 'Landing page / one-page',
+  'Strona firmowa (WordPress / statyczna)': 'Business website (WordPress / static)',
+  'Sklep internetowy': 'Online store',
+  'Opieka nad stroną — miesiąc': 'Website maintenance — monthly',
+  'Szablon HTML maila — responsywny, kodowany': 'Responsive HTML email template — coded',
+  'Szablon „lite” — grafika bez kodowania (do kreatora mailingu)': '"Lite" template — graphics only (for mailing builder)',
+  'Wariant modułu oferty (zdjęcie, cena, metraż, CTA) — 1 szt': 'Offer module variant (image, price, size, CTA) — 1 pc',
+  'Wdrożenie w systemie mailingowym + testy klientów pocztowych': 'Setup in mailing system + email client tests',
+  'Przygotowanie 1 wydania newslettera (do 6 ofert)': '1 newsletter issue prep (up to 6 offers)',
+  'Abonament: 2 wydania miesięcznie': 'Subscription: 2 issues per month',
+  'Abonament kwartalny: 2 wydania/mies. (rabat 10%)': 'Quarterly subscription: 2 issues/month (10% off)'
+};
+
+// Ramka przy 'service-select' wysyla nazwe z DOM — po angielsku, gdy EN jest wlaczony.
+// Mapa odwrotna sprowadza ja z powrotem do klucza polskiego.
+const EN_TO_PL = (function(){ var m = {}; for (var k in ITEMS_EN) m[ITEMS_EN[k]] = k; return m; })();
+const plKey  = n => (SERVICE_DETAILS[n] ? n : (EN_TO_PL[n] || n));
+const nameOf = pl => RLANG() === 'en' ? (ITEMS_EN[pl] || pl) : pl;
+function detailsOf(n){
+  const k = plKey(n), d = SERVICE_DETAILS[k];
+  if (!d) return null;
+  if (RLANG() !== 'en') return d;
+  const en = SERVICE_DETAILS_EN[k] || {};
+  return {cat: CAT_EN[d.cat] || d.cat, desc: en.desc || d.desc, features: en.features || d.features};
+}
+const i18nStatic = root => { try { window.__i18nStatic && window.__i18nStatic(root); } catch(e){} };
+// Opisy EN — te same klucze co SERVICE_DETAILS (polskie nazwy pozycji).
+const SERVICE_DETAILS_EN = {
+  "Logo — nowy projekt": {
+    desc: "A mark from scratch: 3 initial concepts in different directions, one picked and refined over 2 rounds. You get vector files (SVG, PDF, EPS) plus raster (PNG in a dark and a light version).",
+    features: ["3 initial concepts (different directions)","2 revision rounds included","Vector + raster files","Dark + light version","Mini usage guide (1 page)"]
+  },
+  "Logo — redesign / odświeżenie": {
+    desc: "Modernising an existing mark without losing recognition — new typography, a tuned palette, better proportions. Ideal for companies with 3+ years of history.",
+    features: ["Audit of the current mark","2 refresh proposals","Brand DNA preserved","New production files"]
+  },
+  "Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)": {
+    desc: "A complete visual system: logo in several variants, a colour palette with codes, typography (fonts + hierarchy) and a set of materials (business card, letterhead, e-mail signature, social media templates).",
+    features: ["Logo (primary + variants)","Colour palette + usage","Typographic system","Business card + letterhead","E-mail signature","3 social media templates"]
+  },
+  "Mini księga znaku / brandbook": {
+    desc: "A PDF document (12–20 pages) with logo usage rules, palette, typography and examples. Ready to send to any agency or print shop.",
+    features: ["12–20 page PDF","Logo usage rules","CMYK/RGB/HEX palette","Typography + hierarchy","Usage examples"]
+  },
+  "Nazwa firmy / naming": {
+    desc: "10–15 name proposals with a check on .pl/.com domain and Instagram handle availability. Workshop + brief included.",
+    features: ["Brief + online workshop","10–15 name proposals",".pl/.com domain check","Social media availability","Rationale for every name"]
+  },
+  "Wizytówka — projekt": {
+    desc: "A 90×50 mm double-sided business card, print-ready (CMYK, 3 mm bleed, outlined fonts). PDF files for the printer + JPG for e-mail.",
+    features: ["2 variants to choose from","CMYK, 3 mm bleed","Outlined fonts","Print PDF + preview JPG"]
+  },
+  "Baner / billboard — projekt": {
+    desc: "A banner / billboard design in any format (1×2 m, 3×6 m, etc.). Scalable vector, ready for large-format printing.",
+    features: ["Any format and proportions","Vector + bleed","Legibility from a distance","PDF/AI for the printer"]
+  },
+  "Ulotka — projekt (do A5, 2 strony)": {
+    desc: "A classic double-sided A5 flyer — layout proposal, copy (based on your brief) and graphics. Ideal for an event or a seasonal promotion.",
+    features: ["Double-sided A5","Layout + content hierarchy","Vector graphics","Print-ready (PDF, CMYK)"]
+  },
+  "Plakat — projekt": {
+    desc: "An A3–A1 poster with a strong composition — for a concert, an exhibition, a promotion. Focused on legibility from 3 metres.",
+    features: ["A3/A2/A1 to choose from","Strong typography + hierarchy","Print-ready (PDF, CMYK)"]
+  },
+  "Rollup — projekt": {
+    desc: "An 85×200 cm rollup design — for trade fairs, conferences, events. Vertical composition with the key message in the top zone (visible from afar).",
+    features: ["85×200 or 100×200 cm","Layout optimised vertically","Key info in the top third","Production PDF"]
+  },
+  "Menu / karta — projekt": {
+    desc: "A menu card (restaurant, café, salon) — with hierarchy, product photos and prices. A4 / A5 or custom format.",
+    features: ["Any format","Category hierarchy","Room for photos","Print and online version (PDF)"]
+  },
+  "Okleina / magnesy na auto — projekt": {
+    desc: "A car wrap design (passenger or van) or magnets — logo, contact details, tagline. Accounts for the vehicle's proportions and direction of travel.",
+    features: ["Full wrap or sides only","Vector + real dimensions","3D preview on the car","PDF for the plotter shop"]
+  },
+  "Naklejki / etykiety — projekt": {
+    desc: "Product label design (food, cosmetics, spirits) or promotional stickers — meeting legal requirements (ingredients, weight, EAN code).",
+    features: ["Any shape/format","Legal requirements (for food)","Room for a barcode","Vector PDF"]
+  },
+  "Koszulka / odzież — projekt nadruku": {
+    desc: "Print design for a t-shirt, hoodie or tote — matched to the technique (screen print, DTG, embroidery). Pantone colours for accuracy.",
+    features: ["Techniques: screen/DTG/embroidery","Pantone colours","Preview on the product","PSD + vector"]
+  },
+  "Grafika social media — 1 kreacja": {
+    desc: "A single graphic for Instagram/Facebook/LinkedIn — post, story or reel cover. Consistent with your brand style guide.",
+    features: ["IG/FB/LinkedIn format","Square + story version","On-brand","PNG + editable file"]
+  },
+  "Wersja językowa / adaptacja projektu": {
+    desc: "Adapting an existing design to another language (EN, DE, etc.) — proportions and hierarchy preserved, adjusted for text length.",
+    features: ["Any language","Proportions preserved","Hierarchy adjusted","No need to rebuild from scratch"]
+  },
+  "Poprawa / przygotowanie plików do druku": {
+    desc: "Fixing problems with your files — adding bleed, RGB→CMYK conversion, outlining fonts, checking resolution.",
+    features: ["3 mm bleed","RGB → CMYK","Outlined fonts","300 dpi check","PDF/X-1a or X-4"]
+  },
+  "Wizytówki — druk 500 szt.": {
+    desc: "500 business cards, 90×50 mm, 350 g coated stock, matt or gloss lamination. Delivery within 5 working days.",
+    features: ["500 pcs","350 g coated stock","Matt/gloss lamination","5 working days","Delivery included"]
+  },
+  "Ulotki — druk 1000 szt. A6": {
+    desc: "1000 A6 flyers (105×148 mm) on 170 g coated stock, double-sided full colour.",
+    features: ["1000 pcs A6","170 g stock","4/4 print (double-sided)","Kraków/Warsaw in 3 days"]
+  },
+  "Baner z oczkami — 1 m²": {
+    desc: "A 510 g PVC advertising banner with eyelets every 50 cm and a double-stitched hem. Price per 1 m² — any format.",
+    features: ["510 g PVC","Eyelets every 50 cm","Double-stitched hem","Rain resistant"]
+  },
+  "Rollup z konstrukcją — produkcja": {
+    desc: "A complete 85×200 rollup with an aluminium stand, carry bag and print. Ready to set up in 30 seconds.",
+    features: ["85×200 cm","Aluminium stand","Carry bag","Replaceable print"]
+  },
+  "Plakat — druk (do 50×100)": {
+    desc: "Poster printing up to 50×100 cm on 170 g coated stock or 115 g blueback (for advertising columns).",
+    features: ["Up to 50×100 cm","170 g coated or blueback","Optional UV varnish","Any quantity"]
+  },
+  "Landing page / one-page": {
+    desc: "A one-page site — hero + offer + gallery + contact. Responsive, fast (Core Web Vitals), SEO ready. WordPress or static.",
+    features: ["1 page × 6–8 modules","Responsive (mobile-first)","Core Web Vitals 90+","Contact form","Analytics + SEO"]
+  },
+  "Strona firmowa (WordPress / statyczna)": {
+    desc: "A full company website: 5–10 pages (about, services, portfolio, blog, contact). WordPress with a custom theme, or static (faster).",
+    features: ["5–10 pages","WordPress CMS or static","Blog + categories","Multilingual (option)","SSL + hosting recommendation"]
+  },
+  "Sklep internetowy": {
+    desc: "A store on WooCommerce (WordPress) or PrestaShop — product categories, cart, online payments (PayU/Przelewy24/Stripe), courier integration.",
+    features: ["Unlimited products","Online payments","Courier integration","Order dashboard","Automated invoices"]
+  },
+  "Opieka nad stroną — miesiąc": {
+    desc: "Monthly technical care: WP + plugin updates, daily backups, uptime monitoring, 2 h of content changes included.",
+    features: ["WP + plugin updates","Daily backup","24/7 uptime monitoring","2 h of content changes/month","E-mail support"]
+  }
+};
 
 const SERVICE_DETAILS = {
   "Logo — nowy projekt": {
@@ -533,7 +824,7 @@ const SERVICE_DETAILS = {
 const PRESETS = [
   {
     id:"starter",
-    name:"🚀 Starter",
+    name:"Starter",
     desc:"Logo · Wizytówka · Ulotka A5",
     items:[
       {name:"Logo — nowy projekt", qty:1},
@@ -543,7 +834,7 @@ const PRESETS = [
   },
   {
     id:"rebranding",
-    name:"✨ Rebranding kompletny",
+    name:"Rebranding kompletny",
     desc:"Identyfikacja + baner + 3× social",
     items:[
       {name:"Pełna identyfikacja wizualna (logo, kolory, typografia, materiały)", qty:1},
@@ -553,7 +844,7 @@ const PRESETS = [
   },
   {
     id:"firma-online",
-    name:"🌐 Firma online",
+    name:"Firma online",
     desc:"Logo + strona firmowa + 5× social",
     items:[
       {name:"Logo — nowy projekt", qty:1},
@@ -563,7 +854,7 @@ const PRESETS = [
   },
   {
     id:"ecommerce",
-    name:"🛒 E-commerce start",
+    name:"E-commerce start",
     desc:"Sklep + landing + 5× social + mini-brand",
     items:[
       {name:"Sklep internetowy", qty:1},
@@ -574,7 +865,7 @@ const PRESETS = [
   },
   {
     id:"eventowy",
-    name:"🎪 Pakiet eventowy",
+    name:"Pakiet eventowy",
     desc:"Rollup + plakat + ulotka + baner",
     items:[
       {name:"Rollup — projekt", qty:1},
@@ -599,6 +890,7 @@ function estimatePrice(items){
 
 function renderCollections(){
   const presetsEl = document.getElementById('cp-presets');
+  if (!presetsEl) return; // panel Kolekcji zyje teraz w calc.html (pod Wycena)
   const composition = (items) => `<ul class="cp-list">${items.map(i =>
     `<li><span>${i.name}</span><b>× ${i.qty}</b></li>`).join('')}</ul>`;
 
@@ -655,37 +947,7 @@ function applyCollection(collection){
   const iframe = document.getElementById('calc-frame');
   if (!iframe || !iframe.contentWindow) return;
   iframe.contentWindow.postMessage({type:'apply-collection', items:collection.items, name:collection.name}, '*');
-  // Zamknij panel
-  document.getElementById('collections-panel').classList.remove('is-open');
-  // Toast/feedback
-  const btn = document.getElementById('collections-btn');
-  const orig = btn.innerHTML;
-  btn.innerHTML = '✓ Zastosowano ' + collection.name;
-  btn.style.background = 'rgba(125,201,143,.2)';
-  setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; }, 2000);
 }
-
-function saveCurrentAsCollection(name){
-  if (!name || !name.trim()) return alert('Podaj nazwę kolekcji');
-  const iframe = document.getElementById('calc-frame');
-  if (!iframe || !iframe.contentWindow){ alert('Kalkulator się jeszcze ładuje'); return; }
-  // Poproś calc o obecny stan
-  iframe.contentWindow.postMessage({type:'get-state', saveAs:name.trim()}, '*');
-}
-
-// Toggle panel
-document.getElementById('collections-btn').addEventListener('click', () => {
-  document.getElementById('collections-panel').classList.toggle('is-open');
-});
-document.addEventListener('click', (e) => {
-  const panel = document.getElementById('collections-panel');
-  const btn = document.getElementById('collections-btn');
-  if (!panel.contains(e.target) && !btn.contains(e.target)) panel.classList.remove('is-open');
-});
-document.getElementById('cp-save-btn').addEventListener('click', () => {
-  const input = document.getElementById('cp-name-input');
-  saveCurrentAsCollection(input.value);
-});
 
 // Odbiór postMessage z iframe (calc.html wysyła po kliknięciu wiersza + na get-state)
 window.addEventListener('message', (e) => {
@@ -694,20 +956,6 @@ window.addEventListener('message', (e) => {
   if (e.data.type === 'selection') renderReceipt(e.data);
   if (e.data.type === 'state'){
     calcCurrentState = e.data.items || [];
-    if (e.data.saveAs){
-      // Zapisz jako nowa kolekcja
-      const filtered = calcCurrentState.filter(i => i.qty > 0);
-      if (!filtered.length){ alert('Wybierz jakieś pozycje w kalkulatorze (ilość > 0)'); return; }
-      const saved = getSaved();
-      saved.push({id:'c'+Date.now(), name:e.data.saveAs, items:filtered});
-      saveSaved(saved);
-      document.getElementById('cp-name-input').value = '';
-      renderCollections();
-      const btn = document.getElementById('collections-btn');
-      const orig = btn.innerHTML;
-      btn.innerHTML = '✓ Zapisano';
-      setTimeout(() => btn.innerHTML = orig, 1500);
-    }
   }
 });
 
@@ -721,8 +969,12 @@ renderCollections();
   const p = PRESETS.find(x => x.id === urlPreset);
   if (!p) return;
   const iframe = document.getElementById('calc-frame');
-  const tryApply = () => applyCollection(p);
-  if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+  // Uwaga: readyState 'complete' bywa prawda dla about:blank — czekamy na load
+  // i dokladamy retry, bo listener w calc.html rejestruje sie dopiero po parsowaniu.
+  const tryApply = () => { applyCollection(p); setTimeout(() => applyCollection(p), 400); };
+  const src = iframe.getAttribute('src') || '';
+  if (iframe.contentWindow && iframe.contentWindow.location.href.indexOf(src.split('?')[0]) !== -1
+      && iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
     tryApply();
   } else {
     iframe.addEventListener('load', tryApply, {once:true});
@@ -765,7 +1017,11 @@ renderShowcase = function(data){
     // Skróć nazwę do FAB
     const short = data.name.length > 22 ? data.name.slice(0,20)+'…' : data.name;
     fabName.textContent = short + ' · ' + data.price + ' zł';
-    openShowcase();
+    // Szuflada NIE otwiera sie sama. Przy kazdym tapnieciu w pozycje zaslaniala
+    // caly cennik, wiec skladanie wyceny z kilku pozycji znaczylo zamykanie jej
+    // po kazdym kliknieciu. Zamiast tego zapala sie przycisk podgladu i to
+    // uzytkownik decyduje, kiedy chce zobaczyc paragon.
+    if (!splitRight.classList.contains('is-open')) showcaseFab.classList.add('is-visible');
   }
 };
 // On resize — jeśli przechodzi z mobile → desktop, zamknij drawer
@@ -797,9 +1053,24 @@ function matchPreset(items){
 }
 
 function renderReceipt(data){
+  lastReceiptData = data;
   const items = (data.items || []).filter(i => i.qty > 0);
   const top = document.getElementById('showcase-top');
-  if (!items.length){ lastReceiptKey = ''; top.innerHTML = EMPTY_TOP; return false; }
+  const prevCount = cartCount;
+  cartCount = items.length;
+  if (!items.length){
+    lastReceiptKey = '';
+    tabItems = []; tabActive = ''; lastTabKey = '';
+    const bot = document.getElementById('showcase-bottom');
+    // Ramka przysyla puste 'selection' takze wtedy, gdy koszyk od poczatku byl pusty
+    // (np. po przeliczeniu przy zmianie jezyka). Wtedy nie kasujemy podgladu pozycji.
+    if (prevCount === 0 && lastShowcaseData){ renderShowcase(lastShowcaseData); return false; }
+    lastShowcaseData = null;
+    top.innerHTML = EMPTY_TOP;
+    bot.innerHTML = EMPTY_BOTTOM;
+    i18nStatic(top); i18nStatic(bot);
+    return false;
+  }
 
   const pkg = matchPreset(items);
   const inPkg = pkg ? pkg.items.map(i => i.name) : [];
@@ -809,17 +1080,17 @@ function renderReceipt(data){
 
   const line = (i) => `
     <div class="r-item">
-      <div class="r-row"><span class="r-name">${i.name}</span><span class="r-fill"></span><span class="r-val">${i.sum} zł</span></div>
-      <div class="r-qty">${i.qty} × ${i.price} zł</div>
+      <div class="r-row"><span class="r-name">${nameOf(i.name)}</span><span class="r-fill"></span><span class="r-val">${money(i.sum)}</span></div>
+      <div class="r-qty">${i.qty} × ${money(i.price)}</div>
     </div>`;
 
   const e = data.extras || {};
-  const addon = (label, val) => val > 0 ? `<div class="r-tot"><span>${label}</span><span>${Math.round(val)} zł</span></div>` : '';
+  const addon = (label, val) => val > 0 ? `<div class="r-tot"><span>${label}</span><span>${money(val)}</span></div>` : '';
 
-  const orderLines = items.map(i => `• ${i.name} × ${i.qty} — ${i.sum} zł`).join('\n');
+  const orderLines = items.map(i => `• ${nameOf(i.name)} × ${i.qty} — ${money(i.sum)}`).join('\n');
   const wa = 'https://wa.me/48795758555?text=' + encodeURIComponent(
-    (pkg ? 'Cześć! Interesuje mnie pakiet ' + pkg.name + (extraItems.length ? ' + pozycje dodatkowe:\n' : ':\n') : 'Cześć! Interesuje mnie wycena:\n')
-    + orderLines + '\nRazem netto: ' + Math.round(data.net) + ' zł');
+    (pkg ? t('waPkg') + pkg.name + (extraItems.length ? t('waExtra') : ':\n') : t('waQuote'))
+    + orderLines + t('waTotal') + money(data.net));
 
   const key = items.map(i => i.name + ':' + i.qty).join('|') + '#' + Math.round(data.net);
   const isNew = lastReceiptKey.split('#')[0] !== key.split('#')[0];
@@ -831,41 +1102,50 @@ function renderReceipt(data){
     <div class="receipt ${isNew ? 'is-new' : ''}">
       <div class="r-head">
         <div class="r-brand">LucDoroDesign</div>
-        <div class="r-sub">Pakiet · ${pkgItems.length} ${pkgItems.length === 1 ? 'pozycja' : 'pozycji'}</div>
+        <div class="r-sub">${t('pkg')} · ${nItems(pkgItems.length)}</div>
         <div class="r-pkg">${pkg.name}</div>
       </div>
       ${pkgItems.map(line).join('')}
       <div class="r-sep"></div>
-      <div class="r-tot net"><span>SUMA PAKIETU</span><b>${Math.round(pkgSum)} zł</b></div>
-      <div class="r-foot">Skład pakietu — szczegóły niżej ↓</div>
+      <div class="r-tot net"><span>${t('pkgSum')}</span><b>${money(pkgSum)}</b></div>
+      <div class="r-foot">${t('pkgFoot')}</div>
     </div>` : '';
 
-  const finalTitle = pkg ? (finalItems.length ? 'Dodatkowo wybrane' : 'Podsumowanie zamówienia') : 'Wstępna wycena';
+  const finalTitle = pkg ? (finalItems.length ? t('extraSel') : t('orderSum')) : t('quote');
   const finalReceiptHTML = `
     <div class="receipt ${isNew ? 'is-new' : ''}">
       <div class="r-head">
         <div class="r-brand">LucDoroDesign</div>
-        <div class="r-sub">${finalTitle}${finalItems.length ? ' · ' + finalItems.length + ' ' + (finalItems.length === 1 ? 'pozycja' : 'pozycji') : ''}</div>
+        <div class="r-sub">${finalTitle}${finalItems.length ? ' · ' + nItems(finalItems.length) : ''}</div>
       </div>
       ${finalItems.map(line).join('')}
       ${finalItems.length ? '<div class="r-sep"></div>' : ''}
-      ${addon('Tryb przyspieszony', e.rush)}
-      ${addon('Dodatkowe rundy poprawek', e.rev)}
-      ${addon('Dodatkowe konsultacje', e.call)}
-      ${addon('Dostawa', e.del)}
-      ${e.disc > 0 ? `<div class="r-tot"><span>Rabat</span><span>−${Math.round(e.disc)} zł</span></div>` : ''}
-      <div class="r-tot net"><span>NETTO RAZEM</span><b>${Math.round(data.net)} zł</b></div>
-      ${data.vatOn ? `<div class="r-tot"><span>VAT 23%</span><span>${Math.round(data.vat)} zł</span></div>
-      <div class="r-tot"><span>BRUTTO</span><span>${Math.round(data.gross)} zł</span></div>` : ''}
-      <a class="r-cta" href="${wa}" target="_blank" rel="noopener">Zamów → WhatsApp</a>
-      <div class="r-foot">Wycena orientacyjna · ceny netto</div>
+      ${addon(t('rush'), e.rush)}
+      ${addon(t('rev'), e.rev)}
+      ${addon(t('call'), e.call)}
+      ${addon(t('del'), e.del)}
+      ${e.disc > 0 ? `<div class="r-tot"><span>${t('disc')}</span><span>−${money(e.disc)}</span></div>` : ''}
+      <div class="r-tot net"><span>${t('netTotal')}</span><b>${money(data.net)}</b></div>
+      ${data.vatOn ? `<div class="r-tot"><span>${t('vat')}</span><span>${money(data.vat)}</span></div>
+      <div class="r-tot"><span>${t('gross')}</span><span>${money(data.gross)}</span></div>` : ''}
+      <a class="r-cta" href="${wa}" target="_blank" rel="noopener">${t('ctaOrder')}</a>
+      <div class="r-foot">${t('foot')}</div>
     </div>`;
 
   top.innerHTML = `<div class="receipt-wrap">${pkgReceiptHTML}${finalReceiptHTML}</div>`;
   lastSelectedName = pkg ? pkg.name : (items[0] && items[0].name) || '';
+
+  // Harmonijka przebudowuje sie tylko gdy zmienil sie sklad — inaczej odswiezamy
+  // otwarta karte, zeby zmiana ilosci nie zwijala tego, co user wlasnie czyta.
+  const tabKey = items.map(i => i.name).join('|');
+  if (tabKey !== lastTabKey){ lastTabKey = tabKey; renderDescAcc(items, tabActive); }
+  else { tabItems = items; if (tabActive) openDesc(tabActive); }
   return true;
 }
 
+let lastReceiptData = null;  // ostatni stan koszyka — do przerysowania po zmianie jezyka
+let lastShowcaseData = null; // ostatnia kliknięta pojedyncza pozycja
+let cartCount = 0;   // ile pozycji ma koszyk — podglad pojedynczej pozycji nie moze nadpisac sumy
 const EMPTY_TOP = document.getElementById('showcase-top').innerHTML;
 const EMPTY_BOTTOM = document.getElementById('showcase-bottom').innerHTML;
 
@@ -873,62 +1153,229 @@ function renderPackage(data){
   const items = (data.items || []).filter(i => i.qty > 0);
   if (!items.length) return;
   const cards = items.map(i => {
-    const d = SERVICE_DETAILS[i.name] || {};
+    const d = detailsOf(i.name) || {};
     const desc = (d.desc || '').split('. ')[0].replace(/\.\s*$/, '');
     return `
       <div class="pkg-card">
-        <div class="pkg-card-cat">${d.cat || i.group || 'Usługa'}</div>
-        <div class="pkg-card-name">${i.name}</div>
+        <div class="pkg-card-cat">${d.cat || i.group || t('service')}</div>
+        <div class="pkg-card-name">${nameOf(i.name)}</div>
         ${desc ? `<div class="pkg-card-desc">${desc}.</div>` : ''}
         <div class="pkg-card-foot">
-          <span class="pkg-card-qty">${i.qty} × ${i.price} zł</span>
-          <span class="pkg-card-sum">${i.sum} zł</span>
+          <span class="pkg-card-qty">${i.qty} × ${money(i.price)}</span>
+          <span class="pkg-card-sum">${money(i.sum)}</span>
         </div>
       </div>`;
   }).join('');
-  const lines = items.map(i => `• ${i.name} × ${i.qty} — ${i.sum} zł`).join('\n');
+  const lines = items.map(i => `• ${nameOf(i.name)} × ${i.qty} — ${money(i.sum)}`).join('\n');
   document.getElementById('showcase').innerHTML = `
     <div class="showcase-card">
       <div class="pkg-head">
-        <div class="pkg-eyebrow">Pakiet · ${items.length} ${items.length === 1 ? 'usługa' : 'usługi'}</div>
+        <div class="pkg-eyebrow">${t('pkg')} · ${nServ(items.length)}</div>
         <h1 class="pkg-title">${data.name}</h1>
-        <div class="pkg-total">${data.total} zł <small>NETTO</small></div>
+        <div class="pkg-total">${money(data.total)} <small>${t('net')}</small></div>
       </div>
       <div class="pkg-grid">${cards}</div>
-      <a class="showcase-cta" href="https://wa.me/48795758555?text=${encodeURIComponent('Cześć! Interesuje mnie pakiet ' + data.name + ':\n' + lines + '\nRazem: ' + data.total + ' zł netto')}" target="_blank" rel="noopener">
-        Zamów ten pakiet → WhatsApp
+      <a class="showcase-cta" href="https://wa.me/48795758555?text=${encodeURIComponent(t('waPkg') + data.name + ':\n' + lines + t('waTotal') + money(data.total))}" target="_blank" rel="noopener">
+        ${t('ctaPkg')}
       </a>
     </div>
   `;
   lastSelectedName = data.name;
 }
 
+// ── HARMONIJKA Z OPISAMI ──
+// Opis pojedynczej pozycji byl schowany za kliknieciem wiersza i nikt tego nie
+// odkrywal. Przy niepustym koszyku dolne okno listuje pozycje — zwiniete,
+// jedna otwarta naraz. Klikniecie wiersza w kalkulatorze rozwija odpowiednia.
+let tabItems = [];
+let tabActive = '';
+let lastTabKey = '';
+
+function descBody(i){
+  const d = detailsOf(i.name) || {cat:t('service'), desc:t('fbDesc'), features:[]};
+  const feats = (d.features || []).length ? `<ul class="showcase-features">${d.features.map(f => `<li>${f}</li>`).join('')}</ul>` : '';
+  return `
+    <div class="showcase-card">
+      <div class="showcase-eyebrow">${d.cat || t('service')} · ${t('fromList')}</div>
+      <h1 class="showcase-name">${nameOf(i.name)}</h1>
+      <div class="showcase-price-row">
+        <div class="showcase-price">${money(i.price)}</div>
+        <div class="showcase-price-unit">${t('netLc')}${i.qty > 1 ? ' · × ' + i.qty : ''}</div>
+      </div>
+      <p class="showcase-desc">${d.desc || ''}</p>
+      ${feats}
+      <a class="showcase-cta" href="https://wa.me/48795758555?text=${encodeURIComponent(t('waItem1') + nameOf(i.name) + t('waItem2') + money(i.price) + t('waItem3'))}" target="_blank" rel="noopener">
+        ${t('ctaItem')}
+      </a>
+    </div>`;
+}
+
+function renderDescAcc(items, openName){
+  tabItems = items;
+  tabActive = items.some(i => i.name === openName) ? openName : '';
+  const rows = items.map((i, n) => {
+    const on = i.name === tabActive;
+    return `
+      <div class="acc-item${on ? ' is-open' : ''}" data-acc="${n}">
+        <button type="button" class="acc-head" aria-expanded="${on}">
+          <span class="acc-num">${String(n + 1).padStart(2, '0')}</span>
+          <span class="acc-name">${nameOf(i.name)}</span>
+          <span class="acc-price">${money(i.price)}</span>
+          <span class="acc-chev"></span>
+        </button>
+        ${on ? `<div class="acc-body">${descBody(i)}</div>` : ''}
+      </div>`;
+  }).join('');
+  document.getElementById('showcase-bottom').innerHTML = `
+    <div class="desc-acc-wrap">
+      <div class="desc-hint">${t('descHint')}</div>
+      <div class="desc-acc">${rows}</div>
+    </div>`;
+}
+
+// Rozwija wskazana pozycje (i zwija reszte). Zwraca false, gdy jej nie ma na liscie.
+function openDesc(name){
+  const n = tabItems.findIndex(i => i.name === name);
+  if (n < 0) return false;
+  const wrap = document.querySelector('#showcase-bottom .desc-acc');
+  if (!wrap) return false;
+  tabActive = name;
+  wrap.querySelectorAll('.acc-item').forEach(el => {
+    const on = +el.dataset.acc === n;
+    el.classList.toggle('is-open', on);
+    el.querySelector('.acc-head').setAttribute('aria-expanded', on);
+    const body = el.querySelector('.acc-body');
+    if (on && !body) el.insertAdjacentHTML('beforeend', `<div class="acc-body">${descBody(tabItems[n])}</div>`);
+    else if (on && body) body.innerHTML = descBody(tabItems[n]);
+    else if (body) body.remove();
+  });
+  return true;
+}
+
+function closeDesc(){
+  tabActive = '';
+  document.querySelectorAll('#showcase-bottom .acc-item').forEach(el => {
+    el.classList.remove('is-open');
+    el.querySelector('.acc-head').setAttribute('aria-expanded', false);
+    const body = el.querySelector('.acc-body');
+    if (body) body.remove();
+  });
+}
+
+document.getElementById('showcase-bottom').addEventListener('click', (ev) => {
+  const h = ev.target.closest('.acc-head');
+  if (!h || !tabItems.length) return;
+  const it = tabItems[+h.parentElement.dataset.acc];
+  if (!it) return;
+  if (tabActive === it.name) closeDesc(); else openDesc(it.name);
+});
+
 function renderShowcase(data){
-  const {name, price, market} = data;
-  const details = SERVICE_DETAILS[name] || {
-    cat: "Usługa",
-    desc: "Wybrana pozycja z cennika. Skontaktuj się by omówić szczegóły.",
-    features: []
-  };
-  const featHTML = details.features.map(f => `<li>${f}</li>`).join('');
-  const marketHTML = market ? `<div class="showcase-market">Średnia rynkowa: <b>${market} zł</b> · u mnie <b style="color:#7dc98f;">${price} zł</b> = oszczędzasz <b>${Math.round((market-price)/market*100)}%</b></div>` : '';
+  const {price, market} = data;
+  // Ramka wysyla nazwe tak, jak stoi w tabeli — po EN, gdy jezyk przelaczony.
+  // Klucz sprowadzamy do polskiego, wyswietlamy przez nameOf().
+  const key = plKey(data.key || data.name);
+  lastShowcaseData = {key: key, price: price, market: market};
+  const name = nameOf(key);
+  const details = detailsOf(key) || {cat: t('service'), desc: t('fbDesc'), features: []};
+  const featHTML = details.features.length ? `<ul class="r-feat">${details.features.map(f => `<li>${f}</li>`).join('')}</ul>` : '';
+  const marketHTML = market ? `<div class="r-tot"><span>${t('market')}</span><span>${money(market)}</span></div>
+      <div class="r-tot r-save"><span>${t('save')}</span><span>${Math.round((market-price)/market*100)}%</span></div>` : '';
+  const marketCardHTML = market ? `<div class="showcase-market">${t('market')}: <b>${money(market)}</b>${t('mine')}<b class="showcase-market-mine">${money(price)}</b>${t('eqSave')}<b>${Math.round((market-price)/market*100)}%</b></div>` : '';
+
+  // Górne okno — podglad JEDNEJ pozycji tylko gdy koszyk pusty.
+  // Przy niepustym koszyku gora nalezy do zsumowanego paragonu z renderReceipt().
+  if (cartCount === 0) document.getElementById('showcase-top').innerHTML = `
+    <div class="receipt-wrap">
+      <div class="receipt is-new">
+        <div class="r-head">
+          <div class="r-brand">LucDoroDesign</div>
+          <div class="r-sub">${t('preReceipt')}</div>
+          <div class="r-pkg">${details.cat} · ${t('fromList')}</div>
+        </div>
+        <div class="r-item">
+          <div class="r-row"><span class="r-name">${name}</span><span class="r-fill"></span><span class="r-val">${money(price)}</span></div>
+        </div>
+        <div class="r-sep"></div>
+        ${marketHTML}
+        <div class="r-tot net"><span>${t('net')}</span><b>${money(price)}</b></div>
+        <a class="r-cta" href="https://wa.me/48795758555?text=${encodeURIComponent(t('waItem1') + name + t('waItem2') + money(price) + t('waItem3'))}" target="_blank" rel="noopener">
+          ${t('ctaItem')}
+        </a>
+        <div class="r-foot">${t('foot')}</div>
+      </div>
+    </div>
+  `;
+
+  // Dolne okno — przy niepustym koszyku dol nalezy do teczki, wiec klikniecie
+  // wiersza ma tylko przelaczyc zakladke, nie zdmuchnac calego paska.
+  if (cartCount > 0 && openDesc(key)) return;
+
+  // Dolne okno — opis (jak dawniej)
   document.getElementById('showcase-bottom').innerHTML = `
     <div class="showcase-card">
-      <div class="showcase-eyebrow">${details.cat} · z cennika</div>
+      <div class="showcase-eyebrow">${details.cat} · ${t('fromList')}</div>
       <h1 class="showcase-name">${name}</h1>
       <div class="showcase-price-row">
-        <div class="showcase-price">${price} zł</div>
-        <div class="showcase-price-unit">netto</div>
+        <div class="showcase-price">${money(price)}</div>
+        <div class="showcase-price-unit">${t('netLc')}</div>
       </div>
-      ${marketHTML}
+      ${marketCardHTML}
       <p class="showcase-desc">${details.desc}</p>
-      ${featHTML?`<ul class="showcase-features">${featHTML}</ul>`:''}
-      <a class="showcase-cta" href="https://wa.me/48795758555?text=${encodeURIComponent('Cześć! Interesuje mnie: ' + name + ' za ' + price + ' zł netto')}" target="_blank" rel="noopener">
-        Zamów tę pozycję → WhatsApp
+      ${featHTML ? `<ul class="showcase-features">${details.features.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
+      <a class="showcase-cta" href="https://wa.me/48795758555?text=${encodeURIComponent(t('waItem1') + name + t('waItem2') + money(price) + t('waItem3'))}" target="_blank" rel="noopener">
+        ${t('ctaItem')}
       </a>
     </div>
   `;
 }
+
+// Przemalowanie prawej strony po przelaczeniu jezyka. Paragon i harmonijka nie maja
+// atrybutow data-i18n — buduje je JS, wiec trzeba je wygenerowac od nowa.
+window.rerenderRight = function(){
+  const has = lastReceiptData && (lastReceiptData.items || []).some(i => i.qty > 0);
+  if (has){
+    lastReceiptKey = ''; lastTabKey = '';   // wymus pelne przerysowanie, nie tylko odswiezenie karty
+    renderReceipt(lastReceiptData);
+    return;
+  }
+  if (lastShowcaseData){ renderShowcase(lastShowcaseData); return; }
+  const top = document.getElementById('showcase-top');
+  const bot = document.getElementById('showcase-bottom');
+  if (top){ top.innerHTML = EMPTY_TOP; i18nStatic(top); }
+  if (bot){ bot.innerHTML = EMPTY_BOTTOM; i18nStatic(bot); }
+};
+</script>
+<script>
+/* oznacz w menu link do strony, na ktorej jestesmy */
+(function(){
+  var here=location.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+  document.querySelectorAll('.nav-links a[href], .mobile-nav a[href]').forEach(function(a){
+    var u; try{ u=new URL(a.getAttribute('href'), location.href); }catch(e){ return; }
+    if(u.host!==location.host||u.hash) return;
+    var p=u.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+    if(p===here) a.setAttribute('aria-current','page');
+  });
+})();
+</script>
+
+<style>
+/* Na telefonie rola przycisku podgladu przechodzi na "Zamawiam" w stosie —
+   dwa plywajace guziki w tym samym rogu wykluczaly sie nawzajem. */
+@media(max-width:900px){ .showcase-fab{display:none!important} }
+</style>
+<script>
+// Paragon wyjezdza spod stosu na "Zamawiam" i chowa sie, gdy ktos dokłada
+// kolejna pozycje — wtedy znow liczy sie cennik, nie podsumowanie.
+window.addEventListener('message', function(e){
+  var d = e.data;
+  if (!d || !IS_MOBILE()) return;
+  if (d.type === 'order'){
+    if (!splitRight.classList.contains('is-open')) openShowcase();
+  } else if (d.type === 'stack-add'){
+    if (splitRight.classList.contains('is-open')) closeShowcase();
+  }
+});
 </script>
 </body>
 </html>

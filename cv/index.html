@@ -3,98 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<meta name="theme-color" content="#f1f0f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0d10" media="(prefers-color-scheme: dark)">
+
 <title>Łukasz Dorociak — CV · Graphic Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Newsreader:ital,opsz,wght@0,6..72,320..500;1,6..72,320..460&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..700&family=Roboto+Mono:wght@500;700&family=Bricolage+Grotesque:opsz,wght@12..96,700&display=swap" rel="stylesheet">
 <style>
   *{ box-sizing:border-box; margin:0; padding:0; }
-  html,body{ background:#070b0d; color:#EFE7D8; -webkit-font-smoothing:antialiased; }
+  html,body{ background:#070b0d; color:#EFE7D8; -webkit-font-smoothing:antialiased; cursor:default; -webkit-user-select:none; user-select:none; overflow-x:hidden; max-width:100vw; }
 
-  /* ---------- THEMES ---------- */
+  /* ---------- PALETY: tryb (jasny/ciemny) x kolor (fiolet/wino/zielen) ---------- */
   body{
-    --bg:radial-gradient(130% 96% at 50% 30%, #16232a 0%, #0E1519 52%, #0a1013 100%);
-    --text:#EFE7D8; --dim:#A29C8C; --accent:#CBA65E; --accent2:#9A7C41;
-    --line:rgba(239,231,216,.14); --frame:rgba(203,166,94,.30); --ghost:rgba(203,166,94,.085);
+    --panel:#131319; --text:#f2efe8; --text-inverse:#0d0d10; --dim:#a09a91;
+    --line:rgba(242,239,232,.14);
     --vig:radial-gradient(122% 100% at 50% 34%, transparent 54%, rgba(0,0,0,.5) 100%);
     --grain-op:.05; --grain-blend:soft-light;
+    --bg:radial-gradient(130% 96% at 50% 30%, #1a1a22 0%, #0d0d10 52%, #08080a 100%);
+    --accent:#b58cff; --accent2:#7b4dff;
+    --header-bg:rgba(13,13,16,.75);
+    --frame:rgba(181,140,255,.30); --ghost:rgba(181,140,255,.085);
   }
-  body[data-theme="wine"]{
-    --bg:radial-gradient(130% 96% at 50% 30%, #351A22 0%, #1B0E12 55%, #120a0d 100%);
-    --text:#F0E4D8; --dim:#AD9A93; --accent:#D19B73; --accent2:#9C6A4C;
-    --line:rgba(240,228,216,.13); --frame:rgba(209,155,115,.30); --ghost:rgba(209,155,115,.09);
-    --vig:radial-gradient(122% 100% at 50% 34%, transparent 52%, rgba(0,0,0,.52) 100%);
-    --grain-op:.055; --grain-blend:soft-light;
-  }
-  body[data-theme="ivory"]{
-    --bg:radial-gradient(130% 100% at 50% 28%, #F4EDDE 0%, #ECE4D3 55%, #DED4BE 100%);
-    --text:#22292A; --dim:#6E7365; --accent:#2F4B3B; --accent2:#5E7A69;
-    --line:rgba(34,41,42,.13); --frame:rgba(47,75,59,.30); --ghost:rgba(47,75,59,.10);
-    --vig:radial-gradient(122% 100% at 50% 34%, transparent 60%, rgba(78,60,30,.15) 100%);
+  body[data-mode="light"]{
+    --panel:#f7f6fc; --text:#1a1630; --text-inverse:#f1f0f6; --dim:#635d82;
+    --line:rgba(26,22,48,.13);
+    --vig:radial-gradient(122% 100% at 50% 34%, transparent 60%, rgba(45,25,80,.12) 100%);
     --grain-op:.04; --grain-blend:multiply;
   }
+  /* --- ciemny --- */
+  body[data-mode="dark"][data-accent="violet"]{
+    --bg:radial-gradient(130% 96% at 50% 30%, #1a1a22 0%, #0d0d10 52%, #08080a 100%);
+    --panel:#131319; --accent:#b58cff; --accent2:#7b4dff;
+    --header-bg:rgba(13,13,16,.75);
+    --frame:rgba(181,140,255,.30); --ghost:rgba(181,140,255,.085);
+  }
+  body[data-mode="dark"][data-accent="wine"]{
+    --bg:radial-gradient(130% 96% at 50% 30%, #3a1826 0%, #2a0f1a 55%, #1f0a13 100%);
+    --panel:#3a1826; --text:#F5EDEF; --text-inverse:#2A0F1A; --dim:#B89AA8;
+    --accent:#D07DAD; --accent2:#B85D8F;
+    --header-bg:rgba(42,15,26,.9);
+    --line:rgba(245,237,239,.13); --frame:rgba(208,125,173,.30); --ghost:rgba(208,125,173,.09);
+    --vig:radial-gradient(122% 100% at 50% 34%, transparent 52%, rgba(0,0,0,.52) 100%);
+    --grain-op:.055;
+  }
+  body[data-mode="dark"][data-accent="green"]{
+    --bg:radial-gradient(130% 96% at 50% 30%, #10221a 0%, #0a1611 55%, #070f0c 100%);
+    --panel:#101c17; --text:#eaf5ee; --text-inverse:#07110d; --dim:#8fa89a;
+    --accent:#35d17a; --accent2:#1DB954;
+    --header-bg:rgba(7,17,13,.8);
+    --line:rgba(234,245,238,.13); --frame:rgba(53,209,122,.28); --ghost:rgba(53,209,122,.085);
+  }
+  /* --- jasny --- */
+  body[data-mode="light"][data-accent="violet"]{
+    --bg:radial-gradient(130% 100% at 50% 28%, #f7f6fc 0%, #f1f0f6 55%, #e2ddf4 100%);
+    --panel:#f7f6fc; --accent:#7b4dff; --accent2:#5735b7;
+    --header-bg:rgba(241,240,246,.92);
+    --frame:rgba(123,77,255,.30); --ghost:rgba(123,77,255,.10);
+  }
+  body[data-mode="light"][data-accent="wine"]{
+    --bg:radial-gradient(130% 100% at 50% 28%, #fdf7f9 0%, #f8eef2 55%, #f0dde5 100%);
+    --panel:#fdf7f9; --text:#2A0F1A; --text-inverse:#fdf7f9; --dim:#8a6b78;
+    --accent:#B85D8F; --accent2:#8E3E68;
+    --header-bg:rgba(253,247,249,.92);
+    --line:rgba(42,15,26,.13); --frame:rgba(184,93,143,.30); --ghost:rgba(184,93,143,.10);
+  }
+  body[data-mode="light"][data-accent="green"]{
+    --bg:radial-gradient(130% 100% at 50% 28%, #f6fbf7 0%, #eef7f1 55%, #ddeee4 100%);
+    --panel:#f6fbf7; --text:#0d2118; --text-inverse:#f6fbf7; --dim:#5c7568;
+    --accent:#12924a; --accent2:#0c6b36;
+    --header-bg:rgba(246,251,247,.92);
+    --line:rgba(13,33,24,.13); --frame:rgba(18,146,74,.28); --ghost:rgba(18,146,74,.10);
+  }
 
-  /* ---------- toolbar ---------- */
-  .bar{
-    position:fixed; top:0; left:0; right:0; height:60px; z-index:60;
-    display:flex; align-items:center; justify-content:space-between; padding:0 22px; gap:16px;
-    background:rgba(7,11,13,.9); backdrop-filter:blur(8px);
-    border-bottom:1px solid rgba(203,166,94,.18); font-family:'Newsreader',serif;
+  /* ---------- pasek narzedzi CV ---------- */
+  /* Jeden system ksztaltu: kazda grupa to pigulka 36px, kazda kontrolka w srodku 28px.
+     Pasek ma byc obecny, nie krzyczec — chrom siedzi nisko (ramka 9%), a kontrast
+     wraca dopiero pod kursorem i na stanie aktywnym. */
+  .tool-grp, .zoom{
+    display:flex; align-items:center; gap:2px; height:36px; padding:0 3px;
+    border:1px solid color-mix(in srgb, var(--text) 9%, transparent); border-radius:999px;
+    background:color-mix(in srgb, var(--text) 3%, transparent);
+    transition:border-color .2s;
   }
-  .bar .name{ font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#A29C8C; white-space:nowrap; }
-  .bar .name b{ color:#CBA65E; font-weight:500; }
-  .bar .name a{ color:#CBA65E; text-decoration:none; transition:color .18s ease; }
-  .bar .name a:hover{ color:#EFE7D8; }
-  .themes{ display:flex; gap:8px; margin-left:auto; }
-  .swatch{
-    display:flex; align-items:center; gap:8px; cursor:pointer;
-    font:400 12px/1 'Newsreader',serif; letter-spacing:.08em; text-transform:uppercase; color:#8f897c;
-    background:transparent; border:1px solid rgba(255,255,255,.12); border-radius:2px; padding:8px 12px;
-    transition:border-color .18s, color .18s;
-  }
-  .swatch .dotc{ width:12px; height:12px; border-radius:50%; box-shadow:0 0 0 1px rgba(255,255,255,.15) inset; }
-  .swatch[aria-pressed="true"]{ color:#EFE7D8; border-color:rgba(203,166,94,.7); }
-  .swatch:focus-visible{ outline:2px solid #EFE7D8; outline-offset:2px; }
-  .s1 .dotc{ background:#CBA65E; } .s2 .dotc{ background:#D19B73; } .s3 .dotc{ background:#2F4B3B; }
-  .btn{
-    font:500 13px/1 'Newsreader',serif; letter-spacing:.1em; text-transform:uppercase;
-    color:#0E1519; background:#CBA65E; border:none; border-radius:2px; padding:10px 18px; cursor:pointer;
-    text-decoration:none; display:inline-block;
-    transition:background .18s, transform .18s;
-  }
-  .btn:hover{ background:#dcb56d; transform:translateY(-1px); text-decoration:none; }
-  .btn:focus-visible{ outline:2px solid #EFE7D8; outline-offset:3px; }
+  .tool-grp:hover, .zoom:hover{ border-color:color-mix(in srgb, var(--text) 18%, transparent); }
+  .tool-grp .tsep{ width:1px; height:14px; margin:0 2px; background:color-mix(in srgb, var(--text) 10%, transparent); }
 
-  .zoom{ display:flex; align-items:center; gap:2px; margin-left:12px;
-    border:1px solid rgba(255,255,255,.12); border-radius:2px; padding:2px; }
-  .zoom button{
-    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
-    background:transparent; border:none; cursor:pointer; color:#EFE7D8;
-    font:500 16px/1 'Newsreader',serif; border-radius:2px;
+  .tbtn, .swatch, .zoom button{
+    height:28px; display:inline-flex; align-items:center; justify-content:center; gap:7px;
+    padding:0 12px; border:0; border-radius:999px; background:transparent; cursor:pointer;
+    font:500 11px/1 'Roboto Mono',monospace; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--dim); text-decoration:none; white-space:nowrap;
     transition:background .18s, color .18s;
   }
-  .zoom button:hover{ background:rgba(203,166,94,.15); color:#CBA65E; }
-  .zoom button:disabled{ opacity:.3; cursor:not-allowed; }
-  .zoom button:focus-visible{ outline:2px solid #EFE7D8; outline-offset:2px; }
+  .tbtn:hover, .swatch:hover, .zoom button:hover:not(:disabled){
+    background:color-mix(in srgb, var(--text) 7%, transparent); color:var(--text);
+  }
+  /* Stan aktywny: delikatna podkladka w akcencie zamiast pelnego wypelnienia.
+     Tekst zostaje jasny, wiec kontrast trzyma AA — akcent niesie tlo i kropka. */
+  .tbtn[aria-pressed="true"], .tbtn[aria-current="page"], .swatch[aria-pressed="true"]{
+    background:color-mix(in srgb, var(--accent) 16%, transparent); color:var(--text);
+    box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--accent) 32%, transparent);
+  }
+  .tbtn:focus-visible, .swatch:focus-visible, .zoom button:focus-visible{ outline:2px solid var(--text); outline-offset:2px; }
+
+  /* ---------- header (wzorzec main-menu lucdoro.design) ---------- */
+  .header{
+    position:sticky; top:0; z-index:100;
+    background:var(--header-bg); backdrop-filter:blur(28px) saturate(140%); -webkit-backdrop-filter:blur(28px) saturate(140%);
+    border-bottom:2px solid color-mix(in srgb, var(--text) 28%, transparent);
+    box-shadow:0 8px 24px -12px color-mix(in srgb, var(--text) 30%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--text) 8%, transparent);
+    font-family:'Manrope',sans-serif; transition:background .25s, border-color .25s;
+  }
+  .header-bg-title{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:flex-start;
+    padding-left:clamp(140px,18vw,260px); font-family:'Fraunces',serif; font-style:italic; font-weight:400;
+    font-size:clamp(3rem,8vw,6rem); letter-spacing:-.04em; line-height:1.05; color:transparent;
+    -webkit-text-stroke:1px var(--accent); pointer-events:none; user-select:none; z-index:0; opacity:.28; white-space:nowrap; overflow:hidden;
+  }
+  .nav{ position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:12px 24px; min-height:180px; max-width:1600px; margin:0 auto; flex-wrap:wrap; }
+  .brand-wrap{ display:inline-flex; align-items:center; flex-shrink:0; position:relative; }
+  .brand-wrap::after{ content:""; position:absolute; right:-16px; top:28%; bottom:28%; width:1px; background:color-mix(in srgb, var(--text) 18%, transparent); pointer-events:none; }
+  .nav-links{ position:relative; }
+  .nav-links::after{ content:""; position:absolute; right:-16px; top:20%; bottom:20%; width:1px; background:color-mix(in srgb, var(--text) 18%, transparent); pointer-events:none; }
+  .brand-logo{ height:44px; width:auto; display:block; object-fit:contain; }
+  .nav-links{ display:flex; flex-direction:column; gap:6px; align-items:center; font-size:13px; }
+  .nav-row{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; justify-content:center; }
+  .nav-links a{
+    font-size:13px; color:var(--text); position:relative; padding:.7rem 1.15rem; border-radius:999px;
+    transition:color .2s ease;
+    letter-spacing:.05em; text-transform:uppercase; z-index:2; font-weight:500;
+    border:1px solid color-mix(in srgb, var(--text) 20%, transparent);
+    background:color-mix(in srgb, var(--text) 4%, transparent);
+    text-decoration:none;
+  }
+  .nav-links a:hover{ color:var(--accent); }
+  .nav-back{
+    color:var(--text); border:1px solid color-mix(in srgb, var(--text) 20%, transparent); padding:6px 14px;
+    border-radius:999px; font-size:12px; font-weight:600; text-decoration:none; flex-shrink:0;
+    transition:border-color .2s, color .2s;
+  }
+  .nav-back:hover{ border-color:var(--accent); color:var(--accent); }
+  .cv-tools{
+    position:relative; z-index:2; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+    padding:8px 24px 10px;
+  }
+  /* listwa narzedzi lezy na ciemnym tle sceny — nie idzie za jasnym trybem kartki */
+  .cv-tools{ --text:#f2efe8; --dim:#a09a91; --panel:#131319; --text-inverse:#0d0d10; }
+  .themes{ gap:2px; }
+  .swatch .dotc{ width:9px; height:9px; border-radius:50%; flex:none; box-shadow:0 0 0 1px color-mix(in srgb, var(--text) 22%, transparent) inset; }
+  .s1 .dotc{ background:#b58cff; } .s2 .dotc{ background:#D07DAD; } .s3 .dotc{ background:#7b4dff; }
+  #margin-toggle .dotc{ background:var(--accent); transition:background .18s; }
+  #margin-toggle[aria-pressed="false"] .dotc{ background:transparent; }
+  .btn{
+    font:600 13px/1 'Manrope',sans-serif; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--panel); background:var(--text); border:none; border-radius:999px; padding:10px 20px; cursor:pointer;
+    text-decoration:none; display:inline-block;
+    transition:background .18s, transform .18s, opacity .18s;
+  }
+  .btn:hover{ opacity:.88; transform:translateY(-2px); text-decoration:none; }
+  .btn:focus-visible{ outline:2px solid var(--text); outline-offset:3px; }
+
+  .zoom button{ width:28px; padding:0; font:500 15px/1 'Roboto Mono',monospace; }
+  .zoom button:disabled{ opacity:.25; cursor:not-allowed; background:transparent; }
   .zoom .zlabel{
-    min-width:44px; text-align:center; font:400 11px/1 'Newsreader',serif;
-    letter-spacing:.08em; color:#A29C8C; user-select:none;
+    min-width:42px; text-align:center; font:500 11px/1 'Roboto Mono',monospace;
+    letter-spacing:.08em; color:var(--dim); user-select:none;
   }
 
-  .viewport{ display:flex; justify-content:center; padding:88px 24px 40px; }
+  .viewport{ display:flex; justify-content:center; padding:32px 24px 40px; max-width:100vw; overflow-x:auto; -webkit-overflow-scrolling:touch; }
   .holder{ position:relative; }
 
   /* ---------- page (A4) ---------- */
   .poster{
-    width:210mm; height:297mm; position:relative; overflow:hidden;
-    background:var(--bg); color:var(--text); transform-origin:top left;
+    width:210mm; height:297mm; position:relative; overflow:hidden; box-sizing:border-box;
+    background:var(--panel); transform-origin:top left; padding:0;
     box-shadow:0 34px 100px rgba(0,0,0,.6);
     -webkit-print-color-adjust:exact; print-color-adjust:exact;
   }
+  .poster.no-margin{ padding:0; }
+  .poster.no-margin .canvas{ border-radius:0; }
+  .canvas{
+    position:relative; width:100%; height:100%; overflow:hidden; border-radius:0;
+    background:var(--bg); color:var(--text);
+  }
   .ghost{
     position:absolute; z-index:0; pointer-events:none; right:-30mm; top:-16mm;
+    transform:rotate(-2.2deg);
     font-family:'Fraunces',serif; font-weight:300; font-size:150mm; line-height:.72;
-    letter-spacing:-.04em; color:transparent; -webkit-text-stroke:0.28mm var(--ghost);
+    letter-spacing:-.04em; color:transparent;
+    background:radial-gradient(ellipse 140% 140% at center, var(--ghost) 0%, var(--ghost) 55%, transparent 100%);
+    -webkit-background-clip:text; background-clip:text;
   }
   .grain{
     position:absolute; inset:0; z-index:3; pointer-events:none; opacity:var(--grain-op); mix-blend-mode:var(--grain-blend);
@@ -102,227 +204,889 @@
   }
   .vignette{ position:absolute; inset:0; z-index:3; pointer-events:none; background:var(--vig); }
 
-  .content{ position:relative; z-index:2; height:100%; display:flex; flex-direction:column; padding:15mm 16mm 11mm; }
+  .content{ position:relative; z-index:2; height:100%; display:flex; flex-direction:column; padding:9mm 16mm 8mm; }
   .content::before{ content:""; position:absolute; inset:6mm; border:0.35mm solid var(--frame); pointer-events:none; }
 
   /* ---------- header ---------- */
-  .eyebrow{ font-family:'Newsreader',serif; font-weight:400; font-size:3.1mm; letter-spacing:.4em; text-transform:uppercase; color:var(--accent); margin-bottom:3.4mm; }
+  .eyebrow{ font-family:'Roboto Mono',monospace; font-weight:500; font-size:3mm; letter-spacing:.34em; text-transform:uppercase; color:var(--accent); margin-bottom:1.2mm; }
   .eyebrow .dot{ color:var(--accent2); margin:0 1.2mm; }
-  .the{ font-family:'Newsreader',serif; font-weight:400; font-size:3.4mm; letter-spacing:.5em; text-transform:uppercase; color:var(--dim); margin-bottom:.6mm; padding-left:.4mm; }
-  .title{ font-family:'Fraunces',serif; font-weight:320; font-optical-sizing:auto; font-size:17.5mm; line-height:.95; letter-spacing:-0.02em; color:var(--text); }
-  .subtitle{ font-family:'Newsreader',serif; font-style:italic; font-weight:400; font-size:3.45mm; line-height:1.4; color:var(--dim); max-width:170mm; margin-top:3.4mm; }
-  .subtitle b{ font-weight:460; color:var(--text); }
+  .the{ font-family:'Roboto Mono',monospace; font-weight:500; font-size:3.1mm; letter-spacing:.42em; text-transform:uppercase; color:var(--dim); margin-bottom:.6mm; padding-left:.4mm; }
+  .title{ font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-optical-sizing:auto; font-size:17.5mm; line-height:.95; letter-spacing:-0.02em; color:var(--text); }
+  .subtitle{ font-family:'Manrope',sans-serif; font-weight:400; font-size:3.35mm; line-height:1.4; color:var(--dim); max-width:170mm; margin-top:3.4mm; }
+  .subtitle b{ font-weight:700; color:var(--text); }
 
   .contact{
     display:flex; flex-wrap:wrap; gap:2mm 5.5mm; margin-top:4mm;
-    font-family:'Newsreader',serif; font-size:2.85mm; letter-spacing:.1em; text-transform:uppercase; color:var(--text);
+    font-family:'Roboto Mono',monospace; font-size:2.7mm; letter-spacing:.06em; text-transform:uppercase; color:var(--text);
   }
   .contact span{ white-space:nowrap; }
   .contact .k{ color:var(--accent2); margin-right:1.4mm; }
 
-  .rule{ height:0; border-top:0.35mm solid var(--accent); opacity:.62; margin:5mm 0 5.5mm; }
+  .rule{ height:0; border-top:0.35mm solid var(--accent); opacity:.62; margin:5mm 0 5.5mm; transform:rotate(-0.35deg); transform-origin:left center; }
 
   /* ---------- grid ---------- */
-  .grid{ display:grid; grid-template-columns:1.42fr 1fr; flex:1 1 auto; min-height:0; }
-  .col{ display:flex; flex-direction:column; justify-content:space-between; padding-bottom:1.5mm; }
-  .col.left{ padding-right:7mm; border-right:0.28mm solid var(--line); row-gap:3.2mm; }
-  .col.right{ padding-left:7mm; row-gap:3mm; }
+  .grid{ display:grid; grid-template-columns:1.42fr 1fr; flex:0 0 auto; }
+  .col{ display:flex; flex-direction:column; justify-content:flex-start; padding-bottom:1.5mm; }
+  .col.left{ padding-right:7mm; border-right:0.28mm solid var(--line); row-gap:2.4mm; }
+  .col.right{ padding-left:7mm; row-gap:3.4mm; }
 
-  .sec{ font-family:'Newsreader',serif; font-weight:400; font-size:3mm; letter-spacing:.34em; text-transform:uppercase; color:var(--accent); }
+  .sec{ font-family:'Roboto Mono',monospace; font-weight:500; font-size:2.9mm; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); }
 
-  .job{ display:flex; gap:3.2mm; }
-  .job .num{ font-family:'Fraunces',serif; font-weight:330; font-size:4.4mm; color:var(--accent); flex:0 0 6.2mm; font-variant-numeric:lining-nums tabular-nums; line-height:1.2; }
+  .job{
+    display:flex; gap:3.2mm; padding:2.2mm 2.8mm 3.8mm; border:0.28mm solid var(--line); border-radius:3.7mm;
+    background:color-mix(in srgb, var(--panel) 70%, transparent);
+  }
+  .job .num{
+    font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:4.6mm; color:transparent;
+    background:radial-gradient(ellipse 140% 140% at center, var(--accent) 0%, var(--accent) 68%, transparent 100%);
+    -webkit-background-clip:text; background-clip:text;
+    flex:0 0 6.2mm; font-variant-numeric:lining-nums tabular-nums; line-height:1.2;
+  }
   .job .body{ flex:1; }
-  .job h3{ font-family:'Newsreader',serif; font-weight:500; font-size:3.5mm; line-height:1.22; color:var(--text); letter-spacing:.02em; }
-  .job .meta{ font-family:'Newsreader',serif; font-size:2.6mm; letter-spacing:.11em; text-transform:uppercase; color:var(--dim); margin-top:.7mm; white-space:nowrap; }
-  .job .meta b{ color:var(--accent2); font-weight:400; }
-  .job p{ font-family:'Newsreader',serif; font-weight:400; font-size:2.95mm; line-height:1.33; color:var(--text); opacity:.92; margin-top:1.1mm; }
+  .job h3{ font-family:'Manrope',sans-serif; font-weight:600; font-size:3.4mm; line-height:1.22; color:var(--text); letter-spacing:0; }
+  .job .meta{ font-family:'Roboto Mono',monospace; font-weight:700; font-size:2.45mm; letter-spacing:.05em; text-transform:uppercase; color:var(--dim); margin-top:.7mm; white-space:nowrap; }
+  .job .meta b{ color:var(--accent2); font-weight:500; }
+  .job p{ font-family:'Manrope',sans-serif; font-weight:400; font-size:2.9mm; line-height:1.33; color:var(--text); opacity:.92; margin-top:1.1mm; }
 
-  .rlist{ display:flex; flex-direction:column; row-gap:1.2mm; }
-  .rlist .ri{ font-family:'Newsreader',serif; font-size:2.95mm; line-height:1.33; color:var(--text); }
+  .rlist{ display:flex; flex-direction:column; row-gap:1.7mm; }
+  .rlist .ri{ font-family:'Manrope',sans-serif; font-size:2.9mm; line-height:1.4; color:var(--text); }
   .rlist .ri i{ font-style:normal; color:var(--dim); }
-  .rlist .lbl{ font-family:'Newsreader',serif; font-size:2.6mm; letter-spacing:.16em; text-transform:uppercase; color:var(--accent2); display:block; margin-bottom:.3mm; }
-  .rgroup{ padding-bottom:2.6mm; border-bottom:0.28mm solid var(--line); }
+  .rlist .lbl{ font-family:'Roboto Mono',monospace; font-weight:700; font-size:2.45mm; letter-spacing:.12em; text-transform:uppercase; color:var(--accent2); display:block; margin-bottom:.6mm; }
+  .rgroup{ padding-bottom:3mm; border-bottom:0.28mm dashed var(--line); }
   .rgroup:last-of-type{ border-bottom:none; padding-bottom:0; }
 
   /* ---------- finale ---------- */
-  .finale{ margin-top:4.2mm; padding-top:3.4mm; border-top:0.35mm solid var(--accent); display:flex; justify-content:space-between; align-items:baseline; gap:6mm; }
-  .finale .cap{ font-family:'Newsreader',serif; font-weight:400; font-size:2.9mm; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
+  .finale{ margin-top:4.5mm; padding-top:1.4mm; border-top:0.35mm solid var(--accent); display:flex; justify-content:space-between; align-items:baseline; gap:6mm; transform:rotate(0.25deg); transform-origin:left center; }
+  .header-logo{
+    position:absolute; z-index:4; top:13mm; right:13mm; width:24mm; height:15mm;
+    background-color:var(--accent);
+    -webkit-mask-image:url("https://lucdoro.design/assets/logo.png"); -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat; -webkit-mask-position:top center;
+    mask-image:url("https://lucdoro.design/assets/logo.png"); mask-size:contain; mask-repeat:no-repeat; mask-position:top center;
+  }
+  .finale .cap{ font-family:'Roboto Mono',monospace; font-weight:500; font-size:2.75mm; letter-spacing:.26em; text-transform:uppercase; color:var(--dim); }
   .finale .cap .dash{ color:var(--accent2); margin:0 1.6mm; }
-  .finale .big{ font-family:'Fraunces',serif; font-weight:340; font-size:5mm; color:var(--accent); letter-spacing:-0.01em; text-transform:none; }
+  .finale .big{ font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:5mm; color:var(--accent); letter-spacing:-0.01em; text-transform:none; }
 
-  .foot{ margin-top:3.2mm; padding-top:2.2mm; border-top:0.28mm solid var(--line); font-family:'Newsreader',serif; font-size:1.95mm; line-height:1.5; letter-spacing:.03em; color:var(--dim); opacity:.6; }
+  .foot{ margin-top:3mm; padding-top:2mm; border-top:0.28mm solid var(--line); font-family:'Manrope',sans-serif; font-weight:500; font-size:2.15mm; line-height:3.1mm; letter-spacing:.01em; color:var(--dim); opacity:.75; }
+
+  /* ---------- hamburger + mobile nav (wzorzec strony głównej) ---------- */
+  .nav-hamburger{
+    display:none; flex-direction:column; justify-content:center; gap:5px; width:40px; height:40px;
+    padding:8px; border-radius:8px; background:transparent; border:none; cursor:pointer;
+  }
+  .nav-hamburger span{ display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:transform .2s ease, opacity .2s ease; }
+  .nav-hamburger.is-open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .nav-hamburger.is-open span:nth-child(2){ opacity:0; }
+  .nav-hamburger.is-open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  .mobile-nav{
+    display:none; position:fixed; inset:0; padding-top:64px; padding-bottom:40px;
+    background:var(--panel); z-index:150; overflow-y:auto; flex-direction:column;
+  }
+  .mobile-nav.is-open{ display:flex; }
+  .mobile-nav nav{ display:flex; flex-direction:column; flex:1; }
+  .mobile-nav-link{
+    font-family:'Manrope',sans-serif; font-size:16px; color:var(--text); padding:14px 24px;
+    border-bottom:1px solid color-mix(in srgb, var(--text) 12%, transparent); text-decoration:none;
+  }
+  .mobile-nav-link:hover{ background:color-mix(in srgb, var(--text) 6%, transparent); color:var(--accent); }
+
+  @media(max-width:760px){
+    .header-bg-title{ display:none; }
+    .nav{ min-height:92px; padding:12px 16px; gap:12px; }
+    .brand-logo{ height:34px; }
+    .nav-links{ display:none; }
+    .nav-back{ display:none; }
+    .nav > .btn{ padding:8px 14px; font-size:11px; }
+    .nav-hamburger{ display:flex; }
+    .cv-tools{ gap:6px; padding:6px 12px 10px; }
+    .tbtn, .swatch{ font-size:10px; padding:0 9px; gap:5px; }
+    .swatch .dotc{ width:8px; height:8px; }
+  }
+
+  /* ---------- tryb kafelkowy (mobile, wyzwalany zoomem) ---------- */
+  .tile-deck{
+    display:none; position:fixed; inset:0; z-index:300; background:var(--panel);
+    flex-direction:row; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; -ms-overflow-style:none;
+  }
+  .tile-deck::-webkit-scrollbar{ display:none; }
+  .tile-deck.is-open{ display:flex; }
+  .tile-exit{
+    position:fixed; top:14px; right:14px; z-index:310; font-family:'Roboto Mono',monospace; font-size:11px; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--text); background:color-mix(in srgb, var(--panel) 85%, transparent);
+    border:1px solid color-mix(in srgb, var(--text) 25%, transparent); border-radius:999px; padding:10px 16px; cursor:pointer;
+    backdrop-filter:blur(12px);
+  }
+  .tile-track{ display:flex; width:100%; }
+  .tile{
+    flex:0 0 100vw; width:100vw; height:100dvh; scroll-snap-align:center; box-sizing:border-box;
+    display:flex; flex-direction:column; justify-content:center; gap:12px; padding:80px 28px 60px; overflow-y:auto;
+    opacity:0; transition:opacity .4s ease;
+  }
+  .tile.is-visible{ opacity:1; }
+  .tile-eyebrow{ font-family:'Roboto Mono',monospace; font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); }
+  .tile-num{
+    font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:15vw; line-height:1; color:transparent;
+    background:radial-gradient(ellipse 140% 140% at center, var(--accent) 0%, var(--accent) 68%, transparent 100%);
+    -webkit-background-clip:text; background-clip:text; margin-bottom:4px;
+  }
+  .tile h2{ font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:clamp(24px,7vw,36px); color:var(--text); line-height:1.1; }
+  .tile .tile-meta{ font-family:'Roboto Mono',monospace; font-size:12px; letter-spacing:.05em; color:var(--dim); text-transform:uppercase; }
+  .tile p{ font-family:'Manrope',sans-serif; font-size:15px; line-height:1.55; color:var(--text); opacity:.92; }
+  .tile .tile-name{ font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:clamp(34px,11vw,56px); color:var(--text); line-height:.95; }
+  .tile-skill-row{ display:flex; flex-direction:column; gap:2px; margin-bottom:10px; }
+  .tile-skill-row .lbl{ font-family:'Roboto Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent2); }
+  .tile-skill-row .val{ font-family:'Manrope',sans-serif; font-size:14px; color:var(--text); }
+  .tile-dots{ position:fixed; bottom:18px; left:0; right:0; z-index:310; display:flex; align-items:center; justify-content:center; gap:11px; pointer-events:none; }
+  .tile-dot{ width:3px; height:15px; border-radius:2px; background:color-mix(in srgb, var(--text) 30%, transparent); transform-origin:center; transition:background .3s, transform .35s cubic-bezier(.34,1.56,.64,1); }
+  .tile-dot.is-active{ background:var(--accent); transform:rotate(90deg); }
 
   @page{ size:210mm 297mm; margin:0; }
   @media print{
-    .bar{ display:none !important; }
-    .viewport{ display:block; padding:0; }
-    .holder{ width:auto !important; height:auto !important; }
-    .poster{ transform:none !important; box-shadow:none !important; width:210mm; height:297mm; }
+    @page{ size:A4; margin:0; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .header, .mobile-nav, .nav-backdrop, .nav-hamburger,
+    .cv-tools, .no-print, .tile-deck{ display:none !important; }
+    .viewport{ display:block; padding:0 !important; margin:0 !important; overflow:visible !important; max-width:none; }
+    .holder{ width:auto !important; height:auto !important; margin:0 !important; }
+    .poster{
+      transform:none !important; box-shadow:none !important;
+      width:210mm !important; height:297mm !important; margin:0 !important;
+      overflow:hidden !important; break-inside:avoid; break-after:avoid; page-break-after:avoid;
+    }
   }
-</style>
-</head>
-<body data-theme="ivory">
+.nav-links a[aria-current="page"],.mobile-nav a[aria-current="page"]{color:var(--color-primary);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
 
-  <div class="bar no-print">
-    <div class="name"><a href="/" title="Powrót na stronę główną">← lucdoro.design</a> &nbsp;·&nbsp; <b>CV — A4</b></div>
-    <div class="themes">
-      <button class="swatch s1" data-set="slate"  aria-pressed="false"><span class="dotc"></span>Łupek</button>
-      <button class="swatch s2" data-set="wine"   aria-pressed="false"><span class="dotc"></span>Wino</button>
-      <button class="swatch s3" data-set="ivory"  aria-pressed="true"><span class="dotc"></span>Kość słoniowa</button>
+/* === MENU 1:1 ze strona glowna (wariant ciemny) === */
+/* === TOKENY MENU (przeniesione ze strony glownej, wartosci motywu ciemnego) === */
+.header,.mobile-nav,.nav-backdrop{
+--content-wide:1320px;
+--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+--radius-md:0.5rem;
+--text-xs:clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+--text-sm:clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+--text-base:clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+--font-fraunces:'Fraunces',serif;
+--font-body:'Manrope', system-ui, sans-serif;
+--brand-green:#1DB954;
+--color-bg:#0d0d10;--color-surface:#131319;
+--color-text:#f2efe8;--color-text-muted:#a09a91;--color-text-inverse:#0d0d10;
+--color-border:#2b2b36;--color-divider:#23232d;--color-header-bg:rgba(13,13,16,.75);
+--color-primary:#b58cff;--color-primary-highlight:#241b35;
+--wa-bg:#1DB954;--wa-fg:#fff;--wa-shadow:29,185,84;
+--pill-x:0.9rem;}
+
+.header .container-wide{width:min(100% - 2rem, var(--content-wide));margin-inline:auto}
+
+.header{position:sticky;top:0;z-index:50;background:var(--color-header-bg);backdrop-filter:blur(28px) saturate(140%);-webkit-backdrop-filter:blur(28px) saturate(140%);border-bottom:2px solid color-mix(in srgb, var(--color-text) 28%, transparent);box-shadow:0 8px 24px -12px color-mix(in srgb, var(--color-text) 30%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--color-text) 8%, transparent);margin-bottom:clamp(4rem,7vw,7rem);}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:180px;gap:var(--space-8);position:relative;z-index:2;padding:0 clamp(16px,3vw,32px);}
+.nav > .brand-wrap::after{right:calc(-1 * var(--space-4));top:28%;bottom:28%;}
+.nav-links{position:relative;}
+.nav-links::after{right:calc(-1 * var(--space-4));top:20%;bottom:20%;}
+.header-bg-title{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding-left:clamp(180px,22vw,360px);font-family:var(--font-fraunces);font-style:italic;font-weight:400;font-size:clamp(3rem,8vw,7.5rem);letter-spacing:-.04em;line-height:1.05;color:transparent;-webkit-text-stroke:1px var(--brand-green);pointer-events:none;user-select:none;z-index:0;opacity:.3;white-space:nowrap;overflow:hidden}
+.header-bg-title em{font-style:italic;font-weight:600;-webkit-text-stroke:1px var(--color-primary)}
+.header-bg-title{opacity:.28;-webkit-text-stroke-width:.9px}
+@media (max-width:640px){
+  .header-bg-title{display:none}
+}
+.header-bg-title--right{justify-content:flex-start;padding-left:0;padding-right:0;left:0;overflow:visible;will-change:transform}
+.nav-backdrop{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.22;mix-blend-mode:multiply}
+.nav-backdrop{opacity:.35;mix-blend-mode:screen}
+.nav-backdrop .nav-bd-glow{filter:blur(38px)}
+.brand{display:flex;align-items:center;gap:var(--space-3);position:relative;z-index:2;flex-shrink:0}
+.brand-mark{width:42px;height:42px;color:var(--color-text)}
+.brand-name{display:flex;flex-direction:column;line-height:1}
+.brand-name strong{font-size:var(--text-sm);letter-spacing:.08em;text-transform:uppercase}
+.brand-name span{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:.25rem}
+.nav-links{display:flex;align-items:center;gap:.35rem;position:relative;z-index:2;flex-wrap:wrap;justify-content:center;max-width:640px;row-gap:.15rem}
+.nav-links--2rows{flex-direction:column;max-width:none;row-gap:.5rem;}
+.nav-links--2rows .nav-row{display:flex;align-items:center;justify-content:center;gap:.35rem;flex-wrap:wrap}
+.nav-links a[href*="/"]:not([href^="#"]){opacity:.9}
+.nav-links a{font-size:var(--text-sm);color:var(--color-text);position:relative;overflow:hidden;padding:.7rem 1.15rem;border-radius:999px;transition:color .28s ease,transform .35s cubic-bezier(.34,1.56,.64,1),background .28s ease,border-color .28s ease;letter-spacing:.05em;text-transform:uppercase;z-index:2;font-weight:500;font-size:calc(var(--text-sm) - 1px);border:1px solid color-mix(in srgb, var(--color-text) 20%, transparent);background:color-mix(in srgb, var(--color-text) 4%, transparent);}
+.nav-links a{color:var(--color-text)}
+.nav-cta{background:var(--color-text);color:var(--color-bg)}
+.nav-links a::after{content:"";position:absolute;left:1.05rem;right:1.05rem;bottom:.45rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .35s cubic-bezier(.5,0,.2,1);opacity:.6}
+.nav-links a:hover{color:var(--color-text);transform:translateY(-2px);border-color:color-mix(in srgb, var(--color-text) 45%, transparent);background:color-mix(in srgb, var(--color-text) 10%, transparent);}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-links a.nav-hot::after{transform:scaleX(0)}
+.nav-links a.nav-hot.nav-hot{color:var(--wa-fg);transition:color .12s ease,transform .35s cubic-bezier(.34,1.56,.64,1),background .28s ease,border-color .28s ease}
+.nav-pill{box-sizing:border-box;position:absolute;top:0;left:0;height:2.4em;width:0;background:var(--wa-bg);border:1px solid color-mix(in srgb, var(--wa-bg) 60%, black 20%);border-radius:999px;transform:translate(0,-50%) scale(.9);opacity:0;pointer-events:none;z-index:1;transition:opacity .12s ease,background .5s ease,border-color .5s ease;box-shadow:0 6px 20px -8px rgba(var(--wa-shadow),.6)}
+.nav-pill{background:var(--wa-bg);border-color:color-mix(in srgb, var(--wa-bg) 60%, black 20%);box-shadow:0 6px 24px -10px rgba(var(--wa-shadow),.75)}
+.nav-pill.is-active{opacity:1;transform:translate(var(--pill-x,0),-50%) scale(1)}
+.nav-cta{padding:1rem 1.4rem;border-radius:999px;background:var(--color-text);color:var(--color-text-inverse);font-size:var(--text-sm);font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--color-text);box-shadow:0 6px 16px -6px color-mix(in srgb, var(--color-text) 40%, transparent);}
+.nav-cta:hover{transform:translateY(-1px);background:var(--color-primary);color:var(--color-bg)}
+.brand-logo{height:76px;width:auto;object-fit:contain;flex-shrink:0;display:block}
+@media(max-width:768px){
+  .brand-logo{height:64px}
+}
+@media(max-width:480px){
+  .brand-logo{height:56px}
+}
+.brand-logo--black{display:none}
+
+
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:var(--space-2);border-radius:var(--radius-md)}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--color-text);border-radius:2px;transition:transform .2s ease, opacity .2s ease}
+.nav-hamburger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.is-open span:nth-child(2){opacity:0}
+.nav-hamburger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;inset:0;padding-top:64px;padding-bottom:var(--space-10);background:var(--color-bg);z-index:45;overflow-y:auto;flex-direction:column}
+.mobile-nav.is-open{display:flex}
+.mobile-nav nav{display:flex;flex-direction:column;flex:1}
+.mobile-nav nav a{font-size:var(--text-base);color:var(--color-text);padding:var(--space-3) var(--space-6);border-bottom:1px solid var(--color-divider)}
+.mobile-nav nav a:hover{background:var(--color-surface);color:var(--color-primary)}
+.mobile-nav-footer{display:flex;flex-direction:row;gap:var(--space-3);padding:var(--space-4) var(--space-6);border-top:1px solid var(--color-divider)}
+.mobile-contact-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-2);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:.65rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--color-text-muted);background:var(--color-surface);text-align:center}
+.mobile-contact-btn svg{width:20px;height:20px;flex-shrink:0}
+.mobile-contact-btn--wa{border-color:rgba(var(--wa-shadow),.35);color:var(--wa-bg)}
+.mobile-contact-btn--wa:hover{background:rgba(var(--wa-shadow),.1)}
+.mobile-contact-btn--tel{border-color:rgba(181,140,255,.35);color:var(--color-primary)}
+.mobile-contact-btn--tel:hover{background:var(--color-primary-highlight)}
+.mobile-contact-btn--mail:hover{border-color:var(--color-primary);color:var(--color-primary)}
+@media (max-width: 760px){
+  .nav{min-height:92px;gap:var(--space-3)}
+  .nav-cta{display:none}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+}
+@media (min-width:761px){
+  .nav-links--2rows .nav-row{flex-wrap:nowrap;gap:.35em}
+  .nav-links a{white-space:nowrap;padding:.7em 1.1em}
+  .brand-logo{height:clamp(48px, 0.083rem + 4.67vw, 76px)}
+  .nav{gap:clamp(0.75rem, -0.5rem + 2vw, 2rem)}
+}
+@media (min-width:761px){
+  .nav-links--2rows .nav-row{
+    gap:0;padding:4px;
+    border:1px solid color-mix(in srgb, var(--color-text) 18%, transparent);
+    border-radius:18px;
+    background:color-mix(in srgb, var(--color-text) 4%, transparent);
+    backdrop-filter:blur(6px);
+  }
+  .nav-seg{position:relative;display:flex}
+  .nav-links .seg-link::after{display:none}
+  .nav-links a.seg-link:hover{transform:none;background:transparent;border-color:transparent}
+  .nav-links .seg-link{
+    display:inline-flex;align-items:center;gap:.4em;
+    font-family:inherit;font-size:calc(var(--text-sm) - 1px);font-weight:500;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--color-text);
+    border:0;background:transparent;border-radius:0;
+    padding:.62em 1.05em;cursor:pointer;white-space:nowrap;
+    position:relative;overflow:hidden;isolation:isolate;z-index:2;
+    transition:color .28s ease;
+  }
+  .nav-seg:first-child .seg-link{border-top-left-radius:14px;border-bottom-left-radius:14px}
+  .nav-seg:last-child .seg-link{border-top-right-radius:14px;border-bottom-right-radius:14px}
+  .nav-seg + .nav-seg::after{
+    content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;z-index:3;
+    background:color-mix(in srgb, var(--color-text) 18%, transparent);
+    transition:opacity .2s ease;
+  }
+  .nav-links .seg-link::before{
+    content:"";position:absolute;inset:0;
+    background:var(--wa-bg);
+    box-shadow:inset 0 3px 0 color-mix(in srgb, var(--wa-bg) 55%, black 32%);
+    transform:translateY(101%);
+    transition:transform .42s cubic-bezier(.68,0,.24,1);
+    z-index:-1;
+  }
+  .nav-seg:hover > .seg-link,.nav-seg:focus-within > .seg-link,
+  .nav-links .seg-link.is-current,.nav-links .seg-link.nav-hot{color:var(--wa-fg)}
+  .nav-seg:hover > .seg-link::before,.nav-seg:focus-within > .seg-link::before,
+  .nav-links .seg-link.is-current::before,.nav-links .seg-link.nav-hot::before{transform:translateY(0)}
+  .nav-seg:hover::after,.nav-seg:hover + .nav-seg::after,
+  .nav-seg:focus-within::after,.nav-seg:focus-within + .nav-seg::after,
+  .nav-seg:has(> .seg-link.is-current)::after,
+  .nav-seg:has(> .seg-link.is-current) + .nav-seg::after{opacity:0}
+  .nav-links .seg-link:focus-visible{outline:2px solid var(--wa-bg);outline-offset:-3px}
+  .seg-chev{width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .3s ease}
+  .nav-seg:hover .seg-chev,.nav-seg.is-open .seg-chev{transform:translateY(1px) rotate(-135deg)}
+  .nav-sub{
+    position:absolute;top:calc(100% + 10px);left:50%;transform:translate(-50%,8px);
+    min-width:max(100%,208px);display:flex;flex-direction:column;gap:2px;padding:6px;
+    background:var(--color-bg);
+    border:1px solid color-mix(in srgb, var(--color-text) 16%, transparent);
+    border-radius:16px;
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.45);
+    opacity:0;visibility:hidden;pointer-events:none;z-index:60;
+    transition:opacity .24s ease,transform .3s cubic-bezier(.34,1.2,.64,1),visibility .24s;
+  }
+  .nav-sub::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px}
+  .nav-seg.has-sub:hover .nav-sub,.nav-seg.has-sub:focus-within .nav-sub,.nav-seg.is-open .nav-sub{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
+  }
+  .nav-sub a{
+    display:block;padding:.6em .9em;border-radius:11px;
+    font-size:calc(var(--text-sm) - 2px);letter-spacing:.06em;text-transform:uppercase;
+    color:var(--color-text);white-space:nowrap;
+    position:relative;overflow:hidden;isolation:isolate;border:0;background:transparent;
+    transition:color .24s ease;
+  }
+  .nav-sub a::after{display:none}
+  .nav-sub a::before{
+    content:"";position:absolute;inset:0;background:var(--wa-bg);
+    transform:translateY(101%);transition:transform .34s cubic-bezier(.68,0,.24,1);z-index:-1;
+  }
+  .nav-sub a:hover{color:var(--wa-fg);transform:none}
+  .nav-sub a:hover::before{transform:translateY(0)}
+  .nav-pill{display:none!important}
+}
+.mobile-nav-group{display:block;padding:1rem var(--space-6) .35rem;font-size:calc(var(--text-xs) - 1px);letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 55%, transparent);font-weight:700}
+@media (min-width:761px) and (max-width:1200px){
+  .nav-links .seg-link{padding:.55em .8em;font-size:calc(var(--text-sm) - 2px)}
+}
+@media print{.header,.mobile-nav,.nav-backdrop{display:none!important}}
+
+/* === napisy w drugim planie: wypelnienie zamiast konturu === */
+/* kontur (-webkit-text-stroke) rysuje sie po obu stronach krzywej, wiec w kursywie
+   linie sasiednich liter nakladaly sie na siebie; pelne wypelnienie o niskiej sile to usuwa */
+.header-bg-title{ -webkit-text-stroke:0 !important; color:var(--brand-green, #1DB954) !important; opacity:.11 !important; }
+.header-bg-title em{ -webkit-text-stroke:0 !important; color:var(--color-primary, #b58cff) !important; }
+</style>
+
+<link rel="canonical" href="https://lucdoro.design/cv/">
+<meta property="og:url" content="https://lucdoro.design/cv/">
+<meta property="og:image" content="https://lucdoro.design/assets/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="description" content="Łukasz Dorociak — grafik z ponad 10-letnim doświadczeniem: DTP, prepress, materiały produktowe, mockupy i fotografia 360°. Zobacz CV i pobierz PDF.">
+<meta property="og:title" content="Łukasz Dorociak — CV · Graphic Designer">
+<meta property="og:description" content="Łukasz Dorociak — grafik z ponad 10-letnim doświadczeniem: DTP, prepress, materiały produktowe, mockupy i fotografia 360°. Zobacz CV i pobierz PDF.">
+
+<meta property="og:locale" content="pl_PL">
+<meta property="og:type" content="website">
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  (function() {
+    var u="https://lucdoro.design/webpage_tracker/";
+    _paq.push(["setTrackerUrl", u+"matomo.php"]);
+    _paq.push(["setSiteId", "1"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+    g.async=true; g.src=u+"matomo.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+</head>
+<body data-mode="dark" data-accent="violet">
+
+  <header class="header no-print">
+<div class="container-wide nav">
+<div class="header-bg-title" aria-hidden="true">CV</div>
+<a href="https://lucdoro.design/" class="brand" aria-label="LucDoroDesign — strona główna">
+<img src="https://lucdoro.design/assets/logo.png" alt="LucDoroDesign" class="brand-logo brand-logo--white">
+<img src="https://lucdoro.design/assets/logo-black.png" alt="" class="brand-logo brand-logo--black" aria-hidden="true">
+</a>
+<nav class="nav-links nav-links--2rows" aria-label="Główna nawigacja">
+<div class="nav-row">
+<div class="nav-seg"><a data-i18n="nav.projects" href="https://lucdoro.design/#projekty" class="seg-link">Projekty</a></div>
+<div class="nav-seg has-sub">
+<button type="button" class="seg-link seg-trigger" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.offer">Oferta</span><span class="seg-chev" aria-hidden="true"></span></button>
+<div class="nav-sub" role="menu">
+<a data-i18n="nav.packages" href="https://lucdoro.design/#pakiety" role="menuitem">Pakiety</a>
+<a data-i18n="nav.services" href="https://lucdoro.design/#uslugi" role="menuitem">Usługi</a>
+<a data-i18n="nav.process" href="https://lucdoro.design/#proces" role="menuitem">Proces</a>
+<a data-i18n="nav.calc" href="https://lucdoro.design/kalkulator/" role="menuitem">Kalkulator wyceny</a>
+</div>
+</div>
+<div class="nav-seg has-sub">
+<button type="button" class="seg-link seg-trigger" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.tools">Narzędzia</span><span class="seg-chev" aria-hidden="true"></span></button>
+<div class="nav-sub" role="menu">
+<a data-i18n="nav.dev" href="https://lucdoro.design/developer/" role="menuitem">Developer — narzędzia</a>
+</div>
+</div>
+<div class="nav-seg has-sub">
+<button type="button" class="seg-link seg-trigger" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.studio">Studio</span><span class="seg-chev" aria-hidden="true"></span></button>
+<div class="nav-sub" role="menu">
+<a data-i18n="nav.about" href="https://lucdoro.design/#o-mnie" role="menuitem">O studiu</a>
+<a href="https://lucdoro.design/cv/" role="menuitem">CV</a>
+</div>
+</div>
+<div class="nav-seg"><a data-i18n="nav.blog" href="https://lucdoro.design/blog/" class="seg-link">Blog</a></div>
+<div class="nav-seg"><a data-i18n="nav.contact" href="https://lucdoro.design/#kontakt" class="seg-link">Kontakt</a></div>
+</div>
+</nav>
+<a class="nav-cta" href="#" id="download-pdf" role="button" data-i18n="ui.pdf">Pobierz PDF</a>
+<button class="nav-hamburger" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+
+<div class="mobile-nav no-print" id="mobile-nav" aria-hidden="true">
+<nav>
+<a data-i18n="nav.projects" href="https://lucdoro.design/#projekty" class="mobile-nav-link">Projekty</a>
+<span data-i18n="nav.offer" class="mobile-nav-group">Oferta</span>
+<a data-i18n="nav.packages" href="https://lucdoro.design/#pakiety" class="mobile-nav-link">Pakiety</a>
+<a data-i18n="nav.services" href="https://lucdoro.design/#uslugi" class="mobile-nav-link">Usługi</a>
+<a data-i18n="nav.process" href="https://lucdoro.design/#proces" class="mobile-nav-link">Proces</a>
+<a data-i18n="nav.calc" href="https://lucdoro.design/kalkulator/" class="mobile-nav-link">Kalkulator wyceny</a>
+<span data-i18n="nav.tools" class="mobile-nav-group">Narzędzia</span>
+<a data-i18n="nav.dev" href="https://lucdoro.design/developer/" class="mobile-nav-link">Developer — narzędzia</a>
+<span data-i18n="nav.studio" class="mobile-nav-group">Studio</span>
+<a data-i18n="nav.about" href="https://lucdoro.design/#o-mnie" class="mobile-nav-link">O studiu</a>
+<a data-i18n="nav.cv" href="https://lucdoro.design/cv/" class="mobile-nav-link">CV</a>
+<a data-i18n="nav.blog" href="https://lucdoro.design/blog/" class="mobile-nav-link">Blog</a>
+<a data-i18n="nav.contact" href="https://lucdoro.design/#kontakt" class="mobile-nav-link">Kontakt</a>
+</nav>
+<div class="mobile-nav-footer">
+<a class="mobile-contact-btn mobile-contact-btn--wa" href="https://wa.me/48795758555" target="_blank" rel="noopener noreferrer">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.862L.057 23.428a.5.5 0 0 0 .612.612l5.568-1.476A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.686-.523-5.205-1.431l-.372-.221-3.853 1.021 1.022-3.74-.242-.386A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+<span data-i18n="nav.wa">WhatsApp</span>
+</a>
+<a class="mobile-contact-btn mobile-contact-btn--tel" href="tel:+48795758555">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+<span data-i18n="nav.call">Zadzwoń</span>
+</a>
+<a class="mobile-contact-btn mobile-contact-btn--mail" href="mailto:hello@lucdoro.design">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+<span data-i18n="nav.mail">E-mail</span>
+</a>
+</div>
+</div>
+
+
+  <div class="tile-deck no-print" id="tileDeck" aria-hidden="true">
+    <button class="tile-exit" id="tileExit" aria-label="Wróć do widoku A4"><span data-i18n="ui.a4">✕ Widok A4</span></button>
+    <div class="tile-track" id="tileTrack"></div>
+    <div class="tile-dots" id="tileDots"></div>
+  </div>
+
+
+  <div class="cv-tools no-print">
+    <div class="tool-grp" role="group" aria-label="Tryb CV">
+      <a class="tbtn" href="./" aria-current="page" data-i18n="ui.classic">Klasyczne A4</a>
+      <span class="tsep" aria-hidden="true"></span>
+      <a class="tbtn" href="v2/" data-i18n="ui.modern">CV online — karty</a>
     </div>
+
+    <div class="tool-grp themes" role="group" aria-label="Kolor">
+      <button class="swatch tbtn" data-accent="violet" aria-pressed="true"><span class="dotc" style="background:#7b4dff"></span><span data-i18n="ui.violet">Fiolet</span></button>
+      <button class="swatch tbtn" data-accent="wine" aria-pressed="false"><span class="dotc" style="background:#B85D8F"></span><span data-i18n="ui.wine">Wino</span></button>
+      <button class="swatch tbtn" data-accent="green" aria-pressed="false"><span class="dotc" style="background:#1DB954"></span><span data-i18n="ui.green">Zieleń</span></button>
+    </div>
+
+    <div class="tool-grp" role="group" aria-label="Jasny lub ciemny">
+      <button class="tbtn" data-mode="light" aria-pressed="false" data-i18n="ui.light">Jasny</button>
+      <span class="tsep" aria-hidden="true"></span>
+      <button class="tbtn" data-mode="dark" aria-pressed="true" data-i18n="ui.dark">Ciemny</button>
+    </div>
+
+    <div class="tool-grp" role="group" aria-label="Język / Language">
+      <button class="tbtn" data-lang="pl" aria-pressed="true">PL</button>
+      <span class="tsep" aria-hidden="true"></span>
+      <button class="tbtn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+
     <div class="zoom" role="group" aria-label="Powiększenie">
       <button id="zoom-out" aria-label="Pomniejsz">−</button>
       <span class="zlabel" id="zoom-label">100%</span>
       <button id="zoom-in" aria-label="Powiększ">+</button>
     </div>
-    <a class="btn" href="#" id="download-pdf" role="button">Pobierz PDF</a>
   </div>
 
   <div class="viewport">
     <div class="holder" id="holder">
       <section class="poster" id="poster">
+       <div class="canvas">
         <div class="ghost">ŁD</div>
 
         <div class="content">
-          <p class="eyebrow">Graphic Designer <span class="dot">/</span> druk <span class="dot">·</span> digital <span class="dot">·</span> AI</p>
+          <span class="header-logo" role="img" aria-label="LucDoroDesign"></span>
+          <p data-i18n="cv.eyebrow" class="eyebrow">Graphic Designer <span class="dot">/</span> druk <span class="dot">·</span> digital <span class="dot">·</span> AI</p>
           <p class="the">Curriculum Vitae</p>
           <h1 class="title">Łukasz Dorociak</h1>
-          <p class="subtitle">Grafik z <b>10+ latami doświadczenia</b> w materiałach produktowych, DTP i kreacjach reklamowych (druk + digital). Specjalizuję się w mockupach i wizualizacjach produktu — od 2022 łączę generatywną AI (Midjourney) z dopracowaniem w Photoshopie: spójność światła, detalu i kolorystyki. Przy skali stosuję batch processing i proste automatyzacje.</p>
+          <p data-i18n="cv.subtitle" class="subtitle">Grafik z <b>10+ latami doświadczenia</b> w materiałach produktowych, DTP i kreacjach reklamowych (druk + digital). Specjalizuję się w mockupach i wizualizacjach produktu — od 2022 łączę generatywną AI (Midjourney) z dopracowaniem w Photoshopie: spójność światła, detalu i kolorystyki. Przy skali stosuję batch processing i proste automatyzacje.</p>
 
           <div class="contact">
             <span><span class="k">E</span>hello@lucdoro.design</span>
             <span><span class="k">T</span>+48 795 758 555</span>
             <span><span class="k">W</span>lucdoro.design</span>
-            <span><span class="k">L</span>Świętochłowice</span>
+            <span data-i18n="cv.city"><span class="k">L</span>Świętochłowice</span>
           </div>
 
           <div class="rule"></div>
 
           <div class="grid">
             <div class="col left">
-              <p class="sec">Doświadczenie</p>
+              <p data-i18n="cv.sec.exp" class="sec">Doświadczenie</p>
 
               <div class="job">
                 <span class="num">01</span>
                 <div class="body">
-                  <h3>Grafik / twórca materiałów produktowych</h3>
-                  <p class="meta"><b>02.2019 — obecnie</b> &nbsp;·&nbsp; Lucdorodesign (freelance)</p>
-                  <p>Projekty dla klientów z różnych branż (druk + digital: materiały reklamowe, produktowe, DTP); aranżacje produktowe i warianty kreacji z użyciem AI, dopracowanie w Photoshopie; wsadowe przygotowanie materiałów w projektach wielowariantowych.</p>
+                  <h3 data-i18n="job1.h">Grafik / twórca materiałów produktowych</h3>
+                  <p data-i18n="job1.m" class="meta"><b>02.2019 — obecnie</b> &nbsp;·&nbsp; Lucdorodesign (freelance)</p>
+                  <p data-i18n="job1.p">Projekty dla klientów z różnych branż (druk + digital + web); aranżacje produktowe i warianty kreacji z użyciem AI, dopracowanie w Photoshopie; buduję też własne narzędzia — aplikacje desktopowe, automatyzację serwerów i integracje AI.</p>
                 </div>
               </div>
 
               <div class="job">
                 <span class="num">02</span>
                 <div class="body">
-                  <h3>Grafik odzieżowy / materiały kolekcyjne</h3>
-                  <p class="meta"><b>2019 — obecnie</b> &nbsp;·&nbsp; Pour La Amour du Truc (freelance)</p>
-                  <p>Grafiki na odzież i materiały promocyjne; mockupy (manekin/lifestyle), pliki produkcyjne, iteracje i akceptacje; współpraca z produkcją, w tym zagraniczną.</p>
+                  <h3 data-i18n="job2.h">Grafik odzieżowy / materiały kolekcyjne</h3>
+                  <p data-i18n="job2.m" class="meta"><b>2019 — obecnie</b> &nbsp;·&nbsp; Pour La Amour du Truc (freelance)</p>
+                  <p data-i18n="job2.p">Grafiki na odzież i materiały promocyjne; mockupy (manekin/lifestyle), pliki produkcyjne, iteracje i akceptacje; współpraca z produkcją, w tym zagraniczną.</p>
                 </div>
               </div>
 
               <div class="job">
                 <span class="num">03</span>
                 <div class="body">
-                  <h3>DTP Operator</h3>
+                  <h3 data-i18n="job3.h">DTP Operator</h3>
                   <p class="meta"><b>01.2018 — 09.2018</b> &nbsp;·&nbsp; Lauren Peso Polska S.A.</p>
-                  <p>Layout i skład treści, przygotowanie materiałów na potrzeby kanałów cyfrowych.</p>
+                  <p data-i18n="job3.p">Layout i skład treści, przygotowanie materiałów na potrzeby kanałów cyfrowych.</p>
                 </div>
               </div>
 
               <div class="job">
                 <span class="num">04</span>
                 <div class="body">
-                  <h3>DTP / Grafik</h3>
+                  <h3 data-i18n="job4.h">DTP / Grafik</h3>
                   <p class="meta"><b>06.2017 — 09.2017</b> &nbsp;·&nbsp; Advert Studio</p>
-                  <p>Skład i przygotowanie materiałów graficznych do druku i digitalu, praca na briefach.</p>
+                  <p data-i18n="job4.p">Skład i przygotowanie materiałów graficznych do druku i digitalu, praca na briefach.</p>
                 </div>
               </div>
 
               <div class="job">
                 <span class="num">05</span>
                 <div class="body">
-                  <h3>DTP / Prepress + fotografia produktowa 360°</h3>
+                  <h3 data-i18n="job5.h">DTP / Prepress + fotografia produktowa 360°</h3>
                   <p class="meta"><b>12.2015 — 11.2016</b> &nbsp;·&nbsp; MidOceanBrands</p>
-                  <p>Materiały produktowe (DTP, prepress, przygotowanie plików); fotografia produktowa 360° (Orbitvu Alphashoot) — spójność ujęć, materiał do katalogu.</p>
+                  <p data-i18n="job5.p">Materiały produktowe (DTP, prepress, przygotowanie plików); fotografia produktowa 360° (Orbitvu Alphashoot) — spójność ujęć, materiał do katalogu.</p>
                 </div>
               </div>
 
               <div class="job">
                 <span class="num">06</span>
                 <div class="body">
-                  <h3>Fotolaborant</h3>
+                  <h3 data-i18n="job6.h">Fotolaborant</h3>
                   <p class="meta"><b>2004 — 2006</b> &nbsp;·&nbsp; Fujifilm / Fotolab (Auchan)</p>
-                  <p>Kontrola jakości koloru i ekspozycji, praca w procesie foto.</p>
+                  <p data-i18n="job6.p">Kontrola jakości koloru i ekspozycji, praca w procesie foto.</p>
                 </div>
               </div>
             </div>
 
             <div class="col right">
-              <p class="sec">Umiejętności</p>
+              <p data-i18n="cv.sec.skills" class="sec">Umiejętności</p>
 
               <div class="rgroup rlist">
-                <span class="lbl">AI w grafice produktowej</span>
-                <p class="ri">Midjourney — sceny produktowe, aranżacje, lifestyle, wariantowanie; <i>łączenie AI + Photoshop</i></p>
+                <span data-i18n="sk.ai.l" class="lbl">AI w grafice produktowej</span>
+                <p data-i18n="sk.ai.1" class="ri">Midjourney — sceny produktowe, aranżacje, lifestyle, wariantowanie; <i>łączenie AI + Photoshop</i></p>
               </div>
 
               <div class="rgroup rlist">
-                <span class="lbl">Narzędzia</span>
+                <span data-i18n="sk.tools.l" class="lbl">Narzędzia</span>
                 <p class="ri">Adobe Photoshop · Illustrator · InDesign</p>
                 <p class="ri">Affinity Designer</p>
                 <p class="ri">Orbitvu Alphashoot 360</p>
               </div>
 
               <div class="rgroup rlist">
-                <span class="lbl">Specjalizacja</span>
-                <p class="ri">Mockupy i wizualizacje produktów <i>(opakowania, odzież, ekspozycje, wrapy)</i></p>
-                <p class="ri">DTP / prepress — materiały produktowe i marketingowe</p>
+                <span data-i18n="sk.spec.l" class="lbl">Specjalizacja</span>
+                <p data-i18n="sk.spec.1" class="ri">Mockupy i wizualizacje produktów <i>(opakowania, odzież, ekspozycje, wrapy)</i></p>
+                <p data-i18n="sk.spec.2" class="ri">DTP / prepress + budowa stron WWW (własne i klienckie)</p>
               </div>
 
               <div class="rgroup rlist">
-                <span class="lbl">Automatyzacja</span>
-                <p class="ri">Batch processing plików <i>(usuwanie tła, konwersje, porządkowanie zasobów)</i></p>
-                <p class="ri">Python / Bash — proste narzędzia wspierające pracę</p>
+                <span data-i18n="sk.auto.l" class="lbl">Automatyzacja</span>
+                <p data-i18n="sk.auto.1" class="ri">Batch processing plików <i>(usuwanie tła, konwersje, porządkowanie zasobów)</i></p>
+                <p data-i18n="sk.auto.2" class="ri">Aplikacje desktopowe (Electron), automatyzacja serwerów/API</p>
               </div>
 
               <div class="rgroup rlist">
-                <span class="lbl">Języki</span>
-                <p class="ri">Polski <i>(ojczysty)</i> · Angielski <i>(B2/C1)</i></p>
+                <span data-i18n="sk.lang.l" class="lbl">Języki</span>
+                <p data-i18n="sk.lang.1" class="ri">Polski <i>(ojczysty)</i> · Angielski <i>(B2/C1)</i></p>
               </div>
 
-              <p class="sec" style="margin-top:1mm;">Wykształcenie</p>
+              <p data-i18n="cv.sec.edu" class="sec" style="margin-top:1mm;">Wykształcenie</p>
 
               <div class="rlist">
-                <p class="ri">VIII LO im. Marii Skłodowskiej-Curie</p>
-                <p class="ri">Policealne Studium Informatyczne, Chorzów <i>(informatyka, 4 semestry)</i></p>
-                <p class="ri">Kurs EITCA <i>(grafika komputerowa)</i></p>
-                <p class="ri">Szkolenie Fujifilm <i>(Warszawa)</i></p>
+                <p data-i18n="edu.1" class="ri">VIII LO im. Marii Skłodowskiej-Curie</p>
+                <p data-i18n="edu.2" class="ri">Policealne Studium Informatyczne, Chorzów <i>(informatyka, 4 semestry)</i></p>
+                <p data-i18n="edu.3" class="ri">Kurs EITCA <i>(grafika komputerowa)</i></p>
+                <p data-i18n="edu.4" class="ri">Szkolenie Fujifilm <i>(Warszawa)</i></p>
               </div>
             </div>
           </div>
 
           <div class="finale">
             <p class="cap">Portfolio<span class="dash">—</span><span class="big">lucdoro.design</span></p>
-            <p class="cap">Świętochłowice <span class="dash">·</span> 2026</p>
+            <p data-i18n="cv.finale.city" class="cap">Świętochłowice <span class="dash">·</span> 2026</p>
           </div>
 
-          <p class="foot">Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji procesu rekrutacji (zgodnie z ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz. Ustaw z 2018, poz. 1000) oraz zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. — RODO).</p>
+          <p data-i18n="cv.rodo" class="foot">Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji procesu rekrutacji (zgodnie z ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz. Ustaw z 2018, poz. 1000) oraz zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. — RODO).</p>
         </div>
 
         <div class="grain"></div>
         <div class="vignette"></div>
+       </div>
       </section>
     </div>
   </div>
 
 <script>
   var body=document.body;
-  document.querySelectorAll('.swatch').forEach(function(b){
-    b.addEventListener('click', function(){
-      body.dataset.theme=b.dataset.set;
-      document.querySelectorAll('.swatch').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
+
+  /* === SLOWNIK EN (PL = tresc w HTML) === */
+  var EN = {
+    'cv.eyebrow':'Graphic Designer <span class="dot">/</span> print <span class="dot">·</span> digital <span class="dot">·</span> AI',
+    'cv.subtitle':'Graphic designer with <b>10+ years of experience</b> in product materials, DTP and advertising creative (print + digital). I specialise in mockups and product visualisations — since 2022 I have combined generative AI (Midjourney) with Photoshop finishing: consistent light, detail and colour. At scale I use batch processing and simple automation.',
+    'cv.city':'<span class="k">L</span>Świętochłowice, Poland',
+    'cv.sec.exp':'Experience',
+    'job1.h':'Graphic designer / product materials',
+    'job1.m':'<b>02.2019 — present</b> &nbsp;·&nbsp; Lucdorodesign (freelance)',
+    'job1.p':'Projects for clients across many industries (print + digital + web); product arrangements and creative variants with AI, finished in Photoshop; I also build my own tools — desktop apps, server automation and AI integrations.',
+    'job2.h':'Apparel designer / collection materials',
+    'job2.m':'<b>2019 — present</b> &nbsp;·&nbsp; Pour La Amour du Truc (freelance)',
+    'job2.p':'Graphics for apparel and promotional materials; mockups (mannequin/lifestyle), production files, iterations and approvals; cooperation with production, including abroad.',
+    'job3.h':'DTP Operator',
+    'job3.p':'Layout and typesetting, preparing materials for digital channels.',
+    'job4.h':'DTP / Graphic designer',
+    'job4.p':'Typesetting and preparation of graphics for print and digital, working from briefs.',
+    'job5.h':'DTP / Prepress + 360° product photography',
+    'job5.p':'Product materials (DTP, prepress, file preparation); 360° product photography (Orbitvu Alphashoot) — consistent shots, catalogue-ready material.',
+    'job6.h':'Photo lab technician',
+    'job6.p':'Colour and exposure quality control, work in the photo process.',
+    'cv.sec.skills':'Skills',
+    'sk.ai.l':'AI in product graphics',
+    'sk.ai.1':'Midjourney — product scenes, arrangements, lifestyle, variants; <i>AI + Photoshop combined</i>',
+    'sk.tools.l':'Tools',
+    'sk.spec.l':'Specialisation',
+    'sk.spec.1':'Mockups and product visualisations <i>(packaging, apparel, displays, wraps)</i>',
+    'sk.spec.2':'DTP / prepress + building websites (own and client projects)',
+    'sk.auto.l':'Automation',
+    'sk.auto.1':'Batch file processing <i>(background removal, conversions, asset housekeeping)</i>',
+    'sk.auto.2':'Desktop apps (Electron), server/API automation',
+    'sk.lang.l':'Languages',
+    'sk.lang.1':'Polish <i>(native)</i> · English <i>(B2/C1)</i>',
+    'cv.sec.edu':'Education',
+    'edu.1':'VIII Secondary School of Maria Skłodowska-Curie',
+    'edu.2':'Post-secondary IT College, Chorzów <i>(computer science, 4 semesters)</i>',
+    'edu.3':'EITCA course <i>(computer graphics)</i>',
+    'edu.4':'Fujifilm training <i>(Warsaw)</i>',
+    'cv.finale.city':'Świętochłowice, Poland <span class="dash">·</span> 2026',
+    'cv.rodo':'I hereby give consent for my personal data to be processed for the purposes of the recruitment process, in accordance with the Polish Personal Data Protection Act of 10 May 2018 (Journal of Laws 2018, item 1000) and Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (GDPR).',
+    'nav.projects':'Projects', 'nav.packages':'Packages', 'nav.services':'Services', 'nav.process':'Process',
+    'nav.calc':'Pricing calculator', 'nav.creator':'Signature creator', 'nav.signatures':'Email signatures',
+    'nav.gallery':'AI gallery', 'nav.dev':'Developer — tools', 'nav.about':'About the studio', 'nav.blog':'Blog',
+    'nav.contact':'Contact', 'nav.offer':'Offer', 'nav.tools':'Tools', 'nav.studio':'Studio', 'nav.cv':'CV',
+    'nav.wa':'WhatsApp', 'nav.call':'Call', 'nav.mail':'E-mail',
+    'ui.classic':'Classic A4', 'ui.modern':'CV online — cards',
+    'ui.violet':'Violet', 'ui.wine':'Wine', 'ui.green':'Green',
+    'ui.light':'Light', 'ui.dark':'Dark',
+    'ui.pdf':'Download PDF', 'ui.a4':'✕ A4 view',
+    'tile.exp':'Experience', 'tile.skills':'Skills', 'tile.edu':'Education',
+    'tile.portfolio':'Portfolio', 'tile.more':'See the full portfolio →'
+  };
+  var PLTILE = { 'tile.exp':'Doświadczenie', 'tile.skills':'Umiejętności', 'tile.edu':'Wykształcenie',
+                 'tile.portfolio':'Portfolio', 'tile.more':'Zobacz pełne portfolio →' };
+  var LANG = 'pl';
+  function t(k){ return LANG === 'en' ? (EN[k] || PLTILE[k] || k) : (PLTILE[k] || k); }
+
+  /* === JEZYK === */
+  function applyLang(l){
+    LANG = (l === 'en') ? 'en' : 'pl';
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (el.dataset.pl === undefined) el.dataset.pl = el.innerHTML;
+      el.innerHTML = (LANG === 'en' && EN[k] != null) ? EN[k] : el.dataset.pl;
     });
+    document.documentElement.lang = LANG;
+    document.title = (LANG === 'en')
+      ? 'Łukasz Dorociak — CV | Graphic Designer'
+      : 'Łukasz Dorociak — CV | Grafik / DTP / AI';
+    document.querySelectorAll('[data-lang]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.lang === LANG ? 'true' : 'false');
+    });
+    try{ localStorage.setItem('cv-lang', LANG); }catch(e){}
+    if (typeof rebuildTiles === 'function') rebuildTiles();
+  }
+
+  /* === PALETA: tryb (jasny/ciemny) x kolor === */
+  function applyPalette(mode, accent){
+    body.dataset.mode = mode;
+    body.dataset.accent = accent;
+    document.querySelectorAll('[data-mode]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.mode === mode ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-accent]').forEach(function(b){
+      if (b === body) return;
+      b.setAttribute('aria-pressed', b.dataset.accent === accent ? 'true' : 'false');
+    });
+    try{
+      localStorage.setItem('cv-mode', mode);
+      localStorage.setItem('cv-accent', accent);
+      /* CV zmienia tez preferencje strony glownej */
+      localStorage.setItem('theme', mode === 'light' ? 'light' : 'dark');
+    }catch(e){}
+  }
+
+  /* stan startowy — wlasne ustawienia CV, inaczej preferencja strony glownej */
+  (function(){
+    var mode = null, accent = null, lang = null, siteTheme = null;
+    try{
+      mode = localStorage.getItem('cv-mode');
+      accent = localStorage.getItem('cv-accent');
+      lang = localStorage.getItem('cv-lang');
+      siteTheme = localStorage.getItem('theme');
+    }catch(e){}
+    if (mode !== 'light' && mode !== 'dark') mode = (siteTheme === 'light') ? 'light' : 'dark';
+    if (['violet','wine','green'].indexOf(accent) < 0) accent = 'violet';
+    applyPalette(mode, accent);
+    if (lang === 'en') applyLang('en'); else applyLang('pl');
+  })();
+
+  document.querySelectorAll('[data-accent]').forEach(function(b){
+    if (b === body) return;
+    b.addEventListener('click', function(){ applyPalette(body.dataset.mode, b.dataset.accent); });
   });
+  document.querySelectorAll('[data-mode]').forEach(function(b){
+    if (b === body) return;
+    b.addEventListener('click', function(){ applyPalette(b.dataset.mode, body.dataset.accent); });
+  });
+  document.querySelectorAll('[data-lang]').forEach(function(b){
+    b.addEventListener('click', function(){ applyLang(b.dataset.lang); });
+  });
+
+  /* === Mobile hamburger menu (wzorzec strony głównej) === */
+  (function(){
+    var toggle = document.getElementById('nav-toggle');
+    var mobileNav = document.getElementById('mobile-nav');
+    if (!toggle || !mobileNav) return;
+    function closeMenu(){
+      mobileNav.classList.remove('is-open');
+      toggle.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Otwórz menu');
+      mobileNav.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+    toggle.addEventListener('click', function(){
+      var open = mobileNav.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+      mobileNav.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a.mobile-nav-link').forEach(function(link){
+      link.addEventListener('click', closeMenu);
+    });
+  })();
+
+  /* === Tryb kafelkowy (mobile, wyzwalany zoomem) — generowany z treści CV === */
+  var tileObserver = null;
+  function rebuildTiles(){
+    var track = document.getElementById('tileTrack');
+    if (!track || !track.childElementCount) return; /* jeszcze nie zbudowane — nic do odswiezenia */
+    track.innerHTML = '';
+    buildTiles();
+  }
+  function buildTiles(){
+    var track = document.getElementById('tileTrack');
+    if (track.childElementCount) return; /* już zbudowane */
+    var tiles = [];
+
+    /* 0 — hero */
+    var name = document.querySelector('.title').textContent;
+    var eyebrow = document.querySelector('.eyebrow').textContent.replace(/\s+/g,' ').trim();
+    var subtitleHTML = document.querySelector('.subtitle').innerHTML;
+    var contactHTML = document.querySelector('.contact').innerHTML;
+    tiles.push('<div class="tile-eyebrow">'+eyebrow+'</div>' +
+      '<div class="tile-name">'+name+'</div>' +
+      '<p>'+subtitleHTML+'</p>' +
+      '<div class="tile-meta" style="margin-top:10px;">'+contactHTML+'</div>');
+
+    /* 1..N — doświadczenie (już od najnowszego) */
+    document.querySelectorAll('.job').forEach(function(job){
+      var num = job.querySelector('.num').textContent;
+      var h3 = job.querySelector('h3').textContent;
+      var metaHTML = job.querySelector('.meta').innerHTML;
+      var desc = job.querySelector('.body p:not(.meta)').textContent;
+      tiles.push('<div class="tile-eyebrow">'+t('tile.exp')+' · '+num+'</div>' +
+        '<h2>'+h3+'</h2>' +
+        '<div class="tile-meta">'+metaHTML+'</div>' +
+        '<p>'+desc+'</p>');
+    });
+
+    /* umiejętności — po 2 grupy na kafel */
+    var rgroups = Array.prototype.slice.call(document.querySelectorAll('.col.right .rgroup'));
+    for (var i=0;i<rgroups.length;i+=2){
+      var chunk = rgroups.slice(i,i+2);
+      var html = '<div class="tile-eyebrow">'+t('tile.skills')+'</div>';
+      chunk.forEach(function(g){
+        var lbl = g.querySelector('.lbl').textContent;
+        var items = Array.prototype.map.call(g.querySelectorAll('.ri'), function(ri){ return ri.innerHTML; }).join('<br>');
+        html += '<div class="tile-skill-row"><span class="lbl">'+lbl+'</span><span class="val">'+items+'</span></div>';
+      });
+      tiles.push(html);
+    }
+
+    /* wykształcenie */
+    var eduList = document.querySelector('.col.right > .rlist:not(.rgroup)');
+    if (eduList){
+      var eduItems = Array.prototype.map.call(eduList.querySelectorAll('.ri'), function(ri){ return '<div class="tile-skill-row"><span class="val">'+ri.innerHTML+'</span></div>'; }).join('');
+      tiles.push('<div class="tile-eyebrow">'+t('tile.edu')+'</div>' + eduItems);
+    }
+
+    /* kontakt / portfolio */
+    var finaleHTML = document.querySelector('.finale').innerHTML;
+    tiles.push('<div class="tile-eyebrow">'+t('tile.portfolio')+'</div>' +
+      '<h2>lucdoro.design</h2>' +
+      '<div class="tile-meta" style="margin-top:6px;">'+contactHTML+'</div>' +
+      '<p style="margin-top:16px;"><a href="https://lucdoro.design" style="color:var(--accent);text-decoration:underline;">'+t('tile.more')+'</a></p>');
+
+    tiles.forEach(function(html){
+      var el = document.createElement('div');
+      el.className = 'tile';
+      el.innerHTML = html;
+      track.appendChild(el);
+    });
+
+    var dots = document.getElementById('tileDots');
+    tiles.forEach(function(_, i){
+      var d = document.createElement('span');
+      d.className = 'tile-dot' + (i===0 ? ' is-active' : '');
+      dots.appendChild(d);
+    });
+
+    var dotEls = dots.querySelectorAll('.tile-dot');
+    var tileEls = track.querySelectorAll('.tile');
+    tileObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          var idx = Array.prototype.indexOf.call(tileEls, entry.target);
+          dotEls.forEach(function(d,i){ d.classList.toggle('is-active', i===idx); });
+        }
+      });
+    }, { root: track.parentElement, threshold: 0.6 });
+    tileEls.forEach(function(t){ tileObserver.observe(t); });
+  }
+  function openTileMode(){
+    buildTiles();
+    document.getElementById('tileDeck').classList.add('is-open');
+    document.getElementById('tileDeck').setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeTileMode(){
+    document.getElementById('tileDeck').classList.remove('is-open');
+    document.getElementById('tileDeck').setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('tileExit').addEventListener('click', closeTileMode);
+
+  var marginToggle = document.getElementById('margin-toggle');
+  if (marginToggle){
+    marginToggle.addEventListener('click', function(){
+      var on = marginToggle.getAttribute('aria-pressed') === 'true';
+      marginToggle.setAttribute('aria-pressed', on ? 'false' : 'true');
+      document.getElementById('poster').classList.toggle('no-margin', on);
+      fit();
+    });
+  }
   var userZoom = 1;
   var fitScale = 1;
   function fit(){
@@ -342,7 +1106,10 @@
     userZoom = Math.max(0.5, Math.min(3, +(userZoom + delta).toFixed(2)));
     fit();
   }
-  document.getElementById('zoom-in').addEventListener('click', function(){ setZoom(0.25); });
+  document.getElementById('zoom-in').addEventListener('click', function(){
+    if (window.innerWidth <= 760 && userZoom <= 1){ openTileMode(); return; }
+    setZoom(0.25);
+  });
   document.getElementById('zoom-out').addEventListener('click', function(){ setZoom(-0.25); });
   document.getElementById('zoom-label').addEventListener('click', function(){ userZoom = 1; fit(); });
   window.addEventListener('resize', fit);
@@ -353,15 +1120,11 @@
   // Pobierz PDF — window.print() + dynamiczna nazwa pliku per kolorystyka
   var dlBtn = document.getElementById('download-pdf');
   if (dlBtn){
-    var themeNames = {
-      slate: 'lupek',
-      wine: 'wino',
-      ivory: 'kosc-sloniowa'
-    };
+    var themeNames = { violet:'fiolet', wine:'wino', green:'zielen' };
     dlBtn.addEventListener('click', function(e){
       e.preventDefault();
-      var theme = document.body.getAttribute('data-theme') || 'ivory';
-      var themeLabel = themeNames[theme] || theme;
+      var acc = document.body.dataset.accent || 'violet';
+      var themeLabel = (document.body.dataset.mode === 'light' ? 'jasny_' : 'ciemny_') + (themeNames[acc] || acc);
       var originalTitle = document.title;
       // Browser bierze document.title jako suggested filename PDF
       document.title = 'Lukasz_Dorociak_CV_' + themeLabel;
@@ -370,6 +1133,60 @@
       setTimeout(function(){ document.title = originalTitle; }, 500);
     });
   }
+</script>
+<script>
+/* oznacz w menu link do strony, na ktorej jestesmy */
+(function(){
+  var here=location.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+  document.querySelectorAll('.nav-links a[href], .mobile-nav a[href]').forEach(function(a){
+    var u; try{ u=new URL(a.getAttribute('href'), location.href); }catch(e){ return; }
+    if(u.host!==location.host||u.hash) return;
+    var p=u.pathname.replace(/index\.html$/,'').replace(/\/+$/,'')||'/';
+    if(p===here) a.setAttribute('aria-current','page');
+  });
+})();
+</script>
+<script>
+/* === HEADER: wysokosc -> --hdr-h, podmenu (hamburger juz obsluzony nizej) === */
+(function(){
+  var h = document.querySelector('.header');
+  if (!h) return;
+  function setH(){ document.documentElement.style.setProperty('--hdr-h', h.offsetHeight + 'px'); }
+  setH();
+  window.addEventListener('resize', setH);
+  window.addEventListener('load', setH);
+  if (window.ResizeObserver) new ResizeObserver(setH).observe(h);
+})();
+(function(){
+  var segs = Array.prototype.slice.call(document.querySelectorAll('.nav-seg.has-sub'));
+  if (!segs.length) return;
+  function closeAll(except){
+    segs.forEach(function(s){
+      if (s === except) return;
+      s.classList.remove('is-open');
+      var t = s.querySelector('.seg-trigger');
+      if (t) t.setAttribute('aria-expanded','false');
+    });
+  }
+  segs.forEach(function(s){
+    var trg = s.querySelector('.seg-trigger');
+    if (!trg) return;
+    trg.addEventListener('click', function(e){
+      e.preventDefault();
+      var open = !s.classList.contains('is-open');
+      closeAll(s);
+      s.classList.toggle('is-open', open);
+      trg.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    s.addEventListener('mouseleave', function(){ closeAll(null); });
+  });
+  document.addEventListener('click', function(e){
+    if (!e.target.closest('.nav-seg.has-sub')) closeAll(null);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeAll(null);
+  });
+})();
 </script>
 </body>
 </html>

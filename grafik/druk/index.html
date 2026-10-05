@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Materiały do druku — LucDoro Design</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Syne:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400..800&family=Roboto+Mono:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16141f; --muted:#635d82; --violet:#7b4dff; --line:#c8c2e6; --tint:#f4f2fc;
+  --wa:#25d366;
+  --font-display:'Syne',sans-serif; --font-body:'Manrope',sans-serif; --font-fraunces:'Fraunces',serif;
+  --font-mono:'Roboto Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#e9e8ef;font-family:var(--font-body);color:var(--ink);padding:2rem 1rem 5rem;cursor:default}
+.hint{max-width:46rem;margin:0 auto 2rem;background:#fff;border:1px solid var(--line);
+  border-radius:.9rem;padding:1.25rem 1.5rem;font-size:.9rem;line-height:1.6;color:var(--muted)}
+.hint h1{font-family:var(--font-display);font-size:1.1rem;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.02em}
+.hint b{color:var(--ink)}
+.hint code{font-family:var(--font-mono);font-size:.85em;background:var(--tint);padding:.1em .4em;border-radius:.25rem}
+.sheet{background:#fff;margin:0 auto 2rem;box-shadow:0 10px 40px rgba(0,0,0,.12);position:relative;overflow:hidden}
+.label{max-width:46rem;margin:0 auto .5rem;font-family:var(--font-mono);font-size:.75rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+/* ---------- ARKUSZ A4 z 4 ulotkami A6 ---------- */
+.a4{width:210mm;height:297mm;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.a6{
+  width:105mm;height:148.5mm;padding:11mm 9mm;position:relative;
+  border-right:.2mm dashed #d9d6e6;border-bottom:.2mm dashed #d9d6e6;
+  display:flex;flex-direction:column;justify-content:space-between
+}
+.a6:nth-child(2n){border-right:0}
+.a6:nth-child(n+3){border-bottom:0}
+.a6-brand{font-family:var(--font-display);font-weight:800;font-size:3.1mm;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.a6-brand b{color:var(--violet)}
+.a6 h2{font-family:var(--font-display);font-weight:800;font-size:9mm;line-height:.98;
+  letter-spacing:-.035em;margin-top:5mm}
+.a6 h2 em{font-family:var(--font-fraunces);font-style:italic;color:var(--violet);font-weight:600}
+.a6-lead{font-size:3.5mm;line-height:1.45;color:var(--muted);margin-top:4mm;max-width:70mm}
+.a6-list{margin-top:4.5mm;display:grid;gap:1.4mm;font-size:3.3mm;font-weight:600}
+.a6-list span::before{content:"—";color:var(--violet);margin-right:2mm;font-weight:700}
+.a6-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:5mm;margin-top:6mm}
+.a6-qr{width:26mm;height:26mm;flex:none}
+img.a6-qr,.a6-qr img{display:block;width:26mm;height:26mm;aspect-ratio:1;object-fit:contain}
+.a6-contact{font-size:3.3mm;line-height:1.5}
+.a6-contact .big{font-family:var(--font-mono);font-weight:700;font-size:4.6mm;letter-spacing:-.02em;
+  color:var(--ink);display:block;margin-bottom:1mm}
+.a6-contact .url{font-family:var(--font-mono);font-weight:700;color:var(--violet);font-size:3.4mm;display:block}
+.a6-contact .muted{color:var(--muted);font-size:3mm;display:block;margin-top:1.5mm}
+
+/* ---------- A4 ogłoszenie z zrywkami ---------- */
+.a4-poster{width:210mm;height:297mm;padding:16mm 15mm 0;display:flex;flex-direction:column}
+.p-eyebrow{font-family:var(--font-mono);font-size:3.4mm;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--violet)}
+.a4-poster h2{font-family:var(--font-display);font-weight:800;font-size:20mm;line-height:.94;
+  letter-spacing:-.04em;margin-top:6mm}
+.a4-poster h2 em{font-family:var(--font-fraunces);font-style:italic;color:var(--violet);font-weight:600}
+.p-lead{font-size:5mm;line-height:1.45;color:var(--muted);margin-top:7mm;max-width:150mm}
+.p-lead b{color:var(--ink)}
+.p-grid{display:grid;grid-template-columns:1fr 1fr;gap:2mm 8mm;margin-top:8mm;font-size:4.4mm;font-weight:600}
+.p-grid span::before{content:"—";color:var(--violet);margin-right:2.5mm}
+.p-band{display:flex;align-items:center;gap:8mm;margin-top:auto;margin-bottom:6mm;
+  border-top:.4mm solid var(--line);padding-top:7mm}
+.p-qr{width:38mm;height:38mm;flex:none}
+img.p-qr,.p-qr img{display:block;width:38mm;height:38mm;aspect-ratio:1;object-fit:contain}
+.p-band-copy .n{font-family:var(--font-mono);font-weight:700;font-size:9mm;letter-spacing:-.03em;display:block}
+.p-band-copy .u{font-family:var(--font-mono);font-weight:700;font-size:5mm;color:var(--violet);display:block;margin-top:1.5mm}
+.p-band-copy .m{font-size:3.6mm;color:var(--muted);display:block;margin-top:2mm}
+/* zrywki */
+.tabs{display:grid;grid-template-columns:repeat(9,1fr);height:32mm;border-top:.3mm dashed #b9b4d0}
+.tab{border-left:.3mm dashed #b9b4d0;display:flex;align-items:center;justify-content:center;
+  padding:2mm 0}
+.tab:first-child{border-left:0}
+.tab span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-mono);
+  font-weight:700;font-size:3.3mm;letter-spacing:-.01em;color:var(--ink);text-align:center;line-height:1.3}
+.tab span i{font-style:normal;color:var(--violet)}
+
+/* ---------- kwadrat 1080 na social ---------- */
+.sq{width:135mm;height:135mm;background:var(--ink);color:#fff;padding:14mm;
+  display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.sq-eyebrow{font-family:var(--font-mono);font-size:3.2mm;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:#b58cff}
+.sq h2{font-family:var(--font-display);font-weight:800;font-size:13mm;line-height:.96;letter-spacing:-.04em;margin-top:5mm}
+.sq h2 em{font-family:var(--font-fraunces);font-style:italic;color:#b58cff;font-weight:600}
+.sq-list{margin-top:6mm;display:grid;gap:1.6mm;font-size:4mm;font-weight:600;color:#d9d5e8}
+.sq-list span::before{content:"—";color:#b58cff;margin-right:2.5mm}
+.sq-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:6mm}
+.sq-qr{width:30mm;height:30mm;background:#fff;padding:2mm;border-radius:2mm;flex:none}
+.sq-qr img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:contain}
+.sq-contact .n{font-family:var(--font-mono);font-weight:700;font-size:6mm;display:block;letter-spacing:-.02em}
+.sq-contact .u{font-family:var(--font-mono);font-weight:700;font-size:4mm;color:#b58cff;display:block;margin-top:1.5mm}
+.sq-contact .m{font-size:3.4mm;color:#8f8aa3;display:block;margin-top:2mm}
+
+@media print{
+  body{background:#fff;padding:0}
+  .hint,.label{display:none}
+  .sheet{box-shadow:none;margin:0;page-break-after:always;break-after:page}
+  .sheet:last-child{page-break-after:auto;break-after:auto}
+  @page{size:A4;margin:0}
+  .sq{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="hint">
+  <h1>Materiały do druku — jak z tego zrobić PDF</h1>
+  <p><b>Chrome → Drukuj (⌘P) → Miejsce docelowe: „Zapisz jako PDF" → Marginesy: Brak → zaznacz „Grafika w tle".</b>
+  Wyjdą 3 strony A4: arkusz z 4 ulotkami A6 (do pocięcia), ogłoszenie A4 z zrywkami na tablicę, oraz kwadrat na social media.</p>
+  <p style="margin-top:.6rem">Same kody QR w plikach źródłowych: <code>/grafik/assets/qr-grafik.svg</code> (wektor, do Illustratora),
+  <code>qr-grafik-druk-HQ.png</code> (1800 px, do druku), <code>qr-whatsapp.svg</code>, wersje <code>-czarny</code> na kolorowe tła.</p>
+</div>
+
+<!-- ===== ARKUSZ 1: 4 × ulotka A6 ===== -->
+<p class="label">Arkusz 1 — 4 × ulotka A6 (105 × 148 mm), do pocięcia</p>
+<div class="sheet a4" id="sheet-a6"></div>
+
+<!-- ===== ARKUSZ 2: ogłoszenie A4 ze zrywkami ===== -->
+<p class="label">Arkusz 2 — ogłoszenie A4 na tablicę, ze zrywkami</p>
+<div class="sheet a4-poster">
+  <p class="p-eyebrow">Świętochłowice · Śląsk · zdalnie</p>
+  <h2>Zrobię Ci to<br>na komputerze. <em>Po ludzku.</em></h2>
+  <p class="p-lead">Ulotka, plakat, logo, wizytówka, grafika na ogłoszenie albo poprawienie zdjęcia. <b>Opisujesz, co ma być — ja to robię.</b> Bez żargonu, bez formularzy, bez sześciotygodniowego procesu. Wycenę i termin podaję przed startem.</p>
+  <div class="p-grid">
+    <span>Logo i wizytówki</span>
+    <span>Ulotki, plakaty, banery</span>
+    <span>Grafiki na OLX, FB, Instagram</span>
+    <span>Pliki gotowe do druku</span>
+    <span>Retusz i zmiana tła zdjęć</span>
+    <span>Wycena i termin przed startem</span>
+  </div>
+  <div class="p-band">
+    <img class="p-qr" src="../assets/qr-grafik-druk.svg" alt="Kod QR — lucdoro.design/grafik">
+    <div class="p-band-copy">
+      <span class="n">795 758 555</span>
+      <span class="u">lucdoro.design/grafik</span>
+      <span class="m">Zadzwoń albo napisz na WhatsApp · Łukasz, LucDoro Design</span>
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</div>
+
+<!-- ===== ARKUSZ 3: kwadrat na social ===== -->
+<p class="label">Arkusz 3 — kwadrat na Facebooka / Instagram (proporcja 1:1)</p>
+<div class="sheet" style="width:210mm;height:297mm;display:flex;align-items:center;justify-content:center;background:#fff">
+  <div class="sq">
+    <div>
+      <p class="sq-eyebrow">Grafik na zlecenie · Śląsk i zdalnie</p>
+      <h2>Potrzebujesz<br>grafiki? <em>Zrobię.</em></h2>
+      <div class="sq-list">
+        <span>Logo, ulotki, plakaty, wizytówki</span>
+        <span>Posty i zdjęcia na OLX / FB / IG</span>
+        <span>Pliki gotowe do druku</span>
+        <span>Wycena przed startem · wersja robocza w 24 h</span>
+      </div>
+    </div>
+    <div class="sq-bottom">
+      <div class="sq-qr"><img src="../assets/qr-grafik-fb.svg" alt="Kod QR — lucdoro.design/grafik"></div>
+      <div class="sq-contact">
+        <span class="n">795 758 555</span>
+        <span class="u">lucdoro.design/grafik</span>
+        <span class="m">Łukasz · LucDoro Design</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// jedna ulotka A6 powielona 4×
+var A6 = `
+  <div class="a6">
+    <div>
+      <p class="a6-brand">LucDoro<b>.</b>Design</p>
+      <h2>Grafik<br>na zlecenie.<br><em>Po ludzku.</em></h2>
+      <p class="a6-lead">Opisujesz, co ma być — ja to robię. Bez żargonu i bez formularzy. Wersja robocza zwykle w 24 h.</p>
+      <div class="a6-list">
+        <span>Logo, ulotki, plakaty</span>
+        <span>Grafiki na OLX, FB, IG</span>
+        <span>Pliki gotowe do druku</span>
+        <span>Wycena i termin z góry</span>
+      </div>
+    </div>
+    <div class="a6-bottom">
+      <img class="a6-qr" src="../assets/qr-grafik-druk.svg" alt="Kod QR — lucdoro.design/grafik">
+      <div class="a6-contact">
+        <span class="big">795 758 555</span>
+        <span class="url">lucdoro.design/grafik</span>
+        <span class="muted">WhatsApp · Świętochłowice i zdalnie</span>
+      </div>
+    </div>
+  </div>`;
+document.getElementById('sheet-a6').innerHTML = A6.repeat(4);
+
+// zrywki
+var TAB = '<div class="tab"><span>lucdoro.design<i>/grafik</i> · 795 758 555</span></div>';
+document.getElementById('tabs').innerHTML = TAB.repeat(9);
+
+</script>
+</body>
+</html>
